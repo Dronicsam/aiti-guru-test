@@ -6,7 +6,7 @@
  * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('AitiGuruTest.view.main.Main', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.Panel',
     xtype: 'app-main',
 
     requires: [
@@ -20,85 +20,55 @@ Ext.define('AitiGuruTest.view.main.Main', {
 
     controller: 'main',
     viewModel: 'main',
+    plugins: 'viewport',
 
     ui: 'navigation',
 
     tabBarHeaderPosition: 1,
     titleRotation: 0,
     tabRotation: 0,
-
     header: {
-        layout: {
-            align: 'stretchmax'
-        },
+        // layout: {
+        //     align: 'stretchmax'
+        // },
         title: {
             bind: {
                 text: '{name}'
             },
-            flex: 0
-        },
-        iconCls: 'fa-th-list'
-    },
-
-    tabBar: {
-        flex: 1,
-        layout: {
-            align: 'stretch',
-            overflowHandler: 'none'
-        }
-    },
-
-    responsiveConfig: {
-        tall: {
-            headerPosition: 'top'
-        },
-        wide: {
-            headerPosition: 'left'
-        }
-    },
-
-    defaults: {
-        bodyPadding: 20,
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    iconAlign: 'left',
-                    textAlign: 'left'
-                },
-                tall: {
-                    iconAlign: 'top',
-                    textAlign: 'center',
-                    width: 120
-                }
-            }
-        }
-    },
-
-    items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
+        }, 
+        
         items: [{
-            xtype: 'mainlist'
+            xtype: 'button',
+            handler: function (button, e) {
+                function makeid(length) {
+                    let result = '';
+                    const characters = 'ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijhlmnopqrstuvwxyz';
+                    const charactersLength = characters.length;
+                    let counter = 0;
+                    while (counter < length) {
+                      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                      counter += 1;
+                    }
+                    return result;
+                }
+                
+                var idProp = makeid(5)
+                var even = (Math.floor(Math.random() * 90 + 10)) % 2 === 0
+                var tabPanel = Ext.getCmp('mainpanel');
+                tabPanel.add({title: "Товар", xtype: "mainlist", id: idProp, closable: true})
+                console.log(idProp)
+            },
+            text: 'Товар'
+        }, {
+            xtype: 'button',
+            text: "Выход",
+            listeners: [
+            {
+                click: 'onClickButton'
+            }]
         }]
-    }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }]
+    },
+
+
+    items: [{xtype: "mainpanel"}]
 });

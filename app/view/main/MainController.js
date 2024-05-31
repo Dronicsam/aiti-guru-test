@@ -17,5 +17,19 @@ Ext.define('AitiGuruTest.view.main.MainController', {
         if (choice === 'yes') {
             //
         }
+    },
+    onClickButton: function () {
+        localStorage.removeItem("login", null)
+        localStorage.removeItem("password", null)
+        // Remove the localStorage key/value
+        localStorage.removeItem('TutorialLoggedIn');
+
+        // Remove Main View
+        this.getView().destroy();
+
+        // Add the Login Window
+        Ext.create({
+            xtype: 'login'
+        });
     }
 });
