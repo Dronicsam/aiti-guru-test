@@ -32,7 +32,10 @@ $grid-row-cell-font-weight: dynamic($font-weight);
 $grid-row-cell-font-family: dynamic($font-family);
 
 // private
-$grid-row-cell-font: dynamic($grid-row-cell-font-weight #{$grid-row-cell-font-size}/#{$grid-row-cell-line-height} $grid-row-cell-font-family);
+$grid-row-cell-font: dynamic(
+  $grid-row-cell-font-weight #{$grid-row-cell-font-size}/#{$grid-row-cell-line-height}
+    $grid-row-cell-font-family
+);
 
 /**
  * @var {color}
@@ -73,7 +76,7 @@ $grid-cell-special-background-color: dynamic($grid-row-cell-background-color);
  * Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel Checkbox Selection
  * Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
  */
-$grid-cell-special-background-gradient: dynamic('none');
+$grid-cell-special-background-gradient: dynamic("none");
 
 /**
  * @var {number}
@@ -114,7 +117,9 @@ $grid-cell-special-border-style: dynamic($grid-row-cell-border-style);
  * Only applies to the vertical border, since the selected row border color is determined by
  * {#$grid-row-cell-selected-border-color}.
  */
-$grid-cell-special-selected-border-color: dynamic(right($grid-row-cell-border-color));
+$grid-cell-special-selected-border-color: dynamic(
+  right($grid-row-cell-border-color)
+);
 
 /**
  * @var {color}
@@ -122,14 +127,18 @@ $grid-cell-special-selected-border-color: dynamic(right($grid-row-cell-border-co
  * created by {@link Ext.grid.RowNumberer RowNumberer}, {@link Ext.selection.CheckboxModel
  * Checkbox Selection Model} and {@link Ext.grid.plugin.RowExpander RowExpander}.
  */
-$grid-cell-special-over-background-color: dynamic($grid-row-cell-over-background-color);
+$grid-cell-special-over-background-color: dynamic(
+  $grid-row-cell-over-background-color
+);
 
 /**
  * @var {color}
  * The background-color color of odd-numbered rows when the table view is configured with
  * `{@link Ext.view.Table#stripeRows stripeRows}: true`.
  */
-$grid-row-cell-alt-background-color: dynamic(darken($grid-row-cell-background-color, 2));
+$grid-row-cell-alt-background-color: dynamic(
+  darken($grid-row-cell-background-color, 2)
+);
 
 /**
  * @var {string}
@@ -213,7 +222,7 @@ $grid-row-cell-focus-color: dynamic($grid-row-cell-color);
  * @var {color}
  * The background-color of the focused cell
  */
-$grid-row-cell-focus-background-color: dynamic('none');
+$grid-row-cell-focus-background-color: dynamic("none");
 
 /**
  * @var {boolean}
@@ -234,7 +243,9 @@ $grid-cell-selected-color: dynamic($grid-row-cell-selected-color);
  * The background-color of a selected cell when using a {@link Ext.selection.CellModel
  * Cell Selection Model}.
  */
-$grid-cell-selected-background-color: dynamic($grid-row-cell-selected-background-color);
+$grid-cell-selected-background-color: dynamic(
+  $grid-row-cell-selected-background-color
+);
 
 /**
  * @var {number}
@@ -320,7 +331,9 @@ $grid-empty-font-family: dynamic($font-family);
 $grid-resize-marker-background-color: dynamic(#0f0f0f);
 
 // private
-$grid-row-height: dynamic($grid-row-cell-line-height + vertical($grid-cell-inner-padding));
+$grid-row-height: dynamic(
+  $grid-row-cell-line-height + vertical($grid-cell-inner-padding)
+);
 // private
 $grid-row-border-color: top($grid-row-cell-border-color);
 // private

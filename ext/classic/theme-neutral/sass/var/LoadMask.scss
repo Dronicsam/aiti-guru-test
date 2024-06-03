@@ -88,7 +88,7 @@ $loadmask-msg-background-color: dynamic($base-color);
  * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$loadmask-msg-background-gradient: dynamic('none');
+$loadmask-msg-background-gradient: dynamic("none");
 
 /**
  * @var {number/list}
@@ -100,7 +100,7 @@ $loadmask-msg-inner-padding: dynamic(0 5px);
  * @var {string}
  * The icon to display in the message inner element
  */
-$loadmask-msg-inner-icon: dynamic('loadmask/loading');
+$loadmask-msg-inner-icon: dynamic("loadmask/loading");
 
 /**
  * @var {list}
@@ -157,7 +157,10 @@ $loadmask-msg-inner-font-weight: dynamic($font-weight);
 $loadmask-msg-inner-font-family: dynamic($font-family);
 
 // private
-$loadmask-msg-inner-font: dynamic($loadmask-msg-inner-font-weight $loadmask-msg-inner-font-size $loadmask-msg-inner-font-family);
+$loadmask-msg-inner-font: dynamic(
+  $loadmask-msg-inner-font-weight $loadmask-msg-inner-font-size
+    $loadmask-msg-inner-font-family
+);
 
 /**
  * @var {number/list}

@@ -5,9 +5,4 @@ var myForm = new Ext.panel.Panel({
 Ext.define("AitiGuruTest.view.mainpanel.MpanelController", {
   extend: "Ext.app.ViewController",
   alias: "controller.mainpanel",
-  onItemSelected: function (sender, record) {
-    Ext.create({
-      xtype: "productcard",
-    });
-  },
 });

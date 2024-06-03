@@ -75,7 +75,10 @@ $btn-group-header-font-weight: dynamic($font-weight);
 $btn-group-header-font-family: dynamic($font-family);
 
 // private
-$btn-group-header-font: dynamic($btn-group-header-font-weight $btn-group-header-font-size $btn-group-header-font-family);
+$btn-group-header-font: dynamic(
+  $btn-group-header-font-weight $btn-group-header-font-size
+    $btn-group-header-font-family
+);
 
 /**
  * @var {number}
@@ -123,7 +126,7 @@ $btn-group-framed-border-width: dynamic(1px);
  * @var {string}
  * Sprite image to use for header {@link Ext.panel.Tool Tools}
  */
-$btn-group-tool-background-image: dynamic('tools/tool-sprites');
+$btn-group-tool-background-image: dynamic("tools/tool-sprites");
 
 /**
  * @var {boolean}

@@ -13,7 +13,7 @@ $tip-background-color: dynamic(#fff);
  * The background-gradient of the Tip. Can be either the name of a predefined gradient or a
  * list of color stops. Used as the `$type` parameter for {@link Global_CSS#background-gradient}.
  */
-$tip-background-gradient: dynamic('none');
+$tip-background-gradient: dynamic("none");
 
 /**
  * @var {color}
@@ -166,7 +166,7 @@ $tip-tool-spacing: dynamic(4px);
  * @var {string}
  * The sprite to use for the header {@link Ext.panel.Tool Tools}
  */
-$tip-tool-background-image: dynamic('tools/tool-sprites');
+$tip-tool-background-image: dynamic("tools/tool-sprites");
 
 /**
  * @var {boolean}

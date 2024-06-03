@@ -20,13 +20,17 @@ $grid-cell-border-color: dynamic($list-item-border-color);
  * @var {color}
  * Grid cell background-color when pressed
  */
-$grid-cell-pressed-background-color: dynamic($list-item-pressed-background-color);
+$grid-cell-pressed-background-color: dynamic(
+  $list-item-pressed-background-color
+);
 
 /**
  * @var {color}
  * Grid cell background-color when selected
  */
-$grid-cell-selected-background-color: dynamic($list-item-selected-background-color);
+$grid-cell-selected-background-color: dynamic(
+  $list-item-selected-background-color
+);
 
 /**
  * @var {string/number}
@@ -86,7 +90,9 @@ $grid-group-header-color: dynamic($list-group-header-color);
  * @var {color}
  * Grid group header background-color
  */
-$grid-group-header-background-color: dynamic($list-group-header-background-color);
+$grid-group-header-background-color: dynamic(
+  $list-group-header-background-color
+);
 
 /**
  * @var {color}

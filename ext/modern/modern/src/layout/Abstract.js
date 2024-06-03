@@ -1,36 +1,36 @@
 /**
  *
  */
-Ext.define('Ext.layout.Abstract', {
-    mixins: ['Ext.mixin.Observable'],
-    
-    isLayout: true,
+Ext.define("Ext.layout.Abstract", {
+  mixins: ["Ext.mixin.Observable"],
 
-    constructor: function(config) {
-        this.initialConfig = config;
-    },
+  isLayout: true,
 
-    setContainer: function(container) {
-        var me = this;
+  constructor: function (config) {
+    this.initialConfig = config;
+  },
 
-        me.container = container;
+  setContainer: function (container) {
+    var me = this;
 
-        me.mixins.observable.constructor.call(me, me.initialConfig);
+    me.container = container;
 
-        return me;
-    },
+    me.mixins.observable.constructor.call(me, me.initialConfig);
 
-    onItemAdd: function() {},
+    return me;
+  },
 
-    onItemRemove: function() {},
+  onItemAdd: function () {},
 
-    onItemMove: function() {},
+  onItemRemove: function () {},
 
-    onItemCenteredChange: function() {},
+  onItemMove: function () {},
 
-    onItemFloatingChange: function() {},
+  onItemCenteredChange: function () {},
 
-    onItemDockedChange: function() {},
+  onItemFloatingChange: function () {},
 
-    onItemInnerStateChange: function() {}
+  onItemDockedChange: function () {},
+
+  onItemInnerStateChange: function () {},
 });

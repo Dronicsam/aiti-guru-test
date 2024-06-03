@@ -5,7 +5,8 @@
 // import 'user-interface' to use the 'user-select' mixin
 @import "compass/css3/user-interface";
 
-.#{$prefix}android-3 .#{$prefix}surface-wrap, .#{$prefix}android-3 .#{$prefix}surface-wrap > * {
+.#{$prefix}android-3 .#{$prefix}surface-wrap,
+.#{$prefix}android-3 .#{$prefix}surface-wrap > * {
   -webkit-perspective: 1;
 }
 
@@ -36,14 +37,14 @@
   background: $chart-legend-background-color;
 
   @if (lightness($chart-legend-background-color) > 30) {
-    @include box-shadow(rgba(#fff, .6) 0 1px 1px);
+    @include box-shadow(rgba(#fff, 0.6) 0 1px 1px);
   } @else {
-    @include box-shadow(rgba(#fff, .2) 0 1px 0);
+    @include box-shadow(rgba(#fff, 0.2) 0 1px 0);
   }
 }
 
 .#{$prefix}legend-item {
-  padding: .8em 1em .8em $chart-marker-size + 1em;
+  padding: 0.8em 1em 0.8em $chart-marker-size + 1em;
   color: $chart-legend-item-color;
   background: $chart-legend-item-background;
   max-width: 16em;
@@ -59,7 +60,7 @@
 }
 
 .#{$prefix}legend-inactive {
-  @include opacity(.3);
+  @include opacity(0.3);
 }
 
 .#{$prefix}legend-item-marker {
@@ -67,24 +68,26 @@
   width: $chart-marker-size;
   height: $chart-marker-size;
   @include border-radius($chart-marker-size/2);
-  @include box-shadow(rgba(#fff, .3) 0 1px 0, rgba(#000, .4) 0 1px 0 inset);
-  left: .7em;
-  top: .85em;
+  @include box-shadow(rgba(#fff, 0.3) 0 1px 0, rgba(#000, 0.4) 0 1px 0 inset);
+  left: 0.7em;
+  top: 0.85em;
 }
 
 .#{$prefix}rtl > * > .#{$prefix}legend-item {
-  padding: .8em $chart-marker-size + 1em .8em 1em;
+  padding: 0.8em $chart-marker-size + 1em 0.8em 1em;
 }
 
 .#{$prefix}rtl > * > * > .#{$prefix}legend-item-marker {
-  right: .7em;
+  right: 0.7em;
 }
 
-.#{$prefix}legend, .#{$prefix}legend-panel {
+.#{$prefix}legend,
+.#{$prefix}legend-panel {
   background: $chart-legend-background-color;
   outline: none; // hide dotted focus outline in Firefox
 
-  &.#{$prefix}docked-top, &.#{$prefix}docked-bottom {
+  &.#{$prefix}docked-top,
+  &.#{$prefix}docked-bottom {
     .#{$prefix}legend-item {
       border-left: $chart-legend-item-border;
       &:first-child {
@@ -100,8 +103,9 @@
       }
     }
   }
-  
-  &.#{$prefix}docked-left, &.#{$prefix}docked-right {
+
+  &.#{$prefix}docked-left,
+  &.#{$prefix}docked-right {
     .#{$prefix}legend-item {
       border-top: $chart-legend-item-border;
       &:first-child {
@@ -127,35 +131,37 @@
   position: absolute;
   z-index: 9;
   @include display-box;
-  padding: .6em;
+  padding: 0.6em;
 
   .#{$prefix}button {
-    margin: .2em;
+    margin: 0.2em;
   }
 
-  &[data-side=left], &[data-side=right] {
+  &[data-side="left"],
+  &[data-side="right"] {
     top: 0;
     @include box-orient(vertical);
   }
 
-  &[data-side=left] {
+  &[data-side="left"] {
     left: 0;
   }
 
-  &[data-side=right] {
+  &[data-side="right"] {
     right: 0;
   }
 
-  &[data-side=top], &[data-side=bottom] {
+  &[data-side="top"],
+  &[data-side="bottom"] {
     @include box-orient(horizontal);
     right: 0;
   }
 
-  &[data-side=top] {
+  &[data-side="top"] {
     top: 0;
   }
 
-  &[data-side=bottom] {
+  &[data-side="bottom"] {
     bottom: 0;
     @include box-orient(horizontal);
   }

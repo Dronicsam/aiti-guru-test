@@ -1,6 +1,6 @@
-Ext.define('Ext.theme.triton.Toolbar', {
-    override: 'Ext.Toolbar',
-    config: {
-        defaultButtonUI: null
-    }
+Ext.define("Ext.theme.triton.Toolbar", {
+  override: "Ext.Toolbar",
+  config: {
+    defaultButtonUI: null,
+  },
 });

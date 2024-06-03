@@ -1,3 +1,1 @@
-addGlobal([
-    'spec', '__pageIsReady', '__injectionDone'
-]);
+addGlobal(["spec", "__pageIsReady", "__injectionDone"]);

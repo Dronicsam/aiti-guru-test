@@ -120,7 +120,7 @@ $form-field-background-color: dynamic(#fff);
  * @var {string} $form-field-background-image
  * Background image for form fields.
  */
-$form-field-background-image: dynamic('form/text-bg');
+$form-field-background-image: dynamic("form/text-bg");
 
 /**
  * @var {color} $form-field-invalid-background-color
@@ -131,7 +131,7 @@ $form-field-invalid-background-color: dynamic(#fff);
  * @var {string} $form-field-invalid-background-image
  * Background image for invalid form fields.
  */
-$form-field-invalid-background-image: dynamic('grid/invalid_line');
+$form-field-invalid-background-image: dynamic("grid/invalid_line");
 /**
  * @var {string} $form-field-invalid-background-repeat
  * Background repeat for invalid form fields.
@@ -208,7 +208,7 @@ $form-label-vertical-spacing: dynamic(5px);
  * @var {string}
  * The background image for error icons
  */
-$form-error-icon-background-image: dynamic('form/exclamation');
+$form-error-icon-background-image: dynamic("form/exclamation");
 
 /**
  * @var {number}
@@ -281,7 +281,7 @@ $form-item-margin-bottom: dynamic(5px);
  * @var {number}
  * Opacity of disabled form fields
  */
-$form-field-disabled-opacity: dynamic(.3);
+$form-field-disabled-opacity: dynamic(0.3);
 
 /**
  * @var {color}
@@ -311,7 +311,9 @@ $form-toolbar-label-font-family: dynamic($font-family);
  * @var {number}
  * The line-height of toolbar form field labels
  */
-$form-toolbar-label-line-height: dynamic(round($form-toolbar-label-font-size * 1.15));
+$form-toolbar-label-line-height: dynamic(
+  round($form-toolbar-label-font-size * 1.15)
+);
 
 /**
  * @var {number}
@@ -329,7 +331,7 @@ $form-toolbar-label-vertical-spacing: dynamic(5px);
  * @var {string}
  * The background image for toolbar field error icons
  */
-$form-toolbar-error-icon-background-image: dynamic('form/exclamation');
+$form-toolbar-error-icon-background-image: dynamic("form/exclamation");
 
 /**
  * @var {number}
@@ -395,7 +397,7 @@ $form-toolbar-error-msg-line-height: dynamic($form-toolbar-error-icon-height);
  * @var {number}
  * Opacity of disabled toolbar form fields
  */
-$form-toolbar-field-disabled-opacity: dynamic(.3);
+$form-toolbar-field-disabled-opacity: dynamic(0.3);
 
 /**
  * @var {boolean}
@@ -480,7 +482,9 @@ $form-text-field-focus-border-color: dynamic($form-field-focus-border-color);
  * @var {color}
  * Border color for invalid text fields.
  */
-$form-text-field-invalid-border-color: dynamic($form-field-invalid-border-color);
+$form-text-field-invalid-border-color: dynamic(
+  $form-field-invalid-border-color
+);
 
 /**
  * @var {number/list}
@@ -518,25 +522,33 @@ $form-text-field-body-width: dynamic(150px);
  * @var {color}
  * Background color of the text field's input element when the field value is invalid.
  */
-$form-text-field-invalid-background-color: dynamic($form-field-invalid-background-color);
+$form-text-field-invalid-background-color: dynamic(
+  $form-field-invalid-background-color
+);
 
 /**
  * @var {string}
  * Background image of the text field's input element when the field value is invalid.
  */
-$form-text-field-invalid-background-image: dynamic($form-field-invalid-background-image);
+$form-text-field-invalid-background-image: dynamic(
+  $form-field-invalid-background-image
+);
 
 /**
  * @var {string}
  * Background repeat of the text field's input element when the field value is invalid.
  */
-$form-text-field-invalid-background-repeat: dynamic($form-field-invalid-background-repeat);
+$form-text-field-invalid-background-repeat: dynamic(
+  $form-field-invalid-background-repeat
+);
 
 /**
  * @var {string/list}
  * Background position of the text field's input element when the field value is invalid.
  */
-$form-text-field-invalid-background-position: dynamic($form-field-invalid-background-position);
+$form-text-field-invalid-background-position: dynamic(
+  $form-field-invalid-background-position
+);
 
 /**
  * @var {boolean}
@@ -615,7 +627,7 @@ $form-trigger-border-color-pressed: dynamic($form-trigger-border-color-over);
  * @var {string}
  * The default background image for text field triggers
  */
-$form-trigger-background-image: dynamic('form/trigger');
+$form-trigger-background-image: dynamic("form/trigger");
 
 /**
  * @var {color}
@@ -693,7 +705,9 @@ $form-toolbar-text-field-color: dynamic($form-text-field-color);
  * @var {color}
  * The background color of the toolbar text field's input element
  */
-$form-toolbar-text-field-background-color: dynamic($form-text-field-background-color);
+$form-toolbar-text-field-background-color: dynamic(
+  $form-text-field-background-color
+);
 
 /**
  * @var {number/list}
@@ -717,13 +731,17 @@ $form-toolbar-text-field-border-color: dynamic($form-text-field-border-color);
  * @var {color/list}
  * The border color of the focused toolbar text field
  */
-$form-toolbar-text-field-focus-border-color: dynamic($form-text-field-focus-border-color);
+$form-toolbar-text-field-focus-border-color: dynamic(
+  $form-text-field-focus-border-color
+);
 
 /**
  * @var {color} $form-field-invalid-border-color
  * Border color for invalid toolbar text fields.
  */
-$form-toolbar-text-field-invalid-border-color: dynamic($form-text-field-invalid-border-color);
+$form-toolbar-text-field-invalid-border-color: dynamic(
+  $form-text-field-invalid-border-color
+);
 
 /**
  * @var {number/list}
@@ -735,7 +753,9 @@ $form-toolbar-text-field-border-radius: dynamic($form-text-field-border-radius);
  * @var {string}
  * The background image of the toolbar text field's input element
  */
-$form-toolbar-text-field-background-image: dynamic($form-text-field-background-image);
+$form-toolbar-text-field-background-image: dynamic(
+  $form-text-field-background-image
+);
 
 /**
  * @var {number/list}
@@ -761,31 +781,41 @@ $form-toolbar-text-field-body-width: dynamic($form-text-field-body-width);
  * @var {color}
  * Background color of the toolbar text field's input element when the field value is invalid.
  */
-$form-toolbar-text-field-invalid-background-color: dynamic($form-text-field-invalid-background-color);
+$form-toolbar-text-field-invalid-background-color: dynamic(
+  $form-text-field-invalid-background-color
+);
 
 /**
  * @var {string}
  * Background image of the toolbar text field's input element when the field value is invalid.
  */
-$form-toolbar-text-field-invalid-background-image: dynamic($form-text-field-invalid-background-image);
+$form-toolbar-text-field-invalid-background-image: dynamic(
+  $form-text-field-invalid-background-image
+);
 
 /**
  * @var {string}
  * Background repeat of the toolbar text field's input element when the field value is invalid.
  */
-$form-toolbar-text-field-invalid-background-repeat: dynamic($form-text-field-invalid-background-repeat);
+$form-toolbar-text-field-invalid-background-repeat: dynamic(
+  $form-text-field-invalid-background-repeat
+);
 
 /**
  * @var {string/list}
  * Background position of the toolbar text field's input element when the field value is invalid.
  */
-$form-toolbar-text-field-invalid-background-position: dynamic($form-text-field-invalid-background-position);
+$form-toolbar-text-field-invalid-background-position: dynamic(
+  $form-text-field-invalid-background-position
+);
 
 /**
  * @var {boolean}
  * `true` to use classic-theme styled border for toolbar text fields.
  */
-$form-toolbar-text-field-classic-border: dynamic($form-text-field-classic-border);
+$form-toolbar-text-field-classic-border: dynamic(
+  $form-text-field-classic-border
+);
 
 /**
  * @var {number/string}
@@ -841,13 +871,17 @@ $form-toolbar-trigger-border-color-over: dynamic($form-trigger-border-color);
  * @var {color}
  * The color of the toolbar text field's trigger's border when the field is focused
  */
-$form-toolbar-trigger-border-color-focus: dynamic($form-trigger-border-color-focus);
+$form-toolbar-trigger-border-color-focus: dynamic(
+  $form-trigger-border-color-focus
+);
 
 /**
  * @var {color}
  * The color of the toolbar text field's trigger's border when the field is focused and the trigger is hovered
  */
-$form-toolbar-trigger-border-color-pressed: dynamic($form-toolbar-trigger-border-color-over);
+$form-toolbar-trigger-border-color-pressed: dynamic(
+  $form-toolbar-trigger-border-color-over
+);
 
 /**
  * @var {string}
@@ -859,7 +893,9 @@ $form-toolbar-trigger-background-image: dynamic($form-trigger-background-image);
  * @var {color}
  * The background color of the toolbar text field's trigger element
  */
-$form-toolbar-trigger-background-color: dynamic($form-text-field-background-color);
+$form-toolbar-trigger-background-color: dynamic(
+  $form-text-field-background-color
+);
 
 /**
  * @var {string/list}
@@ -907,31 +943,35 @@ $spinner-trigger-vertical: dynamic(true);
  * @var {string}
  * Background image for vertically oriented spinner triggers
  */
-$spinner-trigger-vertical-background-image: dynamic('form/spinner');
+$spinner-trigger-vertical-background-image: dynamic("form/spinner");
 
 /**
  * @var {string}
  * Background image for the "up" trigger when trigger buttons are horizontally aligned
  */
-$spinner-trigger-up-background-image: dynamic('form/spinner-up');
+$spinner-trigger-up-background-image: dynamic("form/spinner-up");
 
 /**
  * @var {string}
  * Background image for the "down" trigger when trigger buttons are horizontally aligned
  */
-$spinner-trigger-down-background-image: dynamic('form/spinner-down');
+$spinner-trigger-down-background-image: dynamic("form/spinner-down");
 
 /**
  * @var {string/list}
  * The glyph for the "up" spinner trigger trigger when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$spinner-trigger-up-glyph: dynamic($fa-var-caret-up 16px $font-icon-font-family);
+$spinner-trigger-up-glyph: dynamic(
+  $fa-var-caret-up 16px $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The glyph for the "down" spinner trigger trigger when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$spinner-trigger-down-glyph: dynamic($fa-var-caret-down 16px $font-icon-font-family);
+$spinner-trigger-down-glyph: dynamic(
+  $fa-var-caret-down 16px $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -949,31 +989,41 @@ $spinner-toolbar-trigger-vertical: dynamic(true);
  * @var {string}
  * Background image for vertically oriented toolbar spinner triggers
  */
-$spinner-toolbar-trigger-vertical-background-image: dynamic($spinner-trigger-vertical-background-image);
+$spinner-toolbar-trigger-vertical-background-image: dynamic(
+  $spinner-trigger-vertical-background-image
+);
 
 /**
  * @var {string}
  * Background image for the "up" toolbar spinner trigger when trigger buttons are horizontally aligned
  */
-$spinner-toolbar-trigger-up-background-image: dynamic($spinner-trigger-up-background-image);
+$spinner-toolbar-trigger-up-background-image: dynamic(
+  $spinner-trigger-up-background-image
+);
 
 /**
  * @var {string}
  * Background image for the "down" toolbar spinner trigger when trigger buttons are horizontally aligned
  */
-$spinner-toolbar-trigger-down-background-image: dynamic($spinner-trigger-down-background-image);
+$spinner-toolbar-trigger-down-background-image: dynamic(
+  $spinner-trigger-down-background-image
+);
 
 /**
  * @var {string/list}
  * The glyph for the "up" toolbar spinner trigger when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$spinner-toolbar-trigger-up-glyph: dynamic($fa-var-caret-up 16px $font-icon-font-family);
+$spinner-toolbar-trigger-up-glyph: dynamic(
+  $fa-var-caret-up 16px $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The glyph for the "down" toolbar spinner trigger when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$spinner-toolbar-trigger-down-glyph: dynamic($fa-var-caret-down 16px $font-icon-font-family);
+$spinner-toolbar-trigger-down-glyph: dynamic(
+  $fa-var-caret-down 16px $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -1010,19 +1060,23 @@ $form-checkbox-size: dynamic(13px);
  * @var {string}
  * The background-image of the checkbox
  */
-$form-checkbox-background-image: dynamic('form/checkbox');
+$form-checkbox-background-image: dynamic("form/checkbox");
 
 /**
  * @var {string/list}
  * The glyph for the checkbox when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$form-checkbox-glyph: dynamic($fa-var-square-o $form-checkbox-size $font-icon-font-family);
+$form-checkbox-glyph: dynamic(
+  $fa-var-square-o $form-checkbox-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The glyph for the checkbox in "checked" state when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$form-checkbox-checked-glyph: dynamic($fa-var-check-square-o $form-checkbox-size $font-icon-font-family);
+$form-checkbox-checked-glyph: dynamic(
+  $fa-var-check-square-o $form-checkbox-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -1040,19 +1094,23 @@ $form-checkbox-glyph-focus-color: dynamic($form-field-focus-border-color);
  * @var {string}
  * The background-image of the radio button
  */
-$form-radio-background-image: dynamic('form/radio');
+$form-radio-background-image: dynamic("form/radio");
 
 /**
  * @var {string/list}
  * The glyph for the radio button when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$form-radio-glyph: dynamic($fa-var-circle-o $form-checkbox-size $font-icon-font-family);
+$form-radio-glyph: dynamic(
+  $fa-var-circle-o $form-checkbox-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The glyph for the radio button in "checked" state when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$form-radio-checked-glyph: dynamic($fa-var-dot-circle-o $form-checkbox-size $font-icon-font-family);
+$form-radio-checked-glyph: dynamic(
+  $fa-var-dot-circle-o $form-checkbox-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -1112,13 +1170,13 @@ $form-toolbar-checkbox-size: dynamic(13px);
  * @var {string}
  * The background-image of the toolbar checkbox
  */
-$form-toolbar-checkbox-background-image: dynamic('form/checkbox');
+$form-toolbar-checkbox-background-image: dynamic("form/checkbox");
 
 /**
  * @var {string}
  * The background-image of the toolbar radio button
  */
-$form-toolbar-radio-background-image: dynamic('form/radio');
+$form-toolbar-radio-background-image: dynamic("form/radio");
 
 /**
  * @var {color}
@@ -1130,25 +1188,33 @@ $form-toolbar-checkbox-label-color: dynamic($form-toolbar-label-font-color);
  * @var {string}
  * The font-weight of the toolbar checkbox's {@link #boxLabel}
  */
-$form-toolbar-checkbox-label-font-weight: dynamic($form-toolbar-label-font-weight);
+$form-toolbar-checkbox-label-font-weight: dynamic(
+  $form-toolbar-label-font-weight
+);
 
 /**
  * @var {string}
  * The font-size of the toolbar checkbox's {@link #boxLabel}
  */
-$form-toolbar-checkbox-label-font-size: dynamic($form-toolbar-label-font-family);
+$form-toolbar-checkbox-label-font-size: dynamic(
+  $form-toolbar-label-font-family
+);
 
 /**
  * @var {string}
  * The font-family of the toolbar checkbox's {@link #boxLabel}
  */
-$form-toolbar-checkbox-label-font-family: dynamic($form-toolbar-label-font-family);
+$form-toolbar-checkbox-label-font-family: dynamic(
+  $form-toolbar-label-font-family
+);
 
 /**
  * @var {string}
  * The line-height of the toolbar checkbox's {@link #boxLabel}
  */
-$form-toolbar-checkbox-label-line-height: dynamic($form-toolbar-label-line-height);
+$form-toolbar-checkbox-label-line-height: dynamic(
+  $form-toolbar-label-line-height
+);
 
 /**
  * @var {number}
@@ -1203,7 +1269,9 @@ $form-display-field-font-weight: dynamic($form-field-font-weight);
  * @var {number}
  * The line-height of display fields
  */
-$form-display-field-line-height: dynamic(round($form-display-field-font-size * 1.15));
+$form-display-field-line-height: dynamic(
+  round($form-display-field-font-size * 1.15)
+);
 
 /**
  * @var {color}
@@ -1221,19 +1289,25 @@ $form-toolbar-display-field-font-size: dynamic($form-display-field-font-size);
  * @var {string}
  * The font-family of toolbar display fields
  */
-$form-toolbar-display-field-font-family: dynamic($form-display-field-font-family);
+$form-toolbar-display-field-font-family: dynamic(
+  $form-display-field-font-family
+);
 
 /**
  * @var {string}
  * The font-weight of toolbar display fields
  */
-$form-toolbar-display-field-font-weight: dynamic($form-display-field-font-weight);
+$form-toolbar-display-field-font-weight: dynamic(
+  $form-display-field-font-weight
+);
 
 /**
  * @var {number}
  * The line-height of toolbar display fields
  */
-$form-toolbar-display-field-line-height: dynamic(round($form-toolbar-display-field-font-size * 1.15));
+$form-toolbar-display-field-line-height: dynamic(
+  round($form-toolbar-display-field-font-size * 1.15)
+);
 
 /**
  * @var {boolean}

@@ -12,13 +12,13 @@ $textfield-input-background-color: dynamic(#fff);
  * @var {color}
  * TextField input padding
  */
-$textfield-input-padding: dynamic(.23em .4em);
+$textfield-input-padding: dynamic(0.23em 0.4em);
 
 /**
  * @var {color}
  * TextField input padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$textfield-input-padding-big: dynamic(.2em .4em);
+$textfield-input-padding-big: dynamic(0.2em 0.4em);
 
 /**
  * @var {string/number}
@@ -79,7 +79,9 @@ $textfield-clear-icon-size: dynamic(1em);
  * @var {string/list}
  * The checkbox icon
  */
-$textfield-clear-icon: dynamic($fa-var-times-circle $textfield-clear-icon-font-size $font-icon-font-family);
+$textfield-clear-icon: dynamic(
+  $fa-var-times-circle $textfield-clear-icon-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}

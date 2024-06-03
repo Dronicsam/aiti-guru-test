@@ -18,7 +18,9 @@ $accordion-header-background-color: dynamic($base-color);
  * @var {color}
  * The background-color of Accordion headers when hovered
  */
-$accordion-header-over-background-color: dynamic($accordion-header-background-color);
+$accordion-header-over-background-color: dynamic(
+  $accordion-header-background-color
+);
 
 /**
  * @var {number}
@@ -90,7 +92,7 @@ $accordion-item-margin: dynamic(0);
  * @var {string}
  * The sprite image to use for {@link Ext.panel.Tool Tools} in Accordion headers
  */
-$accordion-tool-background-image: dynamic('tools/tool-sprites');
+$accordion-tool-background-image: dynamic("tools/tool-sprites");
 
 /**
  * @var {color}
@@ -108,10 +110,14 @@ $accordion-tool-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the Accordion's "expand" tool icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$accordion-tool-expand-glyph: dynamic($fa-var-plus $accordion-tool-glyph-font-size $font-icon-font-family);
+$accordion-tool-expand-glyph: dynamic(
+  $fa-var-plus $accordion-tool-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the Accordion's "collapse" tool icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$accordion-tool-collapse-glyph: dynamic($fa-var-minus $accordion-tool-glyph-font-size $font-icon-font-family);
+$accordion-tool-collapse-glyph: dynamic(
+  $fa-var-minus $accordion-tool-glyph-font-size $font-icon-font-family
+);

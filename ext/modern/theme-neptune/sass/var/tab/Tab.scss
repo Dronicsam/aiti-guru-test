@@ -68,13 +68,13 @@ $tab-border-style: dynamic(solid);
  * @var {number}
  * Tab border-radius
  */
-$tab-border-radius: dynamic(.25em);
+$tab-border-radius: dynamic(0.25em);
 
 /**
  * @var {number}
  * Tab border-radius in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$tab-border-radius-big: dynamic(.2em);
+$tab-border-radius-big: dynamic(0.2em);
 
 /**
  * @var {string/number}
@@ -116,13 +116,13 @@ $tab-font-family: dynamic($font-family);
  * @var {number/list}
  * Tab padding
  */
-$tab-padding: dynamic(.23em .6em);
+$tab-padding: dynamic(0.23em 0.6em);
 
 /**
  * @var {number/list}
  * Tab padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$tab-padding-big: dynamic(.2em .6em);
+$tab-padding-big: dynamic(0.2em 0.6em);
 
 /**
  * @var {number}
@@ -155,7 +155,7 @@ $tab-icon-font-size-big: dynamic($tab-line-height-big);
  * @var {number}
  * The space between the tab icon and text when the icon is horizontally aligned
  */
-$tab-icon-horizontal-spacing: dynamic(.6em);
+$tab-icon-horizontal-spacing: dynamic(0.6em);
 
 /**
  * @var {number}
@@ -168,7 +168,7 @@ $tab-icon-horizontal-spacing-big: dynamic($tab-icon-horizontal-spacing);
  * @var {number}
  * The space between the tab icon and text when the icon is vertically aligned
  */
-$tab-icon-vertical-spacing: dynamic(.2em);
+$tab-icon-vertical-spacing: dynamic(0.2em);
 
 /**
  * @var {number}
@@ -181,7 +181,7 @@ $tab-icon-vertical-spacing-big: dynamic($tab-icon-vertical-spacing);
  * @var {number}
  * Tab opacity when disabled
  */
-$tab-disabled-opacity: dynamic(.5);
+$tab-disabled-opacity: dynamic(0.5);
 
 /**
  * @var {color}
@@ -212,7 +212,7 @@ $tab-badge-border-color: dynamic(darken($tab-badge-background-color, 10%));
  * @var {number/list}
  * The border-radius of the tab's {@link #badgeText badge}
  */
-$tab-badge-border-radius: dynamic(.2em);
+$tab-badge-border-radius: dynamic(0.2em);
 
 /**
  * @var {number}
@@ -254,7 +254,7 @@ $tab-badge-line-height: dynamic($tab-line-height);
  * @var {number}
  * Offset of the {@link #badgeText badge} from the top of the tab
  */
-$tab-badge-top: dynamic(-.2em);
+$tab-badge-top: dynamic(-0.2em);
 
 /**
  * @var {number}
@@ -278,4 +278,4 @@ $tab-badge-left: dynamic(null);
  * @var {number}
  * The padding of the tab's {@link #badgeText badge}
  */
-$tab-badge-padding: dynamic(.1em .3em);
+$tab-badge-padding: dynamic(0.1em 0.3em);

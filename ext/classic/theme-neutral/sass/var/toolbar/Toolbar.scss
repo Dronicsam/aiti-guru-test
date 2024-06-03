@@ -19,7 +19,7 @@ $toolbar-background-color: dynamic($base-color);
  * The background-gradient of the Toolbar.  Can be either the name of a predefined gradient
  * or a list of color stops. Used as the `$type` parameter for {@link Global_CSS#background-gradient}.
  */
-$toolbar-background-gradient: dynamic('none');
+$toolbar-background-gradient: dynamic("none");
 
 /**
  * @var {number}
@@ -85,7 +85,9 @@ $toolbar-spacer-width: dynamic(2px);
  * @var {color}
  * The main border-color of Toolbar {@link Ext.toolbar.Separator Separators}
  */
-$toolbar-separator-color: dynamic(adjust-color($base-color, $hue: -1deg, $saturation: 100%, $lightness: -4.3%));
+$toolbar-separator-color: dynamic(
+  adjust-color($base-color, $hue: -1deg, $saturation: 100%, $lightness: -4.3%)
+);
 
 /**
  * @var {color}
@@ -97,7 +99,9 @@ $toolbar-separator-highlight-color: dynamic(#fff);
  * @var {number/list}
  * The margin of {@link Ext.toolbar.Separator Separators} on a horizontally oriented Toolbar
  */
-$toolbar-separator-horizontal-margin: dynamic(0 $toolbar-horizontal-spacing 0 0);
+$toolbar-separator-horizontal-margin: dynamic(
+  0 $toolbar-horizontal-spacing 0 0
+);
 
 /**
  * @var {number}
@@ -157,7 +161,9 @@ $toolbar-text-font-weight: dynamic($font-weight);
  * @var {color}
  * The text-color of Toolbar text
  */
-$toolbar-text-color: dynamic(mix(desaturate(lighten($base-color, 37), 5), #000, 30));
+$toolbar-text-color: dynamic(
+  mix(desaturate(lighten($base-color, 37), 5), #000, 30)
+);
 
 /**
  * @var {number}
@@ -211,7 +217,9 @@ $toolbar-scroller-border-width: dynamic(0 0 1px);
  * @var {color}
  * The border-color of scroller buttons on vertically aligned toolbars
  */
-$toolbar-scroller-vertical-border-color: dynamic($toolbar-scroller-border-color);
+$toolbar-scroller-vertical-border-color: dynamic(
+  $toolbar-scroller-border-color
+);
 
 /**
  * @var {number}
@@ -298,25 +306,33 @@ $toolbar-scroller-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the "top" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$toolbar-scroller-top-glyph: dynamic($fa-var-chevron-up $toolbar-scroller-glyph-font-size $font-icon-font-family);
+$toolbar-scroller-top-glyph: dynamic(
+  $fa-var-chevron-up $toolbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "right" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$toolbar-scroller-right-glyph: dynamic($fa-var-chevron-right $toolbar-scroller-glyph-font-size $font-icon-font-family);
+$toolbar-scroller-right-glyph: dynamic(
+  $fa-var-chevron-right $toolbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "bottom" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$toolbar-scroller-bottom-glyph: dynamic($fa-var-chevron-down $toolbar-scroller-glyph-font-size $font-icon-font-family);
+$toolbar-scroller-bottom-glyph: dynamic(
+  $fa-var-chevron-down $toolbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "left" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$toolbar-scroller-left-glyph: dynamic($fa-var-chevron-left $toolbar-scroller-glyph-font-size $font-icon-font-family);
+$toolbar-scroller-left-glyph: dynamic(
+  $fa-var-chevron-left $toolbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {boolean}
@@ -330,7 +346,7 @@ $toolbar-classic-scrollers: dynamic(false);
  * @var {string}
  * The sprite to use for {@link Ext.panel.Tool Tools} on a Toolbar
  */
-$toolbar-tool-background-image: dynamic('none');
+$toolbar-tool-background-image: dynamic("none");
 
 /**
  * @var {color}
@@ -350,7 +366,9 @@ $toolbar-menu-overflow-glyph-color: dynamic($button-toolbar-glyph-color);
  * Glyph for the {@link #overflowHandler menu overflow} "more" icon when
  * {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$toolbar-menu-overflow-glyph: dynamic($fa-var-bars $button-small-glyph-font-size $font-icon-font-family);
+$toolbar-menu-overflow-glyph: dynamic(
+  $fa-var-bars $button-small-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {boolean}

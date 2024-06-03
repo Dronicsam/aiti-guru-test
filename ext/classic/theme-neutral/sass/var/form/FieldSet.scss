@@ -6,7 +6,7 @@
  * @var {number}
  * The font-size of the FieldSet header
  */
-$fieldset-header-font-size: dynamic(ceil($font-size * .9));
+$fieldset-header-font-size: dynamic(ceil($font-size * 0.9));
 
 /**
  * @var {string}
@@ -30,7 +30,14 @@ $fieldset-header-line-height: dynamic(14px);
  * @var {color}
  * The text color of the FieldSet header
  */
-$fieldset-header-color: dynamic(adjust-color($base-color, $hue: 3.785deg, $saturation: 18.194%, $lightness: -52.745%));
+$fieldset-header-color: dynamic(
+  adjust-color(
+    $base-color,
+    $hue: 3.785deg,
+    $saturation: 18.194%,
+    $lightness: -52.745%
+  )
+);
 
 /**
  * @var {number}
@@ -48,7 +55,7 @@ $fieldset-border-style: dynamic(solid);
  * @var {color}
  * The border-color of the FieldSet
  */
-$fieldset-border-color: dynamic(#B5B8C8);
+$fieldset-border-color: dynamic(#b5b8c8);
 
 /**
  * @var {number}
@@ -97,7 +104,7 @@ $fieldset-collapse-tool-padding: dynamic(0);
  * The background-image to use for the collapse tool. If 'none' the default tool
  * sprite will be used.  Defaults to 'none'.
  */
-$fieldset-collapse-tool-background-image: dynamic('none');
+$fieldset-collapse-tool-background-image: dynamic("none");
 
 /**
  * @var {number}
@@ -133,13 +140,17 @@ $fieldset-tool-glyph-color: dynamic($fieldset-header-color);
  * @var {string/list}
  * Glyph for the "expand" tool icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$fieldset-tool-expand-glyph: dynamic($fa-var-caret-down $fieldset-tool-glyph-font-size $font-icon-font-family);
+$fieldset-tool-expand-glyph: dynamic(
+  $fa-var-caret-down $fieldset-tool-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "collapse" tool icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$fieldset-tool-collapse-glyph: dynamic($fa-var-caret-up $fieldset-tool-glyph-font-size $font-icon-font-family);
+$fieldset-tool-collapse-glyph: dynamic(
+  $fa-var-caret-up $fieldset-tool-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {number/list}

@@ -126,7 +126,7 @@ $window-tool-spacing: dynamic($panel-tool-spacing);
  * @var {string}
  * The background sprite to use for Window {@link Ext.panel.Tool Tools}
  */
-$window-tool-background-image: dynamic('tools/tool-sprites');
+$window-tool-background-image: dynamic("tools/tool-sprites");
 
 /**
  * @var {color}
@@ -192,7 +192,9 @@ $window-header-icon-spacing: dynamic($panel-header-icon-spacing);
  * @var {list}
  * The background-position of  the Window Header icon
  */
-$window-header-icon-background-position: dynamic($panel-header-icon-background-position);
+$window-header-icon-background-position: dynamic(
+  $panel-header-icon-background-position
+);
 
 /**
  * @var {color}
@@ -291,7 +293,6 @@ $window-body-font-weight: dynamic($panel-body-font-weight);
  * The default font-family of the Window body
  */
 $window-body-font-family: dynamic($panel-body-font-family);
-
 
 // private
 $window-use-classic-header-padding: dynamic(false);

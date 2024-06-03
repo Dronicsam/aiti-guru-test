@@ -26,28 +26,30 @@
  * For more information on Sprites, the core elements added to a draw container's surface,
  * refer to the {@link Ext.draw.sprite.Sprite} documentation.
  */
-Ext.define('Ext.draw.Container', {
-    extend: 'Ext.draw.ContainerBase',
-    alternateClassName: 'Ext.draw.Component',
-    xtype: 'draw',
-    defaultType: 'surface',
+Ext.define(
+  "Ext.draw.Container",
+  {
+    extend: "Ext.draw.ContainerBase",
+    alternateClassName: "Ext.draw.Component",
+    xtype: "draw",
+    defaultType: "surface",
 
     requires: [
-        'Ext.draw.Surface',
-        'Ext.draw.engine.Svg',
-        'Ext.draw.engine.Canvas',
-        'Ext.draw.gradient.GradientDefinition'
+      "Ext.draw.Surface",
+      "Ext.draw.engine.Svg",
+      "Ext.draw.engine.Canvas",
+      "Ext.draw.gradient.GradientDefinition",
     ],
     /**
      * @cfg {String} [engine="Ext.draw.engine.Canvas"]
-     * Defines the engine (type of surface) used to render draw container contents.  
-     * 
-     * The render engine is selected automatically depending on the platform used. Priority 
+     * Defines the engine (type of surface) used to render draw container contents.
+     *
+     * The render engine is selected automatically depending on the platform used. Priority
      * is given to the {@link Ext.draw.engine.Canvas} engine due to its performance advantage.
      *
      * You may also set the engine config to be `Ext.draw.engine.Svg` if so desired.
      */
-    engine: 'Ext.draw.engine.Canvas',
+    engine: "Ext.draw.engine.Canvas",
 
     /**
      * @event spritemousemove
@@ -112,211 +114,220 @@ Ext.define('Ext.draw.Container', {
      */
 
     config: {
-        cls: Ext.baseCSSPrefix + 'draw-container',
+      cls: Ext.baseCSSPrefix + "draw-container",
 
-        /**
-         * @cfg {Function} [resizeHandler]
-         * The resize function that can be configured to have a behavior,
-         * e.g. resize draw surfaces based on new draw container dimensions.
-         *
-         * __Note:__ since resize events trigger {@link #renderFrame} calls automatically,
-         * return `false` from the resize function, if it also calls `renderFrame`,
-         * to prevent double rendering.
-         */
-        resizeHandler: null,
+      /**
+       * @cfg {Function} [resizeHandler]
+       * The resize function that can be configured to have a behavior,
+       * e.g. resize draw surfaces based on new draw container dimensions.
+       *
+       * __Note:__ since resize events trigger {@link #renderFrame} calls automatically,
+       * return `false` from the resize function, if it also calls `renderFrame`,
+       * to prevent double rendering.
+       */
+      resizeHandler: null,
 
-        /**
-         * @cfg {Object[]} sprites
-         * Defines a set of sprites to be added to the drawContainer surface.
-         *
-         * For example:
-         *
-         *      sprites: [{
-         *           type: 'circle',
-         *           fillStyle: '#79BB3F',
-         *           r: 100,
-         *           x: 100,
-         *           y: 100
-         *      }]
-         * 
-         */
-        sprites: null,
+      /**
+       * @cfg {Object[]} sprites
+       * Defines a set of sprites to be added to the drawContainer surface.
+       *
+       * For example:
+       *
+       *      sprites: [{
+       *           type: 'circle',
+       *           fillStyle: '#79BB3F',
+       *           r: 100,
+       *           x: 100,
+       *           y: 100
+       *      }]
+       *
+       */
+      sprites: null,
 
-        /**
-         * @cfg {Object[]} gradients
-         * Defines a set of gradients that can be used as color properties
-         * (fillStyle and strokeStyle, but not shadowColor) in sprites.
-         * The gradients array is an array of objects with the following properties:
-         * - **id** - string - The unique name of the gradient.
-         * - **type** - string, optional - The type of the gradient. Available types are: 'linear', 'radial'. Defaults to 'linear'.
-         * - **angle** - number, optional - The angle of the gradient in degrees.
-         * - **stops** - array - An array of objects with 'color' and 'offset' properties, where 'offset' is a real number from 0 to 1.
-         *
-         * For example:
-         *
-         *     gradients: [{
-         *         id: 'gradientId1',
-         *         type: 'linear',
-         *         angle: 45,
-         *         stops: [{
-         *             offset: 0,
-         *             color: 'red'
-         *         }, {
-         *            offset: 1,
-         *            color: 'yellow'
-         *         }]
-         *     }, {
-         *        id: 'gradientId2',
-         *        type: 'radial',
-         *        stops: [{
-         *            offset: 0,
-         *            color: '#555',
-         *        }, {
-         *            offset: 1,
-         *            color: '#ddd',
-         *        }]
-         *     }]
-         *
-         * Then the sprites can use 'gradientId1' and 'gradientId2' by setting the color attributes to those ids, for example:
-         *
-         *     sprite.setAttributes({
-         *         fillStyle: 'url(#gradientId1)',
-         *         strokeStyle: 'url(#gradientId2)'
-         *     });
-         */
-        gradients: []
+      /**
+       * @cfg {Object[]} gradients
+       * Defines a set of gradients that can be used as color properties
+       * (fillStyle and strokeStyle, but not shadowColor) in sprites.
+       * The gradients array is an array of objects with the following properties:
+       * - **id** - string - The unique name of the gradient.
+       * - **type** - string, optional - The type of the gradient. Available types are: 'linear', 'radial'. Defaults to 'linear'.
+       * - **angle** - number, optional - The angle of the gradient in degrees.
+       * - **stops** - array - An array of objects with 'color' and 'offset' properties, where 'offset' is a real number from 0 to 1.
+       *
+       * For example:
+       *
+       *     gradients: [{
+       *         id: 'gradientId1',
+       *         type: 'linear',
+       *         angle: 45,
+       *         stops: [{
+       *             offset: 0,
+       *             color: 'red'
+       *         }, {
+       *            offset: 1,
+       *            color: 'yellow'
+       *         }]
+       *     }, {
+       *        id: 'gradientId2',
+       *        type: 'radial',
+       *        stops: [{
+       *            offset: 0,
+       *            color: '#555',
+       *        }, {
+       *            offset: 1,
+       *            color: '#ddd',
+       *        }]
+       *     }]
+       *
+       * Then the sprites can use 'gradientId1' and 'gradientId2' by setting the color attributes to those ids, for example:
+       *
+       *     sprite.setAttributes({
+       *         fillStyle: 'url(#gradientId1)',
+       *         strokeStyle: 'url(#gradientId2)'
+       *     });
+       */
+      gradients: [],
     },
 
     /**
      * @property {String} [defaultDownloadServerUrl="http://svg.sencha.io"]
      * The default URL used by {@link #download}.
      */
-    defaultDownloadServerUrl: 'http://svg.sencha.io',
+    defaultDownloadServerUrl: "http://svg.sencha.io",
 
     /**
      * @property {Array} [supportedFormats=["png", "pdf", "jpeg", "gif"]]
      * A list of export types supported by the server.
      * @private
      */
-    supportedFormats: ['png', 'pdf', 'jpeg', 'gif'],
+    supportedFormats: ["png", "pdf", "jpeg", "gif"],
 
     supportedOptions: {
-        version: Ext.isNumber,
-        data: Ext.isString,
-        format: function (format) {
-            return Ext.Array.indexOf(this.supportedFormats, format) >= 0;
-        },
-        filename: Ext.isString,
-        width: Ext.isNumber,
-        height: Ext.isNumber,
-        scale: Ext.isNumber,
-        pdf: Ext.isObject,
-        jpeg: Ext.isObject
+      version: Ext.isNumber,
+      data: Ext.isString,
+      format: function (format) {
+        return Ext.Array.indexOf(this.supportedFormats, format) >= 0;
+      },
+      filename: Ext.isString,
+      width: Ext.isNumber,
+      height: Ext.isNumber,
+      scale: Ext.isNumber,
+      pdf: Ext.isObject,
+      jpeg: Ext.isObject,
     },
 
-    initAnimator: function() {
-        this.frameCallbackId = Ext.draw.Animator.addFrameCallback('renderFrame', this);
+    initAnimator: function () {
+      this.frameCallbackId = Ext.draw.Animator.addFrameCallback(
+        "renderFrame",
+        this,
+      );
     },
 
     applyGradients: function (gradients) {
-        var result = [],
-            i, n, gradient, offset;
-        if (!Ext.isArray(gradients)) {
-            return result;
-        }
-        for (i = 0, n = gradients.length; i < n; i++) {
-            gradient = gradients[i];
-            if (!Ext.isObject(gradient)) {
-                continue;
-            }
-            // ExtJS only supported linear gradients, so we didn't have to specify their type
-            if (typeof gradient.type !== 'string') {
-                gradient.type = 'linear';
-            }
-            if (gradient.angle) {
-                gradient.degrees = gradient.angle;
-                delete gradient.angle;
-            }
-            // Convert ExtJS stops object to Touch stops array
-            if (Ext.isObject(gradient.stops)) {
-                gradient.stops = (function (stops) {
-                    var result = [], stop;
-                    for (offset in stops) {
-                        stop = stops[offset];
-                        stop.offset = offset / 100;
-                        result.push(stop);
-                    }
-                    return result;
-                })(gradient.stops);
-            }
-            result.push(gradient);
-        }
-        Ext.draw.gradient.GradientDefinition.add(result);
+      var result = [],
+        i,
+        n,
+        gradient,
+        offset;
+      if (!Ext.isArray(gradients)) {
         return result;
+      }
+      for (i = 0, n = gradients.length; i < n; i++) {
+        gradient = gradients[i];
+        if (!Ext.isObject(gradient)) {
+          continue;
+        }
+        // ExtJS only supported linear gradients, so we didn't have to specify their type
+        if (typeof gradient.type !== "string") {
+          gradient.type = "linear";
+        }
+        if (gradient.angle) {
+          gradient.degrees = gradient.angle;
+          delete gradient.angle;
+        }
+        // Convert ExtJS stops object to Touch stops array
+        if (Ext.isObject(gradient.stops)) {
+          gradient.stops = (function (stops) {
+            var result = [],
+              stop;
+            for (offset in stops) {
+              stop = stops[offset];
+              stop.offset = offset / 100;
+              result.push(stop);
+            }
+            return result;
+          })(gradient.stops);
+        }
+        result.push(gradient);
+      }
+      Ext.draw.gradient.GradientDefinition.add(result);
+      return result;
     },
 
     applySprites: function (sprites) {
-        // Never update.
-        if (!sprites) {
-            return;
+      // Never update.
+      if (!sprites) {
+        return;
+      }
+
+      sprites = Ext.Array.from(sprites);
+
+      var ln = sprites.length,
+        result = [],
+        i,
+        surface,
+        sprite;
+
+      for (i = 0; i < ln; i++) {
+        sprite = sprites[i];
+        surface = sprite.surface;
+        if (!(surface && surface.isSurface)) {
+          if (Ext.isString(surface)) {
+            surface = this.getSurface(surface);
+          } else {
+            surface = this.getSurface("main");
+          }
         }
+        sprite = surface.add(sprite);
+        result.push(sprite);
+      }
 
-        sprites = Ext.Array.from(sprites);
-
-        var ln = sprites.length,
-            result = [],
-            i, surface, sprite;
-
-        for (i = 0; i < ln; i++) {
-            sprite = sprites[i];
-            surface = sprite.surface;
-            if (!(surface && surface.isSurface)) {
-                if (Ext.isString(surface)) {
-                    surface = this.getSurface(surface);
-                } else {
-                    surface = this.getSurface('main');
-                }
-            }
-            sprite = surface.add(sprite);
-            result.push(sprite);
-        }
-
-        return result;
+      return result;
     },
 
     onBodyResize: function () {
-        // See the following:
-        // Classic: Ext.draw.ContainerBase.reattachToBody
-        //  Modern: Ext.draw.ContainerBase.initialize
-        var el = this.element,
-            size;
+      // See the following:
+      // Classic: Ext.draw.ContainerBase.reattachToBody
+      //  Modern: Ext.draw.ContainerBase.initialize
+      var el = this.element,
+        size;
 
-        if (!el) {
-            return;
-        }
+      if (!el) {
+        return;
+      }
 
-        size = el.getSize();
-        if (size.width && size.height) {
-            this.setBodySize(size);
-        }
+      size = el.getSize();
+      if (size.width && size.height) {
+        this.setBodySize(size);
+      }
     },
 
     setBodySize: function (size) {
-        var me = this,
-            resizeHandler = me.getResizeHandler() || me.defaultResizeHandler,
-            result;
+      var me = this,
+        resizeHandler = me.getResizeHandler() || me.defaultResizeHandler,
+        result;
 
-        me.fireEvent('bodyresize', me, size);
-        result = resizeHandler.call(me, size);
-        if (result !== false) {
-            me.renderFrame();
-        }
+      me.fireEvent("bodyresize", me, size);
+      result = resizeHandler.call(me, size);
+      if (result !== false) {
+        me.renderFrame();
+      }
     },
 
     defaultResizeHandler: function (size) {
-        this.getItems().each(function (surface) {
-            surface.setRect([0, 0, size.width, size.height]);
-        });
+      this.getItems().each(function (surface) {
+        surface.setRect([0, 0, size.width, size.height]);
+      });
     },
 
     /**
@@ -325,33 +336,35 @@ Ext.define('Ext.draw.Container', {
      * @return {Ext.draw.Surface}
      */
     getSurface: function (id) {
-        id = this.getId() + '-' + (id || 'main');
+      id = this.getId() + "-" + (id || "main");
 
-        var me = this,
-            surfaces = me.getItems(),
-            surface = surfaces.get(id);
+      var me = this,
+        surfaces = me.getItems(),
+        surface = surfaces.get(id);
 
-        if (!surface) {
-            surface = me.add({xclass: me.engine, id: id});
-            me.onBodyResize();
-        }
-        return surface;
+      if (!surface) {
+        surface = me.add({ xclass: me.engine, id: id });
+        me.onBodyResize();
+      }
+      return surface;
     },
 
     /**
      * Render all the surfaces in the container.
      */
     renderFrame: function () {
-        var me = this,
-            surfaces = me.getItems(),
-            i, ln, item;
+      var me = this,
+        surfaces = me.getItems(),
+        i,
+        ln,
+        item;
 
-        for (i = 0, ln = surfaces.length; i < ln; i++) {
-            item = surfaces.items[i];
-            if (item.isSurface) {
-                item.renderFrame();
-            }
+      for (i = 0, ln = surfaces.length; i < ln; i++) {
+        item = surfaces.items[i];
+        if (item.isSurface) {
+          item.renderFrame();
         }
+      }
     },
 
     /**
@@ -364,37 +377,44 @@ Ext.define('Ext.draw.Container', {
      * @return {String} return.type The type of the data (e.g. 'png' or 'svg').
      */
     getImage: function (format) {
-        var size = this.innerElement.getSize(),
-            surfaces = Array.prototype.slice.call(this.items.items),
-            image, imageElement,
-            zIndexes = this.surfaceZIndexes,
-            i, j, surface, zIndex;
+      var size = this.innerElement.getSize(),
+        surfaces = Array.prototype.slice.call(this.items.items),
+        image,
+        imageElement,
+        zIndexes = this.surfaceZIndexes,
+        i,
+        j,
+        surface,
+        zIndex;
 
-        // Sort the surfaces by zIndex using insertion sort.
-        for (j = 1; j < surfaces.length; j++) {
-            surface = surfaces[j];
-            zIndex = zIndexes[surface.type];
-            i = j - 1;
-            while (i >= 0 && zIndexes[surfaces[i].type] > zIndex) {
-                surfaces[i + 1] = surfaces[i];
-                i--;
-            }
-            surfaces[i + 1] = surface;
+      // Sort the surfaces by zIndex using insertion sort.
+      for (j = 1; j < surfaces.length; j++) {
+        surface = surfaces[j];
+        zIndex = zIndexes[surface.type];
+        i = j - 1;
+        while (i >= 0 && zIndexes[surfaces[i].type] > zIndex) {
+          surfaces[i + 1] = surfaces[i];
+          i--;
         }
+        surfaces[i + 1] = surface;
+      }
 
-        image = surfaces[0].flatten(size, surfaces);
+      image = surfaces[0].flatten(size, surfaces);
 
-        if (format === 'image') {
-            imageElement = new Image();
-            imageElement.src = image.data;
-            image.data = imageElement;
-            return image;
-        }
-        if (format === 'stream') {
-            image.data = image.data.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
-            return image;
-        }
+      if (format === "image") {
+        imageElement = new Image();
+        imageElement.src = image.data;
+        image.data = imageElement;
         return image;
+      }
+      if (format === "stream") {
+        image.data = image.data.replace(
+          /^data:image\/[^;]+/,
+          "data:application/octet-stream",
+        );
+        return image;
+      }
+      return image;
     },
 
     /**
@@ -473,67 +493,77 @@ Ext.define('Ext.draw.Container', {
      * @return {Boolean} True if request was successfully sent to the server.
      */
     download: function (config) {
-        var me = this,
-            inputs = [],
-            markup, name, value;
+      var me = this,
+        inputs = [],
+        markup,
+        name,
+        value;
 
-        config = Ext.apply({
-            version: 2,
-            data: me.getImage().data
-        }, config);
+      config = Ext.apply(
+        {
+          version: 2,
+          data: me.getImage().data,
+        },
+        config,
+      );
 
-        for (name in config) {
-            if (config.hasOwnProperty(name)) {
-                value = config[name];
-                if (name in me.supportedOptions) {
-                    if (me.supportedOptions[name].call(me, value)) {
-                        inputs.push({
-                            tag: 'input',
-                            type: 'hidden',
-                            name: name,
-                            value: Ext.String.htmlEncode(
-                                Ext.isObject(value) ? Ext.JSON.encode(value) : value
-                            )
-                        });
-                    }
-                    //<debug>
-                    else {
-                        Ext.log.error('Invalid value for image download option "' + name + '": ' + value);
-                    }
-                    //</debug>
-                }
-                //<debug>
-                else {
-                    Ext.log.error('Invalid image download option: "' + name + '"');
-                }
-                //</debug>
+      for (name in config) {
+        if (config.hasOwnProperty(name)) {
+          value = config[name];
+          if (name in me.supportedOptions) {
+            if (me.supportedOptions[name].call(me, value)) {
+              inputs.push({
+                tag: "input",
+                type: "hidden",
+                name: name,
+                value: Ext.String.htmlEncode(
+                  Ext.isObject(value) ? Ext.JSON.encode(value) : value,
+                ),
+              });
             }
+            //<debug>
+            else {
+              Ext.log.error(
+                'Invalid value for image download option "' +
+                  name +
+                  '": ' +
+                  value,
+              );
+            }
+            //</debug>
+          }
+          //<debug>
+          else {
+            Ext.log.error('Invalid image download option: "' + name + '"');
+          }
+          //</debug>
         }
+      }
 
-        markup = Ext.dom.Helper.markup({
-            tag: 'html',
+      markup = Ext.dom.Helper.markup({
+        tag: "html",
+        children: [
+          { tag: "head" },
+          {
+            tag: "body",
             children: [
-                {tag: 'head'},
-                {
-                    tag: 'body',
-                    children: [
-                        {
-                            tag: 'form',
-                            method: 'POST',
-                            action: config.url || me.defaultDownloadServerUrl,
-                            children: inputs
-                        },
-                        {
-                            tag: 'script',
-                            type: 'text/javascript',
-                            children: 'document.getElementsByTagName("form")[0].submit();'
-                        }
-                    ]
-                }
-            ]
-        });
+              {
+                tag: "form",
+                method: "POST",
+                action: config.url || me.defaultDownloadServerUrl,
+                children: inputs,
+              },
+              {
+                tag: "script",
+                type: "text/javascript",
+                children: 'document.getElementsByTagName("form")[0].submit();',
+              },
+            ],
+          },
+        ],
+      });
 
-        window.open('', 'ImageDownload_' + Date.now()).document.write(markup);
+      window.open("", "ImageDownload_" + Date.now()).document.write(markup);
     },
 
     /**
@@ -547,18 +577,25 @@ Ext.define('Ext.draw.Container', {
      */
 
     destroy: function () {
-        var callbackId = this.frameCallbackId;
-        if (callbackId) {
-            Ext.draw.Animator.removeFrameCallback(callbackId);
-        }
-        this.callParent();
+      var callbackId = this.frameCallbackId;
+      if (callbackId) {
+        Ext.draw.Animator.removeFrameCallback(callbackId);
+      }
+      this.callParent();
+    },
+  },
+  function () {
+    if (location.search.match("svg")) {
+      Ext.draw.Container.prototype.engine = "Ext.draw.engine.Svg";
+    } else if (
+      (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ||
+      (Ext.browser.is.AndroidStock4 &&
+        (Ext.os.version.getMinor() === 1 ||
+          Ext.os.version.getMinor() === 2 ||
+          Ext.os.version.getMinor() === 3))
+    ) {
+      // http://code.google.com/p/android/issues/detail?id=37529
+      Ext.draw.Container.prototype.engine = "Ext.draw.engine.Svg";
     }
-
-}, function () {
-    if (location.search.match('svg')) {
-        Ext.draw.Container.prototype.engine = 'Ext.draw.engine.Svg';
-    } else if ((Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) || (Ext.browser.is.AndroidStock4 && (Ext.os.version.getMinor() === 1 || Ext.os.version.getMinor() === 2 || Ext.os.version.getMinor() === 3))) {
-        // http://code.google.com/p/android/issues/detail?id=37529
-        Ext.draw.Container.prototype.engine = 'Ext.draw.engine.Svg';
-    }
-});
+  },
+);

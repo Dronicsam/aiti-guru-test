@@ -5,13 +5,13 @@
 // the Toolbar vars first since there is no dependency at the class-level.  This means
 // Toolbar vars might get imported twice but that is not a problem since the variables
 // are !default - the second import will be effectively ignored.
-@import 'Toolbar';
+@import "Toolbar";
 
 /**
  * @var {string}
  * The UI of buttons that are used in the "default" breadcrumb UI
  */
-$breadcrumb-button-ui: dynamic('default-toolbar');
+$breadcrumb-button-ui: dynamic("default-toolbar");
 
 /**
  * @var {number}
@@ -35,19 +35,19 @@ $breadcrumb-split-width: dynamic($button-small-split-width);
  * @var {string}
  * The background-image for the default "folder" icon
  */
-$breadcrumb-folder-icon: dynamic('tree/folder');
+$breadcrumb-folder-icon: dynamic("tree/folder");
 
 /**
  * @var {string}
  * The background-image for the default "open folder" icon
  */
-$breadcrumb-folder-open-icon: dynamic('tree/folder-open');
+$breadcrumb-folder-open-icon: dynamic("tree/folder-open");
 
 /**
  * @var {string}
  * The background-image for the default "leaf" icon
  */
-$breadcrumb-leaf-icon: dynamic('tree/leaf');
+$breadcrumb-leaf-icon: dynamic("tree/leaf");
 
 /**
  * @var {number}
@@ -65,7 +65,9 @@ $breadcrumb-glyph-color: dynamic($button-toolbar-glyph-color);
  * @var {string/list}
  * Glyph for the "folder" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$breadcrumb-folder-glyph: dynamic($fa-var-folder-o $breadcrumb-glyph-font-size $font-icon-font-family);
+$breadcrumb-folder-glyph: dynamic(
+  $fa-var-folder-o $breadcrumb-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -77,7 +79,9 @@ $breadcrumb-folder-glyph-color: dynamic($breadcrumb-glyph-color);
  * @var {string/list}
  * Glyph for the "open folder" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$breadcrumb-folder-open-glyph: dynamic($fa-var-folder-open-o $breadcrumb-glyph-font-size $font-icon-font-family);
+$breadcrumb-folder-open-glyph: dynamic(
+  $fa-var-folder-open-o $breadcrumb-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -89,7 +93,9 @@ $breadcrumb-folder-open-glyph-color: dynamic($breadcrumb-folder-glyph-color);
  * @var {string/list}
  * Glyph for the "leaf" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$breadcrumb-leaf-glyph: dynamic($fa-var-file-o $breadcrumb-glyph-font-size $font-icon-font-family);
+$breadcrumb-leaf-glyph: dynamic(
+  $fa-var-file-o $breadcrumb-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -101,7 +107,9 @@ $breadcrumb-leaf-glyph-color: dynamic($breadcrumb-glyph-color);
  * @var {string/list}
  * Glyph for the "arrow" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$breadcrumb-arrow-glyph: dynamic($fa-var-angle-right $breadcrumb-glyph-font-size $font-icon-font-family);
+$breadcrumb-arrow-glyph: dynamic(
+  $fa-var-angle-right $breadcrumb-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -113,7 +121,9 @@ $breadcrumb-arrow-glyph-color: dynamic($breadcrumb-glyph-color);
  * @var {string/list}
  * Glyph for the "expanded arrow" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$breadcrumb-arrow-expanded-glyph: dynamic($fa-var-angle-down $breadcrumb-glyph-font-size $font-icon-font-family);
+$breadcrumb-arrow-expanded-glyph: dynamic(
+  $fa-var-angle-down $breadcrumb-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -193,7 +203,9 @@ $breadcrumb-scroller-cursor: dynamic($toolbar-scroller-cursor);
  * @var {string}
  * The cursor of disabled Breadcrumb scrollers
  */
-$breadcrumb-scroller-cursor-disabled: dynamic($toolbar-scroller-cursor-disabled);
+$breadcrumb-scroller-cursor-disabled: dynamic(
+  $toolbar-scroller-cursor-disabled
+);
 
 /**
  * @var {number}
@@ -214,14 +226,18 @@ $breadcrumb-scroller-opacity-over: dynamic($toolbar-scroller-opacity-over);
  * The opacity of pressed Breadcrumb scroller buttons. Only applicable when
  * {@link #$breadcrumb-classic-scrollers} is `false`.
  */
-$breadcrumb-scroller-opacity-pressed: dynamic($toolbar-scroller-opacity-pressed);
+$breadcrumb-scroller-opacity-pressed: dynamic(
+  $toolbar-scroller-opacity-pressed
+);
 
 /**
  * @var {number}
  * The opacity of disabled Breadcrumb scroller buttons. Only applicable when
  * {@link #$breadcrumb-classic-scrollers} is `false`.
  */
-$breadcrumb-scroller-opacity-disabled: dynamic($toolbar-scroller-opacity-disabled);
+$breadcrumb-scroller-opacity-disabled: dynamic(
+  $toolbar-scroller-opacity-disabled
+);
 
 /**
  * @var {boolean}

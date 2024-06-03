@@ -17,7 +17,7 @@ Ext.define("AitiGuruTest.view.workpage.WpageController", {
     }
   },
   onDescChange: function (value) {
-    var store = value.up().up().down("grid").getStore();
+    var store = value.up("app-main").down("grid").getStore();
     if (value.value.length !== 0) {
       store.addFilter({
         id: "descFilters",

@@ -13,7 +13,7 @@ $grid-header-background-color: dynamic(#ddd);
  * The background-gradient of grid headers.  Can be either the name of a predefined gradient
  * or a list of color stops. Used as the `$type` parameter for {@link Global_CSS#background-gradient}.
  */
-$grid-header-background-gradient: dynamic('grid-header');
+$grid-header-background-gradient: dynamic("grid-header");
 
 /**
  * @var {color}
@@ -45,13 +45,15 @@ $grid-header-over-background-color: dynamic(#eee);
  * either the name of a predefined gradient or a list of color stops. Used as the `$type`
  * parameter for {@link Global_CSS#background-gradient}.
  */
-$grid-header-over-background-gradient: dynamic('grid-header-over');
+$grid-header-over-background-gradient: dynamic("grid-header-over");
 
 /**
  * @var {color}
  * The background-color of grid headers when sorted
  */
-$grid-header-sorted-background-color: dynamic($grid-header-over-background-color);
+$grid-header-sorted-background-color: dynamic(
+  $grid-header-over-background-color
+);
 
 /**
  * @var {string/list}
@@ -59,7 +61,9 @@ $grid-header-sorted-background-color: dynamic($grid-header-over-background-color
  * predefined gradient or a list of color stops. Used as the `$type`
  * parameter for {@link Global_CSS#background-gradient}.
  */
-$grid-header-sorted-background-gradient: dynamic($grid-header-over-background-gradient);
+$grid-header-sorted-background-gradient: dynamic(
+  $grid-header-over-background-gradient
+);
 
 /**
  * @var {color}
@@ -89,7 +93,7 @@ $grid-header-trigger-width: dynamic(14px);
  * @var {string}
  * The background-image of grid header triggers
  */
-$grid-header-trigger-background-image: dynamic('grid/hd-pop');
+$grid-header-trigger-background-image: dynamic("grid/hd-pop");
 
 /**
  * @var {string/list}
@@ -101,7 +105,9 @@ $grid-header-trigger-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the grid header trigger icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-trigger-glyph: dynamic($fa-var-caret-down $grid-header-trigger-glyph-font-size $font-icon-font-family);
+$grid-header-trigger-glyph: dynamic(
+  $fa-var-caret-down $grid-header-trigger-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -170,13 +176,18 @@ $grid-header-sort-glyph-color: dynamic($color);
  * @var {string/list}
  * Glyph for the grid header "sort ascending" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-sort-asc-glyph: dynamic($fa-var-long-arrow-up $grid-header-sort-glyph-font-size $font-icon-font-family);
+$grid-header-sort-asc-glyph: dynamic(
+  $fa-var-long-arrow-up $grid-header-sort-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the grid header "sort descending" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-sort-desc-glyph: dynamic($fa-var-long-arrow-down $grid-header-sort-glyph-font-size $font-icon-font-family);
+$grid-header-sort-desc-glyph: dynamic(
+  $fa-var-long-arrow-down $grid-header-sort-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
@@ -194,16 +205,24 @@ $grid-header-menu-glyph-color: dynamic($menu-glyph-color);
  * @var {string/list}
  * Glyph for the grid header menu "sort ascending" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-menu-sort-asc-glyph: dynamic($fa-var-sort-alpha-asc $grid-header-menu-glyph-font-size $font-icon-font-family);
+$grid-header-menu-sort-asc-glyph: dynamic(
+  $fa-var-sort-alpha-asc $grid-header-menu-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the grid header menu "sort descending" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-menu-sort-desc-glyph: dynamic($fa-var-sort-alpha-desc $grid-header-menu-glyph-font-size $font-icon-font-family);
+$grid-header-menu-sort-desc-glyph: dynamic(
+  $fa-var-sort-alpha-desc $grid-header-menu-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the grid header menu "columns" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-header-menu-columns-glyph: dynamic($ext-icon-columns $grid-header-menu-glyph-font-size ExtJS);
+$grid-header-menu-columns-glyph: dynamic(
+  $ext-icon-columns $grid-header-menu-glyph-font-size ExtJS
+);

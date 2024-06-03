@@ -12,7 +12,9 @@ $radiofield-checkbox-font-size: dynamic($checkboxfield-checkbox-font-size);
  * @var {number}
  * The font-size of the radio checkbox in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$radiofield-checkbox-font-size-big: dynamic($checkboxfield-checkbox-font-size-big);
+$radiofield-checkbox-font-size-big: dynamic(
+  $checkboxfield-checkbox-font-size-big
+);
 
 /**
  * @var {number}
@@ -25,13 +27,17 @@ $radiofield-checkbox-size: dynamic($checkboxfield-checkbox-size);
  * @var {string/list}
  * The radio checkbox icon
  */
-$radiofield-checkbox-icon: dynamic($fa-var-circle-o $radiofield-checkbox-font-size $font-icon-font-family);
+$radiofield-checkbox-icon: dynamic(
+  $fa-var-circle-o $radiofield-checkbox-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The radio checkbox icon in "checked" state
  */
-$radiofield-checked-checkbox-icon: dynamic($fa-var-dot-circle-o $radiofield-checkbox-font-size $font-icon-font-family);
+$radiofield-checked-checkbox-icon: dynamic(
+  $fa-var-dot-circle-o $radiofield-checkbox-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}

@@ -30,81 +30,82 @@
  *         }]
  *     }).showAt([5, 5]);
  */
- Ext.define('Ext.menu.DatePicker', {
-     extend: 'Ext.menu.Menu',
+Ext.define("Ext.menu.DatePicker", {
+  extend: "Ext.menu.Menu",
 
-     alias: 'widget.datemenu',
+  alias: "widget.datemenu",
 
-     requires: [
-        'Ext.picker.Date'
-     ],
-     
-    ariaRole: 'dialog',
-    
-    //<locale>
+  requires: ["Ext.picker.Date"],
+
+  ariaRole: "dialog",
+
+  //<locale>
+  /**
+   * @cfg {String} ariaLabel ARIA label for the Date Picker menu
+   */
+  ariaLabel: "Date picker",
+  //</locale>
+
+  /**
+   * @cfg {Boolean} hideOnClick
+   * False to continue showing the menu after a date is selected.
+   */
+  hideOnClick: true,
+
+  /**
+   * @cfg {String} pickerId
+   * An id to assign to the underlying date picker.
+   */
+  pickerId: null,
+
+  /**
+   * @cfg {Number} maxHeight
+   * @private
+   */
+
+  /**
+   * @property {Ext.picker.Date} picker
+   * The {@link Ext.picker.Date} instance for this DateMenu
+   */
+
+  initComponent: function () {
+    var me = this,
+      cfg = Ext.apply({}, me.initialConfig);
+
+    // Ensure we clear any listeners so they aren't duplicated
+    delete cfg.listeners;
+
+    Ext.apply(me, {
+      showSeparator: false,
+      plain: true,
+      bodyPadding: 0, // remove the body padding from the datepicker menu item so it looks like 3.3
+      items: Ext.applyIf(
+        {
+          cls: Ext.baseCSSPrefix + "menu-date-item",
+          margin: 0,
+          border: false,
+          id: me.pickerId,
+          xtype: "datepicker",
+        },
+        cfg,
+      ),
+    });
+
+    me.callParent(arguments);
+
+    me.picker = me.down("datepicker");
     /**
-     * @cfg {String} ariaLabel ARIA label for the Date Picker menu
+     * @event select
+     * @inheritdoc Ext.picker.Date#select
      */
-    ariaLabel: 'Date picker',
-    //</locale>
+    me.relayEvents(me.picker, ["select"]);
 
-    /**
-     * @cfg {Boolean} hideOnClick
-     * False to continue showing the menu after a date is selected.
-     */
-    hideOnClick : true,
-
-    /**
-     * @cfg {String} pickerId
-     * An id to assign to the underlying date picker.
-     */
-    pickerId : null,
-
-    /**
-     * @cfg {Number} maxHeight
-     * @private
-     */
-
-    /**
-     * @property {Ext.picker.Date} picker
-     * The {@link Ext.picker.Date} instance for this DateMenu
-     */
-
-    initComponent : function(){
-        var me = this,
-            cfg = Ext.apply({}, me.initialConfig);
-            
-        // Ensure we clear any listeners so they aren't duplicated
-        delete cfg.listeners;
-            
-        Ext.apply(me, {
-            showSeparator: false,
-            plain: true,
-            bodyPadding: 0, // remove the body padding from the datepicker menu item so it looks like 3.3
-            items: Ext.applyIf({
-                cls: Ext.baseCSSPrefix + 'menu-date-item',
-                margin: 0,
-                border: false,
-                id: me.pickerId,
-                xtype: 'datepicker'
-            }, cfg)
-        });
-
-        me.callParent(arguments);
-
-        me.picker = me.down('datepicker');
-        /**
-         * @event select
-         * @inheritdoc Ext.picker.Date#select
-         */
-        me.relayEvents(me.picker, ['select']);
-
-        if (me.hideOnClick) {
-            me.on('select', me.hidePickerOnSelect, me);
-        }
-    },
-
-    hidePickerOnSelect: function() {
-        Ext.menu.Manager.hideAll();
+    if (me.hideOnClick) {
+      me.on("select", me.hidePickerOnSelect, me);
     }
- });
+  },
+
+  hidePickerOnSelect: function () {
+    Ext.menu.Manager.hideAll();
+  },
+});

@@ -60,132 +60,137 @@
  * @member Ext.Button
  */
 @mixin toolbar-ui(
-    $ui: null,
-    $background-color: null,
-    $background-gradient: null,
+  $ui: null,
+  $background-color: null,
+  $background-gradient: null,
 
-    $border-color: null,
-    $border-width: null,
-    $border-style: null,
+  $border-color: null,
+  $border-width: null,
+  $border-style: null,
 
-    $padding: null,
-    $padding-big: null,
-    $horizontal-spacing: null,
-    $horizontal-spacing-big: null,
-    $vertical-spacing: null,
-    $vertical-spacing-big: null,
+  $padding: null,
+  $padding-big: null,
+  $horizontal-spacing: null,
+  $horizontal-spacing-big: null,
+  $vertical-spacing: null,
+  $vertical-spacing-big: null,
 
-    $title-color: null,
-    $title-font-weight: null,
-    $title-font-size: null,
-    $title-font-size-big: null,
-    $title-font-family: null
-
+  $title-color: null,
+  $title-font-weight: null,
+  $title-font-size: null,
+  $title-font-size-big: null,
+  $title-font-family: null
 ) {
-    $ui-suffix: ui-suffix($ui);
+  $ui-suffix: ui-suffix($ui);
 
-    @if $background-color != null {
-        @if $border-color == null {
-            $border-color: toolbar-border-color($background-color);
-        }
-
-        @if $title-color == null {
-            $title-color: toolbar-title-color($background-color);
-        }
+  @if $background-color != null {
+    @if $border-color == null {
+      $border-color: toolbar-border-color($background-color);
     }
 
-    .x-toolbar#{$ui-suffix} {
-        @include background-gradient($background-color, $background-gradient);
-        @include border($border-width, $border-style, $border-color);
-        padding: $padding;
-
-        @if $enable-big and ($padding-big != $padding) {
-            .x-big & {
-                padding: $padding-big;
-            }
-        }
-
-        @if $horizontal-spacing != null {
-            .x-toolbar-inner.x-horizontal > * {
-                margin-right: $horizontal-spacing;
-
-                @if $enable-big and ($horizontal-spacing-big != $horizontal-spacing) {
-                    .x-big & {
-                        margin-right: $horizontal-spacing-big;
-                    }
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-
-        @if $vertical-spacing != null {
-            .x-vertical > * {
-                margin-bottom: $vertical-spacing;
-
-                @if $enable-big and ($vertical-spacing-big != $vertical-spacing) {
-                    .x-big & {
-                        margin-bottom: $vertical-spacing-big;
-                    }
-                }
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-
-        .x-title {
-            color: $title-color;
-            @include font(
-                $font-weight: $title-font-weight,
-                $font-size: $title-font-size,
-                $font-family: $title-font-family
-            );
-
-            @if $enable-big and ($title-font-size-big != $title-font-size) {
-                .x-big & {
-                    font-size: $title-font-size-big;
-                }
-            }
-        }
+    @if $title-color == null {
+      $title-color: toolbar-title-color($background-color);
     }
+  }
+
+  .x-toolbar#{$ui-suffix} {
+    @include background-gradient($background-color, $background-gradient);
+    @include border($border-width, $border-style, $border-color);
+    padding: $padding;
+
+    @if $enable-big and ($padding-big != $padding) {
+      .x-big & {
+        padding: $padding-big;
+      }
+    }
+
+    @if $horizontal-spacing != null {
+      .x-toolbar-inner.x-horizontal > * {
+        margin-right: $horizontal-spacing;
+
+        @if $enable-big and ($horizontal-spacing-big != $horizontal-spacing) {
+          .x-big & {
+            margin-right: $horizontal-spacing-big;
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    @if $vertical-spacing != null {
+      .x-vertical > * {
+        margin-bottom: $vertical-spacing;
+
+        @if $enable-big and ($vertical-spacing-big != $vertical-spacing) {
+          .x-big & {
+            margin-bottom: $vertical-spacing-big;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .x-title {
+      color: $title-color;
+      @include font(
+        $font-weight: $title-font-weight,
+        $font-size: $title-font-size,
+        $font-family: $title-font-family
+      );
+
+      @if $enable-big and ($title-font-size-big != $title-font-size) {
+        .x-big & {
+          font-size: $title-font-size-big;
+        }
+      }
+    }
+  }
 }
 
 .x-toolbar.x-container > .x-body {
-    // This ensures that the default minimum height of a toolbar is identical to the height
-    // it would have if it contained a default-styled button
-    min-height: calc(#{vertical($button-padding)} + #{vertical($button-border-width)} + #{$button-line-height});
+  // This ensures that the default minimum height of a toolbar is identical to the height
+  // it would have if it contained a default-styled button
+  min-height: calc(
+    #{vertical($button-padding)} + #{vertical($button-border-width)} + #{$button-line-height}
+  );
 
-    @if $enable-big {
-        .x-big & {
-            min-height: calc(#{vertical($button-padding-big)} + #{vertical($button-border-width)} + #{$button-line-height-big});
-        }
+  @if $enable-big {
+    .x-big & {
+      min-height: calc(
+        #{vertical($button-padding-big)} +
+          #{vertical($button-border-width)} +
+          #{$button-line-height-big}
+      );
     }
+  }
 }
 
 @include toolbar-ui(
-    $background-color: $toolbar-background-color,
-    $background-gradient: $toolbar-background-gradient,
+  $background-color: $toolbar-background-color,
+  $background-gradient: $toolbar-background-gradient,
 
-    $border-color: $toolbar-border-color,
-    $border-width: $toolbar-border-width,
-    $border-style: $toolbar-border-style,
+  $border-color: $toolbar-border-color,
+  $border-width: $toolbar-border-width,
+  $border-style: $toolbar-border-style,
 
-    $padding: $toolbar-padding,
-    $padding-big: $toolbar-padding-big,
-    $horizontal-spacing: $toolbar-horizontal-spacing,
-    $horizontal-spacing-big: $toolbar-horizontal-spacing-big,
-    $vertical-spacing: $toolbar-vertical-spacing,
-    $vertical-spacing-big: $toolbar-vertical-spacing-big,
+  $padding: $toolbar-padding,
+  $padding-big: $toolbar-padding-big,
+  $horizontal-spacing: $toolbar-horizontal-spacing,
+  $horizontal-spacing-big: $toolbar-horizontal-spacing-big,
+  $vertical-spacing: $toolbar-vertical-spacing,
+  $vertical-spacing-big: $toolbar-vertical-spacing-big,
 
-    $title-color: $toolbar-title-color,
-    $title-font-weight: $toolbar-title-font-weight,
-    $title-font-size: $toolbar-title-font-size,
-    $title-font-size-big: $toolbar-title-font-size-big,
-    $title-font-family: $toolbar-title-font-family
+  $title-color: $toolbar-title-color,
+  $title-font-weight: $toolbar-title-font-weight,
+  $title-font-size: $toolbar-title-font-size,
+  $title-font-size-big: $toolbar-title-font-size-big,
+  $title-font-family: $toolbar-title-font-family
 );
 
 /**
@@ -205,35 +210,38 @@
  * @member Ext.Button
  * @deprecated 6.0 Use {@link #toolbar-ui} instead
  */
-@mixin sencha-toolbar-ui($ui-label, $color, $gradient: $toolbar-background-gradient) {
-    @include toolbar-ui(
-        $ui: $ui-label,
-        $background-color: $color,
-        $background-gradient: $gradient
-    );
+@mixin sencha-toolbar-ui(
+  $ui-label,
+  $color,
+  $gradient: $toolbar-background-gradient
+) {
+  @include toolbar-ui(
+    $ui: $ui-label,
+    $background-color: $color,
+    $background-gradient: $gradient
+  );
 }
-
 
 // TODO: the following styling should be handled by field uis and a defaultFieldUI config
 .x-toolbar,
 .x-msgbox {
-    .x-field {
-        width: 15em;
-    }
+  .x-field {
+    width: 15em;
+  }
 
-    .x-input-text,
-    .x-input-search,
-    .x-input-number,
-    .x-input-select {
-        border: 1px solid $field-border-color;
-    }
+  .x-input-text,
+  .x-input-search,
+  .x-input-number,
+  .x-input-select {
+    border: 1px solid $field-border-color;
+  }
 
-    .x-form-label {
-        background: transparent;
-        > span {
-            font-weight: $font-weight-normal;
-        }
+  .x-form-label {
+    background: transparent;
+    > span {
+      font-weight: $font-weight-normal;
     }
+  }
 }
 
 /**

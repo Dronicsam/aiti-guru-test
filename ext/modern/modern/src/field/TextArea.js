@@ -42,63 +42,63 @@
  *         {@link #placeHolder}: 'Tell us about yourself...'
  *     });
  */
-Ext.define('Ext.field.TextArea', {
-    extend: 'Ext.field.Text',
-    xtype: 'textareafield',
-    requires: ['Ext.field.TextAreaInput'],
-    alternateClassName: 'Ext.form.TextArea',
+Ext.define("Ext.field.TextArea", {
+  extend: "Ext.field.Text",
+  xtype: "textareafield",
+  requires: ["Ext.field.TextAreaInput"],
+  alternateClassName: "Ext.form.TextArea",
 
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        ui: 'textarea',
+  config: {
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    ui: "textarea",
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        autoCapitalize: false,
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    autoCapitalize: false,
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        component: {
-            xtype: 'textareainput'
-        },
-
-        /**
-         * @cfg {Number} maxRows The maximum number of lines made visible by the input.
-         * @accessor
-         */
-        maxRows: null
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    component: {
+      xtype: "textareainput",
     },
 
     /**
-     * @private
+     * @cfg {Number} maxRows The maximum number of lines made visible by the input.
+     * @accessor
      */
-    updateMaxRows: function(newRows) {
-        this.getComponent().setMaxRows(newRows);
-    },
+    maxRows: null,
+  },
 
-    updateHeight: function(height, oldHeight) {
-        this.callParent([height, oldHeight]);
-        this.getComponent().input.setHeight(newHeight);
-    },
+  /**
+   * @private
+   */
+  updateMaxRows: function (newRows) {
+    this.getComponent().setMaxRows(newRows);
+  },
 
-    updateWidth: function(width, oldWidth) {
-        this.callParent([width, oldWidth]);
-        this.getComponent().input.setWidth(newWidth);
-    },
+  updateHeight: function (height, oldHeight) {
+    this.callParent([height, oldHeight]);
+    this.getComponent().input.setHeight(newHeight);
+  },
 
-    /**
-     * Called when a key has been pressed in the `<input>`
-     * @private
-     */
-    doKeyUp: function(me) {
-        // getValue to ensure that we are in sync with the dom
-        this.toggleClearIcon(this.getValue());
-    }
+  updateWidth: function (width, oldWidth) {
+    this.callParent([width, oldWidth]);
+    this.getComponent().input.setWidth(newWidth);
+  },
+
+  /**
+   * Called when a key has been pressed in the `<input>`
+   * @private
+   */
+  doKeyUp: function (me) {
+    // getValue to ensure that we are in sync with the dom
+    this.toggleClearIcon(this.getValue());
+  },
 });

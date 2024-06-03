@@ -12,7 +12,7 @@ $index-bar-width: dynamic(1.1em);
  * @var {color} $index-bar-bg-color
  * Background-color of the index bar.
  */
-$index-bar-bg-color: dynamic(hsla(hue($base-color), 10%, 60%, .8));
+$index-bar-bg-color: dynamic(hsla(hue($base-color), 10%, 60%, 0.8));
 
 /**
  * @var {color} $index-bar-color

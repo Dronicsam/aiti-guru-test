@@ -54,8 +54,12 @@ $treelist-item-expander-color: dynamic($treelist-color);
 
 $treelist-item-expander-over-color: dynamic($treelist-item-expander-color);
 
-$treelist-item-expander-glyph: dynamic($fa-var-angle-right $font-icon-font-family);
-$treelist-item-expander-expanded-glyph: dynamic($fa-var-angle-down $font-icon-font-family);
+$treelist-item-expander-glyph: dynamic(
+  $fa-var-angle-right $font-icon-font-family
+);
+$treelist-item-expander-expanded-glyph: dynamic(
+  $fa-var-angle-down $font-icon-font-family
+);
 
 $treelist-item-expander-width: dynamic(18px);
 $treelist-item-expander-width-big: dynamic(null);
@@ -80,7 +84,6 @@ $treelist-item-icon-font-size-big: dynamic(null);
 $treelist-item-expanded-background-color: dynamic(null);
 
 $treelist-item-expanded-child-background-color: dynamic(null);
-
 
 //--------------------------------------------------------------------------
 $treelist-row-indicator-selected-color: dynamic(null);

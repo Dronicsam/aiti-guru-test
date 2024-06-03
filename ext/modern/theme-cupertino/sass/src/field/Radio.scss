@@ -2,17 +2,17 @@
  * @class Ext.field.Radio
  */
 .x-field-radio .x-field-mask {
-    &::after {
-        color: transparent;
-    }
+  &::after {
+    color: transparent;
+  }
 }
 
 .x-input-radio:checked + .x-field-mask::after {
-    color: $ios7-blue;
+  color: $ios7-blue;
 }
 
 .x-item-disabled {
-	.x-input-radio:checked + .x-field-mask::after {
-		color: lighten($ios7-blue, 20%);
-	}
+  .x-input-radio:checked + .x-field-mask::after {
+    color: lighten($ios7-blue, 20%);
+  }
 }

@@ -24,7 +24,14 @@ $grid-grouped-header-border-style: dynamic(solid);
  * @var {color}
  * The border-color of group headers
  */
-$grid-grouped-header-border-color: dynamic(adjust-color($base-color, $hue: 0.844deg, $saturation: 7.644%, $lightness: -8.627%));
+$grid-grouped-header-border-color: dynamic(
+  adjust-color(
+    $base-color,
+    $hue: 0.844deg,
+    $saturation: 7.644%,
+    $lightness: -8.627%
+  )
+);
 
 /**
  * @var {number/list}
@@ -42,7 +49,14 @@ $grid-grouped-header-cursor: dynamic(pointer);
  * @var {color}
  * The text color of group header titles
  */
-$grid-grouped-title-color: dynamic(adjust-color($base-color, $hue: 0.952deg, $saturation: -6.718%, $lightness: -41.961%));
+$grid-grouped-title-color: dynamic(
+  adjust-color(
+    $base-color,
+    $hue: 0.952deg,
+    $saturation: -6.718%,
+    $lightness: -41.961%
+  )
+);
 
 /**
  * @var {string}
@@ -66,13 +80,17 @@ $grid-grouped-title-font-weight: dynamic($font-weight-bold);
  * @var {number}
  * The line-height of group header titles
  */
-$grid-grouped-title-line-height: dynamic(round($grid-grouped-title-font-size * 1.15));
+$grid-grouped-title-line-height: dynamic(
+  round($grid-grouped-title-font-size * 1.15)
+);
 
 /**
  * @var {string/list}
  * Glyph for the "group by this field" menu icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-grouped-menu-group-by-glyph: dynamic($ext-icon-group-by $grid-header-menu-glyph-font-size ExtJS);
+$grid-grouped-menu-group-by-glyph: dynamic(
+  $ext-icon-group-by $grid-header-menu-glyph-font-size ExtJS
+);
 
 /**
  * @var {color}
@@ -90,16 +108,24 @@ $grid-grouped-title-glyph-font-size: dynamic(14px);
  * @var {string/list}
  * Glyph for the group title's "expand" group icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-grouped-title-expand-glyph: dynamic($fa-var-plus-square $grid-grouped-title-glyph-font-size $font-icon-font-family);
+$grid-grouped-title-expand-glyph: dynamic(
+  $fa-var-plus-square $grid-grouped-title-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the group title's "collapse" group icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$grid-grouped-title-collapse-glyph: dynamic($fa-var-minus-square $grid-grouped-title-glyph-font-size $font-icon-font-family);
+$grid-grouped-title-collapse-glyph: dynamic(
+  $fa-var-minus-square $grid-grouped-title-glyph-font-size
+    $font-icon-font-family
+);
 
 // private
-$grid-grouped-title-font: dynamic($grid-grouped-title-font-weight #{$grid-grouped-title-font-size}/#{$grid-grouped-title-line-height} $grid-grouped-title-font-family);
+$grid-grouped-title-font: dynamic(
+  $grid-grouped-title-font-weight #{$grid-grouped-title-font-size}/#{$grid-grouped-title-line-height}
+    $grid-grouped-title-font-family
+);
 
 /**
  * @var {number/list}

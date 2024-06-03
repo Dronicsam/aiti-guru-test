@@ -24,17 +24,21 @@ $grid-column-header-font-weight: dynamic($font-weight);
  * @var {number}
  * The line-height of grid column headers
  */
-$grid-column-header-line-height: dynamic(round($grid-column-header-font-size * 1.15));
+$grid-column-header-line-height: dynamic(
+  round($grid-column-header-font-size * 1.15)
+);
 
 // private
-$grid-column-header-font: dynamic($grid-column-header-font-weight #{$grid-column-header-font-size}/#{$grid-column-header-line-height} $grid-column-header-font-family);
+$grid-column-header-font: dynamic(
+  $grid-column-header-font-weight #{$grid-column-header-font-size}/#{$grid-column-header-line-height}
+    $grid-column-header-font-family
+);
 
 /**
  * @var {string}
  * The text-overflow of grid column headers
  */
 $grid-column-text-overflow: dynamic(ellipsis);
-
 
 /**
  * @var {color}
@@ -64,7 +68,7 @@ $grid-column-header-focus-color: dynamic($grid-column-header-color);
  * @var {color}
  * The background-color of focused grid column headers
  */
-$grid-column-header-focus-background-color: dynamic('none');
+$grid-column-header-focus-background-color: dynamic("none");
 
 /**
  * @var {number}
@@ -91,4 +95,5 @@ $grid-column-header-focus-border-inset: dynamic(0px);
 $grid-column-header-focus-border-color: dynamic(#333);
 
 // private
-$grid-header-height: $grid-column-header-line-height + vertical($grid-header-padding);
+$grid-header-height: $grid-column-header-line-height +
+  vertical($grid-header-padding);

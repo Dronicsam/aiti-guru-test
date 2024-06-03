@@ -4,7 +4,7 @@
 //// http://pictos.drewwilson.com/
 //// Pictos icons are (c) 2010 Drew Wilson
 
-$pictos-font-path: get-resource-path('fonts');
+$pictos-font-path: get-resource-path("fonts");
 
 $pictos-var-anchor: "a";
 $pictos-var-box: "b";
@@ -96,7 +96,7 @@ $pictos-var-up: "{";
 $pictos-var-down: "}";
 $pictos-var-screens: "|";
 $pictos-var-bell: ":";
-$pictos-var-quote: "\"";
+$pictos-var-quote: '"';
 $pictos-var-volume_mute: "<";
 $pictos-var-volume: ">";
 $pictos-var-question: "?";

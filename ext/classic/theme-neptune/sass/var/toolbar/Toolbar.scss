@@ -7,7 +7,9 @@ $toolbar-border-color: dynamic($neutral-medium-dark-color);
 $toolbar-horizontal-spacing: dynamic(8px);
 $toolbar-vertical-spacing: dynamic(6px);
 $toolbar-footer-vertical-spacing: dynamic(6px);
-$toolbar-footer-background-color: dynamic(mix($base-light-color, $neutral-light-color, 30%));
+$toolbar-footer-background-color: dynamic(
+  mix($base-light-color, $neutral-light-color, 30%)
+);
 
 $toolbar-scroller-width: dynamic(16px);
 $toolbar-scroller-height: dynamic(16px);
@@ -19,4 +21,4 @@ $toolbar-separator-color: dynamic($neutral-color);
 $toolbar-separator-horizontal-border-width: dynamic(0 0 0 1px);
 $toolbar-separator-vertical-border-width: dynamic(1px 0 0);
 
-$toolbar-tool-background-image: dynamic('tools/tool-sprites-dark');
+$toolbar-tool-background-image: dynamic("tools/tool-sprites-dark");

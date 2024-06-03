@@ -29,14 +29,14 @@
  *         }]
  *     });
  */
-Ext.define('Ext.layout.container.HBox', {
-    extend: 'Ext.layout.container.Box',
+Ext.define("Ext.layout.container.HBox", {
+  extend: "Ext.layout.container.Box",
 
-    alias: 'layout.hbox',
+  alias: "layout.hbox",
 
-    alternateClassName: 'Ext.layout.HBoxLayout',
+  alternateClassName: "Ext.layout.HBoxLayout",
 
-    type: 'hbox',
+  type: "hbox",
 
-    vertical: false
+  vertical: false,
 });

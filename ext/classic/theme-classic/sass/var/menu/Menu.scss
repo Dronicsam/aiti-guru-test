@@ -4,10 +4,12 @@
 $menu-background-color: dynamic(#f0f0f0);
 $menu-border-color: dynamic($panel-border-color);
 $menu-separator-border-color: dynamic(#e0e0e0);
-$menu-item-active-background-color: dynamic(adjust-color($base-color, $saturation: 25.397%, $lightness: 7.647%));
-$menu-item-background-gradient: dynamic('matte');
+$menu-item-active-background-color: dynamic(
+  adjust-color($base-color, $saturation: 25.397%, $lightness: 7.647%)
+);
+$menu-item-background-gradient: dynamic("matte");
 $menu-item-active-border-radius: dynamic(3px);
-$menu-item-font-size: dynamic(ceil($font-size * .9));
+$menu-item-font-size: dynamic(ceil($font-size * 0.9));
 $menu-text-color: dynamic(#222);
 $menu-item-icon-vertical-offset: dynamic(1px);
 $menu-item-text-vertical-offset: dynamic(1px);

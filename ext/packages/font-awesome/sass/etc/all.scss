@@ -1,4 +1,4 @@
-$fa-font-path: get-resource-path('fonts');
+$fa-font-path: get-resource-path("fonts");
 
 @import "_mixins";
 @import "_path";
@@ -16,5 +16,5 @@ $fa-font-path: get-resource-path('fonts');
 // of "fa".  The "fa" class sets some properties that may collide
 // with theme properties, whereas "x-fa" sets only the font-family.
 .x-fa:before {
-    font-family: FontAwesome;
+  font-family: FontAwesome;
 }

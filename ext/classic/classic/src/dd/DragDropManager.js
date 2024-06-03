@@ -6,22 +6,23 @@
  * http://developer.yahoo.net/yui/license.txt
  */
 
-
 /**
  * DragDropManager is a singleton that tracks the element interaction for
  * all DragDrop items in the window.  Generally, you will not call
  * this class directly, but it does have helper methods that could
  * be useful in your DragDrop implementations.
  */
-Ext.define('Ext.dd.DragDropManager', {
+Ext.define(
+  "Ext.dd.DragDropManager",
+  {
     singleton: true,
 
-    requires: ['Ext.util.Region'],
+    requires: ["Ext.util.Region"],
 
-    uses: ['Ext.tip.QuickTipManager'],
+    uses: ["Ext.tip.QuickTipManager"],
 
     // shorter ClassName, to save bytes and use internally
-    alternateClassName: ['Ext.dd.DragDropMgr', 'Ext.dd.DDM'],
+    alternateClassName: ["Ext.dd.DragDropMgr", "Ext.dd.DDM"],
 
     /**
      * @property {String[]} ids
@@ -105,8 +106,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * Called the first time an element is registered.
      * @private
      */
-    init: function() {
-        this.initialized = true;
+    init: function () {
+      this.initialized = true;
     },
 
     /**
@@ -147,96 +148,105 @@ Ext.define('Ext.dd.DragDropManager', {
      * @readonly
      * Class to add to the {@link Ext.dd.DragDrop#getDragEl dragged element} of a DragDrop instance.
      */
-    dragCls: Ext.baseCSSPrefix + 'dd-drag-current',
+    dragCls: Ext.baseCSSPrefix + "dd-drag-current",
 
     /**
      * Runs method on all drag and drop objects
      * @private
      */
-    _execOnAll: function(sMethod, args) {
-        var ids = this.ids,
-            i, j, oDD, item;
-            
-        for (i in ids) {
-            if (ids.hasOwnProperty(i)) {
-                item = ids[i];
-                for (j in item) {
-                    if (item.hasOwnProperty(j)) {
-                        oDD = item[j];
-                        if (! this.isTypeOfDD(oDD)) {
-                            continue;
-                        }
-                        oDD[sMethod].apply(oDD, args);
-                    }
-                }
+    _execOnAll: function (sMethod, args) {
+      var ids = this.ids,
+        i,
+        j,
+        oDD,
+        item;
+
+      for (i in ids) {
+        if (ids.hasOwnProperty(i)) {
+          item = ids[i];
+          for (j in item) {
+            if (item.hasOwnProperty(j)) {
+              oDD = item[j];
+              if (!this.isTypeOfDD(oDD)) {
+                continue;
+              }
+              oDD[sMethod].apply(oDD, args);
             }
+          }
         }
+      }
     },
 
     /**
      * Drag and drop initialization.  Sets up the global event handlers
      * @private
      */
-    addListeners: function() {
-        var me = this;
+    addListeners: function () {
+      var me = this;
 
-        me.init();
+      me.init();
 
-        Ext.getDoc().on({
-            //TODO delay: 1, // delay to let other mouseup events occur before us
-            mouseup: me.handleMouseUp,
+      Ext.getDoc().on({
+        //TODO delay: 1, // delay to let other mouseup events occur before us
+        mouseup: me.handleMouseUp,
 
-            // Mousemove events do not need to be captured because they do not contend
-            // with scroll events - they're only processed when a drag has begun.
-            // Capturing was causing https://sencha.jira.com/browse/EXTJS-13952
-            mousemove: {
-                fn: me.handleMouseMove,
-                capture: false
-            },
-            dragstart: me.preventDrag,
-            drag: me.preventDrag,
-            dragend: me.preventDrag,
-            capture: true,
-            scope: me
-        });
-        Ext.getWin().on({
-            unload: me._onUnload,
-            resize: me._onResize,
-            scope: me
-        });
+        // Mousemove events do not need to be captured because they do not contend
+        // with scroll events - they're only processed when a drag has begun.
+        // Capturing was causing https://sencha.jira.com/browse/EXTJS-13952
+        mousemove: {
+          fn: me.handleMouseMove,
+          capture: false,
+        },
+        dragstart: me.preventDrag,
+        drag: me.preventDrag,
+        dragend: me.preventDrag,
+        capture: true,
+        scope: me,
+      });
+      Ext.getWin().on({
+        unload: me._onUnload,
+        resize: me._onResize,
+        scope: me,
+      });
     },
 
     // if a drag/drop operation is currently underway, this method stops the dragstart,
     // drag, and dragend events from propagating down to any other listeners, e.g. scrollers
-    preventDrag: function(e) {
-        if (this.isMouseDown) {
-            e.stopPropagation();
-        }
+    preventDrag: function (e) {
+      if (this.isMouseDown) {
+        e.stopPropagation();
+      }
     },
 
     /**
      * Reset constraints on all drag and drop objs
      * @private
      */
-    _onResize: function(e) {
-        this._execOnAll("resetConstraints", []);
+    _onResize: function (e) {
+      this._execOnAll("resetConstraints", []);
     },
 
     /**
      * Lock all drag and drop functionality
      */
-    lock: function() { this.locked = true; },
+    lock: function () {
+      this.locked = true;
+    },
 
     /**
      * Unlock all drag and drop functionality
      */
-    unlock: function() { this.locked = false; },
+    unlock: function () {
+      this.locked = false;
+    },
 
     /**
      * Is drag and drop locked?
      * @return {Boolean} True if drag and drop is locked, false otherwise.
      */
-    isLocked: function() { return this.locked; },
+    isLocked: function () {
+      return this.locked;
+    },
 
     /**
      * @property {Object} locationCache
@@ -299,13 +309,15 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Ext.dd.DragDrop} oDD the DragDrop object to register
      * @param {String} sGroup the name of the group this element belongs to
      */
-    regDragDrop: function(oDD, sGroup) {
-        if (!this.initialized) { this.init(); }
+    regDragDrop: function (oDD, sGroup) {
+      if (!this.initialized) {
+        this.init();
+      }
 
-        if (!this.ids[sGroup]) {
-            this.ids[sGroup] = {};
-        }
-        this.ids[sGroup][oDD.id] = oDD;
+      if (!this.ids[sGroup]) {
+        this.ids[sGroup] = {};
+      }
+      this.ids[sGroup][oDD.id] = oDD;
     },
 
     /**
@@ -313,15 +325,15 @@ Ext.define('Ext.dd.DragDropManager', {
      * by DragDrop.removeFromGroup, so don't call this function directly.
      * @private
      */
-    removeDDFromGroup: function(oDD, sGroup) {
-        if (!this.ids[sGroup]) {
-            this.ids[sGroup] = {};
-        }
+    removeDDFromGroup: function (oDD, sGroup) {
+      if (!this.ids[sGroup]) {
+        this.ids[sGroup] = {};
+      }
 
-        var obj = this.ids[sGroup];
-        if (obj && obj[oDD.id]) {
-            delete obj[oDD.id];
-        }
+      var obj = this.ids[sGroup];
+      if (obj && obj[oDD.id]) {
+        delete obj[oDD.id];
+      }
     },
 
     /**
@@ -329,34 +341,34 @@ Ext.define('Ext.dd.DragDropManager', {
      * DragDrop.unreg, use that method instead of calling this directly.
      * @private
      */
-    _remove: function(oDD, clearGroup) {
-        var me = this,
-            ids = me.ids,
-            groups = oDD.groups,
-            g;
+    _remove: function (oDD, clearGroup) {
+      var me = this,
+        ids = me.ids,
+        groups = oDD.groups,
+        g;
 
-        // If we're clearing everything, we'll just end up wiping
-        // this.ids & this.handleIds
-        if (me.clearingAll) {
-            return;
-        }
+      // If we're clearing everything, we'll just end up wiping
+      // this.ids & this.handleIds
+      if (me.clearingAll) {
+        return;
+      }
 
-        if (me.dragCurrent === oDD) {
-            me.dragCurrent = null;
-        }
+      if (me.dragCurrent === oDD) {
+        me.dragCurrent = null;
+      }
 
-        for (g in groups) {
-            if (groups.hasOwnProperty(g)) {
-                if (clearGroup) {
-                    delete ids[g];
-                } else if (ids[g]) {
-                    delete ids[g][oDD.id];
-                }
-            }
+      for (g in groups) {
+        if (groups.hasOwnProperty(g)) {
+          if (clearGroup) {
+            delete ids[g];
+          } else if (ids[g]) {
+            delete ids[g][oDD.id];
+          }
         }
-        
-        delete me.handleIds[oDD.id];
-        delete me.locationCache[oDD.id];
+      }
+
+      delete me.handleIds[oDD.id];
+      delete me.locationCache[oDD.id];
     },
 
     /**
@@ -366,11 +378,11 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {String} sHandleId the id of the element that is the drag
      * handle
      */
-    regHandle: function(sDDId, sHandleId) {
-        if (!this.handleIds[sDDId]) {
-            this.handleIds[sDDId] = {};
-        }
-        this.handleIds[sDDId][sHandleId] = sHandleId;
+    regHandle: function (sDDId, sHandleId) {
+      if (!this.handleIds[sDDId]) {
+        this.handleIds[sDDId] = {};
+      }
+      this.handleIds[sDDId][sHandleId] = sHandleId;
     },
 
     /**
@@ -380,8 +392,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Boolean} true if this element is a DragDrop item,
      * false otherwise
      */
-    isDragDrop: function(id) {
-        return ( this.getDDById(id) ) ? true : false;
+    isDragDrop: function (id) {
+      return this.getDDById(id) ? true : false;
     },
 
     /**
@@ -391,22 +403,24 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Boolean} bTargetsOnly if true, only return targetable objs
      * @return {Ext.dd.DragDrop[]} the related instances
      */
-    getRelated: function(p_oDD, bTargetsOnly) {
-        var oDDs = [],
-            i, j, dd;
-        for (i in p_oDD.groups) {
-            for (j in this.ids[i]) {
-                dd = this.ids[i][j];
-                if (! this.isTypeOfDD(dd)) {
-                    continue;
-                }
-                if (!bTargetsOnly || dd.isTarget) {
-                    oDDs[oDDs.length] = dd;
-                }
-            }
+    getRelated: function (p_oDD, bTargetsOnly) {
+      var oDDs = [],
+        i,
+        j,
+        dd;
+      for (i in p_oDD.groups) {
+        for (j in this.ids[i]) {
+          dd = this.ids[i][j];
+          if (!this.isTypeOfDD(dd)) {
+            continue;
+          }
+          if (!bTargetsOnly || dd.isTarget) {
+            oDDs[oDDs.length] = dd;
+          }
         }
+      }
 
-        return oDDs;
+      return oDDs;
     },
 
     /**
@@ -418,15 +432,16 @@ Ext.define('Ext.dd.DragDropManager', {
      * dd obj
      */
     isLegalTarget: function (oDD, oTargetDD) {
-        var targets = this.getRelated(oDD, true),
-            i, len;
-        for (i=0, len=targets.length;i<len;++i) {
-            if (targets[i].id === oTargetDD.id) {
-                return true;
-            }
+      var targets = this.getRelated(oDD, true),
+        i,
+        len;
+      for (i = 0, len = targets.length; i < len; ++i) {
+        if (targets[i].id === oTargetDD.id) {
+          return true;
         }
+      }
 
-        return false;
+      return false;
     },
 
     /**
@@ -439,7 +454,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Boolean} true if typeof oDD = DragDrop
      */
     isTypeOfDD: function (oDD) {
-        return (oDD && oDD.__ygDragDrop);
+      return oDD && oDD.__ygDragDrop;
     },
 
     /**
@@ -449,9 +464,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Boolean} true if this element is a DragDrop handle, false
      * otherwise
      */
-    isHandle: function(sDDId, sHandleId) {
-        return ( this.handleIds[sDDId] &&
-                        this.handleIds[sDDId][sHandleId] );
+    isHandle: function (sDDId, sHandleId) {
+      return this.handleIds[sDDId] && this.handleIds[sDDId][sHandleId];
     },
 
     /**
@@ -459,15 +473,15 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {String} id the id of the DragDrop object
      * @return {Ext.dd.DragDrop} the drag drop object, null if it is not found
      */
-    getDDById: function(id, force) {
-        var i, dd;
-        for (i in this.ids) {
-            dd = this.ids[i][id];
-            if (dd instanceof Ext.dd.DDTarget || force) {
-                return dd;
-            }
+    getDDById: function (id, force) {
+      var i, dd;
+      for (i in this.ids) {
+        dd = this.ids[i][id];
+        if (dd instanceof Ext.dd.DDTarget || force) {
+          return dd;
         }
-        return null;
+      }
+      return null;
     },
 
     /**
@@ -477,50 +491,51 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Ext.dd.DragDrop} oDD the DragDrop object being dragged
      * @private
      */
-    handleMouseDown: function(e, oDD) {
-        var me = this,
-            xy, el;
+    handleMouseDown: function (e, oDD) {
+      var me = this,
+        xy,
+        el;
 
-        me.isMouseDown = true;
+      me.isMouseDown = true;
 
-        if (Ext.quickTipsActive){
-            Ext.tip.QuickTipManager.ddDisable();
-        }
-        
-        me.currentPoint = e.getPoint();
-        
-        if (me.dragCurrent){
-            // the original browser mouseup wasn't handled (e.g. outside FF browser window)
-            // so clean up first to avoid breaking the next drag
-            me.handleMouseUp(e);
-        }
+      if (Ext.quickTipsActive) {
+        Ext.tip.QuickTipManager.ddDisable();
+      }
 
-        me.mousedownEvent = e;
-        me.currentTarget = e.getTarget();
-        me.dragCurrent = oDD;
+      me.currentPoint = e.getPoint();
 
-        el = oDD.getEl();
+      if (me.dragCurrent) {
+        // the original browser mouseup wasn't handled (e.g. outside FF browser window)
+        // so clean up first to avoid breaking the next drag
+        me.handleMouseUp(e);
+      }
 
-        //<feature legacyBrowser>
-        // We use this to handle an issue where a mouseup will not be detected
-        // if the mouseup event happens outside of the browser window. When the
-        // mouse comes back, any drag will still be active
-        // http://msdn.microsoft.com/en-us/library/ms537630(VS.85).aspx
-        Ext.fly(el).setCapture();
-        //</feature>
+      me.mousedownEvent = e;
+      me.currentTarget = e.getTarget();
+      me.dragCurrent = oDD;
 
-        // track start position
-        xy = e.getXY();
-        me.startX = xy[0];
-        me.startY = xy[1];
+      el = oDD.getEl();
 
-        // Track the distance moved.
-        me.offsetX = me.offsetY = 0;
+      //<feature legacyBrowser>
+      // We use this to handle an issue where a mouseup will not be detected
+      // if the mouseup event happens outside of the browser window. When the
+      // mouse comes back, any drag will still be active
+      // http://msdn.microsoft.com/en-us/library/ms537630(VS.85).aspx
+      Ext.fly(el).setCapture();
+      //</feature>
 
-        me.deltaX = me.startX - el.offsetLeft;
-        me.deltaY = me.startY - el.offsetTop;
+      // track start position
+      xy = e.getXY();
+      me.startX = xy[0];
+      me.startY = xy[1];
 
-        me.dragThreshMet = false;
+      // Track the distance moved.
+      me.offsetX = me.offsetY = 0;
+
+      me.deltaX = me.startX - el.offsetLeft;
+      me.deltaY = me.startY - el.offsetTop;
+
+      me.dragThreshMet = false;
     },
 
     /**
@@ -529,23 +544,23 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Number} x the X position of the original mousedown
      * @param {Number} y the Y position of the original mousedown
      */
-    startDrag: function(x, y) {
-        var me = this,
-            current = me.dragCurrent,
-            dragEl;
+    startDrag: function (x, y) {
+      var me = this,
+        current = me.dragCurrent,
+        dragEl;
 
-        clearTimeout(me.clickTimeout);
-        if (current) {
-            current.b4StartDrag(x, y);
-            current.startDrag(x, y);
-            dragEl = current.getDragEl();
+      clearTimeout(me.clickTimeout);
+      if (current) {
+        current.b4StartDrag(x, y);
+        current.startDrag(x, y);
+        dragEl = current.getDragEl();
 
-            // Add current drag class to dragged element
-            if (dragEl) {
-                Ext.fly(dragEl).addCls(me.dragCls);
-            }
+        // Add current drag class to dragged element
+        if (dragEl) {
+          Ext.fly(dragEl).addCls(me.dragCls);
         }
-        me.dragThreshMet = true;
+      }
+      me.dragThreshMet = true;
     },
 
     /**
@@ -554,34 +569,34 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Event} e the event
      * @private
      */
-    handleMouseUp: function(e) {
-        var me = this;
+    handleMouseUp: function (e) {
+      var me = this;
 
-        me.isMouseDown = false;
+      me.isMouseDown = false;
 
-        if (Ext.quickTipsActive){
-            Ext.tip.QuickTipManager.ddEnable();
-        }
-        if (!me.dragCurrent) {
-            return;
-        }
+      if (Ext.quickTipsActive) {
+        Ext.tip.QuickTipManager.ddEnable();
+      }
+      if (!me.dragCurrent) {
+        return;
+      }
 
-        // See setCapture call in handleMouseDown
-        if (Ext.isIE && document.releaseCapture) {
-            document.releaseCapture();
-        }
+      // See setCapture call in handleMouseDown
+      if (Ext.isIE && document.releaseCapture) {
+        document.releaseCapture();
+      }
 
-        clearTimeout(me.clickTimeout);
+      clearTimeout(me.clickTimeout);
 
-        if (me.dragThreshMet) {
-            me.fireEvents(e, true);
-        }
+      if (me.dragThreshMet) {
+        me.fireEvents(e, true);
+      }
 
-        me.stopDrag(e);
+      me.stopDrag(e);
 
-        me.stopEvent(e);
-        
-        me.mousedownEvent = me.currentTarget = null;
+      me.stopEvent(e);
+
+      me.mousedownEvent = me.currentTarget = null;
     },
 
     /**
@@ -589,14 +604,14 @@ Ext.define('Ext.dd.DragDropManager', {
      * features are turned on.
      * @param {Event} e the event as returned by this.getEvent()
      */
-    stopEvent: function(e) {
-        if (this.stopPropagation) {
-            e.stopPropagation();
-        }
+    stopEvent: function (e) {
+      if (this.stopPropagation) {
+        e.stopPropagation();
+      }
 
-        if (this.preventDefault) {
-            e.preventDefault();
-        }
+      if (this.preventDefault) {
+        e.preventDefault();
+      }
     },
 
     /**
@@ -605,30 +620,29 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Event} e the event
      * @private
      */
-    stopDrag: function(e) {
-        var me = this,
-            current = me.dragCurrent,
-            dragEl;
+    stopDrag: function (e) {
+      var me = this,
+        current = me.dragCurrent,
+        dragEl;
 
-        // Fire the drag end event for the item that was dragged
-        if (current) {
-            if (me.dragThreshMet) {
+      // Fire the drag end event for the item that was dragged
+      if (current) {
+        if (me.dragThreshMet) {
+          // Remove current drag class from dragged element
+          dragEl = current.getDragEl();
+          if (dragEl) {
+            Ext.fly(dragEl).removeCls(me.dragCls);
+          }
 
-                // Remove current drag class from dragged element
-                dragEl = current.getDragEl();
-                if (dragEl) {
-                    Ext.fly(dragEl).removeCls(me.dragCls);
-                }
-
-                current.b4EndDrag(e);
-                current.endDrag(e);
-            }
-
-            me.dragCurrent.onMouseUp(e);
+          current.b4EndDrag(e);
+          current.endDrag(e);
         }
 
-        me.dragCurrent = null;
-        me.dragOvers = {};
+        me.dragCurrent.onMouseUp(e);
+      }
+
+      me.dragCurrent = null;
+      me.dragOvers = {};
     },
 
     /**
@@ -644,41 +658,41 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Event} e the event
      * @private
      */
-    handleMouseMove: function(e) {
-        var me = this,
-            current = me.dragCurrent,
-            point = me.currentPoint = e.getPoint(),
-            currentX = point.x,
-            currentY = point.y,
-            diffX,
-            diffY;
+    handleMouseMove: function (e) {
+      var me = this,
+        current = me.dragCurrent,
+        point = (me.currentPoint = e.getPoint()),
+        currentX = point.x,
+        currentY = point.y,
+        diffX,
+        diffY;
 
-        me.offsetX = currentX - me.startX;
-        me.offsetY = currentY - me.startY;
+      me.offsetX = currentX - me.startX;
+      me.offsetY = currentY - me.startY;
 
-        if (!current) {
-            return true;
-        }
-
-        if (!me.dragThreshMet) {
-            diffX = Math.abs(me.offsetX);
-            diffY = Math.abs(me.offsetY);
-            if (diffX > me.clickPixelThresh || diffY > me.clickPixelThresh) {
-                me.startDrag(me.startX, me.startY);
-            }
-        }
-
-        if (me.dragThreshMet) {
-            current.b4Drag(e);
-            current.onDrag(e);
-            if (!current.moveOnly) {
-                me.fireEvents(e, false);
-            }
-        }
-
-        me.stopEvent(e);
-
+      if (!current) {
         return true;
+      }
+
+      if (!me.dragThreshMet) {
+        diffX = Math.abs(me.offsetX);
+        diffY = Math.abs(me.offsetY);
+        if (diffX > me.clickPixelThresh || diffY > me.clickPixelThresh) {
+          me.startDrag(me.startX, me.startY);
+        }
+      }
+
+      if (me.dragThreshMet) {
+        current.b4Drag(e);
+        current.onDrag(e);
+        if (!current.moveOnly) {
+          me.fireEvents(e, false);
+        }
+      }
+
+      me.stopEvent(e);
+
+      return true;
     },
 
     /**
@@ -688,211 +702,220 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Boolean} isDrop is this a drop op or a mouseover op?
      * @private
      */
-    fireEvents: function(e, isDrop) {
-        var me = this,
-            isTouch = Ext.supports.Touch,
-            dragCurrent = me.dragCurrent,
-            mousePoint = me.currentPoint,
-            currentX = mousePoint.x,
-            currentY = mousePoint.y,
-            allTargets = [],
-            oldOvers  = [],  // cache the previous dragOver array
-            outEvts   = [],
-            overEvts  = [],
-            dropEvts  = [],
-            enterEvts = [],
-            zoom = isTouch ? document.documentElement.clientWidth / window.innerWidth : 1,
-            dragEl, overTarget, overTargetEl, needsSort, i, len, sGroup, overDragEl;
+    fireEvents: function (e, isDrop) {
+      var me = this,
+        isTouch = Ext.supports.Touch,
+        dragCurrent = me.dragCurrent,
+        mousePoint = me.currentPoint,
+        currentX = mousePoint.x,
+        currentY = mousePoint.y,
+        allTargets = [],
+        oldOvers = [], // cache the previous dragOver array
+        outEvts = [],
+        overEvts = [],
+        dropEvts = [],
+        enterEvts = [],
+        zoom = isTouch
+          ? document.documentElement.clientWidth / window.innerWidth
+          : 1,
+        dragEl,
+        overTarget,
+        overTargetEl,
+        needsSort,
+        i,
+        len,
+        sGroup,
+        overDragEl;
 
-        // If the user did the mouse up outside of the window, we could
-        // get here even though we have ended the drag.
-        if (!dragCurrent || dragCurrent.isLocked()) {
-            return;
+      // If the user did the mouse up outside of the window, we could
+      // get here even though we have ended the drag.
+      if (!dragCurrent || dragCurrent.isLocked()) {
+        return;
+      }
+
+      // Touch's delegated event system means that the mousemove (which will be a touchmove really) target will be the element that the listener was requested for, NOT the actual lowest
+      // level target . So we have to use elementFromPoint to find the target which we are currently over.
+      //
+      // If we need to use the current mousemove target to find the over el,
+      // but pointer-events is not supported, AND the delta position does not place the mouse outside of the dragEl,
+      // temporarily move the dragEl away, and fake the mousemove target by using document.elementFromPoint
+      // while it's out of the way.
+      // The pointer events implementation is bugged in IE9/10 and opera, so fallback even if they report that they support it.
+      // IE8m do not support it so they will auto fall back
+      overDragEl = !(dragCurrent.deltaX < 0 || dragCurrent.deltaY < 0);
+      if (
+        isTouch ||
+        (!me.notifyOccluded &&
+          (!Ext.supports.CSSPointerEvents || Ext.isIE10m || Ext.isOpera) &&
+          overDragEl)
+      ) {
+        dragEl = dragCurrent.getDragEl();
+        // Temporarily hide the dragEl instead of moving it off the page. Moving the el off the page can cause
+        // problems when in an iframe with IE8 standards. See EXTJSIV-11728.
+        if (overDragEl) {
+          dragEl.style.visibility = "hidden";
+        }
+        e.target = document.elementFromPoint(currentX / zoom, currentY / zoom);
+        if (overDragEl) {
+          dragEl.style.visibility = "visible";
+        }
+      }
+
+      // Check to see if the object(s) we were hovering over is no longer
+      // being hovered over so we can fire the onDragOut event
+      for (i in me.dragOvers) {
+        overTarget = me.dragOvers[i];
+        delete me.dragOvers[i];
+
+        // Check to make sure that the component hasn't been destroyed in the middle of a drag operation.
+        if (!me.isTypeOfDD(overTarget) || overTarget.destroyed) {
+          continue;
         }
 
-        // Touch's delegated event system means that the mousemove (which will be a touchmove really) target will be the element that the listener was requested for, NOT the actual lowest
-        // level target . So we have to use elementFromPoint to find the target which we are currently over.
-        //
-        // If we need to use the current mousemove target to find the over el,
-        // but pointer-events is not supported, AND the delta position does not place the mouse outside of the dragEl,
-        // temporarily move the dragEl away, and fake the mousemove target by using document.elementFromPoint
-        // while it's out of the way.
-        // The pointer events implementation is bugged in IE9/10 and opera, so fallback even if they report that they support it.
-        // IE8m do not support it so they will auto fall back
-        overDragEl = !(dragCurrent.deltaX < 0 || dragCurrent.deltaY < 0);
-        if (isTouch || (!me.notifyOccluded && (!Ext.supports.CSSPointerEvents || Ext.isIE10m || Ext.isOpera) && overDragEl)) {
-            dragEl = dragCurrent.getDragEl();
-            // Temporarily hide the dragEl instead of moving it off the page. Moving the el off the page can cause
-            // problems when in an iframe with IE8 standards. See EXTJSIV-11728.
-            if (overDragEl) {
-                dragEl.style.visibility = 'hidden';
-            }
-            e.target = document.elementFromPoint(currentX / zoom, currentY/ zoom);
-            if (overDragEl) {
-                dragEl.style.visibility = 'visible';
-            }
+        // If notifyOccluded set, we use mouse position
+        if (me.notifyOccluded) {
+          if (!this.isOverTarget(mousePoint, overTarget, me.mode)) {
+            outEvts.push(overTarget);
+          }
+        }
+        // Otherwise we use event source of the mousemove event
+        else {
+          if (!e.within(overTarget.getEl())) {
+            outEvts.push(overTarget);
+          }
         }
 
-        // Check to see if the object(s) we were hovering over is no longer
-        // being hovered over so we can fire the onDragOut event
-        for (i in me.dragOvers) {
+        oldOvers[i] = true;
+      }
 
-            overTarget = me.dragOvers[i];
-            delete me.dragOvers[i];
+      // Collect all targets which are members of the same ddGoups that the dragCurrent is a member of, and which may recieve mouseover and drop notifications.
+      // This is preparatory to seeing which one(s) we are currently over
+      // Begin by iterating through the ddGroups of which the dragCurrent is a member
+      for (sGroup in dragCurrent.groups) {
+        if ("string" !== typeof sGroup) {
+          continue;
+        }
 
-            // Check to make sure that the component hasn't been destroyed in the middle of a drag operation.
-            if (!me.isTypeOfDD(overTarget) || overTarget.destroyed) {
-                continue;
-            }
+        // Loop over the registered members of each group, testing each as a potential target
+        for (i in me.ids[sGroup]) {
+          overTarget = me.ids[sGroup][i];
 
+          // The target is valid if it is a DD type
+          // And it's got a DOM element
+          // And it's configured to be a drop target
+          // And it's not locked
+          // And the DOM element is fully visible with no hidden ancestors
+          // And it's either not the dragCurrent, or, if it is, tha dragCurrent is configured to not ignore itself.
+          if (
+            me.isTypeOfDD(overTarget) &&
+            (overTargetEl = overTarget.getEl()) &&
+            overTarget.isTarget &&
+            !overTarget.isLocked() &&
+            Ext.fly(overTargetEl).isVisible(true) &&
+            (overTarget !== dragCurrent || dragCurrent.ignoreSelf === false)
+          ) {
             // If notifyOccluded set, we use mouse position
             if (me.notifyOccluded) {
-                if (!this.isOverTarget(mousePoint, overTarget, me.mode)) {
-                    outEvts.push(overTarget);
-                }
+              // Only sort by zIndex if there were some which had a floating zIndex value
+              if ((overTarget.zIndex = me.getZIndex(overTargetEl)) !== -1) {
+                needsSort = true;
+              }
+              allTargets.push(overTarget);
             }
             // Otherwise we use event source of the mousemove event
             else {
-                if (!e.within(overTarget.getEl())) {
-                    outEvts.push(overTarget);
-                }
+              if (e.within(overTarget.getEl())) {
+                allTargets.push(overTarget);
+                break;
+              }
             }
+          }
+        }
+      }
 
-            oldOvers[i] = true;
+      // If there were floating targets, sort the highest zIndex to the top
+      if (needsSort) {
+        Ext.Array.sort(allTargets, me.byZIndex);
+      }
+
+      // Loop through possible targets, notifying the one(s) we are over.
+      // Usually we only deliver events to the topmost.
+      for (i = 0, len = allTargets.length; i < len; i++) {
+        overTarget = allTargets[i];
+
+        // If we are over the overTarget, queue it up to recieve an event of whatever type we are handling
+        if (me.isOverTarget(mousePoint, overTarget, me.mode)) {
+          // look for drop interactions
+          if (isDrop) {
+            dropEvts.push(overTarget);
+            // look for drag enter and drag over interactions
+          } else {
+            // initial drag over: dragEnter fires
+            if (!oldOvers[overTarget.id]) {
+              enterEvts.push(overTarget);
+              // subsequent drag overs: dragOver fires
+            } else {
+              overEvts.push(overTarget);
+            }
+            me.dragOvers[overTarget.id] = overTarget;
+          }
+
+          // Unless this DragDropManager has been explicitly configured to deliver events to multiple targets, then we are done.
+          if (!me.notifyOccluded) {
+            break;
+          }
+        }
+      }
+
+      if (me.mode) {
+        if (outEvts.length) {
+          dragCurrent.b4DragOut(e, outEvts);
+          dragCurrent.onDragOut(e, outEvts);
         }
 
-        // Collect all targets which are members of the same ddGoups that the dragCurrent is a member of, and which may recieve mouseover and drop notifications.
-        // This is preparatory to seeing which one(s) we are currently over
-        // Begin by iterating through the ddGroups of which the dragCurrent is a member
-        for (sGroup in dragCurrent.groups) {
-            if ("string" !== typeof sGroup) {
-                continue;
-            }
-
-            // Loop over the registered members of each group, testing each as a potential target
-            for (i in me.ids[sGroup]) {
-                overTarget = me.ids[sGroup][i];
-
-                // The target is valid if it is a DD type
-                // And it's got a DOM element
-                // And it's configured to be a drop target
-                // And it's not locked
-                // And the DOM element is fully visible with no hidden ancestors
-                // And it's either not the dragCurrent, or, if it is, tha dragCurrent is configured to not ignore itself.
-                if (me.isTypeOfDD(overTarget) &&
-                    (overTargetEl = overTarget.getEl()) &&
-                    (overTarget.isTarget) &&
-                    (!overTarget.isLocked()) &&
-                    (Ext.fly(overTargetEl).isVisible(true)) &&
-                    ((overTarget !== dragCurrent) || (dragCurrent.ignoreSelf === false))) {
-
-                    // If notifyOccluded set, we use mouse position
-                    if (me.notifyOccluded) {
-
-                        // Only sort by zIndex if there were some which had a floating zIndex value
-                        if ((overTarget.zIndex = me.getZIndex(overTargetEl)) !== -1) {
-                            needsSort = true;
-                        }
-                        allTargets.push(overTarget);
-                    }
-                    // Otherwise we use event source of the mousemove event
-                    else {
-                        if (e.within(overTarget.getEl())) {
-                            allTargets.push(overTarget);
-                            break;
-                        }
-                    }
-                }
-            }
+        if (enterEvts.length) {
+          dragCurrent.onDragEnter(e, enterEvts);
         }
 
-        // If there were floating targets, sort the highest zIndex to the top
-        if (needsSort) {
-            Ext.Array.sort(allTargets, me.byZIndex);
+        if (overEvts.length) {
+          dragCurrent.b4DragOver(e, overEvts);
+          dragCurrent.onDragOver(e, overEvts);
         }
 
-        // Loop through possible targets, notifying the one(s) we are over.
-        // Usually we only deliver events to the topmost.
-        for (i = 0, len = allTargets.length; i < len; i++) {
-            overTarget = allTargets[i];
-
-            // If we are over the overTarget, queue it up to recieve an event of whatever type we are handling
-            if (me.isOverTarget(mousePoint, overTarget, me.mode)) {
-                // look for drop interactions
-                if (isDrop) {
-                    dropEvts.push( overTarget );
-                // look for drag enter and drag over interactions
-                } else {
-
-                    // initial drag over: dragEnter fires
-                    if (!oldOvers[overTarget.id]) {
-                        enterEvts.push( overTarget );
-                    // subsequent drag overs: dragOver fires
-                    } else {
-                        overEvts.push( overTarget );
-                    }
-                    me.dragOvers[overTarget.id] = overTarget;
-                }
-
-                // Unless this DragDropManager has been explicitly configured to deliver events to multiple targets, then we are done.
-                if (!me.notifyOccluded) {
-                    break;
-                }
-            }
+        if (dropEvts.length) {
+          dragCurrent.b4DragDrop(e, dropEvts);
+          dragCurrent.onDragDrop(e, dropEvts);
+        }
+      } else {
+        // fire dragout events
+        for (i = 0, len = outEvts.length; i < len; ++i) {
+          dragCurrent.b4DragOut(e, outEvts[i].id);
+          dragCurrent.onDragOut(e, outEvts[i].id);
         }
 
-        if (me.mode) {
-            if (outEvts.length) {
-                dragCurrent.b4DragOut(e, outEvts);
-                dragCurrent.onDragOut(e, outEvts);
-            }
-
-            if (enterEvts.length) {
-                dragCurrent.onDragEnter(e, enterEvts);
-            }
-
-            if (overEvts.length) {
-                dragCurrent.b4DragOver(e, overEvts);
-                dragCurrent.onDragOver(e, overEvts);
-            }
-
-            if (dropEvts.length) {
-                dragCurrent.b4DragDrop(e, dropEvts);
-                dragCurrent.onDragDrop(e, dropEvts);
-            }
-
-        } else {
-            // fire dragout events
-            for (i=0, len=outEvts.length; i<len; ++i) {
-                dragCurrent.b4DragOut(e, outEvts[i].id);
-                dragCurrent.onDragOut(e, outEvts[i].id);
-            }
-
-            // fire enter events
-            for (i=0,len=enterEvts.length; i<len; ++i) {
-                // dc.b4DragEnter(e, oDD.id);
-                dragCurrent.onDragEnter(e, enterEvts[i].id);
-            }
-
-            // fire over events
-            for (i=0,len=overEvts.length; i<len; ++i) {
-                dragCurrent.b4DragOver(e, overEvts[i].id);
-                dragCurrent.onDragOver(e, overEvts[i].id);
-            }
-
-            // fire drop events
-            for (i=0, len=dropEvts.length; i<len; ++i) {
-                dragCurrent.b4DragDrop(e, dropEvts[i].id);
-                dragCurrent.onDragDrop(e, dropEvts[i].id);
-            }
-
+        // fire enter events
+        for (i = 0, len = enterEvts.length; i < len; ++i) {
+          // dc.b4DragEnter(e, oDD.id);
+          dragCurrent.onDragEnter(e, enterEvts[i].id);
         }
 
-        // notify about a drop that did not find a target
-        if (isDrop && !dropEvts.length) {
-            dragCurrent.onInvalidDrop(e);
+        // fire over events
+        for (i = 0, len = overEvts.length; i < len; ++i) {
+          dragCurrent.b4DragOver(e, overEvts[i].id);
+          dragCurrent.onDragOver(e, overEvts[i].id);
         }
 
+        // fire drop events
+        for (i = 0, len = dropEvts.length; i < len; ++i) {
+          dragCurrent.b4DragDrop(e, dropEvts[i].id);
+          dragCurrent.onDragDrop(e, dropEvts[i].id);
+        }
+      }
+
+      // notify about a drop that did not find a target
+      if (isDrop && !dropEvts.length) {
+        dragCurrent.onInvalidDrop(e);
+      }
     },
 
     /**
@@ -905,27 +928,27 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Number} The z-index of the element, or of its topmost absolutely positioned ancestor. Returns -1 if the element is not
      * absolutely positioned.
      */
-    getZIndex: function(element) {
-        var body = document.body,
-            z,
-            zIndex = -1;
+    getZIndex: function (element) {
+      var body = document.body,
+        z,
+        zIndex = -1;
 
-        element = Ext.getDom(element);
-        while (element !== body) {
-            if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
-                zIndex = z;
-            }
-            element = element.parentNode;
+      element = Ext.getDom(element);
+      while (element !== body) {
+        if (!isNaN((z = Number(Ext.fly(element).getStyle("zIndex"))))) {
+          zIndex = z;
         }
-        return zIndex;
+        element = element.parentNode;
+      }
+      return zIndex;
     },
 
     /**
      * @private
      * Utility method to pass to {@link Ext.Array#sort} when sorting potential drop targets by z-index.
      */
-    byZIndex: function(d1, d2) {
-        return d1.zIndex < d2.zIndex;
+    byZIndex: function (d1, d2) {
+      return d1.zIndex < d2.zIndex;
     },
 
     /**
@@ -938,40 +961,39 @@ Ext.define('Ext.dd.DragDropManager', {
      * targeted
      * @return {Ext.dd.DragDrop}       The best single match
      */
-    getBestMatch: function(dds) {
-        var winner = null,
-            len = dds.length,
-            i, dd;
-        // Return null if the input is not what we expect
-        //if (!dds || !dds.length || dds.length == 0) {
-           // winner = null;
-        // If there is only one item, it wins
-        //} else if (dds.length == 1) {
+    getBestMatch: function (dds) {
+      var winner = null,
+        len = dds.length,
+        i,
+        dd;
+      // Return null if the input is not what we expect
+      //if (!dds || !dds.length || dds.length == 0) {
+      // winner = null;
+      // If there is only one item, it wins
+      //} else if (dds.length == 1) {
 
-
-        if (len === 1) {
-            winner = dds[0];
-        } else {
-            // Loop through the targeted items
-            for (i=0; i<len; ++i) {
-                dd = dds[i];
-                // If the cursor is over the object, it wins.  If the
-                // cursor is over multiple matches, the first one we come
-                // to wins.
-                if (dd.cursorIsOver) {
-                    winner = dd;
-                    break;
-                // Otherwise the object with the most overlap wins
-                } else {
-                    if (!winner ||
-                        winner.overlap.getArea() < dd.overlap.getArea()) {
-                        winner = dd;
-                    }
-                }
+      if (len === 1) {
+        winner = dds[0];
+      } else {
+        // Loop through the targeted items
+        for (i = 0; i < len; ++i) {
+          dd = dds[i];
+          // If the cursor is over the object, it wins.  If the
+          // cursor is over multiple matches, the first one we come
+          // to wins.
+          if (dd.cursorIsOver) {
+            winner = dd;
+            break;
+            // Otherwise the object with the most overlap wins
+          } else {
+            if (!winner || winner.overlap.getArea() < dd.overlap.getArea()) {
+              winner = dd;
             }
+          }
         }
+      }
 
-        return winner;
+      return winner;
     },
 
     /**
@@ -991,29 +1013,29 @@ Ext.define('Ext.dd.DragDropManager', {
      *
      * @param {Object} groups an associative array of groups to refresh
      */
-    refreshCache: function(groups) {
-        var sGroup, i, oDD, loc;
-        for (sGroup in groups) {
-            if ("string" !== typeof sGroup) {
-                continue;
-            }
-            for (i in this.ids[sGroup]) {
-                oDD = this.ids[sGroup][i];
-
-                if (this.isTypeOfDD(oDD)) {
-                // if (this.isTypeOfDD(oDD) && oDD.isTarget) {
-                    loc = this.getLocation(oDD);
-                    if (loc) {
-                        this.locationCache[oDD.id] = loc;
-                    } else {
-                        delete this.locationCache[oDD.id];
-                        // this will unregister the drag and drop object if
-                        // the element is not in a usable state
-                        // oDD.unreg();
-                    }
-                }
-            }
+    refreshCache: function (groups) {
+      var sGroup, i, oDD, loc;
+      for (sGroup in groups) {
+        if ("string" !== typeof sGroup) {
+          continue;
         }
+        for (i in this.ids[sGroup]) {
+          oDD = this.ids[sGroup][i];
+
+          if (this.isTypeOfDD(oDD)) {
+            // if (this.isTypeOfDD(oDD) && oDD.isTarget) {
+            loc = this.getLocation(oDD);
+            if (loc) {
+              this.locationCache[oDD.id] = loc;
+            } else {
+              delete this.locationCache[oDD.id];
+              // this will unregister the drag and drop object if
+              // the element is not in a usable state
+              // oDD.unreg();
+            }
+          }
+        }
+      }
     },
 
     /**
@@ -1024,22 +1046,22 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {HTMLElement} el the element to check
      * @return {Boolean} true if the element looks usable
      */
-    verifyEl: function(el) {
-        if (el) {
-            var parent;
-            if(Ext.isIE){
-                try{
-                    parent = el.offsetParent;
-                }catch(e){}
-            }else{
-                parent = el.offsetParent;
-            }
-            if (parent) {
-                return true;
-            }
+    verifyEl: function (el) {
+      if (el) {
+        var parent;
+        if (Ext.isIE) {
+          try {
+            parent = el.offsetParent;
+          } catch (e) {}
+        } else {
+          parent = el.offsetParent;
         }
+        if (parent) {
+          return true;
+        }
+      }
 
-        return false;
+      return false;
     },
 
     /**
@@ -1050,38 +1072,47 @@ Ext.define('Ext.dd.DragDropManager', {
      * the element occupies, including any padding
      * the instance is configured for.
      */
-    getLocation: function(oDD) {
-        if (! this.isTypeOfDD(oDD)) {
-            return null;
-        }
+    getLocation: function (oDD) {
+      if (!this.isTypeOfDD(oDD)) {
+        return null;
+      }
 
-        //delegate getLocation method to the
-        //drag and drop target.
-        if (oDD.getRegion) {
-            return oDD.getRegion();
-        }
+      //delegate getLocation method to the
+      //drag and drop target.
+      if (oDD.getRegion) {
+        return oDD.getRegion();
+      }
 
-        var el = oDD.getEl(), pos, x1, x2, y1, y2, t, r, b, l;
+      var el = oDD.getEl(),
+        pos,
+        x1,
+        x2,
+        y1,
+        y2,
+        t,
+        r,
+        b,
+        l;
 
-        try {
-            pos= Ext.fly(el).getXY();
-        } catch (e) { }
+      try {
+        pos = Ext.fly(el).getXY();
+      } catch (e) {}
 
-        if (!pos) {
-            return null;
-        }
+      if (!pos) {
+        return null;
+      }
 
-        x1 = pos[0];
-        x2 = x1 + el.offsetWidth;
-        y1 = pos[1];
-        y2 = y1 + el.offsetHeight;
+      x1 = pos[0];
+      x2 = x1 + el.offsetWidth;
+      y1 = pos[1];
+      y2 = y1 + el.offsetHeight;
 
-        t = y1 - oDD.padding[0];
-        r = x2 + oDD.padding[1];
-        b = y2 + oDD.padding[2];
-        l = x1 - oDD.padding[3];
+      t = y1 - oDD.padding[0];
+      r = x2 + oDD.padding[1];
+      b = y2 + oDD.padding[2];
+      l = x1 - oDD.padding[3];
 
-        return new Ext.util.Region(t, r, b, l);
+      return new Ext.util.Region(t, r, b, l);
     },
 
     /**
@@ -1091,95 +1122,99 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Boolean} true if the mouse is over the target
      * @private
      */
-    isOverTarget: function(pt, oTarget, intersect) {
-        // use cache if available
-        var loc = this.locationCache[oTarget.id],
-            dc,
-            pos,
-            el,
-            curRegion,
-            overlap;
+    isOverTarget: function (pt, oTarget, intersect) {
+      // use cache if available
+      var loc = this.locationCache[oTarget.id],
+        dc,
+        pos,
+        el,
+        curRegion,
+        overlap;
 
-        if (!loc || !this.useCache) {
-            loc = this.getLocation(oTarget);
-            this.locationCache[oTarget.id] = loc;
-        }
+      if (!loc || !this.useCache) {
+        loc = this.getLocation(oTarget);
+        this.locationCache[oTarget.id] = loc;
+      }
 
-        if (!loc) {
-            return false;
-        }
+      if (!loc) {
+        return false;
+      }
 
-        oTarget.cursorIsOver = loc.contains( pt );
+      oTarget.cursorIsOver = loc.contains(pt);
 
-        // DragDrop is using this as a sanity check for the initial mousedown
-        // in this case we are done.  In POINT mode, if the drag obj has no
-        // contraints, we are also done. Otherwise we need to evaluate the
-        // location of the target as related to the actual location of the
-        // dragged element.
-        dc = this.dragCurrent;
-        if (!dc || !dc.getTargetCoord ||
-                (!intersect && !dc.constrainX && !dc.constrainY)) {
-            return oTarget.cursorIsOver;
-        }
+      // DragDrop is using this as a sanity check for the initial mousedown
+      // in this case we are done.  In POINT mode, if the drag obj has no
+      // contraints, we are also done. Otherwise we need to evaluate the
+      // location of the target as related to the actual location of the
+      // dragged element.
+      dc = this.dragCurrent;
+      if (
+        !dc ||
+        !dc.getTargetCoord ||
+        (!intersect && !dc.constrainX && !dc.constrainY)
+      ) {
+        return oTarget.cursorIsOver;
+      }
 
-        oTarget.overlap = null;
+      oTarget.overlap = null;
 
-        // Get the current location of the drag element, this is the
-        // location of the mouse event less the delta that represents
-        // where the original mousedown happened on the element.  We
-        // need to consider constraints and ticks as well.
-        pos = dc.getTargetCoord(pt.x, pt.y);
+      // Get the current location of the drag element, this is the
+      // location of the mouse event less the delta that represents
+      // where the original mousedown happened on the element.  We
+      // need to consider constraints and ticks as well.
+      pos = dc.getTargetCoord(pt.x, pt.y);
 
-        el = dc.getDragEl();
-        curRegion = new Ext.util.Region(pos.y,
-            pos.x + el.offsetWidth,
-            pos.y + el.offsetHeight,
-            pos.x
-        );
+      el = dc.getDragEl();
+      curRegion = new Ext.util.Region(
+        pos.y,
+        pos.x + el.offsetWidth,
+        pos.y + el.offsetHeight,
+        pos.x,
+      );
 
-        overlap = curRegion.intersect(loc);
+      overlap = curRegion.intersect(loc);
 
-        if (overlap) {
-            oTarget.overlap = overlap;
-            return (intersect) ? true : oTarget.cursorIsOver;
-        } else {
-            return false;
-        }
+      if (overlap) {
+        oTarget.overlap = overlap;
+        return intersect ? true : oTarget.cursorIsOver;
+      } else {
+        return false;
+      }
     },
 
     /**
      * unload event handler
      * @private
      */
-    _onUnload: function(e, me) {
-        Ext.dd.DragDropManager.unregAll();
+    _onUnload: function (e, me) {
+      Ext.dd.DragDropManager.unregAll();
     },
 
     /**
      * Cleans up the drag and drop events and objects.
      * @private
      */
-    unregAll: function() {
-        var me = this,
-            cache = me.elementCache,
-            i;
-            
-        if (me.dragCurrent) {
-            me.stopDrag();
-            me.dragCurrent = null;
-        }
+    unregAll: function () {
+      var me = this,
+        cache = me.elementCache,
+        i;
 
-        me.clearingAll = true;
-        me._execOnAll("unreg", []);
-        delete me.clearingAll;
+      if (me.dragCurrent) {
+        me.stopDrag();
+        me.dragCurrent = null;
+      }
 
-        for (i in cache) {
-            delete cache[i];
-        }
+      me.clearingAll = true;
+      me._execOnAll("unreg", []);
+      delete me.clearingAll;
 
-        me.elementCache = {};
-        me.ids = {};
-        me.handleIds = {};
+      for (i in cache) {
+        delete cache[i];
+      }
+
+      me.elementCache = {};
+      me.ids = {};
+      me.handleIds = {};
     },
 
     /**
@@ -1196,13 +1231,14 @@ Ext.define('Ext.dd.DragDropManager', {
      * @private
      * @deprecated This wrapper isn't that useful
      */
-    getElWrapper: function(id) {
-        var oWrapper = this.elementCache[id];
-        if (!oWrapper || !oWrapper.el) {
-            oWrapper = this.elementCache[id] =
-                new this.ElementWrapper(Ext.getDom(id));
-        }
-        return oWrapper;
+    getElWrapper: function (id) {
+      var oWrapper = this.elementCache[id];
+      if (!oWrapper || !oWrapper.el) {
+        oWrapper = this.elementCache[id] = new this.ElementWrapper(
+          Ext.getDom(id),
+        );
+      }
+      return oWrapper;
     },
 
     /**
@@ -1211,8 +1247,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Object} The element
      * @deprecated use Ext.lib.Ext.getDom instead
      */
-    getElement: function(id) {
-        return Ext.getDom(id);
+    getElement: function (id) {
+      return Ext.getDom(id);
     },
 
     /**
@@ -1221,9 +1257,9 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {String} id the id of the elment to get
      * @return {Object} The style property of the element
      */
-    getCss: function(id) {
-        var el = Ext.getDom(id);
-        return (el) ? el.style : null;
+    getCss: function (id) {
+      var el = Ext.getDom(id);
+      return el ? el.style : null;
     },
 
     /**
@@ -1232,13 +1268,13 @@ Ext.define('Ext.dd.DragDropManager', {
      * @private
      * @deprecated This wrapper isn't that useful
      */
-    ElementWrapper: function(el) {
-        /** The element */
-        this.el = el || null;
-        /** The element id */
-        this.id = this.el && el.id;
-        /** A reference to the style property */
-        this.css = this.el && el.style;
+    ElementWrapper: function (el) {
+      /** The element */
+      this.el = el || null;
+      /** The element id */
+      this.id = this.el && el.id;
+      /** A reference to the style property */
+      this.css = this.el && el.style;
     },
 
     // Continue class docs
@@ -1249,8 +1285,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {HTMLElement} el the element for which to get the position
      * @return {Number} the X coordinate
      */
-    getPosX: function(el) {
-        return Ext.fly(el).getX();
+    getPosX: function (el) {
+      return Ext.fly(el).getX();
     },
 
     /**
@@ -1258,8 +1294,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {HTMLElement} el the element for which to get the position
      * @return {Number} the Y coordinate
      */
-    getPosY: function(el) {
-        return Ext.fly(el).getY();
+    getPosY: function (el) {
+      return Ext.fly(el).getY();
     },
 
     /**
@@ -1268,22 +1304,22 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {HTMLElement} n1 the first node to swap
      * @param {HTMLElement} n2 the other node to swap
      */
-    swapNode: function(n1, n2) {
-        if (n1.swapNode) {
-            n1.swapNode(n2);
-        } else {
-            var p = n2.parentNode,
-                s = n2.nextSibling;
+    swapNode: function (n1, n2) {
+      if (n1.swapNode) {
+        n1.swapNode(n2);
+      } else {
+        var p = n2.parentNode,
+          s = n2.nextSibling;
 
-            if (s === n1) {
-                p.insertBefore(n1, n2);
-            } else if (n2 === n1.nextSibling) {
-                p.insertBefore(n2, n1);
-            } else {
-                n1.parentNode.replaceChild(n2, n1);
-                p.insertBefore(n1, s);
-            }
+        if (s === n1) {
+          p.insertBefore(n1, n2);
+        } else if (n2 === n1.nextSibling) {
+          p.insertBefore(n2, n1);
+        } else {
+          n1.parentNode.replaceChild(n2, n1);
+          p.insertBefore(n1, s);
         }
+      }
     },
 
     /**
@@ -1291,24 +1327,24 @@ Ext.define('Ext.dd.DragDropManager', {
      * @private
      */
     getScroll: function () {
-        var doc   = window.document,
-            docEl = doc.documentElement,
-            body  = doc.body,
-            top   = 0,
-            left  = 0;
+      var doc = window.document,
+        docEl = doc.documentElement,
+        body = doc.body,
+        top = 0,
+        left = 0;
 
-        if (docEl && (docEl.scrollTop || docEl.scrollLeft)) {
-            top  = docEl.scrollTop;
-            left = docEl.scrollLeft;
-        } else if (body) {
-            top  = body.scrollTop;
-            left = body.scrollLeft;
-        }
+      if (docEl && (docEl.scrollTop || docEl.scrollLeft)) {
+        top = docEl.scrollTop;
+        left = docEl.scrollLeft;
+      } else if (body) {
+        top = body.scrollTop;
+        left = body.scrollLeft;
+      }
 
-        return {
-            top: top,
-            left: left
-        };
+      return {
+        top: top,
+        left: left,
+      };
     },
 
     /**
@@ -1317,8 +1353,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {String}      styleProp   the style property
      * @return {String} The value of the style property
      */
-    getStyle: function(el, styleProp) {
-        return Ext.fly(el).getStyle(styleProp);
+    getStyle: function (el, styleProp) {
+      return Ext.fly(el).getStyle(styleProp);
     },
 
     /**
@@ -1326,7 +1362,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Number} the document's scrollTop
      */
     getScrollTop: function () {
-        return this.getScroll().top;
+      return this.getScroll().top;
     },
 
     /**
@@ -1334,7 +1370,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * @return {Number} the document's scrollTop
      */
     getScrollLeft: function () {
-        return this.getScroll().left;
+      return this.getScroll().left;
     },
 
     /**
@@ -1344,8 +1380,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {HTMLElement} targetEl    The position reference element
      */
     moveToEl: function (moveEl, targetEl) {
-        var aCoord = Ext.fly(targetEl).getXY();
-        Ext.fly(moveEl).setXY(aCoord);
+      var aCoord = Ext.fly(targetEl).getXY();
+      Ext.fly(moveEl).setXY(aCoord);
     },
 
     /**
@@ -1354,8 +1390,8 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {Number} b
      * @return {Number} positive, negative or 0
      */
-    numericSort: function(a, b) {
-        return (a - b);
+    numericSort: function (a, b) {
+      return a - b;
     },
 
     /**
@@ -1364,26 +1400,28 @@ Ext.define('Ext.dd.DragDropManager', {
      * clicked.
      * @param {HTMLElement} node the html element to inspect
      */
-    handleWasClicked: function(node, id) {
-        if (this.isHandle(id, node.id)) {
+    handleWasClicked: function (node, id) {
+      if (this.isHandle(id, node.id)) {
+        return true;
+      } else {
+        // check to see if this is a text node child of the one we want
+        var p = node.parentNode;
+
+        while (p) {
+          if (this.isHandle(id, p.id)) {
             return true;
-        } else {
-            // check to see if this is a text node child of the one we want
-            var p = node.parentNode;
-
-            while (p) {
-                if (this.isHandle(id, p.id)) {
-                    return true;
-                } else {
-                    p = p.parentNode;
-                }
-            }
+          } else {
+            p = p.parentNode;
+          }
         }
+      }
 
-        return false;
-    }
-}, function(DragDropManager) {
-    Ext.onInternalReady(function() {
-        DragDropManager.addListeners();
+      return false;
+    },
+  },
+  function (DragDropManager) {
+    Ext.onInternalReady(function () {
+      DragDropManager.addListeners();
     });
-});
+  },
+);

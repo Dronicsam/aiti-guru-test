@@ -25,13 +25,17 @@ $spinnerfield-button-size: dynamic(1em);
  * @var {string/list}
  * Icon for the "up" spinner button
  */
-$spinnerfield-button-up-icon: dynamic($fa-var-plus $spinnerfield-button-font-size FontAwesome);
+$spinnerfield-button-up-icon: dynamic(
+  $fa-var-plus $spinnerfield-button-font-size FontAwesome
+);
 
 /**
  * @var {string/list}
  * Icon for the "down" spinner button
  */
-$spinnerfield-button-down-icon: dynamic($fa-var-minus $spinnerfield-button-font-size FontAwesome);
+$spinnerfield-button-down-icon: dynamic(
+  $fa-var-minus $spinnerfield-button-font-size FontAwesome
+);
 
 /**
  * @var {number}

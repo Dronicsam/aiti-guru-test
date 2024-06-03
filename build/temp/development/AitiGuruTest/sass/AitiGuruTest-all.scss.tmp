@@ -3,10 +3,12 @@ $image-search-path: '/Users/dronicsam/AitiGuruTest/build/development/AitiGuruTes
 $theme-name:  dynamic( 'theme-triton' );
 $include-aitigurutest-application: dynamic(true);;
 $include-aitigurutest-model-main-mainmodel: dynamic(true);;
+$include-aitigurutest-model-product-productmodel: dynamic(true);;
 $include-aitigurutest-store-products: dynamic(true);;
+$include-aitigurutest-view-list-list: dynamic(true);;
+$include-aitigurutest-view-list-listcontroller: dynamic(true);;
 $include-aitigurutest-view-login-login: dynamic(true);;
 $include-aitigurutest-view-login-logincontroller: dynamic(true);;
-$include-aitigurutest-view-main-list: dynamic(true);;
 $include-aitigurutest-view-main-main: dynamic(true);;
 $include-aitigurutest-view-main-maincontroller: dynamic(true);;
 $include-aitigurutest-view-mainpanel-mpanel: dynamic(true);;

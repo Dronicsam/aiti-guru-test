@@ -3,6 +3,6 @@ $grid-column-background-color: dynamic(#fff);
 $grid-column-border-color: dynamic($neutral-color);
 $grid-column-sort-icon-color: dynamic($neutral-dark-color);
 $grid-column-sorted-background-color: dynamic($grid-column-background-color);
-$grid-column-padding: dynamic(.61em .6em);
+$grid-column-padding: dynamic(0.61em 0.6em);
 $grid-column-line-height-big: dynamic(1.25em);
-$grid-column-padding-big: dynamic(.75em .6em);
+$grid-column-padding-big: dynamic(0.75em 0.6em);

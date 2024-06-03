@@ -1,16 +1,3 @@
-var myForm = new Ext.form.Panel({
-  width: 300,
-  height: 40,
-  title: "Ошибка. Неверные данные",
-  floating: true,
-  closable: true,
-  listeners: {
-    beforeclose: function () {
-      window.location.reload();
-    },
-  },
-});
-
 Ext.define("AitiGuruTest.view.login.LoginController", {
   extend: "Ext.app.ViewController",
   alias: "controller.login",
@@ -34,7 +21,9 @@ Ext.define("AitiGuruTest.view.login.LoginController", {
         xtype: "app-main",
       });
     } else {
-      myForm.show();
+      var title = "Ошибка";
+      var msg = "Данные не верны";
+      Ext.MessageBox.alert(title, msg);
       localStorage.removeItem("login");
       localStorage.removeItem("password");
     }

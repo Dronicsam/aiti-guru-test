@@ -96,15 +96,17 @@ $menu-item-active-background-color: dynamic($base-color);
  * @var {color}
  * The border-color of the active {@link Ext.menu.Item Menu Item}
  */
-$menu-item-active-border-color: dynamic(adjust-color($base-color, $saturation: 23%, $lightness: -3%));
- 
+$menu-item-active-border-color: dynamic(
+  adjust-color($base-color, $saturation: 23%, $lightness: -3%)
+);
+
 /**
  * @var {string/list}
  * The background-gradient for {@link Ext.menu.Item Menu Items}. Can be either the name
  * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$menu-item-background-gradient: dynamic('none');
+$menu-item-background-gradient: dynamic("none");
 
 /**
  * @var {number}
@@ -134,7 +136,7 @@ $menu-glyph-font-size: dynamic($menu-item-icon-size);
  * @var {number} $menu-glyph-opacity
  * The opacity to use for menu icons configured using {@link Ext.menu.Item#glyph glyph}
  */
-$menu-glyph-opacity: dynamic(.5);
+$menu-glyph-opacity: dynamic(0.5);
 
 /**
  * @var {color}
@@ -160,14 +162,19 @@ $menu-item-checkbox-glyph-font-size: dynamic($form-checkbox-size);
  * The glyph for {@link Ext.menu.CheckItem CheckItem} checkboxes when
  * {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-item-checkbox-glyph: dynamic($fa-var-square-o $menu-item-checkbox-glyph-font-size $font-icon-font-family);
+$menu-item-checkbox-glyph: dynamic(
+  $fa-var-square-o $menu-item-checkbox-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * The glyph for {@link Ext.menu.CheckItem CheckItem} checkboxes in "checked" state when
  * {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-item-checkbox-checked-glyph: dynamic($fa-var-check-square-o $menu-item-checkbox-glyph-font-size $font-icon-font-family);
+$menu-item-checkbox-checked-glyph: dynamic(
+  $fa-var-check-square-o $menu-item-checkbox-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -194,7 +201,9 @@ $menu-item-checkbox-group-glyph: dynamic(null);
  * The glyph for {@link Ext.menu.CheckItem CheckItem} group checkboxes in "checked" state when
  * {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-item-checkbox-group-checked-glyph: dynamic($fa-var-check $menu-item-checkbox-glyph-font-size $font-icon-font-family);
+$menu-item-checkbox-group-checked-glyph: dynamic(
+  $fa-var-check $menu-item-checkbox-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -208,7 +217,9 @@ $menu-item-checkbox-group-glyph-color: dynamic($menu-item-checkbox-glyph-color);
  * The color of the {@link Ext.menu.CheckItem CheckItem} group checkbox for the active menu item
  * when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-item-active-checkbox-group-glyph-color: dynamic($menu-item-active-checkbox-glyph-color);
+$menu-item-active-checkbox-group-glyph-color: dynamic(
+  $menu-item-active-checkbox-glyph-color
+);
 
 /**
  * @var {list}
@@ -307,13 +318,15 @@ $menu-item-arrow-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the menu arrow icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-item-arrow-glyph: dynamic($fa-var-caret-right $menu-item-arrow-glyph-font-size $font-icon-font-family);
+$menu-item-arrow-glyph: dynamic(
+  $fa-var-caret-right $menu-item-arrow-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {number}
  * The opacity of disabled {@link Ext.menu.Item Menu Items}
  */
-$menu-item-disabled-opacity: dynamic(.5);
+$menu-item-disabled-opacity: dynamic(0.5);
 
 /**
  * @var {number/list}
@@ -331,7 +344,7 @@ $menu-separator-border-color: dynamic($neutral-color);
  * @var {color}
  * The background-color of {@link Ext.menu.Separator Menu Separators}
  */
-$menu-separator-background-color: dynamic(#FFF);
+$menu-separator-background-color: dynamic(#fff);
 
 /**
  * @var {number}
@@ -430,13 +443,17 @@ $menu-scroller-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the "top" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-scroller-top-glyph: dynamic($fa-var-chevron-up $menu-scroller-glyph-font-size $font-icon-font-family);
+$menu-scroller-top-glyph: dynamic(
+  $fa-var-chevron-up $menu-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "bottom" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$menu-scroller-bottom-glyph: dynamic($fa-var-chevron-down $menu-scroller-glyph-font-size $font-icon-font-family);
+$menu-scroller-bottom-glyph: dynamic(
+  $fa-var-chevron-down $menu-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {boolean}

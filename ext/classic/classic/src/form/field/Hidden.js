@@ -42,69 +42,69 @@
  *     text_field=value+from+text+field&hidden;_field_1=value+from+hidden+field&hidden_field_2=value+from+submit+call
  *
  */
-Ext.define('Ext.form.field.Hidden', {
-    extend:'Ext.form.field.Base',
-    alias: ['widget.hiddenfield', 'widget.hidden'],
-    alternateClassName: 'Ext.form.Hidden',
+Ext.define("Ext.form.field.Hidden", {
+  extend: "Ext.form.field.Base",
+  alias: ["widget.hiddenfield", "widget.hidden"],
+  alternateClassName: "Ext.form.Hidden",
 
-    focusable: false,
-    inputType : 'hidden',
-    isTextInput: false,
-    hideLabel: true,
-    hidden: true,
-    
-    ariaRole: 'presentation',
-    
-    initComponent: function() {
-        this.formItemCls += '-hidden';
-        this.callParent();    
-    },
-    
-    /**
-     * @private
-     * Override. Treat undefined and null values as equal to an empty string value.
-     */
-    isEqual: function(value1, value2) {
-        return this.isEqualAsString(value1, value2);
-    },
+  focusable: false,
+  inputType: "hidden",
+  isTextInput: false,
+  hideLabel: true,
+  hidden: true,
 
-    /**
-     * @hide
-     */
-    initEvents: Ext.emptyFn,
+  ariaRole: "presentation",
 
-    /**
-     * @hide
-     */
-    setSize : Ext.emptyFn,
+  initComponent: function () {
+    this.formItemCls += "-hidden";
+    this.callParent();
+  },
 
-    /**
-     * @hide
-     */
-    setWidth : Ext.emptyFn,
+  /**
+   * @private
+   * Override. Treat undefined and null values as equal to an empty string value.
+   */
+  isEqual: function (value1, value2) {
+    return this.isEqualAsString(value1, value2);
+  },
 
-    /**
-     * @hide
-     */
-    setHeight : Ext.emptyFn,
+  /**
+   * @hide
+   */
+  initEvents: Ext.emptyFn,
 
-    /**
-     * @hide
-     */
-    setPosition : Ext.emptyFn,
+  /**
+   * @hide
+   */
+  setSize: Ext.emptyFn,
 
-    /**
-     * @hide
-     */
-    setPagePosition : Ext.emptyFn,
+  /**
+   * @hide
+   */
+  setWidth: Ext.emptyFn,
 
-    /**
-     * @hide
-     */
-    markInvalid : Ext.emptyFn,
+  /**
+   * @hide
+   */
+  setHeight: Ext.emptyFn,
 
-    /**
-     * @hide
-     */
-    clearInvalid : Ext.emptyFn
+  /**
+   * @hide
+   */
+  setPosition: Ext.emptyFn,
+
+  /**
+   * @hide
+   */
+  setPagePosition: Ext.emptyFn,
+
+  /**
+   * @hide
+   */
+  markInvalid: Ext.emptyFn,
+
+  /**
+   * @hide
+   */
+  clearInvalid: Ext.emptyFn,
 });

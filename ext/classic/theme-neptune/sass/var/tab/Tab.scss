@@ -21,25 +21,37 @@ $tab-color-active: dynamic($base-color);
 $tab-color-focus-over: dynamic($tab-color-over);
 $tab-color-focus-active: dynamic($tab-color-active);
 
-$tab-background-gradient: dynamic('none');
-$tab-background-gradient-over: dynamic('none');
-$tab-background-gradient-active: dynamic('none');
-$tab-background-gradient-disabled: dynamic('none');
+$tab-background-gradient: dynamic("none");
+$tab-background-gradient-over: dynamic("none");
+$tab-background-gradient-active: dynamic("none");
+$tab-background-gradient-disabled: dynamic("none");
 
 $tab-border-radius: dynamic(3px 3px 0 0);
 $tab-inner-border-width-focus: dynamic(1px);
 $tab-inner-border-width-focus-over: dynamic($tab-inner-border-width-focus);
 $tab-inner-border-width-focus-active: dynamic($tab-inner-border-width-focus);
-$tab-inner-border-color-focus: dynamic(tab-inner-border-color-focus($tab-base-color-focus, $tab-color-focus));
-$tab-inner-border-color-focus-over: dynamic(tab-inner-border-color-focus-over($tab-base-color-focus-over, $tab-color-focus-over));
-$tab-inner-border-color-focus-active: dynamic(tab-inner-border-color-focus-active($tab-base-color-focus-active, $tab-color-focus-active));
+$tab-inner-border-color-focus: dynamic(
+  tab-inner-border-color-focus($tab-base-color-focus, $tab-color-focus)
+);
+$tab-inner-border-color-focus-over: dynamic(
+  tab-inner-border-color-focus-over(
+    $tab-base-color-focus-over,
+    $tab-color-focus-over
+  )
+);
+$tab-inner-border-color-focus-active: dynamic(
+  tab-inner-border-color-focus-active(
+    $tab-base-color-focus-active,
+    $tab-color-focus-active
+  )
+);
 
 $tab-padding: dynamic(7px 12px 6px);
 
 $tab-margin: dynamic(0 1px 0 0);
 $tab-icon-spacing: dynamic(6px);
 
-$tab-text-opacity-disabled: dynamic(.3);
+$tab-text-opacity-disabled: dynamic(0.3);
 $tab-closable-icon-width: dynamic(12px);
 $tab-closable-icon-height: dynamic(12px);
 $tab-closable-icon-include-hover-background-position: dynamic(true);

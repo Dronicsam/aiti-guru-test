@@ -1,81 +1,80 @@
 describe("Ext.view.NodeCache", function () {
+  var grid, store, view, rows;
 
-    var grid, store, view, rows;
+  beforeEach(function () {
+    store = Ext.create("Ext.data.Store", {
+      fields: ["name"],
+      autoDestroy: true,
 
-    beforeEach(function () {
-        store = Ext.create('Ext.data.Store', {
-            fields      : ['name'],
-            autoDestroy : true,
+      data: {
+        items: [
+          { name: "Lisa" },
+          { name: "Bart" },
+          { name: "Homer" },
+          { name: "Marge" },
+        ],
+      },
 
-            data : {
-                'items' : [
-                    { 'name' : 'Lisa' },
-                    { 'name' : 'Bart' },
-                    { 'name' : 'Homer' },
-                    { 'name' : 'Marge' }
-                ]
-            },
-
-            proxy : {
-                type   : 'memory',
-                reader : {
-                    type : 'json',
-                    rootProperty: 'items'
-                }
-            }
-        });
-
-        grid = Ext.create('Ext.grid.Panel', {
-            store    : store,
-            height   : 100,
-            width    : 100,
-            renderTo : Ext.getBody(),
-            columns  : [
-                {
-                    text      : 'Name',
-                    dataIndex : 'name'
-                }
-            ]
-        });
-        view = grid.getView();
-        rows = view.all;
+      proxy: {
+        type: "memory",
+        reader: {
+          type: "json",
+          rootProperty: "items",
+        },
+      },
     });
 
-    afterEach(function () {
-        grid.destroy();
+    grid = Ext.create("Ext.grid.Panel", {
+      store: store,
+      height: 100,
+      width: 100,
+      renderTo: Ext.getBody(),
+      columns: [
+        {
+          text: "Name",
+          dataIndex: "name",
+        },
+      ],
     });
+    view = grid.getView();
+    rows = view.all;
+  });
 
-    // EXTJSIV-9765
-    it("Store rejectChanges() should not break NodeCache insert()", function () {
-        //have to create a scoped function that because Jasmine expect() changes our scope.
-        var scopedFn = function() {
-            store.rejectChanges();
-        };
+  afterEach(function () {
+    grid.destroy();
+  });
 
-        var count = store.getCount();
+  // EXTJSIV-9765
+  it("Store rejectChanges() should not break NodeCache insert()", function () {
+    //have to create a scoped function that because Jasmine expect() changes our scope.
+    var scopedFn = function () {
+      store.rejectChanges();
+    };
 
-        store.removeAt(count-1);
-        store.removeAt(count-2);
+    var count = store.getCount();
 
-        expect(scopedFn).not.toThrow();
+    store.removeAt(count - 1);
+    store.removeAt(count - 2);
 
-        expect(store.getAt(3).get('name')).toBe('Marge');
-        expect(store.getAt(2).get('name')).toBe('Homer');
-    });
+    expect(scopedFn).not.toThrow();
 
-    // EXTJS-17399
-    it('should not mutate the rendered block on moveBlock(0)', function() {
-        var start = rows.startIndex,
-            end = rows.endIndex,
-            elements = rows.slice();
+    expect(store.getAt(3).get("name")).toBe("Marge");
+    expect(store.getAt(2).get("name")).toBe("Homer");
+  });
 
-        // Request to move the block not at all.
-        // Should not mutate the rendered block in any way
-        rows.moveBlock(0);
+  // EXTJS-17399
+  it("should not mutate the rendered block on moveBlock(0)", function () {
+    var start = rows.startIndex,
+      end = rows.endIndex,
+      elements = rows.slice();
 
-        // Everything should be identical.
-        expect(rows.startIndex).toBe(start);
-        expect(rows.endIndex).toBe(end);
-        expect(rows.slice()).toEqual(elements);
-    });
+    // Request to move the block not at all.
+    // Should not mutate the rendered block in any way
+    rows.moveBlock(0);
+
+    // Everything should be identical.
+    expect(rows.startIndex).toBe(start);
+    expect(rows.endIndex).toBe(end);
+    expect(rows.slice()).toEqual(elements);
+  });
 });

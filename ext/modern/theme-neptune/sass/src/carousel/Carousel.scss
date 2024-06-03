@@ -3,10 +3,10 @@
  */
 
 // Private variables
-$indicator-light: rgba(#fff, .1);
-$indicator-light-active: rgba(#fff, .3);
-$indicator-dark: rgba(#000, .1);
-$indicator-dark-active: rgba(#000, .3);
+$indicator-light: rgba(#fff, 0.1);
+$indicator-light-active: rgba(#fff, 0.3);
+$indicator-dark: rgba(#000, 0.1);
+$indicator-dark-active: rgba(#000, 0.3);
 
 /**
  * Creates a theme UI for carousel indicator components.
@@ -18,34 +18,52 @@ $indicator-dark-active: rgba(#000, .3);
  * @param {color} $active-color Active color for the UI.
  * @param {string} $active-gradient Active gradient for the UI.
  */
-@mixin sencha-carousel-indicator-ui($ui-label, $color, $gradient, $active-color, $active-gradient) {
-    .x-carousel-indicator-#{$ui-label} span {
-        @include background-gradient($color, $gradient);
+@mixin sencha-carousel-indicator-ui(
+  $ui-label,
+  $color,
+  $gradient,
+  $active-color,
+  $active-gradient
+) {
+  .x-carousel-indicator-#{$ui-label} span {
+    @include background-gradient($color, $gradient);
 
-        &.x-carousel-indicator-active {
-            @include background-gradient($active-color, $active-gradient)
-        }
+    &.x-carousel-indicator-active {
+      @include background-gradient($active-color, $active-gradient);
     }
+  }
 }
 
 .x-carousel-indicator {
-    span {
-        width: $carousel-indicator-size;
-        height: $carousel-indicator-size;
-        @if $include-border-radius {
-            @include border-radius($carousel-indicator-size / 2);
-        }
-        margin: $carousel-indicator-spacing;
+  span {
+    width: $carousel-indicator-size;
+    height: $carousel-indicator-size;
+    @if $include-border-radius {
+      @include border-radius($carousel-indicator-size / 2);
     }
+    margin: $carousel-indicator-spacing;
+  }
 }
 
 .x-carousel-indicator-horizontal {
-    height: $carousel-track-size;
+  height: $carousel-track-size;
 }
 
 .x-carousel-indicator-vertical {
-    width: $carousel-track-size;
+  width: $carousel-track-size;
 }
 
-@include sencha-carousel-indicator-ui('light', $indicator-light, 'flat', $indicator-light-active, 'flat');
-@include sencha-carousel-indicator-ui('dark', $indicator-dark, 'flat', $indicator-dark-active, 'flat');
+@include sencha-carousel-indicator-ui(
+  "light",
+  $indicator-light,
+  "flat",
+  $indicator-light-active,
+  "flat"
+);
+@include sencha-carousel-indicator-ui(
+  "dark",
+  $indicator-dark,
+  "flat",
+  $indicator-dark-active,
+  "flat"
+);

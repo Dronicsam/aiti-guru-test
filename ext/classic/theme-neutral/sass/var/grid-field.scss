@@ -16,16 +16,21 @@
  * height is calculated by adding $grid-row-cell-line-height to the top and bottom values of
  * $grid-cell-inner-padding.
  */
-$grid-cell-field-height: dynamic(if($grid-row-height < $form-field-height, $grid-row-height, $form-field-height));
+$grid-cell-field-height: dynamic(
+  if(
+    $grid-row-height < $form-field-height,
+    $grid-row-height,
+    $form-field-height
+  )
+);
 
 /**
  * @var {number/list}
  * The padding of grid fields.
  */
 $grid-cell-field-padding: dynamic(
-    top($form-field-padding)
-    right($grid-cell-inner-padding) - $form-field-border-width
-    bottom($form-field-padding)
+  top($form-field-padding) right($grid-cell-inner-padding) -
+    $form-field-border-width bottom($form-field-padding)
     left($grid-cell-inner-padding) - $form-field-border-width
 );
 
@@ -106,7 +111,9 @@ $grid-cell-text-field-color: dynamic($grid-cell-field-color);
  * @var {color}
  * The background color of a text field's input element when rendered in the context of a grid cell
  */
-$grid-cell-text-field-background-color: dynamic($form-text-field-background-color);
+$grid-cell-text-field-background-color: dynamic(
+  $form-text-field-background-color
+);
 
 /**
  * @var {number/list}
@@ -130,13 +137,17 @@ $grid-cell-text-field-border-color: dynamic($form-text-field-border-color);
  * @var {color/list}
  * The border color of the focused text fields rendered in the context of a grid cell
  */
-$grid-cell-text-field-focus-border-color: dynamic($form-text-field-focus-border-color);
+$grid-cell-text-field-focus-border-color: dynamic(
+  $form-text-field-focus-border-color
+);
 
 /**
  * @var {color}
  * Border color for invalid text fields rendered in the context of a grid cell.
  */
-$grid-cell-text-field-invalid-border-color: dynamic($form-text-field-invalid-border-color);
+$grid-cell-text-field-invalid-border-color: dynamic(
+  $form-text-field-invalid-border-color
+);
 
 /**
  * @var {number/list}
@@ -148,7 +159,9 @@ $grid-cell-text-field-border-radius: dynamic($form-text-field-border-radius);
  * @var {string}
  * The background image of a text field's input element when rendered in the context of a grid cell
  */
-$grid-cell-text-field-background-image: dynamic($form-text-field-background-image);
+$grid-cell-text-field-background-image: dynamic(
+  $form-text-field-background-image
+);
 
 /**
  * @var {number/list}
@@ -175,25 +188,33 @@ $grid-cell-text-field-body-width: dynamic($form-text-field-body-width);
  * @var {color}
  * Background color of a text field's input element when rendered in the context of a grid cell and the field value is invalid.
  */
-$grid-cell-text-field-invalid-background-color: dynamic($form-text-field-invalid-background-color);
+$grid-cell-text-field-invalid-background-color: dynamic(
+  $form-text-field-invalid-background-color
+);
 
 /**
  * @var {string}
  * Background image of a grid field text field's input element when the field value is invalid.
  */
-$grid-cell-text-field-invalid-background-image: dynamic($form-text-field-invalid-background-image);
+$grid-cell-text-field-invalid-background-image: dynamic(
+  $form-text-field-invalid-background-image
+);
 
 /**
  * @var {string}
  * Background repeat of the grid field text field's input element when the field value is invalid.
  */
-$grid-cell-text-field-invalid-background-repeat: dynamic($form-text-field-invalid-background-repeat);
+$grid-cell-text-field-invalid-background-repeat: dynamic(
+  $form-text-field-invalid-background-repeat
+);
 
 /**
  * @var {string/list}
  * Background position of the grid field text field's input element when rendered in the context of a grid cell and the field value is invalid.
  */
-$grid-cell-text-field-invalid-background-position: dynamic($form-text-field-invalid-background-position);
+$grid-cell-text-field-invalid-background-position: dynamic(
+  $form-text-field-invalid-background-position
+);
 
 /**
  * @var {boolean}
@@ -255,25 +276,33 @@ $grid-cell-field-trigger-border-color-over: dynamic($form-trigger-border-color);
  * @var {color}
  * The color of a text field's trigger's border when  rendered in the context of a grid cell and the field is focused
  */
-$grid-cell-field-trigger-border-color-focus: dynamic($form-trigger-border-color-focus);
+$grid-cell-field-trigger-border-color-focus: dynamic(
+  $form-trigger-border-color-focus
+);
 
 /**
  * @var {color}
  * The color of a text field's trigger's border when rendered in the context of a grid cell and the field is focused and the trigger is hovered
  */
-$grid-cell-field-trigger-border-color-pressed: dynamic($grid-cell-field-trigger-border-color-over);
+$grid-cell-field-trigger-border-color-pressed: dynamic(
+  $grid-cell-field-trigger-border-color-over
+);
 
 /**
  * @var {string}
  * The default background image for text field triggers when rendered in the context of a grid cell
  */
-$grid-cell-field-trigger-background-image: dynamic($form-trigger-background-image);
+$grid-cell-field-trigger-background-image: dynamic(
+  $form-trigger-background-image
+);
 
 /**
  * @var {color}
  * The background color of a text field's trigger element when rendered in the context of a grid cell
  */
-$grid-cell-field-trigger-background-color: dynamic($form-trigger-background-color);
+$grid-cell-field-trigger-background-color: dynamic(
+  $form-trigger-background-color
+);
 
 /**
  * @var {boolean}
@@ -298,19 +327,25 @@ $grid-cell-spinner-trigger-vertical: dynamic($spinner-trigger-vertical);
  * @var {string}
  * Background image for vertically oriented grid field spinner triggers when rendered in the context of a grid cell
  */
-$grid-cell-spinner-trigger-vertical-background-image: dynamic($spinner-trigger-vertical-background-image);
+$grid-cell-spinner-trigger-vertical-background-image: dynamic(
+  $spinner-trigger-vertical-background-image
+);
 
 /**
  * @var {string}
  * Background image for the "up" trigger when grid field spinner trigger buttons are  rendered in the context of a grid cell and horizontally aligned
  */
-$grid-cell-spinner-trigger-up-background-image: dynamic($spinner-trigger-up-background-image);
+$grid-cell-spinner-trigger-up-background-image: dynamic(
+  $spinner-trigger-up-background-image
+);
 
 /**
  * @var {string}
  * Background image for the "down" trigger when grid field spinner trigger buttons are  rendered in the context of a grid cell and horizontally aligned
  */
-$grid-cell-spinner-trigger-down-background-image: dynamic($spinner-trigger-down-background-image);
+$grid-cell-spinner-trigger-down-background-image: dynamic(
+  $spinner-trigger-down-background-image
+);
 
 /**
  * @var {boolean}

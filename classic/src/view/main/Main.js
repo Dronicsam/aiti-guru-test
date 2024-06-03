@@ -14,8 +14,6 @@ Ext.define("AitiGuruTest.view.main.Main", {
     "Ext.window.MessageBox",
 
     "AitiGuruTest.view.main.MainController",
-    "AitiGuruTest.view.main.List",
-
     "AitiGuruTest.model.main.MainModel",
   ],
 
@@ -57,5 +55,5 @@ Ext.define("AitiGuruTest.view.main.Main", {
     ],
   },
 
-  items: [{ xtype: "mainpanel" }],
+  items: [{ xtype: "wpage" }, { xtype: "mainlist" }],
 });

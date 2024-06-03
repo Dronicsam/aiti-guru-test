@@ -1,7 +1,6 @@
 {
   "paths": {
     "AitiGuruTest": "app",
-    "AitiGuruTest.view.main.List": "classic/src/view/main/List.js",
     "AitiGuruTest.view.main.Main": "classic/src/view/main/Main.js",
     "Ext": "ext/classic/classic/src",
     "Ext.AbstractManager": "ext/packages/core/src/AbstractManager.js",
@@ -270,7 +269,7 @@
     {
       "path": "app/Application.js",
       "requires": [],
-      "uses": [30, 32, 33, 34, 37, 38, 42],
+      "uses": [31, 33, 34, 35, 36, 37, 42, 43, 44],
       "idx": 29
     },
     {
@@ -279,87 +278,99 @@
       "uses": [],
       "idx": 30
     },
-    { "path": "app/store/Products.js", "requires": [], "uses": [], "idx": 31 },
     {
-      "path": "app/view/login/LoginController.js",
+      "path": "app/model/product/ProductModel.js",
       "requires": [],
-      "uses": [30, 34, 37, 38, 42],
-      "idx": 32
+      "uses": [],
+      "idx": 31
     },
+    { "path": "app/store/Products.js", "requires": [], "uses": [], "idx": 32 },
     {
-      "path": "app/view/login/Login.js",
-      "requires": [32],
+      "path": "app/view/list/ListController.js",
+      "requires": [],
       "uses": [],
       "idx": 33
     },
     {
-      "path": "app/view/main/MainController.js",
-      "requires": [],
-      "uses": [32, 33, 39, 40, 41],
+      "path": "app/view/list/List.js",
+      "requires": [32, 33],
+      "uses": [38, 39],
       "idx": 34
     },
     {
-      "path": "app/view/product/ProductController.js",
+      "path": "app/view/login/LoginController.js",
       "requires": [],
-      "uses": [30, 34, 37, 38, 42],
+      "uses": [31, 33, 34, 37, 42, 43, 44],
       "idx": 35
     },
     {
-      "path": "app/view/product/Product.js",
+      "path": "app/view/login/Login.js",
       "requires": [35],
       "uses": [],
       "idx": 36
     },
     {
-      "path": "app/view/mainpanel/MpanelController.js",
-      "requires": [35, 36],
-      "uses": [],
+      "path": "app/view/main/MainController.js",
+      "requires": [],
+      "uses": [33, 34, 35, 36, 42, 43],
       "idx": 37
     },
     {
-      "path": "app/view/mainpanel/Mpanel.js",
-      "requires": [37],
+      "path": "app/view/product/ProductController.js",
+      "requires": [],
       "uses": [],
       "idx": 38
+    },
+    {
+      "path": "app/view/product/Product.js",
+      "requires": [38],
+      "uses": [],
+      "idx": 39
+    },
+    {
+      "path": "app/view/mainpanel/MpanelController.js",
+      "requires": [38, 39],
+      "uses": [],
+      "idx": 40
+    },
+    {
+      "path": "app/view/mainpanel/Mpanel.js",
+      "requires": [40],
+      "uses": [],
+      "idx": 41
     },
     {
       "path": "app/view/workpage/WpageController.js",
       "requires": [],
       "uses": [],
-      "idx": 39
+      "idx": 42
     },
     {
       "path": "app/view/workpage/Wpage.js",
-      "requires": [39],
+      "requires": [42],
       "uses": [],
-      "idx": 40
-    },
-    {
-      "path": "classic/src/view/main/List.js",
-      "requires": [31],
-      "uses": [],
-      "idx": 41
+      "idx": 43
     },
     {
       "path": "classic/src/view/main/Main.js",
-      "requires": [30, 34, 41],
+      "requires": [30, 37],
       "uses": [],
-      "idx": 42
+      "idx": 44
     },
     {
       "path": "app.js",
       "requires": [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 42
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 44
       ],
       "uses": [],
-      "idx": 43
+      "idx": 45
     },
     {
       "path": "build/temp/development/AitiGuruTest/sencha-compiler/app/full-page-master-bundle.js",
-      "requires": [43],
+      "requires": [45],
       "uses": [],
-      "idx": 44
+      "idx": 46
     }
   ],
   "classes": {
@@ -369,63 +380,73 @@
       "alias": ["viewmodel.main"],
       "alternates": []
     },
-    "AitiGuruTest.store.Products": {
+    "AitiGuruTest.model.product.ProductModel": {
       "idx": 31,
+      "alias": ["viewmodel.main"],
+      "alternates": []
+    },
+    "AitiGuruTest.store.Products": {
+      "idx": 32,
       "alias": ["store.products"],
       "alternates": []
     },
-    "AitiGuruTest.view.login.Login": {
+    "AitiGuruTest.view.list.List": {
+      "idx": 34,
+      "alias": ["widget.mainlist"],
+      "alternates": []
+    },
+    "AitiGuruTest.view.list.ListController": {
       "idx": 33,
+      "alias": ["controller.list"],
+      "alternates": []
+    },
+    "AitiGuruTest.view.login.Login": {
+      "idx": 36,
       "alias": ["widget.login"],
       "alternates": []
     },
     "AitiGuruTest.view.login.LoginController": {
-      "idx": 32,
+      "idx": 35,
       "alias": ["controller.login"],
       "alternates": []
     },
-    "AitiGuruTest.view.main.List": {
-      "idx": 41,
-      "alias": ["widget.mainlist"],
-      "alternates": []
-    },
     "AitiGuruTest.view.main.Main": {
-      "idx": 42,
+      "idx": 44,
       "alias": ["widget.app-main"],
       "alternates": []
     },
     "AitiGuruTest.view.main.MainController": {
-      "idx": 34,
+      "idx": 37,
       "alias": ["controller.main"],
       "alternates": []
     },
     "AitiGuruTest.view.mainpanel.Mpanel": {
-      "idx": 38,
+      "idx": 41,
       "alias": ["widget.mainpanel"],
       "alternates": []
     },
     "AitiGuruTest.view.mainpanel.MpanelController": {
-      "idx": 37,
+      "idx": 40,
       "alias": ["controller.mainpanel"],
       "alternates": []
     },
     "AitiGuruTest.view.product.Product": {
-      "idx": 36,
+      "idx": 39,
       "alias": ["widget.productcard"],
       "alternates": []
     },
     "AitiGuruTest.view.product.ProductController": {
-      "idx": 35,
+      "idx": 38,
       "alias": ["controller.product"],
       "alternates": []
     },
     "AitiGuruTest.view.workpage.Wpage": {
-      "idx": 40,
+      "idx": 43,
       "alias": ["widget.wpage"],
       "alternates": []
     },
     "AitiGuruTest.view.workpage.WpageController": {
-      "idx": 39,
+      "idx": 42,
       "alias": ["controller.workpage"],
       "alternates": []
     },
@@ -2163,8 +2184,224 @@
   ],
   "css": [
     {
+      "remote": false,
       "exclude": ["fashion"],
-      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all.css"
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_1.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
+    },
+    {
+      "remote": false,
+      "exclude": ["fashion"],
+      "path": "build/development/AitiGuruTest/classic/resources/AitiGuruTest-all_2.css"
     }
   ],
   "cache": { "enable": false, "deltas": "classic/deltas" },
@@ -2178,7 +2415,7 @@
   "toolkit": "classic",
   "theme": "theme-triton",
   "profile": "classic",
-  "hash": "c1f0d032302c4fe82a16eae96e0b21e2ac47cf48",
+  "hash": "f7d83163ea8745492872791760573e0bd3c2ba52",
   "resources": {
     "path": "build/development/AitiGuruTest/classic/resources",
     "shared": "build/development/AitiGuruTest/resources"

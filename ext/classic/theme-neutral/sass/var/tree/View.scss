@@ -43,10 +43,8 @@ $tree-expander-cursor: dynamic(pointer);
  * The amount of padding to apply to the tree cell's inner div element
  */
 $tree-cell-inner-padding: dynamic(
-    top($grid-cell-inner-padding)
-    right($grid-cell-inner-padding)
-    bottom($grid-cell-inner-padding)
-    0
+  top($grid-cell-inner-padding) right($grid-cell-inner-padding)
+    bottom($grid-cell-inner-padding) 0
 );
 
 /**
@@ -65,7 +63,9 @@ $tree-glyph-color: dynamic($color);
  * @var {string/list}
  * Glyph for the "folder" tree icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tree-folder-glyph: dynamic($fa-var-folder-o $tree-glyph-font-size $font-icon-font-family);
+$tree-folder-glyph: dynamic(
+  $fa-var-folder-o $tree-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -77,7 +77,9 @@ $tree-folder-glyph-color: dynamic($tree-glyph-color);
  * @var {string/list}
  * Glyph for the "open folder" tree icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tree-folder-open-glyph: dynamic($fa-var-folder-open-o $tree-glyph-font-size $font-icon-font-family);
+$tree-folder-open-glyph: dynamic(
+  $fa-var-folder-open-o $tree-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -89,7 +91,9 @@ $tree-folder-open-glyph-color: dynamic($tree-folder-glyph-color);
 * @var {string/list}
 * Glyph for the "leaf" tree icon when {@link Global_CSS#$enable-font-icons} is `true`.
 */
-$tree-leaf-glyph: dynamic($fa-var-file-o $tree-glyph-font-size $font-icon-font-family);
+$tree-leaf-glyph: dynamic(
+  $fa-var-file-o $tree-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -101,7 +105,9 @@ $tree-leaf-glyph-color: dynamic($tree-glyph-color);
 * @var {string/list}
 * Glyph for the "arrow" tree icon when {@link Global_CSS#$enable-font-icons} is `true`.
 */
-$tree-arrow-glyph: dynamic($fa-var-caret-right $tree-glyph-font-size $font-icon-font-family);
+$tree-arrow-glyph: dynamic(
+  $fa-var-caret-right $tree-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -113,7 +119,9 @@ $tree-arrow-glyph-color: dynamic($tree-glyph-color);
 * @var {string/list}
 * Glyph for the "expanded arrow" tree icon when {@link Global_CSS#$enable-font-icons} is `true`.
 */
-$tree-arrow-expanded-glyph: dynamic($fa-var-caret-down $tree-glyph-font-size $font-icon-font-family);
+$tree-arrow-expanded-glyph: dynamic(
+  $fa-var-caret-down $tree-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}

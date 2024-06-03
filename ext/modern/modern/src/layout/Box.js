@@ -23,67 +23,65 @@
  *
  * See the {@link Ext.layout.VBox VBox layout docs} for more information on using vboxes.
  */
-Ext.define('Ext.layout.Box', {
-    extend: 'Ext.layout.Default',
+Ext.define("Ext.layout.Box", {
+  extend: "Ext.layout.Default",
 
-    config: {
-        orient: 'horizontal',
+  config: {
+    orient: "horizontal",
 
-        /**
-         * @cfg {String} align
-         * Controls how the child items of the container are aligned. Acceptable configuration values for this property are:
-         *
-         * - ** start ** : child items are packed together at left side of container
-         * - ** center ** : child items are packed together at mid-width of container
-         * - ** end ** : child items are packed together at right side of container
-         * - **stretch** : child items are stretched vertically to fill the height of the container
-         *
-         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
-         * explanation.
-         * @accessor
-         */
-        align: 'start',
+    /**
+     * @cfg {String} align
+     * Controls how the child items of the container are aligned. Acceptable configuration values for this property are:
+     *
+     * - ** start ** : child items are packed together at left side of container
+     * - ** center ** : child items are packed together at mid-width of container
+     * - ** end ** : child items are packed together at right side of container
+     * - **stretch** : child items are stretched vertically to fill the height of the container
+     *
+     * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
+     * explanation.
+     * @accessor
+     */
+    align: "start",
 
-        /**
-         * @cfg {String} pack
-         * Controls how the child items of the container are packed together. Acceptable configuration values
-         * for this property are:
-         *
-         * - ** start ** : child items are packed together at left side of container
-         * - ** center ** : child items are packed together at mid-width of container
-         * - ** end ** : child items are packed together at right side of container
-         * - ** justify ** : child items are packed evenly across the container. Uses the 'justify-content: space-between' css property
-         *
-         * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
-         * explanation.
-         * @accessor
-         */
-        pack: 'start'
-    },
+    /**
+     * @cfg {String} pack
+     * Controls how the child items of the container are packed together. Acceptable configuration values
+     * for this property are:
+     *
+     * - ** start ** : child items are packed together at left side of container
+     * - ** center ** : child items are packed together at mid-width of container
+     * - ** end ** : child items are packed together at right side of container
+     * - ** justify ** : child items are packed evenly across the container. Uses the 'justify-content: space-between' css property
+     *
+     * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
+     * explanation.
+     * @accessor
+     */
+    pack: "start",
+  },
 
-    alias: 'layout.tablebox',
+  alias: "layout.tablebox",
 
-    layoutBaseClass: 'x-layout-tablebox',
+  layoutBaseClass: "x-layout-tablebox",
 
-    itemClass: 'x-layout-tablebox-item',
+  itemClass: "x-layout-tablebox-item",
 
-    setContainer: function(container) {
-        this.callParent(arguments);
+  setContainer: function (container) {
+    this.callParent(arguments);
 
-        container.innerElement.addCls(this.layoutBaseClass);
+    container.innerElement.addCls(this.layoutBaseClass);
 
-        container.on('flexchange', 'onItemFlexChange', this, {
-            delegate: '> component'
-        });
-    },
+    container.on("flexchange", "onItemFlexChange", this, {
+      delegate: "> component",
+    });
+  },
 
-    onItemInnerStateChange: function(item, isInner) {
-        this.callParent(arguments);
+  onItemInnerStateChange: function (item, isInner) {
+    this.callParent(arguments);
 
-        item.toggleCls(this.itemClass, isInner);
-    },
+    item.toggleCls(this.itemClass, isInner);
+  },
 
-    onItemFlexChange: function() {
-
-    }
+  onItemFlexChange: function () {},
 });

@@ -21,7 +21,9 @@ $button-toolbar-border-color: dynamic(mix(#000, $neutral-light-color, 7%));
 $button-toolbar-split-line-color: dynamic($button-toolbar-border-color);
 $button-toolbar-inner-border-color-focus: dynamic($base-color);
 
-$button-default-border-color: dynamic(mix(#000, $button-default-base-color, 7%));
+$button-default-border-color: dynamic(
+  mix(#000, $button-default-base-color, 7%)
+);
 
 $button-small-border-radius: dynamic(0);
 $button-medium-border-radius: dynamic(0);

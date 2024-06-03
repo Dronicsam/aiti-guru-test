@@ -4,15 +4,15 @@ $button-border-radius: dynamic(null);
 $button-border-radius-big: dynamic(null);
 $button-small-border-radius: dynamic(null);
 $button-back-forward-tip-horizontal-offset: dynamic(0);
-$button-padding: dynamic(.54em .6em);
+$button-padding: dynamic(0.54em 0.6em);
 $button-line-height-big: dynamic(1.375em);
-$button-padding-big: dynamic(.625em .6em);
+$button-padding-big: dynamic(0.625em 0.6em);
 $button-badge-border-radius: dynamic(0);
 
 @mixin button-action-ui {
-    @include button-ui(
-    $ui: 'action',
+  @include button-ui(
+    $ui: "action",
     $background-color: $base-color,
     $color: $light-color
-    );
+  );
 }

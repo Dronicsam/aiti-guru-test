@@ -1,3 +1,1 @@
-addGlobal([
-    'spec'
-]);
+addGlobal(["spec"]);

@@ -33,11 +33,13 @@ $row-expander-cell-spacing-after: dynamic(6px);
 $row-expander-cursor: dynamic(pointer);
 
 // private
-$row-expander-cell-padding:
-    max(ceil(($grid-row-height - $row-expander-height) / 2), 0)
-    $row-expander-cell-spacing-after
-    max(floor(($grid-row-height - $row-expander-height) / 2), 0)
-    $row-expander-cell-spacing-before;
+$row-expander-cell-padding: max(
+    ceil(($grid-row-height - $row-expander-height) / 2),
+    0
+  )
+  $row-expander-cell-spacing-after
+  max(floor(($grid-row-height - $row-expander-height) / 2), 0)
+  $row-expander-cell-spacing-before;
 
 /**
  * @var {color}
@@ -55,10 +57,14 @@ $row-expander-glyph-font-size: dynamic(14px);
  * @var {string/list}
  * Glyph for the RowExpander's "expand" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$row-expander-expand-glyph: dynamic($fa-var-plus-square $row-expander-glyph-font-size $font-icon-font-family);
+$row-expander-expand-glyph: dynamic(
+  $fa-var-plus-square $row-expander-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the RowExpander's "collapse" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$row-expander-collapse-glyph: dynamic($fa-var-minus-square $row-expander-glyph-font-size $font-icon-font-family);
+$row-expander-collapse-glyph: dynamic(
+  $fa-var-minus-square $row-expander-glyph-font-size $font-icon-font-family
+);

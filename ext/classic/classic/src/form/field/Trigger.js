@@ -8,34 +8,40 @@
  * triggers} config instead.  This class is provided for compatibility reasons but is
  * not used internally by the framework.
  */
-Ext.define('Ext.form.field.Trigger', {
-    extend:'Ext.form.field.Text',
-    alias: ['widget.triggerfield', 'widget.trigger'],
-    requires: ['Ext.dom.Helper', 'Ext.util.ClickRepeater'],
-    alternateClassName: ['Ext.form.TriggerField', 'Ext.form.TwinTriggerField', 'Ext.form.Trigger'],
+Ext.define("Ext.form.field.Trigger", {
+  extend: "Ext.form.field.Text",
+  alias: ["widget.triggerfield", "widget.trigger"],
+  requires: ["Ext.dom.Helper", "Ext.util.ClickRepeater"],
+  alternateClassName: [
+    "Ext.form.TriggerField",
+    "Ext.form.TwinTriggerField",
+    "Ext.form.Trigger",
+  ],
 
-    /**
-     * @cfg {String} triggerCls
-     * An additional CSS class used to style the trigger button. The trigger will always get the {@link Ext.form.trigger.Trigger#baseCls}
-     * by default and triggerCls will be **appended** if specified.
-     */
-    triggerCls: Ext.baseCSSPrefix + 'form-arrow-trigger',
+  /**
+   * @cfg {String} triggerCls
+   * An additional CSS class used to style the trigger button. The trigger will always get the {@link Ext.form.trigger.Trigger#baseCls}
+   * by default and triggerCls will be **appended** if specified.
+   */
+  triggerCls: Ext.baseCSSPrefix + "form-arrow-trigger",
 
-    inheritableStatics: {
-        warnDeprecated: function() {
-            //<debug>
-            // TODO: can we make this warning depend on compat level?
-            Ext.log.warn('Ext.form.field.Trigger is deprecated. Use Ext.form.field.Text instead.');
-            //</debug>
-        }
+  inheritableStatics: {
+    warnDeprecated: function () {
+      //<debug>
+      // TODO: can we make this warning depend on compat level?
+      Ext.log.warn(
+        "Ext.form.field.Trigger is deprecated. Use Ext.form.field.Text instead.",
+      );
+      //</debug>
     },
+  },
 
-    onClassExtended: function() {
-        this.warnDeprecated();
-    },
+  onClassExtended: function () {
+    this.warnDeprecated();
+  },
 
-    constructor: function(config) {
-        this.self.warnDeprecated();
-        this.callParent([config]);
-    }
+  constructor: function (config) {
+    this.self.warnDeprecated();
+    this.callParent([config]);
+  },
 });

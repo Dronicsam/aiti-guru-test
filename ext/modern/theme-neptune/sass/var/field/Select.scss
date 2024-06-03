@@ -25,7 +25,9 @@ $selectfield-trigger-size: dynamic(1em);
  * @var {string/list}
  * SelectField trigger icon
  */
-$selectfield-trigger-icon: dynamic($fa-var-caret-down $selectfield-trigger-font-size $font-icon-font-family);
+$selectfield-trigger-icon: dynamic(
+  $fa-var-caret-down $selectfield-trigger-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}

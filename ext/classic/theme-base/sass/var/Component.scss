@@ -7,7 +7,7 @@
  * The prefix to be applied to all CSS selectors. If this is changed, it must also be changed in your
  * JavaScript application.
  */
-$prefix: dynamic('x-');
+$prefix: dynamic("x-");
 
 /**
  * @var {boolean/string} $relative-image-path-for-uis
@@ -90,18 +90,18 @@ $include-rtl: false !default;
  * @var {string} $image-extension
  * default file extension to use for images (defaults to 'png').
  */
-$image-extension: dynamic('png');
+$image-extension: dynamic("png");
 
 /**
  * @var {string} $slicer-image-extension
  * default file extension to use for slicer images (defaults to 'gif').
  */
-$slicer-image-extension: dynamic('gif');
+$slicer-image-extension: dynamic("gif");
 
 /**
  * Default search path for images
  */
-$image-search-path: '.' !default;
+$image-search-path: "." !default;
 
 /**
  * @var {boolean}
@@ -123,7 +123,7 @@ $enable-font-smoothing: dynamic(true);
  * paths in the CSS output to be generated correctly. By default this is the same as the
  * CSS output directory.
  */
-$theme-resource-path: dynamic('');
+$theme-resource-path: dynamic("");
 
 /**
  * @private

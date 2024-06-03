@@ -37,130 +37,130 @@
  *     form.submit(); //sends a single field back to the server (in this case color: red)
  *
  */
-Ext.define('Ext.field.Radio', {
-    extend: 'Ext.field.Checkbox',
-    xtype: 'radiofield',
-    alternateClassName: 'Ext.form.Radio',
+Ext.define("Ext.field.Radio", {
+  extend: "Ext.field.Checkbox",
+  xtype: "radiofield",
+  alternateClassName: "Ext.form.Radio",
 
-    isRadio: true,
+  isRadio: true,
 
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        ui: 'radio',
-
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        component: {
-            type: 'radio',
-            cls: Ext.baseCSSPrefix + 'input-radio'
-        }
-    },
-
-    getValue: function() {
-        return this._value === undefined ? null : this._value;
-    },
-
-    setValue: function(value) {
-        this._value = value;
-        return this;
-    },
-
-    getSubmitValue: function() {
-        var value = this._value;
-        if (value === undefined || value === null) {
-            value = true;
-        }
-        return (this.getChecked()) ? value : null;
-    },
-
-    updateChecked: function(checked, oldChecked) {
-        var me = this;
-
-        me.callParent([checked, oldChecked]);
-
-        if (me.initialized && checked) {
-            me.refreshGroupValues(me);
-        }
-    },
+  config: {
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    ui: "radio",
 
     /**
-     * @private
+     * @cfg
+     * @inheritdoc
      */
-    onMaskTap: function(component, e) {
-        var me = this,
-            dom = me.getComponent().input.dom;
-
-        if (me.getDisabled()) {
-            return false;
-        }
-
-        me.setChecked(true);
-
-        //return false so the mask does not disappear
-        return false;
+    component: {
+      type: "radio",
+      cls: Ext.baseCSSPrefix + "input-radio",
     },
+  },
 
-    /**
-     * Returns the selected value if this radio is part of a group (other radio fields with the same name, in the same FormPanel),
-     * @return {String}
-     */
-    getGroupValue: function() {
-        var fields = this.getSameGroupFields(),
-            ln = fields.length,
-            i = 0,
-            field;
+  getValue: function () {
+    return this._value === undefined ? null : this._value;
+  },
 
-        for (; i < ln; i++) {
-            field = fields[i];
-            if (field.getChecked()) {
-                return field.getValue();
-            }
-        }
+  setValue: function (value) {
+    this._value = value;
+    return this;
+  },
 
-        return null;
-    },
-
-    /**
-     * Set the matched radio field's status (that has the same value as the given string) to checked.
-     * @param {String} value The value of the radio field to check.
-     * @return {Ext.field.Radio} The field that is checked.
-     */
-    setGroupValue: function(value) {
-        var fields = this.getSameGroupFields(),
-            ln = fields.length,
-            i = 0,
-            field;
-
-        for (; i < ln; i++) {
-            field = fields[i];
-            if (field.getValue() === value) {
-                field.setChecked(true);
-                return field;
-            }
-        }
-    },
-
-    /**
-     * Loops through each of the fields this radiofield is linked to (has the same name) and
-     * calls `onChange` on those fields so the appropriate event is fired.
-     * @private
-     */
-    refreshGroupValues: function(trigger) {
-        var fields = this.getSameGroupFields(),
-            ln = fields.length,
-            i = 0,
-            field;
-
-        for (; i < ln; i++) {
-            field = fields[i];
-            if (field !== trigger) {
-                field.setChecked(false);
-            }
-        }
+  getSubmitValue: function () {
+    var value = this._value;
+    if (value === undefined || value === null) {
+      value = true;
     }
+    return this.getChecked() ? value : null;
+  },
+
+  updateChecked: function (checked, oldChecked) {
+    var me = this;
+
+    me.callParent([checked, oldChecked]);
+
+    if (me.initialized && checked) {
+      me.refreshGroupValues(me);
+    }
+  },
+
+  /**
+   * @private
+   */
+  onMaskTap: function (component, e) {
+    var me = this,
+      dom = me.getComponent().input.dom;
+
+    if (me.getDisabled()) {
+      return false;
+    }
+
+    me.setChecked(true);
+
+    //return false so the mask does not disappear
+    return false;
+  },
+
+  /**
+   * Returns the selected value if this radio is part of a group (other radio fields with the same name, in the same FormPanel),
+   * @return {String}
+   */
+  getGroupValue: function () {
+    var fields = this.getSameGroupFields(),
+      ln = fields.length,
+      i = 0,
+      field;
+
+    for (; i < ln; i++) {
+      field = fields[i];
+      if (field.getChecked()) {
+        return field.getValue();
+      }
+    }
+
+    return null;
+  },
+
+  /**
+   * Set the matched radio field's status (that has the same value as the given string) to checked.
+   * @param {String} value The value of the radio field to check.
+   * @return {Ext.field.Radio} The field that is checked.
+   */
+  setGroupValue: function (value) {
+    var fields = this.getSameGroupFields(),
+      ln = fields.length,
+      i = 0,
+      field;
+
+    for (; i < ln; i++) {
+      field = fields[i];
+      if (field.getValue() === value) {
+        field.setChecked(true);
+        return field;
+      }
+    }
+  },
+
+  /**
+   * Loops through each of the fields this radiofield is linked to (has the same name) and
+   * calls `onChange` on those fields so the appropriate event is fired.
+   * @private
+   */
+  refreshGroupValues: function (trigger) {
+    var fields = this.getSameGroupFields(),
+      ln = fields.length,
+      i = 0,
+      field;
+
+    for (; i < ln; i++) {
+      field = fields[i];
+      if (field !== trigger) {
+        field.setChecked(false);
+      }
+    }
+  },
 });

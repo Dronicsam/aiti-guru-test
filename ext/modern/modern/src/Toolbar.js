@@ -80,191 +80,185 @@
  *             ...
  *
  */
-Ext.define('Ext.Toolbar', {
-    extend: 'Ext.Container',
-    xtype : 'toolbar',
+Ext.define("Ext.Toolbar", {
+  extend: "Ext.Container",
+  xtype: "toolbar",
 
-    requires: [
-        'Ext.Button',
-        'Ext.Title',
-        'Ext.Spacer',
-        'Ext.layout.HBox'
-    ],
+  requires: ["Ext.Button", "Ext.Title", "Ext.Spacer", "Ext.layout.HBox"],
+
+  /**
+   * @private
+   */
+  isToolbar: true,
+
+  config: {
+    /**
+     * @cfg baseCls
+     * @inheritdoc
+     */
+    baseCls: Ext.baseCSSPrefix + "toolbar",
 
     /**
-     * @private
+     * @cfg {String/Ext.Title} title
+     * The title of the toolbar.
+     * @accessor
      */
-    isToolbar: true,
+    title: null,
 
-    config: {
-        /**
-         * @cfg baseCls
-         * @inheritdoc
-         */
-        baseCls: Ext.baseCSSPrefix + 'toolbar',
+    /**
+     * @cfg {String} defaultType
+     * The default xtype to create.
+     * @accessor
+     */
+    defaultType: "button",
 
-        /**
-         * @cfg {String/Ext.Title} title
-         * The title of the toolbar.
-         * @accessor
-         */
-        title: null,
+    /**
+     * @cfg {String}
+     * A default {@link Ext.Component#ui ui} to use for {@link Ext.Button Button} items.
+     */
+    defaultButtonUI: null,
 
-        /**
-         * @cfg {String} defaultType
-         * The default xtype to create.
-         * @accessor
-         */
-        defaultType: 'button',
+    /**
+     * @cfg {String} docked
+     * The docked position for this {@link Ext.Toolbar}.
+     * If you specify `left` or `right`, the {@link #layout} configuration will automatically change to a `vbox`. It's also
+     * recommended to adjust the {@link #width} of the toolbar if you do this.
+     * @accessor
+     */
 
-        /**
-         * @cfg {String}
-         * A default {@link Ext.Component#ui ui} to use for {@link Ext.Button Button} items.
-         */
-        defaultButtonUI: null,
+    /**
+     * @cfg {String} minHeight
+     * The minimum height height of the Toolbar.
+     * @accessor
+     */
+    minHeight: null,
 
-        /**
-         * @cfg {String} docked
-         * The docked position for this {@link Ext.Toolbar}.
-         * If you specify `left` or `right`, the {@link #layout} configuration will automatically change to a `vbox`. It's also
-         * recommended to adjust the {@link #width} of the toolbar if you do this.
-         * @accessor
-         */
-
-        /**
-         * @cfg {String} minHeight
-         * The minimum height height of the Toolbar.
-         * @accessor
-         */
-        minHeight: null,
-
-        /**
-         * @cfg {Object/String} layout Configuration for this Container's layout. Example:
-         *
-         *     Ext.create('Ext.Container', {
-         *         layout: {
-         *             type: 'hbox',
-         *             align: 'middle'
-         *         },
-         *         items: [
-         *             {
-         *                 xtype: 'panel',
-         *                 flex: 1,
-         *                 style: 'background-color: red;'
-         *             },
-         *             {
-         *                 xtype: 'panel',
-         *                 flex: 2,
-         *                 style: 'background-color: green'
-         *             }
-         *         ]
-         *     });
-         *
-         * See the [layouts guide](#!/guides/layouts) for more information
-         *
-         * __Note:__ If you set the {@link #docked} configuration to `left` or `right`, the default layout will change from the
-         * `hbox` to a `vbox`.
-         *
-         * @accessor
-         */
-        layout: {
-            type: 'hbox',
-            align: 'center'
-        }
+    /**
+     * @cfg {Object/String} layout Configuration for this Container's layout. Example:
+     *
+     *     Ext.create('Ext.Container', {
+     *         layout: {
+     *             type: 'hbox',
+     *             align: 'middle'
+     *         },
+     *         items: [
+     *             {
+     *                 xtype: 'panel',
+     *                 flex: 1,
+     *                 style: 'background-color: red;'
+     *             },
+     *             {
+     *                 xtype: 'panel',
+     *                 flex: 2,
+     *                 style: 'background-color: green'
+     *             }
+     *         ]
+     *     });
+     *
+     * See the [layouts guide](#!/guides/layouts) for more information
+     *
+     * __Note:__ If you set the {@link #docked} configuration to `left` or `right`, the default layout will change from the
+     * `hbox` to a `vbox`.
+     *
+     * @accessor
+     */
+    layout: {
+      type: "hbox",
+      align: "center",
     },
+  },
 
-    hasCSSMinHeight: true,
+  hasCSSMinHeight: true,
 
-    constructor: function(config) {
-        config = config || {};
+  constructor: function (config) {
+    config = config || {};
 
-        if (config.docked == "left" || config.docked == "right") {
-            config.layout = {
-                type: 'vbox',
-                align: 'stretch'
-            };
-        }
-
-        this.callParent([config]);
-    },
-
-    /**
-     * @private
-     */
-    applyTitle: function(title) {
-        if (typeof title == 'string') {
-            title = {
-                title: title,
-                centered : Ext.theme.is.Tizen ? false : true
-            };
-        }
-
-        return Ext.factory(title, Ext.Title, this.getTitle());
-    },
-
-    /**
-     * @private
-     */
-    updateTitle: function(newTitle, oldTitle) {
-        if (newTitle) {
-            this.add(newTitle);
-        }
-
-        if (oldTitle) {
-            oldTitle.destroy();
-        }
-    },
-
-    /**
-     * Shows the title, if it exists.
-     */
-    showTitle: function() {
-        var title = this.getTitle();
-
-        if (title) {
-            title.show();
-        }
-    },
-
-    /**
-     * Hides the title, if it exists.
-     */
-    hideTitle: function() {
-        var title = this.getTitle();
-
-        if (title) {
-            title.hide();
-        }
-    },
-
-    /**
-     * Returns an {@link Ext.Title} component.
-     * @member Ext.Toolbar
-     * @method getTitle
-     * @return {Ext.Title}
-     */
-
-    /**
-     * Use this to update the {@link #title} configuration.
-     * @member Ext.Toolbar
-     * @method setTitle
-     * @param {String/Ext.Title} title You can either pass a String, or a config/instance of {@link Ext.Title}.
-     */
-
-    onItemAdd: function(item, index) {
-        var defaultButtonUI = this.getDefaultButtonUI();
-
-        if (defaultButtonUI) {
-            if (item.isSegmentedButton) {
-                if (item.getDefaultUI() == null) {
-                    item.setDefaultUI(defaultButtonUI);
-                }
-            } else if (item.isButton && (item.getUi() == null)) {
-                item.setUi(defaultButtonUI);
-            }
-        }
-
-        this.callParent([item, index]);
+    if (config.docked == "left" || config.docked == "right") {
+      config.layout = {
+        type: "vbox",
+        align: "stretch",
+      };
     }
-});
 
+    this.callParent([config]);
+  },
+
+  /**
+   * @private
+   */
+  applyTitle: function (title) {
+    if (typeof title == "string") {
+      title = {
+        title: title,
+        centered: Ext.theme.is.Tizen ? false : true,
+      };
+    }
+
+    return Ext.factory(title, Ext.Title, this.getTitle());
+  },
+
+  /**
+   * @private
+   */
+  updateTitle: function (newTitle, oldTitle) {
+    if (newTitle) {
+      this.add(newTitle);
+    }
+
+    if (oldTitle) {
+      oldTitle.destroy();
+    }
+  },
+
+  /**
+   * Shows the title, if it exists.
+   */
+  showTitle: function () {
+    var title = this.getTitle();
+
+    if (title) {
+      title.show();
+    }
+  },
+
+  /**
+   * Hides the title, if it exists.
+   */
+  hideTitle: function () {
+    var title = this.getTitle();
+
+    if (title) {
+      title.hide();
+    }
+  },
+
+  /**
+   * Returns an {@link Ext.Title} component.
+   * @member Ext.Toolbar
+   * @method getTitle
+   * @return {Ext.Title}
+   */
+
+  /**
+   * Use this to update the {@link #title} configuration.
+   * @member Ext.Toolbar
+   * @method setTitle
+   * @param {String/Ext.Title} title You can either pass a String, or a config/instance of {@link Ext.Title}.
+   */
+
+  onItemAdd: function (item, index) {
+    var defaultButtonUI = this.getDefaultButtonUI();
+
+    if (defaultButtonUI) {
+      if (item.isSegmentedButton) {
+        if (item.getDefaultUI() == null) {
+          item.setDefaultUI(defaultButtonUI);
+        }
+      } else if (item.isButton && item.getUi() == null) {
+        item.setUi(defaultButtonUI);
+      }
+    }
+
+    this.callParent([item, index]);
+  },
+});

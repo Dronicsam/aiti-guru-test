@@ -2,62 +2,76 @@ Ext.define("AitiGuruTest.view.product.Product", {
   extend: "Ext.window.Window",
   xtype: "productcard",
   requires: ["AitiGuruTest.view.product.ProductController", "Ext.form.Panel"],
-
+  id: "productcard",
   controller: "product",
   bodyPadding: 10,
-  title: "Окно входа",
-  closable: true,
+  header: {
+    title: "123",
+    id: "titleId",
+    renderer: function (val, metadata, record) {
+      metadata.style = "cursor: auto;";
+      return val;
+    },
+  },
+  modal: true,
   autoShow: true,
-
+  closable: false,
   items: {
     xtype: "form",
+    id: "productform",
     reference: "form",
     items: [
       {
+        fieldLabel: "ID:",
         xtype: "textfield",
-        name: "login",
-        fieldLabel: "Цена:",
-        allowBlank: false,
+        name: "itemId",
+        id: "itemId",
+        readOnly: true,
+        value: "123",
+        inputWrapCls: "",
+        triggerWrapCls: "",
+        fieldStyle: "background:none",
       },
       {
+        fieldLabel: "Наименование:",
         xtype: "textfield",
-        name: "password",
+        name: "itemDesc",
+        id: "descId",
+        readOnly: true,
+        value: "123",
+        inputWrapCls: "",
+        triggerWrapCls: "",
+        fieldStyle: "background:none",
+      },
+      {
+        xtype: "numberfield",
+        id: "priceId",
+        name: "itemPrice",
+        fieldLabel: "Цена:",
+      },
+      {
+        xtype: "numberfield",
+        id: "amountId",
+        name: "itemAmount",
         fieldLabel: "Кол-во",
-        allowBlank: false,
       },
     ],
     buttons: [
       {
-        text: "Вход",
+        text: "Сохранить",
         formBind: true,
         listeners: [
           {
-            click: function () {
-              var data = this.up("form").getForm().getValues();
-              for (let i in data) {
-                localStorage.setItem(i, data[i]);
-              }
-            },
-          },
-          {
-            click: "onLoginClick",
+            click: { fn: "onCancelClick", extraArg: "yes" },
           },
         ],
       },
       {
-        text: "Вход",
+        text: "Отмена",
         formBind: true,
         listeners: [
           {
-            click: function () {
-              var data = this.up("form").getForm().getValues();
-              for (let i in data) {
-                localStorage.setItem(i, data[i]);
-              }
-            },
-          },
-          {
-            click: "onLoginClick",
+            click: { fn: "onCancelClick", extraArg: "yes" },
           },
         ],
       },

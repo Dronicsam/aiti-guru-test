@@ -12,7 +12,7 @@ $font-icon-font-family: dynamic(FontAwesome);
 */
 $font-size: dynamic(15px);
 $font-weight: dynamic(normal);
-$font-family: dynamic('Helvetica');
+$font-family: dynamic("Helvetica");
 
 $default-text-contrast: dynamic(85%);
 
@@ -26,12 +26,12 @@ $base-color: dynamic(#808080);
  * @var {string} $image-extension
  * default file extension to use for images (defaults to 'png').
  */
-$image-extension: dynamic('png');
+$image-extension: dynamic("png");
 
 /**
  * Default search path for images
  */
-$image-search-path: '.' !default;
+$image-search-path: "." !default;
 
 /**
  * @var {boolean/string} $relative-image-path-for-uis
@@ -55,7 +55,7 @@ $include-missing-images: dynamic(true);
  * paths in the CSS output to be generated correctly. By default this is the same as the
  * CSS output directory.
  */
-$theme-resource-path: dynamic('');
+$theme-resource-path: dynamic("");
 
 /**
  * @var {number} $css-shadow-border-radius

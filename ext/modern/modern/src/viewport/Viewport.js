@@ -4,42 +4,43 @@
  * Please refer to the {@link Ext.Viewport} documentation about using the global instance.
  * @private
  */
-Ext.define('Ext.viewport.Viewport', {
-    requires: [
-        'Ext.viewport.Ios',
-        'Ext.viewport.Android',
-        'Ext.viewport.WindowsPhone'
-    ],
-    singleton: true,
+Ext.define("Ext.viewport.Viewport", {
+  requires: [
+    "Ext.viewport.Ios",
+    "Ext.viewport.Android",
+    "Ext.viewport.WindowsPhone",
+  ],
+  singleton: true,
 
-    setup: function (config) {
-        var osName = Ext.os.name,
-            viewportName;
+  setup: function (config) {
+    var osName = Ext.os.name,
+      viewportName;
 
-        switch (osName) {
-            case 'Android':
-                viewportName = (Ext.browser.name === 'ChromeMobile') ? 'Default' : 'Android';
-                break;
+    switch (osName) {
+      case "Android":
+        viewportName =
+          Ext.browser.name === "ChromeMobile" ? "Default" : "Android";
+        break;
 
-            case 'iOS':
-                viewportName = 'Ios';
-                break;
+      case "iOS":
+        viewportName = "Ios";
+        break;
 
-            case 'Windows':
-                viewportName = (Ext.browser.name === 'IE') ? 'WindowsPhone' : 'Default';
-                break;
+      case "Windows":
+        viewportName = Ext.browser.name === "IE" ? "WindowsPhone" : "Default";
+        break;
 
-            case 'WindowsPhone':
-                viewportName = 'WindowsPhone';
-                break;
+      case "WindowsPhone":
+        viewportName = "WindowsPhone";
+        break;
 
-            default:
-                viewportName = 'Default';
-                break;
-        }
-
-        Ext.Viewport = Ext.create('Ext.viewport.' + viewportName, config);
+      default:
+        viewportName = "Default";
+        break;
     }
+
+    Ext.Viewport = Ext.create("Ext.viewport." + viewportName, config);
+  },
 });
 
 // Docs for the singleton instance created by above factory:

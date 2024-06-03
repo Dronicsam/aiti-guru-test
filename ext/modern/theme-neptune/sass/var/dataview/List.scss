@@ -30,7 +30,9 @@ $list-item-pressed-background-color: dynamic(mix(#fff, $base-light-color, 50%));
  * @var {color}
  * List item background-color when selected
  */
-$list-item-selected-background-color: dynamic(mix(#fff, $base-light-color, 25%));
+$list-item-selected-background-color: dynamic(
+  mix(#fff, $base-light-color, 25%)
+);
 
 /**
  * @var {string/number}
@@ -72,13 +74,13 @@ $list-item-font-family: dynamic($font-family);
  * @var {number/list}
  * List item padding
  */
-$list-item-padding: dynamic(.3em .6em);
+$list-item-padding: dynamic(0.3em 0.6em);
 
 /**
  * @var {number/list}
  * List item padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$list-item-padding-big: dynamic(.46em .6em);
+$list-item-padding-big: dynamic(0.46em 0.6em);
 
 /**
  * @var {color}

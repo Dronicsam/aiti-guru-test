@@ -4,23 +4,22 @@
  * @abstract
  * @private
  */
-Ext.define('Ext.event.gesture.SingleTouch', {
-    extend: 'Ext.event.gesture.Recognizer',
+Ext.define("Ext.event.gesture.SingleTouch", {
+  extend: "Ext.event.gesture.Recognizer",
 
-    inheritableStatics: {
-        NOT_SINGLE_TOUCH: "Not Single Touch",
-        TOUCH_MOVED: "Touch Moved",
-        EVENT_CANCELED: "Event Canceled"
-    },
+  inheritableStatics: {
+    NOT_SINGLE_TOUCH: "Not Single Touch",
+    TOUCH_MOVED: "Touch Moved",
+    EVENT_CANCELED: "Event Canceled",
+  },
 
-    onTouchStart: function(e) {
-        if (e.touches.length > 1) {
-            return this.fail(this.self.NOT_SINGLE_TOUCH);
-        }
-    },
-
-    onTouchCancel: function() {
-        return false;
+  onTouchStart: function (e) {
+    if (e.touches.length > 1) {
+      return this.fail(this.self.NOT_SINGLE_TOUCH);
     }
-});
+  },
 
+  onTouchCancel: function () {
+    return false;
+  },
+});

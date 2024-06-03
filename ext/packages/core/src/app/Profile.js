@@ -61,224 +61,261 @@
  *
  * For a fuller understanding of the ideas behind Profiles and how best to use them in your app, we suggest you read
  * the [device profiles guide](/touch/2.4/core_concepts/device_profiles.html).
- * 
+ *
  */
-Ext.define('Ext.app.Profile', {
-    mixins: {
-        observable: "Ext.mixin.Observable"
-    },
+Ext.define("Ext.app.Profile", {
+  mixins: {
+    observable: "Ext.mixin.Observable",
+  },
 
+  /**
+   * @property {Boolean}
+   * `true` to identify an object as an instance of `Ext.app.Profile`
+   */
+  isProfile: true,
+
+  config: {
     /**
-     * @property {Boolean}
-     * `true` to identify an object as an instance of `Ext.app.Profile`
+     * @cfg {String} namespace The namespace that this Profile's classes can be found in. Defaults to the lowercased
+     * Profile {@link #name}, for example a Profile called MyApp.profile.Phone will by default have a 'phone'
+     * namespace, which means that this Profile's additional models, stores, views and controllers will be loaded
+     * from the MyApp.model.phone.*, MyApp.store.phone.*, MyApp.view.phone.* and MyApp.controller.phone.* namespaces
+     * respectively.
+     * @accessor
      */
-    isProfile: true,
-
-    config: {
-        /**
-         * @cfg {String} namespace The namespace that this Profile's classes can be found in. Defaults to the lowercased
-         * Profile {@link #name}, for example a Profile called MyApp.profile.Phone will by default have a 'phone'
-         * namespace, which means that this Profile's additional models, stores, views and controllers will be loaded
-         * from the MyApp.model.phone.*, MyApp.store.phone.*, MyApp.view.phone.* and MyApp.controller.phone.* namespaces
-         * respectively.
-         * @accessor
-         */
-        namespace: 'auto',
-
-        /**
-         * @cfg {String} name The name of this Profile. Defaults to the last section of the class name (e.g. a profile
-         * called MyApp.profile.Phone will default the name to 'Phone').
-         * @accessor
-         */
-        name: 'auto',
-
-        /**
-         * @cfg {String} mainView
-         */
-        mainView: {
-            $value: null,
-            lazy: true
-        },
-
-        /**
-         * @cfg {Ext.app.Application} application The {@link Ext.app.Application Application} instance that this
-         * Profile is bound to. This is set automatically.
-         * @accessor
-         * @readonly
-         */
-        application: null,
-
-        // @cmd-auto-dependency {aliasPrefix: "controller.", profile: true, blame: "all"}
-        /**
-         * @cfg {Array} controllers Any additional {@link Ext.app.Controller Controllers} to load for this
-         * profile. Note that each item here will be prepended with the Profile namespace when loaded. Example usage:
-         *
-         *     controllers: [
-         *         'Users',
-         *         'MyApp.controller.Products'
-         *     ]
-         *
-         * This will load *MyApp.controller.tablet.Users* and *MyApp.controller.Products*.
-         * @accessor
-         */
-        controllers: [],
-
-        // @cmd-auto-dependency {aliasPrefix : "model.", profile: true, blame: "all"}
-        /**
-         * @cfg {Array} models Any additional {@link Ext.app.Application#models Models} to load for this profile. Note
-         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
-         *
-         *     models: [
-         *         'Group',
-         *         'MyApp.model.User'
-         *     ]
-         *
-         * This will load *MyApp.model.tablet.Group* and *MyApp.model.User*.
-         * @accessor
-         */
-        models: [],
-
-        // @cmd-auto-dependency {aliasPrefix: "view.", profile: true, blame: "all"}
-        /**
-         * @cfg {Array} views Any additional {@link Ext.app.Application#views views} to load for this profile. Note
-         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
-         *
-         *     views: [
-         *         'Main',
-         *         'MyApp.view.Login'
-         *     ]
-         *
-         * This will load *MyApp.view.tablet.Main* and *MyApp.view.Login*.
-         * @accessor
-         */
-        views: [],
-
-        // @cmd-auto-dependency {aliasPrefix: "store.", profile: true, blame: "all"}
-        /**
-         * @cfg {Array} stores Any additional {@link Ext.app.Application#stores Stores} to load for this profile. Note
-         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
-         *
-         *     stores: [
-         *         'Users',
-         *         'MyApp.store.Products'
-         *     ]
-         *
-         * This will load *MyApp.store.tablet.Users* and *MyApp.store.Products*.
-         * @accessor
-         */
-        stores: []
-    },
+    namespace: "auto",
 
     /**
-     * Creates a new Profile instance
+     * @cfg {String} name The name of this Profile. Defaults to the last section of the class name (e.g. a profile
+     * called MyApp.profile.Phone will default the name to 'Phone').
+     * @accessor
      */
-    constructor: function(config) {
-        this.initConfig(config);
-
-        this.mixins.observable.constructor.apply(this, arguments);
-    },
+    name: "auto",
 
     /**
-     * Determines whether or not this Profile is active on the device isActive is executed on. Should return true if
-     * this profile is meant to be active on this device, false otherwise. Each Profile should implement this function
-     * (the default implementation just returns false).
-     * @return {Boolean} True if this Profile should be activated on the device it is running on, false otherwise
+     * @cfg {String} mainView
      */
-    isActive: function() {
-        return false;
+    mainView: {
+      $value: null,
+      lazy: true,
     },
 
     /**
-     * @method
-     * The launch function is called by the {@link Ext.app.Application Application} if this Profile's {@link #isActive}
-     * function returned true. This is typically the best place to run any profile-specific app launch code. Example
-     * usage:
+     * @cfg {Ext.app.Application} application The {@link Ext.app.Application Application} instance that this
+     * Profile is bound to. This is set automatically.
+     * @accessor
+     * @readonly
+     */
+    application: null,
+
+    // @cmd-auto-dependency {aliasPrefix: "controller.", profile: true, blame: "all"}
+    /**
+     * @cfg {Array} controllers Any additional {@link Ext.app.Controller Controllers} to load for this
+     * profile. Note that each item here will be prepended with the Profile namespace when loaded. Example usage:
      *
-     *     launch: function() {
-     *         Ext.create('MyApp.view.tablet.Main');
-     *     }
+     *     controllers: [
+     *         'Users',
+     *         'MyApp.controller.Products'
+     *     ]
+     *
+     * This will load *MyApp.controller.tablet.Users* and *MyApp.controller.Products*.
+     * @accessor
      */
-    launch: Ext.emptyFn,
+    controllers: [],
 
+    // @cmd-auto-dependency {aliasPrefix : "model.", profile: true, blame: "all"}
     /**
-     * @private
+     * @cfg {Array} models Any additional {@link Ext.app.Application#models Models} to load for this profile. Note
+     * that each item here will be prepended with the Profile namespace when loaded. Example usage:
+     *
+     *     models: [
+     *         'Group',
+     *         'MyApp.model.User'
+     *     ]
+     *
+     * This will load *MyApp.model.tablet.Group* and *MyApp.model.User*.
+     * @accessor
      */
-    applyNamespace: function(name) {
-        if (name == 'auto') {
-            name = this.getName();
-        }
+    models: [],
 
-        return name.toLowerCase();
-    },
-
+    // @cmd-auto-dependency {aliasPrefix: "view.", profile: true, blame: "all"}
     /**
-     * @private
+     * @cfg {Array} views Any additional {@link Ext.app.Application#views views} to load for this profile. Note
+     * that each item here will be prepended with the Profile namespace when loaded. Example usage:
+     *
+     *     views: [
+     *         'Main',
+     *         'MyApp.view.Login'
+     *     ]
+     *
+     * This will load *MyApp.view.tablet.Main* and *MyApp.view.Login*.
+     * @accessor
      */
-    applyName: function(name) {
-        if (name == 'auto') {
-            var pieces = this.$className.split('.');
-            name = pieces[pieces.length - 1];
-        }
+    views: [],
 
-        return name;
-    },
-    onClassExtended: function(cls, data, hooks) {
-        var onBeforeClassCreated = hooks.onBeforeCreated;
-
-        hooks.onBeforeCreated = function(cls, data) {
-            var Controller = Ext.app.Controller,
-                requires = [],
-                proto = cls.prototype,
-                namespace;
-
-            namespace = Controller.resolveNamespace(cls, data);
-
-            Controller.processDependencies(proto, requires, namespace, 'model', data.models);
-            Controller.processDependencies(proto, requires, namespace, 'view', data.views);
-            Controller.processDependencies(proto, requires, namespace, 'store', data.stores);
-            Controller.processDependencies(proto, requires, namespace, 'controller', data.controllers);
-
-            Ext.require(requires, Ext.Function.pass(onBeforeClassCreated, arguments, this));
-        };
-    },
-
+    // @cmd-auto-dependency {aliasPrefix: "store.", profile: true, blame: "all"}
     /**
-     * @private
-     * Computes the full class names of any specified model, view, controller and store dependencies, returns them in
-     * an object map for easy loading
+     * @cfg {Array} stores Any additional {@link Ext.app.Application#stores Stores} to load for this profile. Note
+     * that each item here will be prepended with the Profile namespace when loaded. Example usage:
+     *
+     *     stores: [
+     *         'Users',
+     *         'MyApp.store.Products'
+     *     ]
+     *
+     * This will load *MyApp.store.tablet.Users* and *MyApp.store.Products*.
+     * @accessor
      */
-    getDependencies: function() {
-        var allClasses = [],
-            appName = this.getApplication().getName(),
-            namespace = this.getNamespace(),
-            map = {
-                model: this.getModels(),
-                view: this.getViews(),
-                controller: this.getControllers(),
-                store: this.getStores()
-            },
-            classType, classNames;
+    stores: [],
+  },
 
-        for (classType in map) {
-            classNames = [];
+  /**
+   * Creates a new Profile instance
+   */
+  constructor: function (config) {
+    this.initConfig(config);
 
-            Ext.each(map[classType], function(className) {
-                if (Ext.isString(className)) {
-                    //we check name === appName to allow MyApp.profile.MyApp to exist
-                    if (Ext.isString(className) && (Ext.ClassManager.getPrefix(className) === "" || className === appName)) {
-                        className = appName + '.' + classType + '.' + namespace + '.' + className;
-                    }
+    this.mixins.observable.constructor.apply(this, arguments);
+  },
 
-                    classNames.push(className);
-                    allClasses.push(className);
-                }
-            }, this);
+  /**
+   * Determines whether or not this Profile is active on the device isActive is executed on. Should return true if
+   * this profile is meant to be active on this device, false otherwise. Each Profile should implement this function
+   * (the default implementation just returns false).
+   * @return {Boolean} True if this Profile should be activated on the device it is running on, false otherwise
+   */
+  isActive: function () {
+    return false;
+  },
 
-            map[classType] = classNames;
-        }
+  /**
+   * @method
+   * The launch function is called by the {@link Ext.app.Application Application} if this Profile's {@link #isActive}
+   * function returned true. This is typically the best place to run any profile-specific app launch code. Example
+   * usage:
+   *
+   *     launch: function() {
+   *         Ext.create('MyApp.view.tablet.Main');
+   *     }
+   */
+  launch: Ext.emptyFn,
 
-        map.all = allClasses;
-
-        return map;
+  /**
+   * @private
+   */
+  applyNamespace: function (name) {
+    if (name == "auto") {
+      name = this.getName();
     }
+
+    return name.toLowerCase();
+  },
+
+  /**
+   * @private
+   */
+  applyName: function (name) {
+    if (name == "auto") {
+      var pieces = this.$className.split(".");
+      name = pieces[pieces.length - 1];
+    }
+
+    return name;
+  },
+  onClassExtended: function (cls, data, hooks) {
+    var onBeforeClassCreated = hooks.onBeforeCreated;
+
+    hooks.onBeforeCreated = function (cls, data) {
+      var Controller = Ext.app.Controller,
+        requires = [],
+        proto = cls.prototype,
+        namespace;
+
+      namespace = Controller.resolveNamespace(cls, data);
+
+      Controller.processDependencies(
+        proto,
+        requires,
+        namespace,
+        "model",
+        data.models,
+      );
+      Controller.processDependencies(
+        proto,
+        requires,
+        namespace,
+        "view",
+        data.views,
+      );
+      Controller.processDependencies(
+        proto,
+        requires,
+        namespace,
+        "store",
+        data.stores,
+      );
+      Controller.processDependencies(
+        proto,
+        requires,
+        namespace,
+        "controller",
+        data.controllers,
+      );
+
+      Ext.require(
+        requires,
+        Ext.Function.pass(onBeforeClassCreated, arguments, this),
+      );
+    };
+  },
+
+  /**
+   * @private
+   * Computes the full class names of any specified model, view, controller and store dependencies, returns them in
+   * an object map for easy loading
+   */
+  getDependencies: function () {
+    var allClasses = [],
+      appName = this.getApplication().getName(),
+      namespace = this.getNamespace(),
+      map = {
+        model: this.getModels(),
+        view: this.getViews(),
+        controller: this.getControllers(),
+        store: this.getStores(),
+      },
+      classType,
+      classNames;
+
+    for (classType in map) {
+      classNames = [];
+
+      Ext.each(
+        map[classType],
+        function (className) {
+          if (Ext.isString(className)) {
+            //we check name === appName to allow MyApp.profile.MyApp to exist
+            if (
+              Ext.isString(className) &&
+              (Ext.ClassManager.getPrefix(className) === "" ||
+                className === appName)
+            ) {
+              className =
+                appName + "." + classType + "." + namespace + "." + className;
+            }
+
+            classNames.push(className);
+            allClasses.push(className);
+          }
+        },
+        this,
+      );
+
+      map[classType] = classNames;
+    }
+
+    map.all = allClasses;
+
+    return map;
+  },
 });

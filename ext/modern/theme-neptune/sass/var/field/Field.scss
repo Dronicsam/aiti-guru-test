@@ -36,13 +36,13 @@ $field-label-background-color: dynamic($neutral-light-color);
  * @var {color}
  * Field label padding
  */
-$field-label-padding: dynamic(.23em .6em);
+$field-label-padding: dynamic(0.23em 0.6em);
 
 /**
  * @var {color}
  * Field label padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$field-label-padding-big: dynamic(.2em .6em);
+$field-label-padding-big: dynamic(0.2em 0.6em);
 
 /**
  * @var {string/number}

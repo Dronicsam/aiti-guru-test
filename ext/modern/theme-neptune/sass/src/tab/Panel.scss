@@ -23,17 +23,17 @@
  * @member Ext.tab.Bar
  * @deprecated Use {@link Ext.tab.Bar#tabbar-ui} and {@link Ext.tab.Tab#tab-ui} instead
  */
-@mixin sencha-tabbar-ui($ui-label, $bar-color, $bar-gradient, $tab-active-color) {
+@mixin sencha-tabbar-ui(
+  $ui-label,
+  $bar-color,
+  $bar-gradient,
+  $tab-active-color
+) {
+  @include tabbar-ui($ui: $ui-label, $background-color: $bar-color);
 
-    @include tabbar-ui(
-        $ui: $ui-label,
-        $background-color: $bar-color
-    );
-
-    @include tab-ui(
-        $ui: $ui-label,
-        $background-color: $bar-color,
-        $active-background-color: $tab-active-color
-    );
+  @include tab-ui(
+    $ui: $ui-label,
+    $background-color: $bar-color,
+    $active-background-color: $tab-active-color
+  );
 }
-

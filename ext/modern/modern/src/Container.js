@@ -65,23 +65,18 @@
  * After this line is run everything is back to how it was, with the first child panel once again taking up the full
  * width inside `mainPanel`.
  */
-Ext.define('Ext.Container', {
-    extend: 'Ext.Component',
+Ext.define(
+  "Ext.Container",
+  {
+    extend: "Ext.Component",
 
-    alternateClassName: ['Ext.lib.Container', 'Ext.container.Container'],
+    alternateClassName: ["Ext.lib.Container", "Ext.container.Container"],
 
-    requires: [
-        'Ext.layout.*',
-        'Ext.ItemCollection',
-        'Ext.Mask'
-    ],
+    requires: ["Ext.layout.*", "Ext.ItemCollection", "Ext.Mask"],
 
-    xtype: 'container',
-    
-    mixins: [
-        'Ext.mixin.Queryable',
-        'Ext.mixin.Container'
-    ],
+    xtype: "container",
+
+    mixins: ["Ext.mixin.Queryable", "Ext.mixin.Container"],
 
     /**
      * @event add
@@ -135,178 +130,177 @@ Ext.define('Ext.Container', {
      */
 
     eventedConfig: {
-        /**
-         * @cfg {Object/String/Number} activeItem The item from the {@link #cfg-items} collection that will be active first. This is
-         * usually only meaningful in a {@link Ext.layout.Card card layout}, where only one item can be active at a
-         * time. If passes a string, it will be assumed to be a {@link Ext.ComponentQuery} selector.
-         * @accessor
-         * @evented
-         */
-        activeItem: 0
+      /**
+       * @cfg {Object/String/Number} activeItem The item from the {@link #cfg-items} collection that will be active first. This is
+       * usually only meaningful in a {@link Ext.layout.Card card layout}, where only one item can be active at a
+       * time. If passes a string, it will be assumed to be a {@link Ext.ComponentQuery} selector.
+       * @accessor
+       * @evented
+       */
+      activeItem: 0,
     },
 
     config: {
-        /**
-         * @cfg {String/Object/Boolean} cardSwitchAnimation
-         * Animation to be used during transitions of cards.
-         * @removed 2.0.0 Please use {@link Ext.layout.Card#animation} instead
-         */
+      /**
+       * @cfg {String/Object/Boolean} cardSwitchAnimation
+       * Animation to be used during transitions of cards.
+       * @removed 2.0.0 Please use {@link Ext.layout.Card#animation} instead
+       */
 
-        /**
-         * @cfg {Object/String} layout Configuration for this Container's layout. Example:
-         *
-         *     Ext.create('Ext.Container', {
-         *         layout: {
-         *             type: 'hbox',
-         *             align: 'middle'
-         *         },
-         *         items: [
-         *             {
-         *                 xtype: 'panel',
-         *                 flex: 1,
-         *                 style: 'background-color: red;'
-         *             },
-         *             {
-         *                 xtype: 'panel',
-         *                 flex: 2,
-         *                 style: 'background-color: green'
-         *             }
-         *         ]
-         *     });
-         *
-         * See the [Layouts Guide](#!/guide/layouts) for more information.
-         *
-         * @accessor
-         */
-        layout: 'default',
+      /**
+       * @cfg {Object/String} layout Configuration for this Container's layout. Example:
+       *
+       *     Ext.create('Ext.Container', {
+       *         layout: {
+       *             type: 'hbox',
+       *             align: 'middle'
+       *         },
+       *         items: [
+       *             {
+       *                 xtype: 'panel',
+       *                 flex: 1,
+       *                 style: 'background-color: red;'
+       *             },
+       *             {
+       *                 xtype: 'panel',
+       *                 flex: 2,
+       *                 style: 'background-color: green'
+       *             }
+       *         ]
+       *     });
+       *
+       * See the [Layouts Guide](#!/guide/layouts) for more information.
+       *
+       * @accessor
+       */
+      layout: "default",
 
-        /**
-         * @cfg {Object} control Enables you to easily control Components inside this Container by listening to their
-         * events and taking some action. For example, if we had a container with a nested Disable button, and we
-         * wanted to hide the Container when the Disable button is tapped, we could do this:
-         *
-         *     Ext.create('Ext.Container', {
-         *         control: {
-         *            'button[text=Disable]': {
-         *                tap: 'hideMe'
-         *            }
-         *         },
-         *
-         *         hideMe: function () {
-         *             this.hide();
-         *         }
-         *     });
-         *
-         * We used a {@link Ext.ComponentQuery} selector to listen to the {@link Ext.Button#tap tap} event on any
-         * {@link Ext.Button button} anywhere inside the Container that has the {@link Ext.Button#text text} 'Disable'.
-         * Whenever a Component matching that selector fires the `tap` event our `hideMe` function is called. `hideMe` is
-         * called with scope: `this` (e.g. `this` is the Container instance).
-         *
-         */
-        control: {},
+      /**
+       * @cfg {Object} control Enables you to easily control Components inside this Container by listening to their
+       * events and taking some action. For example, if we had a container with a nested Disable button, and we
+       * wanted to hide the Container when the Disable button is tapped, we could do this:
+       *
+       *     Ext.create('Ext.Container', {
+       *         control: {
+       *            'button[text=Disable]': {
+       *                tap: 'hideMe'
+       *            }
+       *         },
+       *
+       *         hideMe: function () {
+       *             this.hide();
+       *         }
+       *     });
+       *
+       * We used a {@link Ext.ComponentQuery} selector to listen to the {@link Ext.Button#tap tap} event on any
+       * {@link Ext.Button button} anywhere inside the Container that has the {@link Ext.Button#text text} 'Disable'.
+       * Whenever a Component matching that selector fires the `tap` event our `hideMe` function is called. `hideMe` is
+       * called with scope: `this` (e.g. `this` is the Container instance).
+       *
+       */
+      control: {},
 
-        /**
-         * @cfg {Object} defaults A set of default configurations to apply to all child Components in this Container.
-         * It's often useful to specify defaults when creating more than one items with similar configurations. For
-         * example here we can specify that each child is a panel and avoid repeating the xtype declaration for each
-         * one:
-         *
-         *     Ext.create('Ext.Container', {
-         *         defaults: {
-         *             xtype: 'panel'
-         *         },
-         *         items: [
-         *             {
-         *                 html: 'Panel 1'
-         *             },
-         *             {
-         *                 html: 'Panel 2'
-         *             }
-         *         ]
-         *     });
-         *
-         * @accessor
-         */
-        defaults: null,
+      /**
+       * @cfg {Object} defaults A set of default configurations to apply to all child Components in this Container.
+       * It's often useful to specify defaults when creating more than one items with similar configurations. For
+       * example here we can specify that each child is a panel and avoid repeating the xtype declaration for each
+       * one:
+       *
+       *     Ext.create('Ext.Container', {
+       *         defaults: {
+       *             xtype: 'panel'
+       *         },
+       *         items: [
+       *             {
+       *                 html: 'Panel 1'
+       *             },
+       *             {
+       *                 html: 'Panel 2'
+       *             }
+       *         ]
+       *     });
+       *
+       * @accessor
+       */
+      defaults: null,
 
-        // @cmd-auto-dependency { aliasPrefix: "widget.", typeProperty: "xtype", defaultTypeProperty: "defaultType", defaultsProperty: "defaults" }
-        /**
-         * @cfg {Array/Object} items The child items to add to this Container. This is usually an array of Component
-         * configurations or instances, for example:
-         *
-         *     Ext.create('Ext.Container', {
-         *         items: [
-         *             {
-         *                 xtype: 'panel',
-         *                 html: 'This is an item'
-         *             }
-         *         ]
-         *     });
-         * @accessor
-         */
-        items: null,
+      // @cmd-auto-dependency { aliasPrefix: "widget.", typeProperty: "xtype", defaultTypeProperty: "defaultType", defaultsProperty: "defaults" }
+      /**
+       * @cfg {Array/Object} items The child items to add to this Container. This is usually an array of Component
+       * configurations or instances, for example:
+       *
+       *     Ext.create('Ext.Container', {
+       *         items: [
+       *             {
+       *                 xtype: 'panel',
+       *                 html: 'This is an item'
+       *             }
+       *         ]
+       *     });
+       * @accessor
+       */
+      items: null,
 
-        /**
-         * @cfg {Boolean} autoDestroy If `true`, child items will be destroyed as soon as they are {@link #method-remove removed}
-         * from this container.
-         * @accessor
-         */
-        autoDestroy: true,
+      /**
+       * @cfg {Boolean} autoDestroy If `true`, child items will be destroyed as soon as they are {@link #method-remove removed}
+       * from this container.
+       * @accessor
+       */
+      autoDestroy: true,
 
-        /** @cfg {String} defaultType
-         * The default {@link Ext.Component xtype} of child Components to create in this Container when a child item
-         * is specified as a raw configuration object, rather than as an instantiated Component.
-         * @accessor
-         */
-        defaultType: null,
+      /** @cfg {String} defaultType
+       * The default {@link Ext.Component xtype} of child Components to create in this Container when a child item
+       * is specified as a raw configuration object, rather than as an instantiated Component.
+       * @accessor
+       */
+      defaultType: null,
 
-        /**
-         * @cfg {Boolean/Object/Ext.Mask/Ext.LoadMask} masked
-         * A configuration to allow you to mask this container.
-         * You can optionally pass an object block with and xtype of `loadmask`, and an optional `message` value to
-         * display a loading mask. Please refer to the {@link Ext.LoadMask} component to see other configurations.
-         *
-         *     masked: {
-         *         xtype: 'loadmask',
-         *         message: 'My message'
-         *     }
-         *
-         * Alternatively, you can just call the setter at any time with `true`/`false` to show/hide the mask:
-         *
-         *     setMasked(true); //show the mask
-         *     setMasked(false); //hides the mask
-         *
-         * There are also two convenient methods, {@link #method-mask} and {@link #unmask}, to allow you to mask and unmask
-         * this container at any time.
-         *
-         * Remember, the {@link Ext.Viewport} is always a container, so if you want to mask your whole application at anytime,
-         * can call:
-         *
-         *     Ext.Viewport.setMasked({
-         *         xtype: 'loadmask',
-         *         message: 'Hello'
-         *     });
-         *
-         * @accessor
-         */
-        masked: null,
+      /**
+       * @cfg {Boolean/Object/Ext.Mask/Ext.LoadMask} masked
+       * A configuration to allow you to mask this container.
+       * You can optionally pass an object block with and xtype of `loadmask`, and an optional `message` value to
+       * display a loading mask. Please refer to the {@link Ext.LoadMask} component to see other configurations.
+       *
+       *     masked: {
+       *         xtype: 'loadmask',
+       *         message: 'My message'
+       *     }
+       *
+       * Alternatively, you can just call the setter at any time with `true`/`false` to show/hide the mask:
+       *
+       *     setMasked(true); //show the mask
+       *     setMasked(false); //hides the mask
+       *
+       * There are also two convenient methods, {@link #method-mask} and {@link #unmask}, to allow you to mask and unmask
+       * this container at any time.
+       *
+       * Remember, the {@link Ext.Viewport} is always a container, so if you want to mask your whole application at anytime,
+       * can call:
+       *
+       *     Ext.Viewport.setMasked({
+       *         xtype: 'loadmask',
+       *         message: 'Hello'
+       *     });
+       *
+       * @accessor
+       */
+      masked: null,
 
-        /**
-         * @cfg {Boolean} modal `true` to make this Container modal. This will create a mask underneath the Container
-         * that covers its parent and does not allow the user to interact with any other Components until this
-         * Container is dismissed.
-         * @accessor
-         */
-        modal: null,
+      /**
+       * @cfg {Boolean} modal `true` to make this Container modal. This will create a mask underneath the Container
+       * that covers its parent and does not allow the user to interact with any other Components until this
+       * Container is dismissed.
+       * @accessor
+       */
+      modal: null,
 
-        /**
-         * @cfg {Boolean} hideOnMaskTap When using a {@link #modal} Component, setting this to `true` will hide the modal
-         * mask and the Container when the mask is tapped on.
-         * @accessor
-         */
-        hideOnMaskTap: null
+      /**
+       * @cfg {Boolean} hideOnMaskTap When using a {@link #modal} Component, setting this to `true` will hide the modal
+       * mask and the Container when the mask is tapped on.
+       * @accessor
+       */
+      hideOnMaskTap: null,
     },
-
 
     /**
      * @cfg {Boolean}
@@ -316,39 +310,41 @@ Ext.define('Ext.Container', {
      */
     manageBorders: false,
 
-    constructor: function(config) {
-        var me = this;
+    constructor: function (config) {
+      var me = this;
 
-        me._items = me.items = new Ext.ItemCollection();
-        me.innerItems = [];
+      me._items = me.items = new Ext.ItemCollection();
+      me.innerItems = [];
 
-        me.onItemAdd = me.onFirstItemAdd;
+      me.onItemAdd = me.onFirstItemAdd;
 
-        me.callParent(arguments);
+      me.callParent(arguments);
 
-        if (me.manageBorders) {
-            me.element.addCls('x-managed-borders');
-        }
+      if (me.manageBorders) {
+        me.element.addCls("x-managed-borders");
+      }
     },
 
-    initialize: function() {
-        this.callParent();
+    initialize: function () {
+      this.callParent();
 
-        // Ensure the container's layout instance is created, even if the container
-        // has no items.  This ensures border management is handled correctly on empty
-        // panels.
-        this.getLayout();
+      // Ensure the container's layout instance is created, even if the container
+      // has no items.  This ensures border management is handled correctly on empty
+      // panels.
+      this.getLayout();
     },
 
-    getElementConfig: function() {
-        return {
-            reference: 'element',
-            classList: ['x-container', 'x-unsized'],
-            children: [{
-                reference: 'innerElement',
-                className: 'x-inner'
-            }]
-        };
+    getElementConfig: function () {
+      return {
+        reference: "element",
+        classList: ["x-container", "x-unsized"],
+        children: [
+          {
+            reference: "innerElement",
+            className: "x-inner",
+          },
+        ],
+      };
     },
 
     /**
@@ -358,23 +354,23 @@ Ext.define('Ext.Container', {
      * @param {Boolean/Object/Ext.Mask/Ext.LoadMask} masked
      * @return {Object}
      */
-    applyMasked: function(masked) {
-        var isVisible = true,
-            currentMask;
+    applyMasked: function (masked) {
+      var isVisible = true,
+        currentMask;
 
-        if (masked === false) {
-            masked = true;
-            isVisible = false;
-        }
+      if (masked === false) {
+        masked = true;
+        isVisible = false;
+      }
 
-        currentMask = Ext.factory(masked, Ext.Mask, this.getMasked());
+      currentMask = Ext.factory(masked, Ext.Mask, this.getMasked());
 
-        if (currentMask) {
-            this.add(currentMask);
-            currentMask.setHidden(!isVisible);
-        }
+      if (currentMask) {
+        this.add(currentMask);
+        currentMask.setHidden(!isVisible);
+      }
 
-        return currentMask;
+      return currentMask;
     },
 
     /**
@@ -382,8 +378,8 @@ Ext.define('Ext.Container', {
      * functionality, call the {@link #setMasked} function direction (See the {@link #masked} configuration documentation
      * for more information).
      */
-    mask: function(mask) {
-        this.setMasked(mask || true);
+    mask: function (mask) {
+      this.setMasked(mask || true);
     },
 
     /**
@@ -391,278 +387,306 @@ Ext.define('Ext.Container', {
      * functionality, call the {@link #setMasked} function direction (See the {@link #masked} configuration documentation
      * for more information).
      */
-    unmask: function() {
-        this.setMasked(false);
+    unmask: function () {
+      this.setMasked(false);
     },
 
-    initInheritedState: function(inheritedState, inheritedStateInner) {
-        this.callParent([inheritedState, inheritedStateInner]);
-        this.initContainerInheritedState(inheritedState, inheritedStateInner);
+    initInheritedState: function (inheritedState, inheritedStateInner) {
+      this.callParent([inheritedState, inheritedStateInner]);
+      this.initContainerInheritedState(inheritedState, inheritedStateInner);
     },
 
-    onAdded: function(parent, instanced) {
-        var me = this,
-            modal;
+    onAdded: function (parent, instanced) {
+      var me = this,
+        modal;
 
-        me.callParent([parent, instanced]);
+      me.callParent([parent, instanced]);
 
-        me.containerOnAdded(parent, instanced);
+      me.containerOnAdded(parent, instanced);
 
-        modal = me.getModal();
+      modal = me.getModal();
+      if (modal) {
+        parent.insertBefore(modal, me);
+        modal.setZIndex(me.getZIndex() - 1);
+      }
+    },
+
+    onRemoved: function (destroying) {
+      this.containerOnRemoved(destroying);
+      this.callParent([destroying]);
+    },
+
+    applyModal: function (modal, currentModal) {
+      var isVisible = true;
+
+      if (modal === false) {
+        modal = true;
+        isVisible = false;
+      }
+
+      currentModal = Ext.factory(modal, Ext.Mask, currentModal);
+
+      if (currentModal) {
+        currentModal.setVisibility(isVisible);
+      }
+
+      return currentModal;
+    },
+
+    updateModal: function (modal) {
+      var container = this.getParent();
+
+      if (container) {
         if (modal) {
-            parent.insertBefore(modal, me);
-            modal.setZIndex(me.getZIndex() - 1);
+          container.insertBefore(modal, this);
+          modal.setZIndex(this.getZIndex() - 1);
+        } else {
+          container.remove(modal);
         }
+      }
     },
 
-    onRemoved: function(destroying) {
-        this.containerOnRemoved(destroying);
-        this.callParent([destroying]);
+    updateHideOnMaskTap: function (hide) {
+      var mask = this.getModal();
+
+      if (mask) {
+        mask[hide ? "on" : "un"].call(mask, "tap", "hide", this);
+      }
     },
 
-    applyModal: function(modal, currentModal) {
-        var isVisible = true;
+    updateZIndex: function (zIndex) {
+      var modal = this.getModal();
 
-        if (modal === false) {
-            modal = true;
-            isVisible = false;
-        }
+      this.callParent(arguments);
 
-        currentModal = Ext.factory(modal, Ext.Mask, currentModal);
-
-        if (currentModal) {
-            currentModal.setVisibility(isVisible);
-        }
-
-        return currentModal;
+      if (modal) {
+        modal.setZIndex(zIndex - 1);
+      }
     },
 
-    updateModal: function(modal) {
-        var container = this.getParent();
+    updateBaseCls: function (newBaseCls, oldBaseCls) {
+      var me = this,
+        element = me.element,
+        ui = me.getUi();
 
-        if (container) {
-            if (modal) {
-                container.insertBefore(modal, this);
-                modal.setZIndex(this.getZIndex() - 1);
-            }
-            else {
-                container.remove(modal);
-            }
+      if (oldBaseCls) {
+        element.removeCls(oldBaseCls);
+        me.innerElement.removeCls(newBaseCls, null, "inner");
+
+        if (ui) {
+          element.removeCls(me.currentUi);
         }
+      }
+
+      if (newBaseCls) {
+        element.addCls(newBaseCls);
+        me.innerElement.addCls(newBaseCls, null, "inner");
+
+        if (ui) {
+          element.addCls(newBaseCls, null, ui);
+          me.currentUi = newBaseCls + "-" + ui;
+        }
+      }
     },
 
-    updateHideOnMaskTap : function(hide) {
-        var mask = this.getModal();
-
-        if (mask) {
-            mask[hide ? 'on' : 'un'].call(mask, 'tap', 'hide', this);
-        }
-    },
-
-    updateZIndex: function(zIndex) {
-        var modal = this.getModal();
-
-        this.callParent(arguments);
-
-        if (modal) {
-            modal.setZIndex(zIndex - 1);
-        }
-    },
-
-    updateBaseCls: function(newBaseCls, oldBaseCls) {
+    applyItems: function (items, collection) {
+      if (items) {
         var me = this,
-            element = me.element,
-            ui = me.getUi();
+          activeItem;
 
-        if (oldBaseCls) {
-            element.removeCls(oldBaseCls);
-            me.innerElement.removeCls(newBaseCls, null, 'inner');
+        me.getDefaultType();
+        me.getDefaults();
 
-            if (ui) {
-                element.removeCls(me.currentUi);
-            }
+        if (me.initialized && collection.length > 0) {
+          me.removeAll();
         }
 
-        if (newBaseCls) {
-            element.addCls(newBaseCls);
-            me.innerElement.addCls(newBaseCls, null, 'inner');
+        me.add(items);
 
-            if (ui) {
-                element.addCls(newBaseCls, null, ui);
-                me.currentUi = newBaseCls + '-' + ui;
-            }
+        //Don't need to call setActiveItem when Container is first initialized
+        if (me.initialized) {
+          activeItem = me.initialConfig.activeItem || me.config.activeItem || 0;
+
+          me.setActiveItem(activeItem);
         }
-    },
-
-    applyItems: function(items, collection) {
-        if (items) {
-            var me = this,
-                activeItem;
-
-            me.getDefaultType();
-            me.getDefaults();
-
-            if (me.initialized && collection.length > 0) {
-                me.removeAll();
-            }
-
-            me.add(items);
-
-            //Don't need to call setActiveItem when Container is first initialized
-            if (me.initialized) {
-                activeItem = me.initialConfig.activeItem || me.config.activeItem || 0;
-
-                me.setActiveItem(activeItem);
-            }
-        }
+      }
     },
 
     /**
      * @private
      */
-     applyControl: function(selectors) {
-         var selector, key, listener, listeners;
+    applyControl: function (selectors) {
+      var selector, key, listener, listeners;
 
-         for (selector in selectors) {
-             listeners = selectors[selector];
+      for (selector in selectors) {
+        listeners = selectors[selector];
 
-             for (key in listeners) {
-                 listener = listeners[key];
+        for (key in listeners) {
+          listener = listeners[key];
 
-                 if (Ext.isObject(listener)) {
-                     listener.delegate = selector;
-                 }
-             }
+          if (Ext.isObject(listener)) {
+            listener.delegate = selector;
+          }
+        }
 
-             listeners.delegate = selector;
+        listeners.delegate = selector;
 
-             this.addListener(listeners);
-         }
+        this.addListener(listeners);
+      }
 
-         return selectors;
-     },
+      return selectors;
+    },
 
     /**
      * Initialize layout and event listeners the very first time an item is added
      * @private
      */
-    onFirstItemAdd: function() {
-        var me = this;
-        
-        delete me.onItemAdd;
+    onFirstItemAdd: function () {
+      var me = this;
 
-        if (me.innerHtmlElement && !me.getHtml()) {
-            me.innerHtmlElement.destroy();
-            delete me.innerHtmlElement;
-        }
+      delete me.onItemAdd;
 
-        me.on('innerstatechange', 'onItemInnerStateChange', me, {
-            delegate: '> component'
-        });
+      if (me.innerHtmlElement && !me.getHtml()) {
+        me.innerHtmlElement.destroy();
+        delete me.innerHtmlElement;
+      }
 
-        return me.onItemAdd.apply(me, arguments);
+      me.on("innerstatechange", "onItemInnerStateChange", me, {
+        delegate: "> component",
+      });
+
+      return me.onItemAdd.apply(me, arguments);
     },
 
     //<debug>
-    updateLayout: function(newLayout, oldLayout) {
-        if (oldLayout && oldLayout.isLayout) {
-            Ext.Logger.error('Replacing a layout after one has already been initialized is not currently supported.');
-        }
+    updateLayout: function (newLayout, oldLayout) {
+      if (oldLayout && oldLayout.isLayout) {
+        Ext.Logger.error(
+          "Replacing a layout after one has already been initialized is not currently supported.",
+        );
+      }
     },
     //</debug>
 
-    getLayout: function() {
-        var layout = this.layout;
-        if (!(layout && layout.isLayout)) {
-            layout = this.link('_layout', this.link('layout', Ext.factory(this._layout || 'default', Ext.layout.Default, null, 'layout')));
-            layout.setContainer(this);
-        }
+    getLayout: function () {
+      var layout = this.layout;
+      if (!(layout && layout.isLayout)) {
+        layout = this.link(
+          "_layout",
+          this.link(
+            "layout",
+            Ext.factory(
+              this._layout || "default",
+              Ext.layout.Default,
+              null,
+              "layout",
+            ),
+          ),
+        );
+        layout.setContainer(this);
+      }
 
-        return layout;
+      return layout;
     },
 
-    updateDefaultType: function(defaultType) {
-        // Cache the direct reference to the default item class here for performance
-        this.defaultItemClass = Ext.ClassManager.getByAlias('widget.' + defaultType);
+    updateDefaultType: function (defaultType) {
+      // Cache the direct reference to the default item class here for performance
+      this.defaultItemClass = Ext.ClassManager.getByAlias(
+        "widget." + defaultType,
+      );
 
-        //<debug>
-        if (!this.defaultItemClass) {
-            Ext.Logger.error("Invalid defaultType of: '" + defaultType + "', must be a valid component xtype");
-        }
-        //</debug>
+      //<debug>
+      if (!this.defaultItemClass) {
+        Ext.Logger.error(
+          "Invalid defaultType of: '" +
+            defaultType +
+            "', must be a valid component xtype",
+        );
+      }
+      //</debug>
     },
 
-    applyDefaults: function(defaults) {
-        if (defaults) {
-            this.factoryItem = this.factoryItemWithDefaults;
-            return defaults;
-        }
+    applyDefaults: function (defaults) {
+      if (defaults) {
+        this.factoryItem = this.factoryItemWithDefaults;
+        return defaults;
+      }
     },
 
-    factoryItem: function(item) {
-        //<debug>
-        if (!item) {
-            Ext.Logger.error("Invalid item given: " + item + ", must be either the config object to factory a new item, " +
-                "or an existing component instance");
-        }
-        //</debug>
+    factoryItem: function (item) {
+      //<debug>
+      if (!item) {
+        Ext.Logger.error(
+          "Invalid item given: " +
+            item +
+            ", must be either the config object to factory a new item, " +
+            "or an existing component instance",
+        );
+      }
+      //</debug>
 
-        var me = this;
-        // This forces default type to be resolved prior to any other configs that may be using it to create children
-        if (!me.$hasCachedDefaultItemClass) {
-            me.getDefaultType();
-            me.$hasCachedDefaultItemClass = true;
-        }
+      var me = this;
+      // This forces default type to be resolved prior to any other configs that may be using it to create children
+      if (!me.$hasCachedDefaultItemClass) {
+        me.getDefaultType();
+        me.$hasCachedDefaultItemClass = true;
+      }
+      return Ext.factory(item, me.defaultItemClass);
+    },
+
+    factoryItemWithDefaults: function (item) {
+      //<debug>
+      if (!item) {
+        Ext.Logger.error(
+          "Invalid item given: " +
+            item +
+            ", must be either the config object to factory a new item, " +
+            "or an existing component instance",
+        );
+      }
+      //</debug>
+
+      var me = this,
+        defaults = me.getDefaults(),
+        instance;
+
+      if (!defaults) {
         return Ext.factory(item, me.defaultItemClass);
-    },
+      }
 
-    factoryItemWithDefaults: function(item) {
-        //<debug>
-        if (!item) {
-            Ext.Logger.error("Invalid item given: " + item + ", must be either the config object to factory a new item, " +
-                "or an existing component instance");
+      // Existing instance
+      if (item.isComponent) {
+        instance = item;
+
+        // Apply defaults only if this is not already an item of this container
+        if (defaults && item.isInnerItem() && !me.has(instance)) {
+          instance.setConfig(defaults, true);
         }
-        //</debug>
-
-        var me = this,
-            defaults = me.getDefaults(),
-            instance;
-
-        if (!defaults) {
-            return Ext.factory(item, me.defaultItemClass);
-        }
-
-        // Existing instance
-        if (item.isComponent) {
-            instance = item;
-
-            // Apply defaults only if this is not already an item of this container
-            if (defaults && item.isInnerItem() && !me.has(instance)) {
-                instance.setConfig(defaults, true);
-            }
-        }
-        // Config object
-        else {
-            if (defaults && !item.ignoreDefaults) {
-                // Note:
-                // - defaults is only applied to inner items
-                // - we merge the given config together with defaults into a new object so that the original object stays intact
-                if (!(
-                        item.hasOwnProperty('left') &&
-                        item.hasOwnProperty('right') &&
-                        item.hasOwnProperty('top') &&
-                        item.hasOwnProperty('bottom') &&
-                        item.hasOwnProperty('docked') &&
-                        item.hasOwnProperty('centered')
-                    )) {
-                    item = Ext.mergeIf({}, item, defaults);
-                }
-            }
-
-            instance = Ext.factory(item, me.defaultItemClass);
+      }
+      // Config object
+      else {
+        if (defaults && !item.ignoreDefaults) {
+          // Note:
+          // - defaults is only applied to inner items
+          // - we merge the given config together with defaults into a new object so that the original object stays intact
+          if (
+            !(
+              item.hasOwnProperty("left") &&
+              item.hasOwnProperty("right") &&
+              item.hasOwnProperty("top") &&
+              item.hasOwnProperty("bottom") &&
+              item.hasOwnProperty("docked") &&
+              item.hasOwnProperty("centered")
+            )
+          ) {
+            item = Ext.mergeIf({}, item, defaults);
+          }
         }
 
-        return instance;
+        instance = Ext.factory(item, me.defaultItemClass);
+      }
+
+      return instance;
     },
 
     /**
@@ -681,41 +705,50 @@ Ext.define('Ext.Container', {
      *
      * @return {Ext.Component/Ext.Component[]} The Component(s) that were added.
      */
-    add: function(newItems) {
-        var me = this,
-            addingArray = true,
-            addedItems = [],
-            i, ln, item, newActiveItem, instanced;
-        
-        if (!Ext.isArray(newItems)) {
-            newItems = [newItems];
-            addingArray = false;
+    add: function (newItems) {
+      var me = this,
+        addingArray = true,
+        addedItems = [],
+        i,
+        ln,
+        item,
+        newActiveItem,
+        instanced;
+
+      if (!Ext.isArray(newItems)) {
+        newItems = [newItems];
+        addingArray = false;
+      }
+
+      for (i = 0, ln = newItems.length; i < ln; i++) {
+        item = newItems[i];
+        instanced = item.isWidget;
+
+        if (!instanced) {
+          item.$initParent = me;
         }
 
-        for (i = 0, ln = newItems.length; i < ln; i++) {
-            item = newItems[i];
-            instanced = item.isWidget;
-            
-            if (!instanced) {
-                item.$initParent = me;
-            }
-            
-            item = me.factoryItem(item);
-            me.doAdd(item, instanced);
-            delete item.$initParent;
-            
-            if (!newActiveItem && !me.getActiveItem() && me.innerItems.length > 0 && item.isInnerItem()) {
-                newActiveItem = item;
-            }
-            
-            addedItems.push(item);
+        item = me.factoryItem(item);
+        me.doAdd(item, instanced);
+        delete item.$initParent;
+
+        if (
+          !newActiveItem &&
+          !me.getActiveItem() &&
+          me.innerItems.length > 0 &&
+          item.isInnerItem()
+        ) {
+          newActiveItem = item;
         }
 
-        if (newActiveItem) {
-            me.setActiveItem(newActiveItem);
-        }
+        addedItems.push(item);
+      }
 
-        return addingArray ? addedItems : addedItems[0];
+      if (newActiveItem) {
+        me.setActiveItem(newActiveItem);
+      }
+
+      return addingArray ? addedItems : addedItems[0];
     },
 
     /**
@@ -724,23 +757,23 @@ Ext.define('Ext.Container', {
      * @param {Boolean} instanced
      * when received.
      */
-    doAdd: function(item, instanced) {
-        var me = this,
-            items = me.getItems(),
-            index;
+    doAdd: function (item, instanced) {
+      var me = this,
+        items = me.getItems(),
+        index;
 
-        if (!items.has(item)) {
-            index = items.length;
-            items.add(item);
+      if (!items.has(item)) {
+        index = items.length;
+        items.add(item);
 
-            if (item.isInnerItem()) {
-                me.insertInner(item);
-            }
-
-            item.onAdded(me, !!instanced);
-
-            me.onItemAdd(item, index);
+        if (item.isInnerItem()) {
+          me.insertInner(item);
         }
+
+        item.onAdded(me, !!instanced);
+
+        me.onItemAdd(item, index);
+      }
     },
 
     /**
@@ -751,67 +784,70 @@ Ext.define('Ext.Container', {
      *
      * @return {Ext.Component} The Component that was removed.
      */
-    remove: function(item, destroy) {
-        var me = this,
-            index, innerItems;
-        
-        item = me.getComponent(item);
-        
-        index = me.indexOf(item);
-        innerItems = me.getInnerItems();
+    remove: function (item, destroy) {
+      var me = this,
+        index,
+        innerItems;
 
-        if (destroy === undefined) {
-            destroy = me.getAutoDestroy();
+      item = me.getComponent(item);
+
+      index = me.indexOf(item);
+      innerItems = me.getInnerItems();
+
+      if (destroy === undefined) {
+        destroy = me.getAutoDestroy();
+      }
+
+      if (index !== -1) {
+        if (
+          !me.removingAll &&
+          innerItems.length > 1 &&
+          item === me.getActiveItem()
+        ) {
+          me.on({
+            activeitemchange: "doRemove",
+            scope: me,
+            single: true,
+            order: "after",
+            args: [item, index, destroy],
+          });
+
+          me.doResetActiveItem(innerItems.indexOf(item));
+        } else {
+          me.doRemove(item, index, destroy);
+          if (innerItems.length === 0) {
+            me.setActiveItem(null);
+          }
         }
+      }
 
-        if (index !== -1) {
-            if (!me.removingAll && innerItems.length > 1 && item === me.getActiveItem()) {
-                me.on({
-                    activeitemchange: 'doRemove',
-                    scope: me,
-                    single: true,
-                    order: 'after',
-                    args: [item, index, destroy]
-                });
-
-                me.doResetActiveItem(innerItems.indexOf(item));
-            }
-            else {
-                me.doRemove(item, index, destroy);
-                if (innerItems.length === 0) {
-                    me.setActiveItem(null);
-                }
-            }
-        }
-
-        return item;
+      return item;
     },
 
-    doResetActiveItem: function(innerIndex) {
-        if (innerIndex === 0) {
-            this.setActiveItem(1);
-        }
-        else {
-            this.setActiveItem(0);
-        }
+    doResetActiveItem: function (innerIndex) {
+      if (innerIndex === 0) {
+        this.setActiveItem(1);
+      } else {
+        this.setActiveItem(0);
+      }
     },
 
-    doRemove: function(item, index, destroy) {
-        var me = this;
+    doRemove: function (item, index, destroy) {
+      var me = this;
 
-        me.items.remove(item);
+      me.items.remove(item);
 
-        if (item.isInnerItem()) {
-            me.removeInner(item);
-        }
+      if (item.isInnerItem()) {
+        me.removeInner(item);
+      }
 
-        me.onItemRemove(item, index, destroy);
+      me.onItemRemove(item, index, destroy);
 
-        item.onRemoved(item.destroying || destroy);
+      item.onRemoved(item.destroying || destroy);
 
-        if (destroy) {
-            item.destroy();
-        }
+      if (destroy) {
+        item.destroy();
+      }
     },
 
     /**
@@ -824,38 +860,38 @@ Ext.define('Ext.Container', {
      *
      * @return {Ext.Component[]} Array of the removed Components
      */
-    removeAll: function(destroy, everything) {
-        var items = this.items,
-            removed = [],
-            ln = items.length,
-            i = 0,
-            item;
+    removeAll: function (destroy, everything) {
+      var items = this.items,
+        removed = [],
+        ln = items.length,
+        i = 0,
+        item;
 
-        if (typeof destroy != 'boolean') {
-            destroy = this.getAutoDestroy();
+      if (typeof destroy != "boolean") {
+        destroy = this.getAutoDestroy();
+      }
+
+      everything = Boolean(everything);
+
+      // removingAll flag is used so we don't unnecessarily change activeItem while removing all items.
+      this.removingAll = true;
+
+      for (; i < ln; i++) {
+        item = items.getAt(i);
+
+        if (item && (everything || item.isInnerItem())) {
+          this.doRemove(item, i, destroy);
+          i--;
+          ln--;
         }
 
-        everything = Boolean(everything);
+        removed.push(item);
+      }
+      this.setActiveItem(null);
 
-        // removingAll flag is used so we don't unnecessarily change activeItem while removing all items.
-        this.removingAll = true;
+      this.removingAll = false;
 
-        for (; i < ln; i++) {
-            item = items.getAt(i);
-
-            if (item && (everything || item.isInnerItem())) {
-                this.doRemove(item, i, destroy);
-                i--;
-                ln--;
-            }
-            
-            removed.push(item);
-        }
-        this.setActiveItem(null);
-
-        this.removingAll = false;
-
-        return removed;
+      return removed;
     },
 
     /**
@@ -863,12 +899,12 @@ Ext.define('Ext.Container', {
      * @param {Number} index The index of the Component to return.
      * @return {Ext.Component} The item at the specified `index`, if found.
      */
-    getAt: function(index) {
-        return this.items.getAt(index);
+    getAt: function (index) {
+      return this.items.getAt(index);
     },
 
-    getInnerAt: function(index) {
-        return this.innerItems[index];
+    getInnerAt: function (index) {
+      return this.innerItems[index];
     },
 
     /**
@@ -880,14 +916,14 @@ Ext.define('Ext.Container', {
      *
      * @return {Ext.Component} The removed Component
      */
-    removeAt: function(index) {
-        var item = this.getAt(index);
+    removeAt: function (index) {
+      var item = this.getAt(index);
 
-        if (item) {
-            this.remove(item);
-        }
+      if (item) {
+        this.remove(item);
+      }
 
-        return item;
+      return item;
     },
 
     /**
@@ -897,39 +933,39 @@ Ext.define('Ext.Container', {
      *
      * @param {Number} index The index of the Component to remove.
      */
-    removeInnerAt: function(index) {
-        var item = this.getInnerItems()[index];
+    removeInnerAt: function (index) {
+      var item = this.getInnerItems()[index];
 
-        if (item) {
-            this.remove(item);
-        }
+      if (item) {
+        this.remove(item);
+      }
 
-        return item;
+      return item;
     },
 
     /**
      * @private
      */
-    has: function(item) {
-        return this.getItems().indexOf(item) != -1;
+    has: function (item) {
+      return this.getItems().indexOf(item) != -1;
     },
 
     /**
      * @private
      */
-    hasInnerItem: function(item) {
-        return this.innerItems.indexOf(item) != -1;
+    hasInnerItem: function (item) {
+      return this.innerItems.indexOf(item) != -1;
     },
 
     /**
      * @private
      */
-    indexOf: function(item) {
-        return this.getItems().indexOf(item);
+    indexOf: function (item) {
+      return this.getItems().indexOf(item);
     },
 
-    innerIndexOf: function(item) {
-        return this.innerItems.indexOf(item);
+    innerIndexOf: function (item) {
+      return this.innerItems.indexOf(item);
     },
 
     /**
@@ -937,38 +973,38 @@ Ext.define('Ext.Container', {
      * @param {Ext.Component} item
      * @param {Number} index
      */
-    insertInner: function(item, index) {
-        var items = this.getItems().items,
-            innerItems = this.innerItems,
-            currentInnerIndex = innerItems.indexOf(item),
-            newInnerIndex = -1,
-            nextSibling;
+    insertInner: function (item, index) {
+      var items = this.getItems().items,
+        innerItems = this.innerItems,
+        currentInnerIndex = innerItems.indexOf(item),
+        newInnerIndex = -1,
+        nextSibling;
 
-        if (currentInnerIndex !== -1) {
-            innerItems.splice(currentInnerIndex, 1);
+      if (currentInnerIndex !== -1) {
+        innerItems.splice(currentInnerIndex, 1);
+      }
+
+      if (typeof index == "number") {
+        do {
+          nextSibling = items[++index];
+        } while (nextSibling && !nextSibling.isInnerItem());
+
+        if (nextSibling) {
+          newInnerIndex = innerItems.indexOf(nextSibling);
+          innerItems.splice(newInnerIndex, 0, item);
         }
+      }
 
-        if (typeof index == 'number') {
-            do {
-                nextSibling = items[++index];
-            } while (nextSibling && !nextSibling.isInnerItem());
+      if (newInnerIndex === -1) {
+        innerItems.push(item);
+        newInnerIndex = innerItems.length - 1;
+      }
 
-            if (nextSibling) {
-                newInnerIndex = innerItems.indexOf(nextSibling);
-                innerItems.splice(newInnerIndex, 0, item);
-            }
-        }
+      if (currentInnerIndex !== -1) {
+        this.onInnerItemMove(item, newInnerIndex, currentInnerIndex);
+      }
 
-        if (newInnerIndex === -1) {
-            innerItems.push(item);
-            newInnerIndex = innerItems.length - 1;
-        }
-
-        if (currentInnerIndex !== -1) {
-            this.onInnerItemMove(item, newInnerIndex, currentInnerIndex);
-        }
-
-        return this;
+      return this;
     },
 
     onInnerItemMove: Ext.emptyFn,
@@ -977,10 +1013,10 @@ Ext.define('Ext.Container', {
      * @private
      * @param {Ext.Component} item
      */
-    removeInner: function(item) {
-        Ext.Array.remove(this.innerItems, item);
+    removeInner: function (item) {
+      Ext.Array.remove(this.innerItems, item);
 
-        return this;
+      return this;
     },
 
     /**
@@ -992,34 +1028,36 @@ Ext.define('Ext.Container', {
      * @param {Number} index The index to insert the Component at.
      * @param {Object} item The Component to insert.
      */
-    insert: function(index, item) {
-        var me = this,
-            instanced,
-            i;
+    insert: function (index, item) {
+      var me = this,
+        instanced,
+        i;
 
-        //<debug>
-        if (typeof index != 'number') {
-            Ext.Logger.error("Invalid index of '" + index + "', must be a valid number");
+      //<debug>
+      if (typeof index != "number") {
+        Ext.Logger.error(
+          "Invalid index of '" + index + "', must be a valid number",
+        );
+      }
+      //</debug>
+
+      if (Ext.isArray(item)) {
+        for (i = item.length - 1; i >= 0; i--) {
+          me.insert(index, item[i]);
         }
-        //</debug>
 
-        if (Ext.isArray(item)) {
-            for (i = item.length - 1; i >= 0; i--) {
-                me.insert(index, item[i]);
-            }
+        return me;
+      }
 
-            return me;
-        }
+      instanced = item.isWidget;
+      if (!instanced) {
+        item.$initParent = me;
+      }
+      item = me.factoryItem(item);
+      me.doInsert(index, item, instanced);
+      delete item.$initParent;
 
-        instanced = item.isWidget;
-        if (!instanced) {
-            item.$initParent = me;
-        }
-        item = me.factoryItem(item);
-        me.doInsert(index, item, instanced);
-        delete item.$initParent;
-
-        return item;
+      return item;
     },
 
     /**
@@ -1028,173 +1066,184 @@ Ext.define('Ext.Container', {
      * @param {Ext.Component} item
      * @param {Boolean} instanced
      */
-    doInsert: function(index, item, instanced) {
-        var me = this,
-            items = me.items,
-            itemsLength = items.length,
-            currentIndex, isInnerItem;
+    doInsert: function (index, item, instanced) {
+      var me = this,
+        items = me.items,
+        itemsLength = items.length,
+        currentIndex,
+        isInnerItem;
 
-        isInnerItem = item.isInnerItem();
+      isInnerItem = item.isInnerItem();
 
-        if (index > itemsLength) {
-            index = itemsLength;
-        }
+      if (index > itemsLength) {
+        index = itemsLength;
+      }
 
-        if (items[index - 1] === item) {
-            return me;
-        }
+      if (items[index - 1] === item) {
+        return me;
+      }
 
-        currentIndex = me.indexOf(item);
+      currentIndex = me.indexOf(item);
 
-        if (currentIndex !== -1) {
-            items.removeAt(currentIndex);
-        }
+      if (currentIndex !== -1) {
+        items.removeAt(currentIndex);
+      }
 
-        items.insert(index, item);
+      items.insert(index, item);
 
-        if (currentIndex === -1) {
-            item.onAdded(me, !!instanced);
-        }
+      if (currentIndex === -1) {
+        item.onAdded(me, !!instanced);
+      }
 
-        if (isInnerItem) {
-            me.insertInner(item, index);
-        }
+      if (isInnerItem) {
+        me.insertInner(item, index);
+      }
 
-        if (currentIndex !== -1) {
-            me.onItemMove(item, index, currentIndex);
-        } else {
-            me.onItemAdd(item, index);
-        }
+      if (currentIndex !== -1) {
+        me.onItemMove(item, index, currentIndex);
+      } else {
+        me.onItemAdd(item, index);
+      }
     },
 
     /**
      * @private
      */
-    insertFirst: function(item) {
-        return this.insert(0, item);
+    insertFirst: function (item) {
+      return this.insert(0, item);
     },
 
     /**
      * @private
      */
-    insertLast: function(item) {
-        return this.insert(this.getItems().length, item);
+    insertLast: function (item) {
+      return this.insert(this.getItems().length, item);
     },
 
     /**
      * @private
      */
-    insertBefore: function(item, relativeToItem) {
-        var index = this.indexOf(relativeToItem);
+    insertBefore: function (item, relativeToItem) {
+      var index = this.indexOf(relativeToItem);
 
-        if (index !== -1) {
-            this.insert(index, item);
-        }
-        return this;
+      if (index !== -1) {
+        this.insert(index, item);
+      }
+      return this;
     },
 
     /**
      * @private
      */
-    insertAfter: function(item, relativeToItem) {
-        var index = this.indexOf(relativeToItem);
+    insertAfter: function (item, relativeToItem) {
+      var index = this.indexOf(relativeToItem);
 
-        if (index !== -1) {
-            this.insert(index + 1, item);
-        }
-        return this;
+      if (index !== -1) {
+        this.insert(index + 1, item);
+      }
+      return this;
     },
 
     /**
      * @private
      */
-    onItemAdd: function(item, index) {
-        var me = this;
+    onItemAdd: function (item, index) {
+      var me = this;
 
-        me.doItemLayoutAdd(item, index);
+      me.doItemLayoutAdd(item, index);
 
-        if (me.initialized) {
-            if (item.hasListeners.added) {
-                item.fireEvent('added', item, me, index);
-            }
-            if (me.hasListeners.add) {
-                me.fireEvent('add', me, item, index);
-            }
+      if (me.initialized) {
+        if (item.hasListeners.added) {
+          item.fireEvent("added", item, me, index);
         }
+        if (me.hasListeners.add) {
+          me.fireEvent("add", me, item, index);
+        }
+      }
     },
 
-    doItemLayoutAdd: function(item, index) {
-        var layout = this.getLayout();
+    doItemLayoutAdd: function (item, index) {
+      var layout = this.getLayout();
 
-        if (this.isRendered() && item.setRendered(true)) {
-            item.fireAction('renderedchange', [this, item, true], 'onItemAdd', layout, { args: [item, index] });
-        } else {
-            layout.onItemAdd(item, index);
-        }
-    },
-
-    /**
-     * @private
-     */
-    onItemRemove: function(item, index, destroying) {
-        var me = this;
-
-        me.doItemLayoutRemove(item, index, destroying);
-
-        if (item.hasListeners.removed) {
-            item.fireEvent('removed', item, me, index);
-        }
-        if (me.hasListeners.remove) {
-            me.fireEvent('remove', me, item, index);
-        }
-    },
-
-    doItemLayoutRemove: function(item, index, destroying) {
-        var layout = this.getLayout();
-
-        if (this.isRendered() && item.setRendered(false)) {
-            item.fireAction('renderedchange', [this, item, false], 'onItemRemove', layout, { args: [item, index, destroying] });
-        }
-        else {
-            layout.onItemRemove(item, index, destroying);
-        }
+      if (this.isRendered() && item.setRendered(true)) {
+        item.fireAction(
+          "renderedchange",
+          [this, item, true],
+          "onItemAdd",
+          layout,
+          { args: [item, index] },
+        );
+      } else {
+        layout.onItemAdd(item, index);
+      }
     },
 
     /**
      * @private
      */
-    onItemMove: function(item, toIndex, fromIndex) {
-        var me = this;
+    onItemRemove: function (item, index, destroying) {
+      var me = this;
 
-        if (item.isDocked()) {
-            item.setDocked(null);
-        }
+      me.doItemLayoutRemove(item, index, destroying);
 
-        me.doItemLayoutMove(item, toIndex, fromIndex);
-
-        if (item.hasListeners.moved) {
-            item.fireEvent('moved', item, me, toIndex, fromIndex);
-        }
-        if (me.hasListeners.move) {
-            me.fireEvent('move', me, item, toIndex, fromIndex);
-        }
+      if (item.hasListeners.removed) {
+        item.fireEvent("removed", item, me, index);
+      }
+      if (me.hasListeners.remove) {
+        me.fireEvent("remove", me, item, index);
+      }
     },
 
-    doItemLayoutMove: function(item, toIndex, fromIndex) {
-        this.getLayout().onItemMove(item, toIndex, fromIndex);
+    doItemLayoutRemove: function (item, index, destroying) {
+      var layout = this.getLayout();
+
+      if (this.isRendered() && item.setRendered(false)) {
+        item.fireAction(
+          "renderedchange",
+          [this, item, false],
+          "onItemRemove",
+          layout,
+          { args: [item, index, destroying] },
+        );
+      } else {
+        layout.onItemRemove(item, index, destroying);
+      }
     },
 
-    onItemInnerStateChange: function(item, isInner) {
-        var layout = this.getLayout();
+    /**
+     * @private
+     */
+    onItemMove: function (item, toIndex, fromIndex) {
+      var me = this;
 
-        if (isInner) {
-            this.insertInner(item, this.items.indexOf(item));
-        }
-        else {
-            this.removeInner(item);
-        }
+      if (item.isDocked()) {
+        item.setDocked(null);
+      }
 
-        layout.onItemInnerStateChange.apply(layout, arguments);
+      me.doItemLayoutMove(item, toIndex, fromIndex);
+
+      if (item.hasListeners.moved) {
+        item.fireEvent("moved", item, me, toIndex, fromIndex);
+      }
+      if (me.hasListeners.move) {
+        me.fireEvent("move", me, item, toIndex, fromIndex);
+      }
+    },
+
+    doItemLayoutMove: function (item, toIndex, fromIndex) {
+      this.getLayout().onItemMove(item, toIndex, fromIndex);
+    },
+
+    onItemInnerStateChange: function (item, isInner) {
+      var layout = this.getLayout();
+
+      if (isInner) {
+        this.insertInner(item, this.items.indexOf(item));
+      } else {
+        this.removeInner(item);
+      }
+
+      layout.onItemInnerStateChange.apply(layout, arguments);
     },
 
     /**
@@ -1202,84 +1251,84 @@ Ext.define('Ext.Container', {
      * `floating`.
      * @return {Array} The inner items of this container.
      */
-    getInnerItems: function() {
-        return this.innerItems;
+    getInnerItems: function () {
+      return this.innerItems;
     },
 
     /**
      * Returns all the {@link Ext.Component#docked} items in this container.
      * @return {Array} The docked items of this container.
      */
-    getDockedItems: function() {
-        var items = this.getItems().items,
-            dockedItems = [],
-            ln = items.length,
-            item, i;
+    getDockedItems: function () {
+      var items = this.getItems().items,
+        dockedItems = [],
+        ln = items.length,
+        item,
+        i;
 
-        for (i = 0; i < ln; i++) {
-            item = items[i];
-            if (item.isDocked()) {
-                dockedItems.push(item);
-            }
+      for (i = 0; i < ln; i++) {
+        item = items[i];
+        if (item.isDocked()) {
+          dockedItems.push(item);
         }
+      }
 
-        return dockedItems;
+      return dockedItems;
     },
 
     /**
      * @private
      */
-    applyActiveItem: function(activeItem, currentActiveItem) {
-        var me = this,
-            innerItems = me.getInnerItems();
+    applyActiveItem: function (activeItem, currentActiveItem) {
+      var me = this,
+        innerItems = me.getInnerItems();
 
-        // Make sure the items are already initialized
-        me.getItems();
+      // Make sure the items are already initialized
+      me.getItems();
 
-        // No items left to be active, reset back to 0 on falsy changes
-        if (!activeItem && innerItems.length === 0) {
-            return 0;
-        } else if (typeof activeItem == 'number') {
-            activeItem = Math.max(0, Math.min(activeItem, innerItems.length - 1));
-            activeItem = innerItems[activeItem];
+      // No items left to be active, reset back to 0 on falsy changes
+      if (!activeItem && innerItems.length === 0) {
+        return 0;
+      } else if (typeof activeItem == "number") {
+        activeItem = Math.max(0, Math.min(activeItem, innerItems.length - 1));
+        activeItem = innerItems[activeItem];
 
-            if (activeItem) {
-                return activeItem;
-            }
-            else if (currentActiveItem) {
-                return null;
-            }
-        } else if (activeItem) {
-            var item;
-
-            //ComponentQuery selector?
-            if (typeof activeItem == 'string') {
-                item = me.child(activeItem);
-
-                activeItem = {
-                    xtype : activeItem
-                };
-            }
-
-            if (!item || !item.isComponent) {
-                activeItem.$initParent = me;
-                item = me.factoryItem(activeItem);
-            }
-            me.pendingActiveItem = item;
-
-            //<debug>
-            if (!item.isInnerItem()) {
-                Ext.Logger.error("Setting activeItem to be a non-inner item");
-            }
-            //</debug>
-
-            if (!me.has(item)) {
-                me.add(item);
-            }
-            delete item.$initParent;
-
-            return item;
+        if (activeItem) {
+          return activeItem;
+        } else if (currentActiveItem) {
+          return null;
         }
+      } else if (activeItem) {
+        var item;
+
+        //ComponentQuery selector?
+        if (typeof activeItem == "string") {
+          item = me.child(activeItem);
+
+          activeItem = {
+            xtype: activeItem,
+          };
+        }
+
+        if (!item || !item.isComponent) {
+          activeItem.$initParent = me;
+          item = me.factoryItem(activeItem);
+        }
+        me.pendingActiveItem = item;
+
+        //<debug>
+        if (!item.isInnerItem()) {
+          Ext.Logger.error("Setting activeItem to be a non-inner item");
+        }
+        //</debug>
+
+        if (!me.has(item)) {
+          me.add(item);
+        }
+        delete item.$initParent;
+
+        return item;
+      }
     },
 
     /**
@@ -1289,94 +1338,104 @@ Ext.define('Ext.Container', {
      * @param {Object/Number} activeItem The item or item index to make active.
      * @param {Object/Ext.fx.layout.Card} animation Card animation configuration or instance.
      */
-    animateActiveItem: function(activeItem, animation) {
-        var layout = this.getLayout(),
-            defaultAnimation;
+    animateActiveItem: function (activeItem, animation) {
+      var layout = this.getLayout(),
+        defaultAnimation;
 
-        if (this.activeItemAnimation) {
-            this.activeItemAnimation.destroy();
+      if (this.activeItemAnimation) {
+        this.activeItemAnimation.destroy();
+      }
+      this.activeItemAnimation = animation = new Ext.fx.layout.Card(animation);
+      if (animation && layout.isCard) {
+        animation.setLayout(layout);
+        defaultAnimation = layout.getAnimation();
+        if (defaultAnimation) {
+          defaultAnimation.disable();
         }
-        this.activeItemAnimation = animation = new Ext.fx.layout.Card(animation);
-        if (animation && layout.isCard) {
-            animation.setLayout(layout);
-            defaultAnimation = layout.getAnimation();
+        animation.on(
+          "animationend",
+          function () {
             if (defaultAnimation) {
-                defaultAnimation.disable();
+              defaultAnimation.enable();
             }
-            animation.on('animationend', function() {
-                if (defaultAnimation) {
-                    defaultAnimation.enable();
-                }
-                animation.destroy();
-            }, this);
-        }
-        return this.setActiveItem(activeItem);
+            animation.destroy();
+          },
+          this,
+        );
+      }
+      return this.setActiveItem(activeItem);
     },
 
     /**
      * @private
      */
-    updateActiveItem: function(newActiveItem, oldActiveItem) {
-        delete this.pendingActiveItem;
-        if (oldActiveItem) {
-            oldActiveItem.fireEvent('deactivate', oldActiveItem, this, newActiveItem);
-        }
+    updateActiveItem: function (newActiveItem, oldActiveItem) {
+      delete this.pendingActiveItem;
+      if (oldActiveItem) {
+        oldActiveItem.fireEvent(
+          "deactivate",
+          oldActiveItem,
+          this,
+          newActiveItem,
+        );
+      }
 
-        if (newActiveItem) {
-            newActiveItem.fireEvent('activate', newActiveItem, this, oldActiveItem);
-        }
+      if (newActiveItem) {
+        newActiveItem.fireEvent("activate", newActiveItem, this, oldActiveItem);
+      }
     },
 
-    show:function(){
-        this.callParent(arguments);
+    show: function () {
+      this.callParent(arguments);
 
-        var modal = this.getModal();
+      var modal = this.getModal();
 
-        if (modal) {
-            modal.setHidden(false);
-        }
+      if (modal) {
+        modal.setHidden(false);
+      }
 
-        return this;
+      return this;
     },
 
-    hide:function(){
-        this.callParent(arguments);
+    hide: function () {
+      this.callParent(arguments);
 
-        var modal = this.getModal();
+      var modal = this.getModal();
 
-        if (modal) {
-            modal.setHidden(true);
-        }
+      if (modal) {
+        modal.setHidden(true);
+      }
 
-        return this;
+      return this;
     },
 
-    updateHidden: function(hidden) {
-        var modal = this.getModal();
+    updateHidden: function (hidden) {
+      var modal = this.getModal();
 
-        if (modal && (modal.getHidden() !== hidden)) {
-            modal.setHidden(hidden);
-        }
+      if (modal && modal.getHidden() !== hidden) {
+        modal.setHidden(hidden);
+      }
 
-        this.callParent(arguments);
+      this.callParent(arguments);
     },
 
     /**
      * @private
      */
-    setRendered: function(rendered) {
-        if (this.callParent(arguments)) {
-            var items = this.items.items,
-                i, ln;
+    setRendered: function (rendered) {
+      if (this.callParent(arguments)) {
+        var items = this.items.items,
+          i,
+          ln;
 
-            for (i = 0,ln = items.length; i < ln; i++) {
-                items[i].setRendered(rendered);
-            }
-
-            return true;
+        for (i = 0, ln = items.length; i < ln; i++) {
+          items[i].setRendered(rendered);
         }
 
-        return false;
+        return true;
+      }
+
+      return false;
     },
 
     /**
@@ -1386,22 +1445,23 @@ Ext.define('Ext.Container', {
      * This should be overridden by components which have child items
      * that are not contained in items. For example `dockedItems`, `menu`, etc
      */
-    getRefItems: function(deep) {
-        var items = this.getItems().items.slice(),
-            ln = items.length,
-            i, item;
+    getRefItems: function (deep) {
+      var items = this.getItems().items.slice(),
+        ln = items.length,
+        i,
+        item;
 
-        if (deep) {
-            for (i = 0; i < ln; i++) {
-                item = items[i];
+      if (deep) {
+        for (i = 0; i < ln; i++) {
+          item = items[i];
 
-                if (item.getRefItems) {
-                    items = items.concat(item.getRefItems(true));
-                }
-            }
+          if (item.getRefItems) {
+            items = items.concat(item.getRefItems(true));
+          }
         }
+      }
 
-        return items;
+      return items;
     },
 
     /**
@@ -1417,16 +1477,16 @@ Ext.define('Ext.Container', {
      * For additional information see {@link Ext.util.MixedCollection#get}.
      * @return {Ext.Component} The component (if found).
      */
-    getComponent: function(component) {
-        if (typeof component === 'number') {
-            return this.getItems().getAt(component);
-        }
-        
-        if (Ext.isObject(component)) {
-            component = component.getItemId();
-        }
+    getComponent: function (component) {
+      if (typeof component === "number") {
+        return this.getItems().getAt(component);
+      }
 
-        return this.getItems().get(component);
+      if (Ext.isObject(component)) {
+        component = component.getItemId();
+      }
+
+      return this.getItems().get(component);
     },
 
     /**
@@ -1435,55 +1495,55 @@ Ext.define('Ext.Container', {
      * @param {String/Number} component The `id` or `index` of the component to find.
      * @return {Ext.Component/Boolean} The docked component, if found.
      */
-    getDockedComponent: function(component) {
-        if (Ext.isObject(component)) {
-            component = component.getItemId();
+    getDockedComponent: function (component) {
+      if (Ext.isObject(component)) {
+        component = component.getItemId();
+      }
+
+      var dockedItems = this.getDockedItems(),
+        ln = dockedItems.length,
+        item,
+        i;
+
+      if (Ext.isNumber(component)) {
+        return dockedItems[component];
+      }
+
+      for (i = 0; i < ln; i++) {
+        item = dockedItems[i];
+        if (item.id == component) {
+          return item;
         }
+      }
 
-        var dockedItems = this.getDockedItems(),
-            ln = dockedItems.length,
-            item, i;
-
-        if (Ext.isNumber(component)) {
-            return dockedItems[component];
-        }
-
-        for (i = 0; i < ln; i++) {
-            item = dockedItems[i];
-            if (item.id == component) {
-                return item;
-            }
-        }
-
-        return false;
+      return false;
     },
 
-    destroy: function() {
-        var me = this,
-            modal = me.getModal();
+    destroy: function () {
+      var me = this,
+        modal = me.getModal();
 
-        if (modal) {
-            modal.destroy();
-        }
+      if (modal) {
+        modal.destroy();
+      }
 
-        me.removeAll(true, true);
+      me.removeAll(true, true);
 
-        me.callParent();
-        
-        Ext.destroy(me.items);
-        
-        me.items = null;
+      me.callParent();
+
+      Ext.destroy(me.items);
+
+      me.items = null;
     },
 
     privates: {
-        applyReference: function (reference) {
-          // Need to call like this because applyReference from container comes via a mixin
-            return this.setupReference(reference);
-        }
-    }
-
-}, function() {
+      applyReference: function (reference) {
+        // Need to call like this because applyReference from container comes via a mixin
+        return this.setupReference(reference);
+      },
+    },
+  },
+  function () {
     this.prototype.defaultItemClass = this;
-});
-
-
+  },
+);

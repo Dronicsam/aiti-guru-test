@@ -54,7 +54,9 @@ $messagebox-glyph-font-size: dynamic($messagebox-icon-size);
  * @var {string/list}
  * Glyph for the "info" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$messagebox-info-glyph: dynamic($fa-var-info-circle $messagebox-glyph-font-size $font-icon-font-family);
+$messagebox-info-glyph: dynamic(
+  $fa-var-info-circle $messagebox-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -66,7 +68,10 @@ $messagebox-info-glyph-color: dynamic(#808080);
  * @var {string/list}
  * Glyph for the "warning" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$messagebox-warning-glyph: dynamic($fa-var-exclamation-triangle $messagebox-glyph-font-size $font-icon-font-family);
+$messagebox-warning-glyph: dynamic(
+  $fa-var-exclamation-triangle $messagebox-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -78,7 +83,9 @@ $messagebox-warning-glyph-color: dynamic(#f8d400);
  * @var {string/list}
  * Glyph for the "question" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$messagebox-question-glyph: dynamic($fa-var-question-circle $messagebox-glyph-font-size $font-icon-font-family);
+$messagebox-question-glyph: dynamic(
+  $fa-var-question-circle $messagebox-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}
@@ -90,7 +97,9 @@ $messagebox-question-glyph-color: dynamic(#808080);
  * @var {string/list}
  * Glyph for the "error" icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$messagebox-error-glyph: dynamic($fa-var-times-circle $messagebox-glyph-font-size $font-icon-font-family);
+$messagebox-error-glyph: dynamic(
+  $fa-var-times-circle $messagebox-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {color}

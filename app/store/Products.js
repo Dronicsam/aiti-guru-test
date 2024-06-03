@@ -3,7 +3,13 @@ Ext.define("AitiGuruTest.store.Products", {
 
   alias: "store.products",
 
-  fields: ["id", "name", "description", "price", "amount"],
+  fields: [
+    { name: "id", type: "int" },
+    { name: "name", type: "string" },
+    { name: "description", type: "string" },
+    { name: "price", type: "float" },
+    { name: "amount", type: "int" },
+  ],
 
   data: {
     items: [

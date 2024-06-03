@@ -1,1 +1,1 @@
-Ext.define('Ext.tip.ToolTip', {});
+Ext.define("Ext.tip.ToolTip", {});

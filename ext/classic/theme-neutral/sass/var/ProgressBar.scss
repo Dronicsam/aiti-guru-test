@@ -44,7 +44,7 @@ $progress-bar-background-color: dynamic($base-color);
  * a predefined gradient or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$progress-bar-background-gradient: dynamic('none');
+$progress-bar-background-gradient: dynamic("none");
 
 /**
  * @var {color}

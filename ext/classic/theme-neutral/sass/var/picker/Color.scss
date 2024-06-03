@@ -102,13 +102,17 @@ $colorpicker-item-background-color-over: dynamic(#fff);
  * @var {color}
  * The border-color of the selected Color Picker item
  */
-$colorpicker-item-border-color-selected: dynamic($colorpicker-item-border-color-over);
+$colorpicker-item-border-color-selected: dynamic(
+  $colorpicker-item-border-color-over
+);
 
 /**
  * @var {color}
  * The background-color of the selected Color Picker item
  */
-$colorpicker-item-background-color-selected: dynamic($colorpicker-item-background-color-over);
+$colorpicker-item-background-color-selected: dynamic(
+  $colorpicker-item-background-color-over
+);
 
 /**
  * @var {color}

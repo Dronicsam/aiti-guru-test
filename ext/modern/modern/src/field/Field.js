@@ -22,329 +22,329 @@
  * though it is sometimes more useful to extend {@link Ext.field.Text} as this provides additional text entry
  * functionality.
  */
-Ext.define('Ext.field.Field', {
-    extend: 'Ext.Decorator',
-    alternateClassName: 'Ext.form.Field',
-    xtype: 'field',
-    requires: [
-        'Ext.field.Input'
-    ],
+Ext.define("Ext.field.Field", {
+  extend: "Ext.Decorator",
+  alternateClassName: "Ext.form.Field",
+  xtype: "field",
+  requires: ["Ext.field.Input"],
 
+  /**
+   * Set to `true` on all Ext.field.Field subclasses. This is used by {@link Ext.form.Panel#getValues} to determine which
+   * components inside a form are fields.
+   * @property isField
+   * @type Boolean
+   */
+  isField: true,
+
+  /**
+   * @private
+   */
+  isFormField: true,
+
+  config: {
     /**
-     * Set to `true` on all Ext.field.Field subclasses. This is used by {@link Ext.form.Panel#getValues} to determine which
-     * components inside a form are fields.
-     * @property isField
-     * @type Boolean
+     * @cfg
+     * @inheritdoc
      */
-    isField: true,
+    baseCls: Ext.baseCSSPrefix + "field",
 
     /**
-     * @private
+     * The label of this field
+     * @cfg {String} label
+     * @accessor
      */
-    isFormField: true,
-
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        baseCls: Ext.baseCSSPrefix + 'field',
-
-        /**
-         * The label of this field
-         * @cfg {String} label
-         * @accessor
-         */
-        label: null,
-
-        /**
-         * @cfg {String} labelAlign The position to render the label relative to the field input.
-         * Available options are: 'top', 'left', 'bottom' and 'right'
-         * @accessor
-         */
-        labelAlign: 'left',
-
-        /**
-         * @cfg {Number/String} labelWidth The width to make this field's label.
-         * @accessor
-         */
-        labelWidth: '30%',
-
-        /**
-         * @cfg {Boolean} labelWrap `true` to allow the label to wrap. If set to `false`, the label will be truncated with
-         * an ellipsis.
-         * @accessor
-         */
-        labelWrap: false,
-
-        /**
-         * @cfg {Boolean} clearIcon `true` to use a clear icon in this field.
-         * @accessor
-         */
-        clearIcon: null,
-
-        /**
-         * @cfg {Boolean} required `true` to make this field required.
-         *
-         * __Note:__ this only causes a visual indication.
-         *
-         * Doesn't prevent user from submitting the form.
-         * @accessor
-         */
-        required: false,
-
-        /**
-         * The label Element associated with this Field.
-         *
-         * __Note:__ Only available if a {@link #label} is specified.
-         * @type Ext.Element
-         * @property labelEl
-         * @deprecated 2.0
-         */
-
-        /**
-         * @cfg {String} [inputType='text'] The type attribute for input fields -- e.g. radio, text, password, file.
-         * The types 'file' and 'password' must be used to render those field types currently -- there are
-         * no separate Ext components for those.
-         * @deprecated 2.0 Please use `input.type` instead.
-         * @accessor
-         */
-        inputType: null,
-
-        /**
-         * @cfg {String} name The field's HTML name attribute.
-         *
-         * __Note:__ this property must be set if this field is to be automatically included with.
-         * {@link Ext.form.Panel#method-submit form submit()}.
-         * @accessor
-         */
-        name: null,
-
-        /**
-         * @cfg {Mixed} value A value to initialize this field with.
-         * @accessor
-         */
-        value: null,
-
-        /**
-         * @cfg {Number} tabIndex The `tabIndex` for this field. Note this only applies to fields that are rendered,
-         * not those which are built via `applyTo`.
-         * @accessor
-         */
-        tabIndex: null
-
-        /**
-         * @cfg {Object} component The inner component for this field.
-         */
-
-        /**
-         * @cfg {Boolean} fullscreen
-         * @hide
-         */
-    },
-
-    cachedConfig: {
-        /**
-         * @cfg {String} labelCls Optional CSS class to add to the Label element.
-         * @accessor
-         */
-        labelCls: null,
-
-        /**
-         * @cfg {String} requiredCls The `className` to be applied to this Field when the {@link #required} configuration is set to `true`.
-         * @accessor
-         */
-        requiredCls: Ext.baseCSSPrefix + 'field-required',
-
-        /**
-         * @cfg {String} inputCls CSS class to add to the input element of this fields {@link #component}
-         */
-        inputCls: null
-    },
-
-    noWrapCls: Ext.baseCSSPrefix + 'form-label-nowrap',
+    label: null,
 
     /**
-     * @cfg {Boolean} isFocused
-     * `true` if this field is currently focused.
-     * @private
+     * @cfg {String} labelAlign The position to render the label relative to the field input.
+     * Available options are: 'top', 'left', 'bottom' and 'right'
+     * @accessor
      */
-
-    getElementConfig: function() {
-        var prefix = Ext.baseCSSPrefix;
-
-        return {
-            reference: 'element',
-            className: Ext.baseCSSPrefix + 'container',
-            children: [
-                {
-                    reference: 'label',
-                    cls: prefix + 'form-label',
-                    children: [{
-                        reference: 'labelspan',
-                        tag: 'span'
-                    }]
-                },
-                {
-                    reference: 'innerElement',
-                    cls: prefix + 'component-outer'
-                }
-            ]
-        };
-    },
+    labelAlign: "left",
 
     /**
-     * @private
+     * @cfg {Number/String} labelWidth The width to make this field's label.
+     * @accessor
      */
-    updateLabel: function(newLabel, oldLabel) {
-        var renderElement = this.renderElement,
-            prefix = Ext.baseCSSPrefix;
-
-        if (newLabel) {
-            this.labelspan.setHtml(newLabel);
-            renderElement.addCls(prefix + 'field-labeled');
-        } else {
-            renderElement.removeCls(prefix + 'field-labeled');
-        }
-    },
+    labelWidth: "30%",
 
     /**
-     * @private
+     * @cfg {Boolean} labelWrap `true` to allow the label to wrap. If set to `false`, the label will be truncated with
+     * an ellipsis.
+     * @accessor
      */
-    updateLabelAlign: function(newLabelAlign, oldLabelAlign) {
-        var renderElement = this.renderElement,
-            prefix = Ext.baseCSSPrefix;
-
-        if (newLabelAlign) {
-            renderElement.addCls(prefix + 'label-align-' + newLabelAlign);
-
-            if (newLabelAlign == "top" || newLabelAlign == "bottom") {
-                this.label.setWidth('100%');
-            } else {
-                this.updateLabelWidth(this.getLabelWidth());
-            }
-        }
-
-        if (oldLabelAlign) {
-            renderElement.removeCls(prefix + 'label-align-' + oldLabelAlign);
-        }
-    },
+    labelWrap: false,
 
     /**
-     * @private
+     * @cfg {Boolean} clearIcon `true` to use a clear icon in this field.
+     * @accessor
      */
-    updateLabelCls: function(newLabelCls, oldLabelCls) {
-        if (newLabelCls) {
-            this.label.addCls(newLabelCls);
-        }
-
-        if (oldLabelCls) {
-            this.label.removeCls(oldLabelCls);
-        }
-    },
+    clearIcon: null,
 
     /**
-     * @private
-     */
-    updateLabelWidth: function(newLabelWidth) {
-        var labelAlign = this.getLabelAlign();
-
-        if (newLabelWidth) {
-            if (labelAlign == "top" || labelAlign == "bottom") {
-                this.label.setWidth('100%');
-            } else {
-                this.label.setWidth(newLabelWidth);
-            }
-        }
-    },
-
-    /**
-     * @private
-     */
-    updateLabelWrap: function(newLabelWrap, oldLabelWrap) {
-        this.toggleCls(this.noWrapCls, !newLabelWrap);
-    },
-
-    /**
-     * Updates the {@link #required} configuration.
-     * @private
-     */
-    updateRequired: function(newRequired) {
-        this.renderElement.toggleCls(this.getRequiredCls(), newRequired);
-    },
-
-    /**
-     * Updates the {@link #required} configuration
-     * @private
-     */
-    updateRequiredCls: function(newRequiredCls, oldRequiredCls) {
-        if (this.getRequired()) {
-            this.renderElement.replaceCls(oldRequiredCls, newRequiredCls);
-        }
-    },
-
-    /**
-     * @private
-     */
-    initialize: function() {
-        var me = this;
-        me.callParent();
-
-        me.doInitValue();
-    },
-
-    /**
-     * @private
-     */
-    doInitValue: function() {
-        /**
-         * @property {Mixed} originalValue
-         * The original value of the field as configured in the {@link #value} configuration.
-         * setting is `true`.
-         */
-        this.originalValue = this.getInitialConfig().value;
-    },
-
-    /**
-     * Resets the current field value back to the original value on this field when it was created.
+     * @cfg {Boolean} required `true` to make this field required.
      *
-     *     // This will create a field with an original value
-     *     var field = Ext.Viewport.add({
-     *         xtype: 'textfield',
-     *         value: 'first value'
-     *     });
+     * __Note:__ this only causes a visual indication.
      *
-     *     // Update the value
-     *     field.setValue('new value');
-     *
-     *     // Now you can reset it back to the `first value`
-     *     field.reset();
-     *
-     * @return {Ext.field.Field} this
+     * Doesn't prevent user from submitting the form.
+     * @accessor
      */
-    reset: function() {
-        this.setValue(this.originalValue);
-
-        return this;
-    },
+    required: false,
 
     /**
-     * Resets the field's {@link #originalValue} property so it matches the current {@link #getValue value}. This is
-     * called by {@link Ext.form.Panel}.{@link Ext.form.Panel#setValues setValues} if the form's
-     * {@link Ext.form.Panel#trackResetOnLoad trackResetOnLoad} property is set to true.
+     * The label Element associated with this Field.
+     *
+     * __Note:__ Only available if a {@link #label} is specified.
+     * @type Ext.Element
+     * @property labelEl
+     * @deprecated 2.0
      */
-    resetOriginalValue: function() {
-        this.originalValue = this.getValue();
-    },
 
     /**
-     * Returns `true` if the value of this Field has been changed from its {@link #originalValue}.
-     * Will return `false` if the field is disabled or has not been rendered yet.
-     *
-     * @return {Boolean} `true` if this field has been changed from its original value (and
-     * is not disabled), `false` otherwise.
+     * @cfg {String} [inputType='text'] The type attribute for input fields -- e.g. radio, text, password, file.
+     * The types 'file' and 'password' must be used to render those field types currently -- there are
+     * no separate Ext components for those.
+     * @deprecated 2.0 Please use `input.type` instead.
+     * @accessor
      */
-    isDirty: function() {
-        return false;
+    inputType: null,
+
+    /**
+     * @cfg {String} name The field's HTML name attribute.
+     *
+     * __Note:__ this property must be set if this field is to be automatically included with.
+     * {@link Ext.form.Panel#method-submit form submit()}.
+     * @accessor
+     */
+    name: null,
+
+    /**
+     * @cfg {Mixed} value A value to initialize this field with.
+     * @accessor
+     */
+    value: null,
+
+    /**
+     * @cfg {Number} tabIndex The `tabIndex` for this field. Note this only applies to fields that are rendered,
+     * not those which are built via `applyTo`.
+     * @accessor
+     */
+    tabIndex: null,
+
+    /**
+     * @cfg {Object} component The inner component for this field.
+     */
+
+    /**
+     * @cfg {Boolean} fullscreen
+     * @hide
+     */
+  },
+
+  cachedConfig: {
+    /**
+     * @cfg {String} labelCls Optional CSS class to add to the Label element.
+     * @accessor
+     */
+    labelCls: null,
+
+    /**
+     * @cfg {String} requiredCls The `className` to be applied to this Field when the {@link #required} configuration is set to `true`.
+     * @accessor
+     */
+    requiredCls: Ext.baseCSSPrefix + "field-required",
+
+    /**
+     * @cfg {String} inputCls CSS class to add to the input element of this fields {@link #component}
+     */
+    inputCls: null,
+  },
+
+  noWrapCls: Ext.baseCSSPrefix + "form-label-nowrap",
+
+  /**
+   * @cfg {Boolean} isFocused
+   * `true` if this field is currently focused.
+   * @private
+   */
+
+  getElementConfig: function () {
+    var prefix = Ext.baseCSSPrefix;
+
+    return {
+      reference: "element",
+      className: Ext.baseCSSPrefix + "container",
+      children: [
+        {
+          reference: "label",
+          cls: prefix + "form-label",
+          children: [
+            {
+              reference: "labelspan",
+              tag: "span",
+            },
+          ],
+        },
+        {
+          reference: "innerElement",
+          cls: prefix + "component-outer",
+        },
+      ],
+    };
+  },
+
+  /**
+   * @private
+   */
+  updateLabel: function (newLabel, oldLabel) {
+    var renderElement = this.renderElement,
+      prefix = Ext.baseCSSPrefix;
+
+    if (newLabel) {
+      this.labelspan.setHtml(newLabel);
+      renderElement.addCls(prefix + "field-labeled");
+    } else {
+      renderElement.removeCls(prefix + "field-labeled");
     }
+  },
+
+  /**
+   * @private
+   */
+  updateLabelAlign: function (newLabelAlign, oldLabelAlign) {
+    var renderElement = this.renderElement,
+      prefix = Ext.baseCSSPrefix;
+
+    if (newLabelAlign) {
+      renderElement.addCls(prefix + "label-align-" + newLabelAlign);
+
+      if (newLabelAlign == "top" || newLabelAlign == "bottom") {
+        this.label.setWidth("100%");
+      } else {
+        this.updateLabelWidth(this.getLabelWidth());
+      }
+    }
+
+    if (oldLabelAlign) {
+      renderElement.removeCls(prefix + "label-align-" + oldLabelAlign);
+    }
+  },
+
+  /**
+   * @private
+   */
+  updateLabelCls: function (newLabelCls, oldLabelCls) {
+    if (newLabelCls) {
+      this.label.addCls(newLabelCls);
+    }
+
+    if (oldLabelCls) {
+      this.label.removeCls(oldLabelCls);
+    }
+  },
+
+  /**
+   * @private
+   */
+  updateLabelWidth: function (newLabelWidth) {
+    var labelAlign = this.getLabelAlign();
+
+    if (newLabelWidth) {
+      if (labelAlign == "top" || labelAlign == "bottom") {
+        this.label.setWidth("100%");
+      } else {
+        this.label.setWidth(newLabelWidth);
+      }
+    }
+  },
+
+  /**
+   * @private
+   */
+  updateLabelWrap: function (newLabelWrap, oldLabelWrap) {
+    this.toggleCls(this.noWrapCls, !newLabelWrap);
+  },
+
+  /**
+   * Updates the {@link #required} configuration.
+   * @private
+   */
+  updateRequired: function (newRequired) {
+    this.renderElement.toggleCls(this.getRequiredCls(), newRequired);
+  },
+
+  /**
+   * Updates the {@link #required} configuration
+   * @private
+   */
+  updateRequiredCls: function (newRequiredCls, oldRequiredCls) {
+    if (this.getRequired()) {
+      this.renderElement.replaceCls(oldRequiredCls, newRequiredCls);
+    }
+  },
+
+  /**
+   * @private
+   */
+  initialize: function () {
+    var me = this;
+    me.callParent();
+
+    me.doInitValue();
+  },
+
+  /**
+   * @private
+   */
+  doInitValue: function () {
+    /**
+     * @property {Mixed} originalValue
+     * The original value of the field as configured in the {@link #value} configuration.
+     * setting is `true`.
+     */
+    this.originalValue = this.getInitialConfig().value;
+  },
+
+  /**
+   * Resets the current field value back to the original value on this field when it was created.
+   *
+   *     // This will create a field with an original value
+   *     var field = Ext.Viewport.add({
+   *         xtype: 'textfield',
+   *         value: 'first value'
+   *     });
+   *
+   *     // Update the value
+   *     field.setValue('new value');
+   *
+   *     // Now you can reset it back to the `first value`
+   *     field.reset();
+   *
+   * @return {Ext.field.Field} this
+   */
+  reset: function () {
+    this.setValue(this.originalValue);
+
+    return this;
+  },
+
+  /**
+   * Resets the field's {@link #originalValue} property so it matches the current {@link #getValue value}. This is
+   * called by {@link Ext.form.Panel}.{@link Ext.form.Panel#setValues setValues} if the form's
+   * {@link Ext.form.Panel#trackResetOnLoad trackResetOnLoad} property is set to true.
+   */
+  resetOriginalValue: function () {
+    this.originalValue = this.getValue();
+  },
+
+  /**
+   * Returns `true` if the value of this Field has been changed from its {@link #originalValue}.
+   * Will return `false` if the field is disabled or has not been rendered yet.
+   *
+   * @return {Boolean} `true` if this field has been changed from its original value (and
+   * is not disabled), `false` otherwise.
+   */
+  isDirty: function () {
+    return false;
+  },
 });

@@ -76,301 +76,296 @@
  *
  * The {@link #defaultType} of Toolbar's is {@link Ext.Button button}.
  */
-Ext.define('Ext.TitleBar', {
-    extend: 'Ext.Container',
-    xtype: 'titlebar',
+Ext.define("Ext.TitleBar", {
+  extend: "Ext.Container",
+  xtype: "titlebar",
 
-    requires: [
-        'Ext.Button',
-        'Ext.Title',
-        'Ext.Spacer'
-    ],
+  requires: ["Ext.Button", "Ext.Title", "Ext.Spacer"],
 
-    defaultBindProperty: 'title',
+  defaultBindProperty: "title",
+
+  /**
+   * @private
+   */
+  isToolbar: true,
+
+  config: {
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    baseCls: Ext.baseCSSPrefix + "toolbar",
 
     /**
-     * @private
+     * @cfg
+     * @inheritdoc
      */
-    isToolbar: true,
+    cls: Ext.baseCSSPrefix + "navigation-bar",
 
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        baseCls: Ext.baseCSSPrefix + 'toolbar',
+    /**
+     * @cfg {String} ui
+     * Style options for Toolbar. Either 'light' or 'dark'.
+     * @accessor
+     */
+    ui: "dark",
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        cls: Ext.baseCSSPrefix + 'navigation-bar',
+    /**
+     * @cfg {String} title
+     * The title of the toolbar.
+     * @accessor
+     */
+    title: null,
 
-        /**
-         * @cfg {String} ui
-         * Style options for Toolbar. Either 'light' or 'dark'.
-         * @accessor
-         */
-        ui: 'dark',
+    /**
+     * @cfg {String} titleAlign
+     * The alignment for the title of the toolbar.
+     * @accessor
+     */
+    titleAlign: "center",
 
-        /**
-         * @cfg {String} title
-         * The title of the toolbar.
-         * @accessor
-         */
-        title: null,
+    /**
+     * @cfg {String} defaultType
+     * The default xtype to create.
+     * @accessor
+     */
+    defaultType: "button",
 
-        /**
-         * @cfg {String} titleAlign
-         * The alignment for the title of the toolbar.
-         * @accessor
-         */
-        titleAlign: 'center',
+    /**
+     * @cfg {String} minHeight
+     * The minimum height height of the Toolbar.
+     * @accessor
+     */
+    minHeight: null,
 
-        /**
-         * @cfg {String} defaultType
-         * The default xtype to create.
-         * @accessor
-         */
-        defaultType: 'button',
-
-        /**
-         * @cfg {String} minHeight
-         * The minimum height height of the Toolbar.
-         * @accessor
-         */
-        minHeight: null,
-
-        /**
-         * @cfg
-         * @hide
-         */
-        layout: {
-            type: 'hbox'
-        },
-
-        /**
-         * @cfg {Array/Object} items The child items to add to this TitleBar. The {@link #defaultType} of
-         * a TitleBar is {@link Ext.Button}, so you do not need to specify an `xtype` if you are adding
-         * buttons.
-         *
-         * You can also give items a `align` configuration which will align the item to the `left` or `right` of
-         * the TitleBar.
-         * @accessor
-         */
-        items: [],
-
-        /**
-         * @cfg {String} maxButtonWidth The maximum width of the button by percentage
-         * @accessor
-         */
-        maxButtonWidth: '40%'
-    },
-
-    hasCSSMinHeight: true,
-
-    beforeInitialize: function() {
-        this.applyItems = this.applyInitialItems;
-    },
-
-    initialize: function() {
-        delete this.applyItems;
-
-        this.add(this.initialItems);
-        delete this.initialItems;
-
-        this.on({
-            painted: 'refreshTitlePosition',
-            single: true
-        });
-    },
-
-    applyInitialItems: function(items) {
-        var me = this,
-            titleAlign = me.getTitleAlign(),
-            defaults = me.getDefaults() || {};
-
-        me.initialItems = items;
-
-        me.leftBox = me.add({
-            xtype: 'container',
-            style: 'position: relative',
-            layout: {
-                type: 'hbox',
-                align: 'center'
-            },
-            listeners: {
-                resize: 'refreshTitlePosition',
-                scope: me
-            }
-        });
-
-        me.spacer = me.add({
-            xtype: 'component',
-            style: 'position: relative',
-            flex: 1,
-            listeners: {
-                resize: 'refreshTitlePosition',
-                scope: me
-            }
-        });
-
-        me.rightBox = me.add({
-            xtype: 'container',
-            style: 'position: relative',
-            layout: {
-                type: 'hbox',
-                align: 'center'
-            },
-            listeners: {
-                resize: 'refreshTitlePosition',
-                scope: me
-            }
-        });
-
-
-        switch(titleAlign) {
-            case 'left':
-                me.titleComponent = me.leftBox.add({
-                    xtype: 'title',
-                    cls: Ext.baseCSSPrefix + 'title-align-left',
-                    hidden: defaults.hidden
-                });
-                me.refreshTitlePosition = Ext.emptyFn;
-            break;
-            case 'right':
-                me.titleComponent = me.rightBox.add({
-                    xtype: 'title',
-                    cls: Ext.baseCSSPrefix + 'title-align-right',
-                    hidden: defaults.hidden
-                });
-                me.refreshTitlePosition = Ext.emptyFn;
-            break;
-            default:
-                me.titleComponent = me.add({
-                    xtype: 'title',
-                    hidden: defaults.hidden,
-                    centered: true
-                });
-            break;
-        }
-
-        me.doAdd = me.doBoxAdd;
-        me.remove = me.doBoxRemove;
-        me.doInsert = me.doBoxInsert;
-    },
-
-    doBoxAdd: function(item) {
-        if (item.config.align == 'right') {
-            this.rightBox.add(item);
-        }
-        else {
-            this.leftBox.add(item);
-        }
-    },
-
-    doBoxRemove: function(item, destroy) {
-        if (item.config.align == 'right') {
-            this.rightBox.remove(item, destroy);
-        }
-        else {
-            this.leftBox.remove(item, destroy);
-        }
-    },
-
-    doBoxInsert: function(index, item) {
-        if (item.config.align == 'right') {
-            this.rightBox.insert(index, item);
-        }
-        else {
-            this.leftBox.insert(index, item);
-        }
-    },
-
-    calculateMaxButtonWidth: function() {
-        var maxButtonWidth = this.getMaxButtonWidth();
-
-        //check if it is a percentage
-        if (Ext.isString(maxButtonWidth)) {
-            maxButtonWidth = parseInt(maxButtonWidth.replace('%', ''), 10);
-        }
-        maxButtonWidth = Math.round((this.element.getWidth() / 100) * maxButtonWidth);
-
-        return maxButtonWidth;
-    },
-
-    refreshTitlePosition: function() {
-        if (this.destroyed) {
-            return;
-        }
-
-        var titleElement = this.titleComponent.renderElement;
-
-        titleElement.setWidth(null);
-        titleElement.setLeft(null);
-
-        //set the min/max width of the left button
-        var leftBox = this.leftBox,
-            leftButton = leftBox.down('button'),
-            singleButton = leftBox.getItems().getCount() == 1,
-            leftBoxWidth, maxButtonWidth;
-
-        if (leftButton && singleButton) {
-            if (leftButton.getWidth() == null) {
-                leftButton.renderElement.setWidth('auto');
-            }
-
-            leftBoxWidth = leftBox.renderElement.getWidth();
-            maxButtonWidth = this.calculateMaxButtonWidth();
-
-            if (leftBoxWidth > maxButtonWidth) {
-                leftButton.renderElement.setWidth(maxButtonWidth);
-            }
-        }
-
-        var spacerBox = this.spacer.renderElement.getBox();
-
-        if (Ext.browser.is.IE) {
-            titleElement.setWidth(spacerBox.width);
-        }
-
-        var titleBox = titleElement.getBox(),
-            widthDiff = titleBox.width - spacerBox.width,
-            titleLeft = titleBox.left,
-            titleRight = titleBox.right,
-            halfWidthDiff, leftDiff, rightDiff;
-
-
-        if (widthDiff > 0) {
-            halfWidthDiff = widthDiff / 2;
-            titleLeft += halfWidthDiff;
-            titleRight -= halfWidthDiff;
-            titleElement.setWidth(spacerBox.width);
-        }
-
-        leftDiff = spacerBox.left - titleLeft;
-        rightDiff = titleRight - spacerBox.right;
-
-        if (leftDiff > 0) {
-            titleElement.setLeft(leftDiff);
-        }
-        else if (rightDiff > 0) {
-            titleElement.setLeft(-rightDiff);
-        }
-
-        titleElement.repaint();
+    /**
+     * @cfg
+     * @hide
+     */
+    layout: {
+      type: "hbox",
     },
 
     /**
-     * @private
+     * @cfg {Array/Object} items The child items to add to this TitleBar. The {@link #defaultType} of
+     * a TitleBar is {@link Ext.Button}, so you do not need to specify an `xtype` if you are adding
+     * buttons.
+     *
+     * You can also give items a `align` configuration which will align the item to the `left` or `right` of
+     * the TitleBar.
+     * @accessor
      */
-    updateTitle: function(newTitle) {
-        // ensure the items have been initialized, since the applyer creates titleComponent
-        this.getItems();
-        this.titleComponent.setTitle(newTitle);
+    items: [],
 
-        if (this.isPainted()) {
-            this.refreshTitlePosition();
-        }
+    /**
+     * @cfg {String} maxButtonWidth The maximum width of the button by percentage
+     * @accessor
+     */
+    maxButtonWidth: "40%",
+  },
+
+  hasCSSMinHeight: true,
+
+  beforeInitialize: function () {
+    this.applyItems = this.applyInitialItems;
+  },
+
+  initialize: function () {
+    delete this.applyItems;
+
+    this.add(this.initialItems);
+    delete this.initialItems;
+
+    this.on({
+      painted: "refreshTitlePosition",
+      single: true,
+    });
+  },
+
+  applyInitialItems: function (items) {
+    var me = this,
+      titleAlign = me.getTitleAlign(),
+      defaults = me.getDefaults() || {};
+
+    me.initialItems = items;
+
+    me.leftBox = me.add({
+      xtype: "container",
+      style: "position: relative",
+      layout: {
+        type: "hbox",
+        align: "center",
+      },
+      listeners: {
+        resize: "refreshTitlePosition",
+        scope: me,
+      },
+    });
+
+    me.spacer = me.add({
+      xtype: "component",
+      style: "position: relative",
+      flex: 1,
+      listeners: {
+        resize: "refreshTitlePosition",
+        scope: me,
+      },
+    });
+
+    me.rightBox = me.add({
+      xtype: "container",
+      style: "position: relative",
+      layout: {
+        type: "hbox",
+        align: "center",
+      },
+      listeners: {
+        resize: "refreshTitlePosition",
+        scope: me,
+      },
+    });
+
+    switch (titleAlign) {
+      case "left":
+        me.titleComponent = me.leftBox.add({
+          xtype: "title",
+          cls: Ext.baseCSSPrefix + "title-align-left",
+          hidden: defaults.hidden,
+        });
+        me.refreshTitlePosition = Ext.emptyFn;
+        break;
+      case "right":
+        me.titleComponent = me.rightBox.add({
+          xtype: "title",
+          cls: Ext.baseCSSPrefix + "title-align-right",
+          hidden: defaults.hidden,
+        });
+        me.refreshTitlePosition = Ext.emptyFn;
+        break;
+      default:
+        me.titleComponent = me.add({
+          xtype: "title",
+          hidden: defaults.hidden,
+          centered: true,
+        });
+        break;
     }
+
+    me.doAdd = me.doBoxAdd;
+    me.remove = me.doBoxRemove;
+    me.doInsert = me.doBoxInsert;
+  },
+
+  doBoxAdd: function (item) {
+    if (item.config.align == "right") {
+      this.rightBox.add(item);
+    } else {
+      this.leftBox.add(item);
+    }
+  },
+
+  doBoxRemove: function (item, destroy) {
+    if (item.config.align == "right") {
+      this.rightBox.remove(item, destroy);
+    } else {
+      this.leftBox.remove(item, destroy);
+    }
+  },
+
+  doBoxInsert: function (index, item) {
+    if (item.config.align == "right") {
+      this.rightBox.insert(index, item);
+    } else {
+      this.leftBox.insert(index, item);
+    }
+  },
+
+  calculateMaxButtonWidth: function () {
+    var maxButtonWidth = this.getMaxButtonWidth();
+
+    //check if it is a percentage
+    if (Ext.isString(maxButtonWidth)) {
+      maxButtonWidth = parseInt(maxButtonWidth.replace("%", ""), 10);
+    }
+    maxButtonWidth = Math.round(
+      (this.element.getWidth() / 100) * maxButtonWidth,
+    );
+
+    return maxButtonWidth;
+  },
+
+  refreshTitlePosition: function () {
+    if (this.destroyed) {
+      return;
+    }
+
+    var titleElement = this.titleComponent.renderElement;
+
+    titleElement.setWidth(null);
+    titleElement.setLeft(null);
+
+    //set the min/max width of the left button
+    var leftBox = this.leftBox,
+      leftButton = leftBox.down("button"),
+      singleButton = leftBox.getItems().getCount() == 1,
+      leftBoxWidth,
+      maxButtonWidth;
+
+    if (leftButton && singleButton) {
+      if (leftButton.getWidth() == null) {
+        leftButton.renderElement.setWidth("auto");
+      }
+
+      leftBoxWidth = leftBox.renderElement.getWidth();
+      maxButtonWidth = this.calculateMaxButtonWidth();
+
+      if (leftBoxWidth > maxButtonWidth) {
+        leftButton.renderElement.setWidth(maxButtonWidth);
+      }
+    }
+
+    var spacerBox = this.spacer.renderElement.getBox();
+
+    if (Ext.browser.is.IE) {
+      titleElement.setWidth(spacerBox.width);
+    }
+
+    var titleBox = titleElement.getBox(),
+      widthDiff = titleBox.width - spacerBox.width,
+      titleLeft = titleBox.left,
+      titleRight = titleBox.right,
+      halfWidthDiff,
+      leftDiff,
+      rightDiff;
+
+    if (widthDiff > 0) {
+      halfWidthDiff = widthDiff / 2;
+      titleLeft += halfWidthDiff;
+      titleRight -= halfWidthDiff;
+      titleElement.setWidth(spacerBox.width);
+    }
+
+    leftDiff = spacerBox.left - titleLeft;
+    rightDiff = titleRight - spacerBox.right;
+
+    if (leftDiff > 0) {
+      titleElement.setLeft(leftDiff);
+    } else if (rightDiff > 0) {
+      titleElement.setLeft(-rightDiff);
+    }
+
+    titleElement.repaint();
+  },
+
+  /**
+   * @private
+   */
+  updateTitle: function (newTitle) {
+    // ensure the items have been initialized, since the applyer creates titleComponent
+    this.getItems();
+    this.titleComponent.setTitle(newTitle);
+
+    if (this.isPainted()) {
+      this.refreshTitlePosition();
+    }
+  },
 });

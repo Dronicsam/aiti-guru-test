@@ -12,21 +12,27 @@ $button-background-color: dynamic($neutral-light-color);
  * @var {color}
  * Button background-color when pressed
  */
-$button-pressed-background-color: dynamic(button-pressed-background-color($button-background-color));
+$button-pressed-background-color: dynamic(
+  button-pressed-background-color($button-background-color)
+);
 
 /**
  * @var {string/list}
  * Button background-gradient.  Can be either the name of a gradient defined by
  * {@link Global_CSS#background-gradient} or a list of color stops.
  */
-$button-background-gradient: dynamic(button-background-gradient($button-background-color));
+$button-background-gradient: dynamic(
+  button-background-gradient($button-background-color)
+);
 
 /**
  * @var {string/list}
  * Button background-gradient when pressed.  Can be either the name of a gradient
  * defined by {@link Global_CSS#background-gradient} or a list of color stops.
  */
-$button-pressed-background-gradient: dynamic(button-pressed-background-gradient($button-pressed-background-color));
+$button-pressed-background-gradient: dynamic(
+  button-pressed-background-gradient($button-pressed-background-color)
+);
 
 /**
  * @var {color}
@@ -50,7 +56,9 @@ $button-border-color: dynamic(button-border-color($button-background-color));
  * @var {color/list}
  * Button border-color when pressed
  */
-$button-pressed-border-color: dynamic(button-pressed-border-color($button-pressed-background-color));
+$button-pressed-border-color: dynamic(
+  button-pressed-border-color($button-pressed-background-color)
+);
 
 /**
  * @var {number/list}
@@ -68,13 +76,13 @@ $button-border-style: dynamic(solid);
  * @var {number}
  * Button border-radius
  */
-$button-border-radius: dynamic(.25em);
+$button-border-radius: dynamic(0.25em);
 
 /**
  * @var {number}
  * Button border-radius in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$button-border-radius-big: dynamic(.2em);
+$button-border-radius-big: dynamic(0.2em);
 
 /**
  * @var {string/number}
@@ -116,13 +124,13 @@ $button-font-family: dynamic($font-family);
  * @var {number/list}
  * Button padding
  */
-$button-padding: dynamic(.23em .6em);
+$button-padding: dynamic(0.23em 0.6em);
 
 /**
  * @var {number/list}
  * Button padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$button-padding-big: dynamic(.2em .6em);
+$button-padding-big: dynamic(0.2em 0.6em);
 
 /**
  * @var {number}
@@ -155,7 +163,7 @@ $button-icon-font-size-big: dynamic($button-line-height-big);
  * @var {number}
  * The space between the button icon and text when the icon is horizontally aligned
  */
-$button-icon-horizontal-spacing: dynamic(.6em);
+$button-icon-horizontal-spacing: dynamic(0.6em);
 
 /**
  * @var {number}
@@ -168,7 +176,7 @@ $button-icon-horizontal-spacing-big: dynamic($button-icon-horizontal-spacing);
  * @var {number}
  * The space between the button icon and text when the icon is vertically aligned
  */
-$button-icon-vertical-spacing: dynamic(.2em);
+$button-icon-vertical-spacing: dynamic(0.2em);
 
 /**
  * @var {number}
@@ -181,7 +189,7 @@ $button-icon-vertical-spacing-big: dynamic($button-icon-vertical-spacing);
  * @var {number}
  * Button opacity when disabled
  */
-$button-disabled-opacity: dynamic(.5);
+$button-disabled-opacity: dynamic(0.5);
 
 /**
  * @var {color}
@@ -200,19 +208,23 @@ $button-badge-background-gradient: dynamic($base-background-gradient);
  * @var {color}
  * The text color of the button's {@link #badgeText badge}
  */
-$button-badge-color: dynamic(color-by-background($button-badge-background-color));
+$button-badge-color: dynamic(
+  color-by-background($button-badge-background-color)
+);
 
 /**
  * @var {color}
  * The border-color of the button's {@link #badgeText badge}
  */
-$button-badge-border-color: dynamic(darken($button-badge-background-color, 10%));
+$button-badge-border-color: dynamic(
+  darken($button-badge-background-color, 10%)
+);
 
 /**
  * @var {number/list}
  * The border-radius of the button's {@link #badgeText badge}
  */
-$button-badge-border-radius: dynamic(.2em);
+$button-badge-border-radius: dynamic(0.2em);
 
 /**
  * @var {number}
@@ -254,7 +266,7 @@ $button-badge-line-height: dynamic($button-line-height);
  * @var {number}
  * Offset of the {@link #badgeText badge} from the top of the button
  */
-$button-badge-top: dynamic(-.2em);
+$button-badge-top: dynamic(-0.2em);
 
 /**
  * @var {number}
@@ -278,7 +290,7 @@ $button-badge-left: dynamic(null);
  * @var {number}
  * The padding of the button's {@link #badgeText badge}
  */
-$button-badge-padding: dynamic(.1em .3em);
+$button-badge-padding: dynamic(0.1em 0.3em);
 
 /**
  * @var {boolean}
@@ -309,7 +321,6 @@ $button-round-ui: dynamic($include-default-uis);
  * `true` to include the "small" button UI
  */
 $button-small-ui: dynamic($include-default-uis);
-
 
 /**
  * Creates a visual theme for a Button.
@@ -461,223 +472,247 @@ $button-small-ui: dynamic($include-default-uis);
  * @member Ext.Button
  */
 @mixin button-ui(
-    $ui: null,
+  $ui: null,
 
-    $background-color: null,
-    $pressed-background-color: null,
+  $background-color: null,
+  $pressed-background-color: null,
 
-    $background-gradient: null,
-    $pressed-background-gradient: null,
+  $background-gradient: null,
+  $pressed-background-gradient: null,
 
-    $color: null,
-    $pressed-color: null,
+  $color: null,
+  $pressed-color: null,
 
-    $border-color: null,
-    $pressed-border-color: null,
+  $border-color: null,
+  $pressed-border-color: null,
 
-    $border-width: null,
-    $border-style: null,
+  $border-width: null,
+  $border-style: null,
 
-    $border-radius: null,
-    $border-radius-big: null,
+  $border-radius: null,
+  $border-radius-big: null,
 
-    $font-weight: null,
-    $font-size: null,
-    $font-size-big: null,
-    $line-height: null,
-    $line-height-big: null,
-    $font-family: null,
+  $font-weight: null,
+  $font-size: null,
+  $font-size-big: null,
+  $line-height: null,
+  $line-height-big: null,
+  $font-family: null,
 
-    $padding: null,
-    $padding-big: null,
+  $padding: null,
+  $padding-big: null,
 
-    $icon-size: null,
-    $icon-size-big: null,
-    $icon-font-size: null,
-    $icon-font-size-big: null,
-    $icon-horizontal-spacing: null,
-    $icon-horizontal-spacing-big: null,
-    $icon-vertical-spacing: null,
-    $icon-vertical-spacing-big: null,
+  $icon-size: null,
+  $icon-size-big: null,
+  $icon-font-size: null,
+  $icon-font-size-big: null,
+  $icon-horizontal-spacing: null,
+  $icon-horizontal-spacing-big: null,
+  $icon-vertical-spacing: null,
+  $icon-vertical-spacing-big: null,
 
-    $disabled-opacity: null,
+  $disabled-opacity: null,
 
-    $badge-background-color: null,
-    $badge-background-gradient: null,
-    $badge-color: null,
-    $badge-border-color: null,
-    $badge-border-radius: null,
-    $badge-min-width: null,
-    $badge-max-width: null,
-    $badge-font-weight: null,
-    $badge-font-size: null,
-    $badge-font-family: null,
-    $badge-line-height: null,
-    $badge-top: null,
-    $badge-right: null,
-    $badge-bottom: null,
-    $badge-left: null,
-    $badge-padding: null
+  $badge-background-color: null,
+  $badge-background-gradient: null,
+  $badge-color: null,
+  $badge-border-color: null,
+  $badge-border-radius: null,
+  $badge-min-width: null,
+  $badge-max-width: null,
+  $badge-font-weight: null,
+  $badge-font-size: null,
+  $badge-font-family: null,
+  $badge-line-height: null,
+  $badge-top: null,
+  $badge-right: null,
+  $badge-bottom: null,
+  $badge-left: null,
+  $badge-padding: null
 ) {
-    $ui-suffix: ui-suffix($ui);
+  $ui-suffix: ui-suffix($ui);
 
-    @if $background-color != null {
-        @if $pressed-background-color == null {
-            $pressed-background-color: button-pressed-background-color($background-color);
-        }
-
-        @if $border-color == null {
-            $border-color: button-border-color($background-color);
-        }
-
-        @if $color == null {
-            $color: button-color($background-color);
-        }
-
-        @if $background-gradient == null {
-            $background-gradient: button-background-gradient($background-color);
-        }
+  @if $background-color != null {
+    @if $pressed-background-color == null {
+      $pressed-background-color: button-pressed-background-color(
+        $background-color
+      );
     }
 
-    @if $pressed-background-color != null {
-        @if $pressed-border-color == null {
-            $pressed-border-color: button-pressed-border-color($pressed-background-color);
-        }
-
-        @if $pressed-color == null {
-            $pressed-color: button-pressed-color($pressed-background-color);
-        }
-
-        @if $pressed-background-gradient == null {
-            $pressed-background-gradient: button-pressed-background-gradient($pressed-background-color);
-        }
+    @if $border-color == null {
+      $border-color: button-border-color($background-color);
     }
 
-    .x-button#{$ui-suffix} {
-        color: $color;
-        padding: $padding;
-        @include font($font-weight, $font-size, $line-height, $font-family);
-        @include border($border-width, $border-style, $border-color);
-
-        @if $include-border-radius {
-            @include border-radius($border-radius);
-        }
-
-        @if $enable-big {
-            .x-big & {
-                @if $padding-big != $padding {
-                    padding: $padding-big;
-                }
-                @if $font-size-big != $font-size {
-                    font-size: $font-size-big;
-                }
-                @if $line-height-big != $line-height {
-                    line-height: $line-height-big;
-                }
-                @if $include-border-radius and ($border-radius-big != $border-radius) {
-                    @include border-radius($border-radius-big);
-                }
-            }
-        }
-
-        @include background-gradient($background-color, $background-gradient);
-
-        &.x-button-pressing, &.x-button-pressed {
-            color: $pressed-color;
-            @include background-gradient($pressed-background-color, $pressed-background-gradient);
-            border-color: $pressed-border-color;
-        }
-
-        .x-button-icon {
-            width: $icon-size;
-            height: $icon-size;
-            line-height: $icon-size;
-            font-size: $icon-font-size;
-
-            @if $enable-big {
-                .x-big & {
-                    @if $icon-size-big != $icon-size {
-                        width: $icon-size-big;
-                        height: $icon-size-big;
-                        line-height: $icon-size-big;
-                    }
-                    @if $icon-font-size-big != $icon-font-size {
-                        font-size: $icon-font-size-big;
-                    }
-                }
-            }
-        }
-
-        &.x-iconalign-left .x-button-icon {
-            margin-right: $icon-horizontal-spacing;
-
-            @if $enable-big and $icon-horizontal-spacing-big != $icon-horizontal-spacing {
-                .x-big & {
-                    margin-right: $icon-horizontal-spacing-big;
-                }
-            }
-        }
-
-        &.x-iconalign-right .x-button-icon {
-            margin-left: $icon-horizontal-spacing;
-
-            @if $enable-big and $icon-horizontal-spacing-big != $icon-horizontal-spacing {
-                .x-big & {
-                    margin-left: $icon-horizontal-spacing-big;
-                }
-            }
-        }
-
-        &.x-iconalign-top .x-button-icon {
-            margin-bottom: $icon-vertical-spacing;
-
-            @if $enable-big and $icon-vertical-spacing-big != $icon-vertical-spacing {
-                .x-big & {
-                    margin-bottom: $icon-vertical-spacing-big;
-                }
-            }
-        }
-
-        &.x-iconalign-bottom .x-button-icon {
-            margin-top: $icon-vertical-spacing;
-
-            @if $enable-big and $icon-vertical-spacing-big != $icon-vertical-spacing {
-                .x-big & {
-                    margin-top: $icon-vertical-spacing-big;
-                }
-            }
-        }
-
-        .x-button-label {
-            // prevents the button height from shrinking when it has no text
-            min-height: $line-height;
-        }
-
-        &.x-item-disabled {
-            opacity: $disabled-opacity;
-        }
-
-        .x-badge {
-            border-color: $badge-border-color;
-            min-width: $badge-min-width;
-
-            @include font($badge-font-weight, $badge-font-size, $badge-line-height, $badge-font-family);
-
-            top: $badge-top;
-            right: $badge-right;
-            bottom: $badge-bottom;
-            left: $badge-left;
-            padding: $badge-padding;
-            max-width: $badge-max-width;
-            color: $badge-color;
-
-            @include background-gradient($badge-background-color, $badge-background-gradient);
-
-            @if $include-border-radius {
-                @include border-radius($badge-border-radius);
-            }
-        }
+    @if $color == null {
+      $color: button-color($background-color);
     }
+
+    @if $background-gradient == null {
+      $background-gradient: button-background-gradient($background-color);
+    }
+  }
+
+  @if $pressed-background-color != null {
+    @if $pressed-border-color == null {
+      $pressed-border-color: button-pressed-border-color(
+        $pressed-background-color
+      );
+    }
+
+    @if $pressed-color == null {
+      $pressed-color: button-pressed-color($pressed-background-color);
+    }
+
+    @if $pressed-background-gradient == null {
+      $pressed-background-gradient: button-pressed-background-gradient(
+        $pressed-background-color
+      );
+    }
+  }
+
+  .x-button#{$ui-suffix} {
+    color: $color;
+    padding: $padding;
+    @include font($font-weight, $font-size, $line-height, $font-family);
+    @include border($border-width, $border-style, $border-color);
+
+    @if $include-border-radius {
+      @include border-radius($border-radius);
+    }
+
+    @if $enable-big {
+      .x-big & {
+        @if $padding-big != $padding {
+          padding: $padding-big;
+        }
+        @if $font-size-big != $font-size {
+          font-size: $font-size-big;
+        }
+        @if $line-height-big != $line-height {
+          line-height: $line-height-big;
+        }
+        @if $include-border-radius and ($border-radius-big != $border-radius) {
+          @include border-radius($border-radius-big);
+        }
+      }
+    }
+
+    @include background-gradient($background-color, $background-gradient);
+
+    &.x-button-pressing,
+    &.x-button-pressed {
+      color: $pressed-color;
+      @include background-gradient(
+        $pressed-background-color,
+        $pressed-background-gradient
+      );
+      border-color: $pressed-border-color;
+    }
+
+    .x-button-icon {
+      width: $icon-size;
+      height: $icon-size;
+      line-height: $icon-size;
+      font-size: $icon-font-size;
+
+      @if $enable-big {
+        .x-big & {
+          @if $icon-size-big != $icon-size {
+            width: $icon-size-big;
+            height: $icon-size-big;
+            line-height: $icon-size-big;
+          }
+          @if $icon-font-size-big != $icon-font-size {
+            font-size: $icon-font-size-big;
+          }
+        }
+      }
+    }
+
+    &.x-iconalign-left .x-button-icon {
+      margin-right: $icon-horizontal-spacing;
+
+      @if $enable-big and
+        $icon-horizontal-spacing-big !=
+        $icon-horizontal-spacing
+      {
+        .x-big & {
+          margin-right: $icon-horizontal-spacing-big;
+        }
+      }
+    }
+
+    &.x-iconalign-right .x-button-icon {
+      margin-left: $icon-horizontal-spacing;
+
+      @if $enable-big and
+        $icon-horizontal-spacing-big !=
+        $icon-horizontal-spacing
+      {
+        .x-big & {
+          margin-left: $icon-horizontal-spacing-big;
+        }
+      }
+    }
+
+    &.x-iconalign-top .x-button-icon {
+      margin-bottom: $icon-vertical-spacing;
+
+      @if $enable-big and $icon-vertical-spacing-big != $icon-vertical-spacing {
+        .x-big & {
+          margin-bottom: $icon-vertical-spacing-big;
+        }
+      }
+    }
+
+    &.x-iconalign-bottom .x-button-icon {
+      margin-top: $icon-vertical-spacing;
+
+      @if $enable-big and $icon-vertical-spacing-big != $icon-vertical-spacing {
+        .x-big & {
+          margin-top: $icon-vertical-spacing-big;
+        }
+      }
+    }
+
+    .x-button-label {
+      // prevents the button height from shrinking when it has no text
+      min-height: $line-height;
+    }
+
+    &.x-item-disabled {
+      opacity: $disabled-opacity;
+    }
+
+    .x-badge {
+      border-color: $badge-border-color;
+      min-width: $badge-min-width;
+
+      @include font(
+        $badge-font-weight,
+        $badge-font-size,
+        $badge-line-height,
+        $badge-font-family
+      );
+
+      top: $badge-top;
+      right: $badge-right;
+      bottom: $badge-bottom;
+      left: $badge-left;
+      padding: $badge-padding;
+      max-width: $badge-max-width;
+      color: $badge-color;
+
+      @include background-gradient(
+        $badge-background-color,
+        $badge-background-gradient
+      );
+
+      @if $include-border-radius {
+        @include border-radius($badge-border-radius);
+      }
+    }
+  }
 }
 
 /**
@@ -690,10 +725,7 @@ $button-small-ui: dynamic($include-default-uis);
  * @protected
  */
 @mixin button-action-ui {
-    @include button-ui(
-    $ui: 'action',
-    $background-color: $base-highlight-color
-    );
+  @include button-ui($ui: "action", $background-color: $base-highlight-color);
 }
 
 /**
@@ -706,10 +738,10 @@ $button-small-ui: dynamic($include-default-uis);
  * @protected
  */
 @mixin button-confirm-ui {
-    @include button-ui(
-    $ui: 'confirm',
+  @include button-ui(
+    $ui: "confirm",
     $background-color: desaturate(darken($confirm-color, 10%), 5%)
-    );
+  );
 }
 
 /**
@@ -722,10 +754,10 @@ $button-small-ui: dynamic($include-default-uis);
  * @protected
  */
 @mixin button-decline-ui {
-    @include button-ui(
-    $ui: 'decline',
+  @include button-ui(
+    $ui: "decline",
     $background-color: desaturate(darken($alert-color, 10%), 5%)
-    );
+  );
 }
 
 /**
@@ -738,11 +770,11 @@ $button-small-ui: dynamic($include-default-uis);
  * @protected
  */
 @mixin button-round-ui {
-    @include button-ui(
-    $ui: 'round',
+  @include button-ui(
+    $ui: "round",
     $border-radius: 10000px,
     $border-radius-big: 20000px
-    );
+  );
 }
 
 /**
@@ -763,10 +795,14 @@ $button-small-ui: dynamic($include-default-uis);
  * @member Ext.Button
  * @deprecated 6.0 Use {@link #button-ui} instead
  */
-@mixin sencha-button-ui($ui-label, $color, $gradient: $button-background-gradient) {
-    @include button-ui(
+@mixin sencha-button-ui(
+  $ui-label,
+  $color,
+  $gradient: $button-background-gradient
+) {
+  @include button-ui(
     $ui: $ui-label,
     $background-color: $color,
     $background-gradient: $gradient
-    );
+  );
 }

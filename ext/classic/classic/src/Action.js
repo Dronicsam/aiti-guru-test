@@ -60,229 +60,231 @@
  *     var aRef = btn.baseAction;
  *     aRef.setText('New text');
  */
-Ext.define('Ext.Action', {
+Ext.define("Ext.Action", {
+  /* Begin Definitions */
 
-    /* Begin Definitions */
+  /* End Definitions */
 
-    /* End Definitions */
+  /**
+   * @cfg {String} [text='']
+   * The text to set for all components configured by this Action.
+   */
+  /**
+   * @cfg {String} [iconCls='']
+   * The CSS class selector that specifies a background image to be used as the header icon for
+   * all components configured by this Action.
+   *
+   * An example of specifying a custom icon class would be something like:
+   *
+   *     // specify the property in the config for the class:
+   *          ...
+   *          iconCls: 'do-something'
+   *
+   *     // css class that specifies background image to be used as the icon image:
+   *     .do-something { background-image: url(../images/my-icon.gif) 0 6px no-repeat !important; }
+   *
+   * There are no default icon classes that come with Ext JS.
+   */
+  /**
+   * @cfg {Boolean} [disabled=false]
+   * True to disable all components configured by this Action, false to enable them.
+   */
+  /**
+   * @cfg {Boolean} [hidden=false]
+   * True to hide all components configured by this Action, false to show them.
+   */
+  /**
+   * @cfg {Function} handler
+   * The function that will be invoked by each component tied to this Action
+   * when the component's primary event is triggered.
+   */
+  /**
+   * @cfg {String} itemId
+   * See {@link Ext.Component}.{@link Ext.Component#itemId itemId}.
+   */
+  /**
+   * @cfg {Object} scope
+   * The scope (this reference) in which the {@link #handler} is executed.
+   * Defaults to the browser window.
+   */
 
-    /**
-     * @cfg {String} [text='']
-     * The text to set for all components configured by this Action.
-     */
-    /**
-     * @cfg {String} [iconCls='']
-     * The CSS class selector that specifies a background image to be used as the header icon for
-     * all components configured by this Action.
-     *
-     * An example of specifying a custom icon class would be something like:
-     *
-     *     // specify the property in the config for the class:
-     *          ...
-     *          iconCls: 'do-something'
-     *
-     *     // css class that specifies background image to be used as the icon image:
-     *     .do-something { background-image: url(../images/my-icon.gif) 0 6px no-repeat !important; }
-     *
-     * There are no default icon classes that come with Ext JS.
-     */
-    /**
-     * @cfg {Boolean} [disabled=false]
-     * True to disable all components configured by this Action, false to enable them.
-     */
-    /**
-     * @cfg {Boolean} [hidden=false]
-     * True to hide all components configured by this Action, false to show them.
-     */
-    /**
-     * @cfg {Function} handler
-     * The function that will be invoked by each component tied to this Action
-     * when the component's primary event is triggered.
-     */
-    /**
-     * @cfg {String} itemId
-     * See {@link Ext.Component}.{@link Ext.Component#itemId itemId}.
-     */
-    /**
-     * @cfg {Object} scope
-     * The scope (this reference) in which the {@link #handler} is executed.
-     * Defaults to the browser window.
-     */
+  /**
+   * Creates new Action.
+   * @param {Object} config Config object.
+   */
+  constructor: function (config) {
+    this.initialConfig = config;
+    this.itemId = config.itemId = config.itemId || config.id || Ext.id();
+    this.items = [];
+  },
 
-    /**
-     * Creates new Action.
-     * @param {Object} config Config object.
-     */
-    constructor : function(config){
-        this.initialConfig = config;
-        this.itemId = config.itemId = (config.itemId || config.id || Ext.id());
-        this.items = [];
-    },
+  /*
+   * @property {Boolean} isAction
+   * `true` in this class to identify an object as an instantiated Action, or subclass thereof.
+   */
+  isAction: true,
 
-    /*
-     * @property {Boolean} isAction
-     * `true` in this class to identify an object as an instantiated Action, or subclass thereof.
-     */
-    isAction : true,
+  /**
+   * Sets the text to be displayed by all components configured by this Action.
+   * @param {String} text The text to display
+   */
+  setText: function (text) {
+    this.initialConfig.text = text;
+    this.callEach("setText", [text]);
+  },
 
-    /**
-     * Sets the text to be displayed by all components configured by this Action.
-     * @param {String} text The text to display
-     */
-    setText : function(text){
-        this.initialConfig.text = text;
-        this.callEach('setText', [text]);
-    },
+  /**
+   * Gets the text currently displayed by all components configured by this Action.
+   */
+  getText: function () {
+    return this.initialConfig.text;
+  },
 
-    /**
-     * Gets the text currently displayed by all components configured by this Action.
-     */
-    getText : function(){
-        return this.initialConfig.text;
-    },
+  /**
+   * Sets the icon CSS class for all components configured by this Action.  The class should supply
+   * a background image that will be used as the icon image.
+   * @param {String} cls The CSS class supplying the icon image
+   */
+  setIconCls: function (cls) {
+    this.initialConfig.iconCls = cls;
+    this.callEach("setIconCls", [cls]);
+  },
 
-    /**
-     * Sets the icon CSS class for all components configured by this Action.  The class should supply
-     * a background image that will be used as the icon image.
-     * @param {String} cls The CSS class supplying the icon image
-     */
-    setIconCls : function(cls){
-        this.initialConfig.iconCls = cls;
-        this.callEach('setIconCls', [cls]);
-    },
+  /**
+   * Gets the icon CSS class currently used by all components configured by this Action.
+   */
+  getIconCls: function () {
+    return this.initialConfig.iconCls;
+  },
 
-    /**
-     * Gets the icon CSS class currently used by all components configured by this Action.
-     */
-    getIconCls : function(){
-        return this.initialConfig.iconCls;
-    },
+  /**
+   * Sets the disabled state of all components configured by this Action.  Shortcut method
+   * for {@link #enable} and {@link #disable}.
+   * @param {Boolean} disabled True to disable the component, false to enable it
+   */
+  setDisabled: function (v) {
+    this.initialConfig.disabled = v;
+    this.callEach("setDisabled", [v]);
+  },
 
-    /**
-     * Sets the disabled state of all components configured by this Action.  Shortcut method
-     * for {@link #enable} and {@link #disable}.
-     * @param {Boolean} disabled True to disable the component, false to enable it
-     */
-    setDisabled : function(v){
-        this.initialConfig.disabled = v;
-        this.callEach('setDisabled', [v]);
-    },
+  /**
+   * Enables all components configured by this Action.
+   */
+  enable: function () {
+    this.setDisabled(false);
+  },
 
-    /**
-     * Enables all components configured by this Action.
-     */
-    enable : function(){
-        this.setDisabled(false);
-    },
+  /**
+   * Disables all components configured by this Action.
+   */
+  disable: function () {
+    this.setDisabled(true);
+  },
 
-    /**
-     * Disables all components configured by this Action.
-     */
-    disable : function(){
-        this.setDisabled(true);
-    },
+  /**
+   * Returns true if the components using this Action are currently disabled, else returns false.
+   */
+  isDisabled: function () {
+    return this.initialConfig.disabled;
+  },
 
-    /**
-     * Returns true if the components using this Action are currently disabled, else returns false.
-     */
-    isDisabled : function(){
-        return this.initialConfig.disabled;
-    },
+  /**
+   * Sets the hidden state of all components configured by this Action.  Shortcut method
+   * for `{@link #hide}` and `{@link #show}`.
+   * @param {Boolean} hidden True to hide the component, false to show it.
+   */
+  setHidden: function (v) {
+    this.initialConfig.hidden = v;
+    this.callEach("setVisible", [!v]);
+  },
 
-    /**
-     * Sets the hidden state of all components configured by this Action.  Shortcut method
-     * for `{@link #hide}` and `{@link #show}`.
-     * @param {Boolean} hidden True to hide the component, false to show it.
-     */
-    setHidden : function(v){
-        this.initialConfig.hidden = v;
-        this.callEach('setVisible', [!v]);
-    },
+  /**
+   * Shows all components configured by this Action.
+   */
+  show: function () {
+    this.setHidden(false);
+  },
 
-    /**
-     * Shows all components configured by this Action.
-     */
-    show : function(){
-        this.setHidden(false);
-    },
+  /**
+   * Hides all components configured by this Action.
+   */
+  hide: function () {
+    this.setHidden(true);
+  },
 
-    /**
-     * Hides all components configured by this Action.
-     */
-    hide : function(){
-        this.setHidden(true);
-    },
+  /**
+   * Returns true if the components configured by this Action are currently hidden, else returns false.
+   */
+  isHidden: function () {
+    return this.initialConfig.hidden;
+  },
 
-    /**
-     * Returns true if the components configured by this Action are currently hidden, else returns false.
-     */
-    isHidden : function(){
-        return this.initialConfig.hidden;
-    },
+  /**
+   * Sets the function that will be called by each Component using this action when its primary event is triggered.
+   * @param {Function} fn The function that will be invoked by the action's components.  The function
+   * will be called with no arguments.
+   * @param {Object} scope The scope (this reference) in which the function is executed. Defaults to the Component
+   * firing the event.
+   */
+  setHandler: function (fn, scope) {
+    this.initialConfig.handler = fn;
+    this.initialConfig.scope = scope;
+    this.callEach("setHandler", [fn, scope]);
+  },
 
-    /**
-     * Sets the function that will be called by each Component using this action when its primary event is triggered.
-     * @param {Function} fn The function that will be invoked by the action's components.  The function
-     * will be called with no arguments.
-     * @param {Object} scope The scope (this reference) in which the function is executed. Defaults to the Component
-     * firing the event.
-     */
-    setHandler : function(fn, scope){
-        this.initialConfig.handler = fn;
-        this.initialConfig.scope = scope;
-        this.callEach('setHandler', [fn, scope]);
-    },
+  /**
+   * Executes the specified function once for each Component currently tied to this Action.  The function passed
+   * in should accept a single argument that will be an object that supports the basic Action config/method interface.
+   * @param {Function} fn The function to execute for each component
+   * @param {Object} scope The scope (this reference) in which the function is executed.
+   * Defaults to the Component.
+   */
+  each: function (fn, scope) {
+    Ext.each(this.items, fn, scope);
+  },
 
-    /**
-     * Executes the specified function once for each Component currently tied to this Action.  The function passed
-     * in should accept a single argument that will be an object that supports the basic Action config/method interface.
-     * @param {Function} fn The function to execute for each component
-     * @param {Object} scope The scope (this reference) in which the function is executed.
-     * Defaults to the Component.
-     */
-    each : function(fn, scope){
-        Ext.each(this.items, fn, scope);
-    },
+  /**
+   * @private
+   */
+  callEach: function (fnName, args) {
+    var items = this.items,
+      i = 0,
+      len = items.length,
+      item;
 
-    /**
-     * @private
-     */
-    callEach : function(fnName, args){
-        var items = this.items,
-            i = 0,
-            len = items.length,
-            item;
-
-        Ext.suspendLayouts();
-        for(; i < len; i++){
-            item = items[i];
-            item[fnName].apply(item, args);
-        }
-        Ext.resumeLayouts(true);
-    },
-
-    /**
-     * @private
-     */
-    addComponent : function(comp){
-        this.items.push(comp);
-        comp.on('destroy', this.removeComponent, this);
-    },
-
-    /**
-     * @private
-     */
-    removeComponent : function(comp){
-        Ext.Array.remove(this.items, comp);
-    },
-
-    /**
-     * Executes this Action manually using the handler function specified in the original config object
-     * or the handler function set with {@link #setHandler}.  Any arguments passed to this
-     * function will be passed on to the handler function.
-     * @param {Object...} args Variable number of arguments passed to the handler function
-     */
-    execute : function(){
-        this.initialConfig.handler.apply(this.initialConfig.scope || Ext.global, arguments);
+    Ext.suspendLayouts();
+    for (; i < len; i++) {
+      item = items[i];
+      item[fnName].apply(item, args);
     }
+    Ext.resumeLayouts(true);
+  },
+
+  /**
+   * @private
+   */
+  addComponent: function (comp) {
+    this.items.push(comp);
+    comp.on("destroy", this.removeComponent, this);
+  },
+
+  /**
+   * @private
+   */
+  removeComponent: function (comp) {
+    Ext.Array.remove(this.items, comp);
+  },
+
+  /**
+   * Executes this Action manually using the handler function specified in the original config object
+   * or the handler function set with {@link #setHandler}.  Any arguments passed to this
+   * function will be passed on to the handler function.
+   * @param {Object...} args Variable number of arguments passed to the handler function
+   */
+  execute: function () {
+    this.initialConfig.handler.apply(
+      this.initialConfig.scope || Ext.global,
+      arguments,
+    );
+  },
 });

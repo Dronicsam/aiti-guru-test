@@ -18,50 +18,49 @@
  * They must also call the {@link #initLabelable} method during component initialization to ensure the mixin gets
  * set up correctly.
  */
-Ext.define("Ext.form.Labelable", {
-    extend: 'Ext.Mixin',
+Ext.define(
+  "Ext.form.Labelable",
+  {
+    extend: "Ext.Mixin",
 
-    requires: [
-        'Ext.XTemplate',
-        'Ext.overrides.dom.Element'
-    ],
+    requires: ["Ext.XTemplate", "Ext.overrides.dom.Element"],
 
     isLabelable: true,
 
     mixinConfig: {
-        id: 'labelable',
+      id: "labelable",
 
-        on: {
-            beforeRender: 'beforeLabelRender',
-            onRender: 'onLabelRender'
-        }
+      on: {
+        beforeRender: "beforeLabelRender",
+        onRender: "onLabelRender",
+      },
     },
 
     config: {
-        childEls: [
-            /**
-             * @property {Ext.dom.Element} labelEl
-             * The label Element for this component. Only available after the component has been rendered.
-             */
-            'labelEl',
+      childEls: [
+        /**
+         * @property {Ext.dom.Element} labelEl
+         * The label Element for this component. Only available after the component has been rendered.
+         */
+        "labelEl",
 
-            /**
-             * @property {Ext.dom.Element} bodyEl
-             * The div Element wrapping the component's contents. Only available after the component has been rendered.
-             */
-            'bodyEl',
+        /**
+         * @property {Ext.dom.Element} bodyEl
+         * The div Element wrapping the component's contents. Only available after the component has been rendered.
+         */
+        "bodyEl",
 
-            /**
-             * @property {Ext.dom.Element} errorEl
-             * The div Element that will contain the component's error message(s). Note that depending on the configured
-             * {@link #msgTarget}, this element may be hidden in favor of some other form of presentation, but will always
-             * be present in the DOM for use by assistive technologies.
-             */
-            'errorEl',
+        /**
+         * @property {Ext.dom.Element} errorEl
+         * The div Element that will contain the component's error message(s). Note that depending on the configured
+         * {@link #msgTarget}, this element may be hidden in favor of some other form of presentation, but will always
+         * be present in the DOM for use by assistive technologies.
+         */
+        "errorEl",
 
-            'errorWrapEl',
-            'ariaErrorEl'
-        ]
+        "errorWrapEl",
+        "ariaErrorEl",
+      ],
     },
 
     /**
@@ -72,45 +71,45 @@ Ext.define("Ext.form.Labelable", {
      * @private
      */
     labelableRenderTpl: [
-        '{beforeLabelTpl}',
-        '<label id="{id}-labelEl" data-ref="labelEl" class="{labelCls} {labelCls}-{ui} {labelClsExtra} ',
-                '{unselectableCls}" style="{labelStyle}"<tpl if="inputId">',
-                ' for="{inputId}"</tpl> {labelAttrTpl}>',
-            '<span class="{labelInnerCls} {labelInnerCls}-{ui}" style="{labelInnerStyle}">',
-            '{beforeLabelTextTpl}',
-            '<tpl if="fieldLabel">{fieldLabel}',
-                '<tpl if="labelSeparator">{labelSeparator}</tpl>',
-            '</tpl>',
-            '{afterLabelTextTpl}',
-            '</span>',
-        '</label>',
-        '{afterLabelTpl}',
-        '<div id="{id}-bodyEl" data-ref="bodyEl" role="presentation"',
-            ' class="{baseBodyCls} {baseBodyCls}-{ui}<tpl if="fieldBodyCls">',
-            ' {fieldBodyCls} {fieldBodyCls}-{ui}</tpl> {growCls} {extraFieldBodyCls}"',
-            '<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
-            '{beforeBodyEl}',
-            '{beforeSubTpl}',
-            '{[values.$comp.getSubTplMarkup(values)]}',
-            '{afterSubTpl}',
-            '{afterBodyEl}',
-            // Unlike errorEl below ariaErrorEl is always rendered but is clipped out of existence
-            '<div id="{id}-ariaErrorEl" data-ref="ariaErrorEl" role="alert" aria-live="polite"',
-                ' class="' + Ext.baseCSSPrefix + 'hidden-clip">',
-            '</div>',
-        '</div>',
-        '<tpl if="renderError">',
-            '<div id="{id}-errorWrapEl" data-ref="errorWrapEl" class="{errorWrapCls} {errorWrapCls}-{ui}',
-                ' {errorWrapExtraCls}" style="{errorWrapStyle}">',
-                '<div role="presentation" id="{id}-errorEl" data-ref="errorEl" ',
-                    'class="{errorMsgCls} {invalidMsgCls} {invalidMsgCls}-{ui}" ',
-                    'data-anchorTarget="{tipAnchorTarget}">',
-                '</div>',
-            '</div>',
-        '</tpl>',
-        {
-            disableFormats: true
-        }
+      "{beforeLabelTpl}",
+      '<label id="{id}-labelEl" data-ref="labelEl" class="{labelCls} {labelCls}-{ui} {labelClsExtra} ',
+      '{unselectableCls}" style="{labelStyle}"<tpl if="inputId">',
+      ' for="{inputId}"</tpl> {labelAttrTpl}>',
+      '<span class="{labelInnerCls} {labelInnerCls}-{ui}" style="{labelInnerStyle}">',
+      "{beforeLabelTextTpl}",
+      '<tpl if="fieldLabel">{fieldLabel}',
+      '<tpl if="labelSeparator">{labelSeparator}</tpl>',
+      "</tpl>",
+      "{afterLabelTextTpl}",
+      "</span>",
+      "</label>",
+      "{afterLabelTpl}",
+      '<div id="{id}-bodyEl" data-ref="bodyEl" role="presentation"',
+      ' class="{baseBodyCls} {baseBodyCls}-{ui}<tpl if="fieldBodyCls">',
+      ' {fieldBodyCls} {fieldBodyCls}-{ui}</tpl> {growCls} {extraFieldBodyCls}"',
+      '<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
+      "{beforeBodyEl}",
+      "{beforeSubTpl}",
+      "{[values.$comp.getSubTplMarkup(values)]}",
+      "{afterSubTpl}",
+      "{afterBodyEl}",
+      // Unlike errorEl below ariaErrorEl is always rendered but is clipped out of existence
+      '<div id="{id}-ariaErrorEl" data-ref="ariaErrorEl" role="alert" aria-live="polite"',
+      ' class="' + Ext.baseCSSPrefix + 'hidden-clip">',
+      "</div>",
+      "</div>",
+      '<tpl if="renderError">',
+      '<div id="{id}-errorWrapEl" data-ref="errorWrapEl" class="{errorWrapCls} {errorWrapCls}-{ui}',
+      ' {errorWrapExtraCls}" style="{errorWrapStyle}">',
+      '<div role="presentation" id="{id}-errorEl" data-ref="errorEl" ',
+      'class="{errorMsgCls} {invalidMsgCls} {invalidMsgCls}-{ui}" ',
+      'data-anchorTarget="{tipAnchorTarget}">',
+      "</div>",
+      "</div>",
+      "</tpl>",
+      {
+        disableFormats: true,
+      },
     ],
 
     /**
@@ -122,17 +121,17 @@ Ext.define("Ext.form.Labelable", {
     activeErrorsTpl: undefined,
 
     htmlActiveErrorsTpl: [
-        '<tpl if="errors && errors.length">',
-            '<ul class="{listCls}">',
-                '<tpl for="errors"><li>{.}</li></tpl>',
-            '</ul>',
-        '</tpl>'
+      '<tpl if="errors && errors.length">',
+      '<ul class="{listCls}">',
+      '<tpl for="errors"><li>{.}</li></tpl>',
+      "</ul>",
+      "</tpl>",
     ],
 
     plaintextActiveErrorsTpl: [
-        '<tpl if="errors && errors.length">',
-            '<tpl for="errors"><tpl if="xindex &gt; 1">\n</tpl>{.}</tpl>',
-        '</tpl>'
+      '<tpl if="errors && errors.length">',
+      '<tpl for="errors"><tpl if="xindex &gt; 1">\n</tpl>{.}</tpl>',
+      "</tpl>",
     ],
 
     /**
@@ -145,7 +144,7 @@ Ext.define("Ext.form.Labelable", {
      * @cfg {String} formItemCls
      * A CSS class to be applied to the outermost element to denote that it is participating in the form field layout.
      */
-    formItemCls: Ext.baseCSSPrefix + 'form-item',
+    formItemCls: Ext.baseCSSPrefix + "form-item",
 
     /**
      * @cfg {String} labelCls
@@ -153,15 +152,15 @@ Ext.define("Ext.form.Labelable", {
      * and drives the field layout where it is concatenated with a hyphen ('-') and {@link #labelAlign}. To add
      * additional classes, use {@link #labelClsExtra}.
      */
-    labelCls: Ext.baseCSSPrefix + 'form-item-label',
+    labelCls: Ext.baseCSSPrefix + "form-item-label",
 
     /**
      * @private
      */
-    topLabelCls: Ext.baseCSSPrefix + 'form-item-label-top',
-    rightLabelCls: Ext.baseCSSPrefix + 'form-item-label-right',
-    labelInnerCls: Ext.baseCSSPrefix + 'form-item-label-inner',
-    topLabelSideErrorCls: Ext.baseCSSPrefix + 'form-item-label-top-side-error',
+    topLabelCls: Ext.baseCSSPrefix + "form-item-label-top",
+    rightLabelCls: Ext.baseCSSPrefix + "form-item-label-right",
+    labelInnerCls: Ext.baseCSSPrefix + "form-item-label-inner",
+    topLabelSideErrorCls: Ext.baseCSSPrefix + "form-item-label-top-side-error",
 
     /**
      * @cfg {String} labelClsExtra
@@ -172,36 +171,37 @@ Ext.define("Ext.form.Labelable", {
      * @cfg {String} errorMsgCls
      * The CSS class to be applied to the error message element.
      */
-    errorMsgCls: Ext.baseCSSPrefix + 'form-error-msg',
+    errorMsgCls: Ext.baseCSSPrefix + "form-error-msg",
 
-    errorWrapCls: Ext.baseCSSPrefix + 'form-error-wrap',
-    errorWrapSideCls: Ext.baseCSSPrefix + 'form-error-wrap-side',
-    errorWrapUnderCls: Ext.baseCSSPrefix + 'form-error-wrap-under',
-    errorWrapUnderSideLabelCls: Ext.baseCSSPrefix + 'form-error-wrap-under-side-label',
+    errorWrapCls: Ext.baseCSSPrefix + "form-error-wrap",
+    errorWrapSideCls: Ext.baseCSSPrefix + "form-error-wrap-side",
+    errorWrapUnderCls: Ext.baseCSSPrefix + "form-error-wrap-under",
+    errorWrapUnderSideLabelCls:
+      Ext.baseCSSPrefix + "form-error-wrap-under-side-label",
 
     /**
      * @cfg {String} baseBodyCls
      * The CSS class to be applied to the body content element.
      */
-    baseBodyCls: Ext.baseCSSPrefix + 'form-item-body',
+    baseBodyCls: Ext.baseCSSPrefix + "form-item-body",
 
-    invalidIconCls: Ext.baseCSSPrefix + 'form-invalid-icon',
+    invalidIconCls: Ext.baseCSSPrefix + "form-invalid-icon",
 
-    invalidUnderCls: Ext.baseCSSPrefix + 'form-invalid-under',
+    invalidUnderCls: Ext.baseCSSPrefix + "form-invalid-under",
 
-    noLabelCls: Ext.baseCSSPrefix + 'form-item-no-label',
+    noLabelCls: Ext.baseCSSPrefix + "form-item-no-label",
 
     /**
      * @cfg {String} fieldBodyCls
      * An extra CSS class to be applied to the body content element in addition to {@link #baseBodyCls}.
      */
-    fieldBodyCls: '',
+    fieldBodyCls: "",
 
     /**
      * @cfg {String} invalidCls
      * The CSS class to use when marking the component invalid.
      */
-    invalidCls : Ext.baseCSSPrefix + 'form-invalid',
+    invalidCls: Ext.baseCSSPrefix + "form-invalid",
 
     /**
      * @cfg {String} fieldLabel
@@ -220,7 +220,7 @@ Ext.define("Ext.form.Labelable", {
      *   - "right" - The label is positioned to the left of the field, with its text aligned to the right.
      *     Its width is determined by the {@link #labelWidth} config.
      */
-    labelAlign : 'left',
+    labelAlign: "left",
 
     /**
      * @cfg {Number} labelWidth
@@ -248,14 +248,14 @@ Ext.define("Ext.form.Labelable", {
      *
      * Set to empty string to hide the separator completely.
      */
-    labelSeparator : ':',
+    labelSeparator: ":",
     //</locale>
 
     /**
      * @cfg {String} labelStyle
      * A CSS style specification string to apply directly to this field's label.
      */
-    
+
     /**
      * @cfg {Boolean} hideLabel
      * Set to true to completely hide the label element ({@link #fieldLabel} and {@link #labelSeparator}). Also see
@@ -303,7 +303,7 @@ Ext.define("Ext.form.Labelable", {
      *   - `none` Don't display any error message. This might be useful if you are implementing custom error display.
      *   - `[element id]` Add the error message directly to the innerHTML of the specified element.
      */
-    msgTarget: 'qtip',
+    msgTarget: "qtip",
 
     /**
      * @private
@@ -311,11 +311,11 @@ Ext.define("Ext.form.Labelable", {
      * to be an element id
      */
     msgTargets: {
-        qtip: 1,
-        title: 1,
-        under: 1,
-        side: 1,
-        none: 1
+      qtip: 1,
+      title: 1,
+      under: 1,
+      side: 1,
+      none: 1,
     },
 
     /**
@@ -331,128 +331,128 @@ Ext.define("Ext.form.Labelable", {
     noWrap: true,
 
     labelableInsertions: [
+      /**
+       * @cfg {String/Array/Ext.XTemplate} beforeBodyEl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * at the beginning of the input containing element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "beforeBodyEl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} beforeBodyEl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * at the beginning of the input containing element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'beforeBodyEl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} afterBodyEl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * at the end of the input containing element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "afterBodyEl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} afterBodyEl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * at the end of the input containing element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'afterBodyEl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} beforeLabelTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * before the label element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "beforeLabelTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} beforeLabelTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * before the label element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'beforeLabelTpl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} afterLabelTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * after the label element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "afterLabelTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} afterLabelTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * after the label element. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'afterLabelTpl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} beforeSubTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * before the {@link #getSubTplMarkup subTpl markup}. If an `XTemplate` is used, the
+       * component's {@link Ext.Component#renderData render data} serves as the context.
+       */
+      "beforeSubTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} beforeSubTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * before the {@link #getSubTplMarkup subTpl markup}. If an `XTemplate` is used, the
-         * component's {@link Ext.Component#renderData render data} serves as the context.
-         */
-        'beforeSubTpl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} afterSubTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * after the {@link #getSubTplMarkup subTpl markup}. If an `XTemplate` is used, the
+       * component's {@link Ext.Component#renderData render data} serves as the context.
+       */
+      "afterSubTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} afterSubTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * after the {@link #getSubTplMarkup subTpl markup}. If an `XTemplate` is used, the
-         * component's {@link Ext.Component#renderData render data} serves as the context.
-         */
-        'afterSubTpl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} beforeLabelTextTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * before the label text. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "beforeLabelTextTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} beforeLabelTextTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * before the label text. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'beforeLabelTextTpl',
+      /**
+       * @cfg {String/Array/Ext.XTemplate} afterLabelTextTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * after the label text. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
+       * serves as the context.
+       */
+      "afterLabelTextTpl",
 
-        /**
-         * @cfg {String/Array/Ext.XTemplate} afterLabelTextTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * after the label text. If an `XTemplate` is used, the component's {@link Ext.Component#renderData render data}
-         * serves as the context.
-         */
-        'afterLabelTextTpl',
-
-        /**
-         * @cfg {String/Array/Ext.XTemplate} labelAttrTpl
-         * An optional string or `XTemplate` configuration to insert in the field markup
-         * inside the label element (as attributes). If an `XTemplate` is used, the component's
-         * {@link Ext.Component#renderData render data} serves as the context.
-         */
-        'labelAttrTpl'
+      /**
+       * @cfg {String/Array/Ext.XTemplate} labelAttrTpl
+       * An optional string or `XTemplate` configuration to insert in the field markup
+       * inside the label element (as attributes). If an `XTemplate` is used, the component's
+       * {@link Ext.Component#renderData render data} serves as the context.
+       */
+      "labelAttrTpl",
     ],
 
     statics: {
-        /**
-         * Use a custom QuickTip instance separate from the main QuickTips singleton, so that we
-         * can give it a custom frame style. Responds to errorqtip rather than the qtip property.
-         * @static
-         * @private
-         */
-        initTip: function() {
-            var tip = this.tip,
-                cfg, copy;
+      /**
+       * Use a custom QuickTip instance separate from the main QuickTips singleton, so that we
+       * can give it a custom frame style. Responds to errorqtip rather than the qtip property.
+       * @static
+       * @private
+       */
+      initTip: function () {
+        var tip = this.tip,
+          cfg,
+          copy;
 
-            if (tip) {
-                return;
-            }
-
-            cfg = {
-                id: 'ext-form-error-tip',
-                //<debug>
-                // tell the spec runner to ignore this element when checking if the dom is clean
-                sticky: true,
-                //</debug>
-                ui: 'form-invalid'
-            };
-
-            // On Touch devices, tapping the target shows the qtip
-            if (Ext.supports.Touch) {
-                cfg.dismissDelay = 0;
-                cfg.anchor = 'top';
-                cfg.showDelay = 0;
-                cfg.listeners = {
-                    beforeshow: function() {
-                        this.minWidth = Ext.fly(this.anchorTarget).getWidth();
-                    }
-                };
-            }
-            tip = this.tip = Ext.create('Ext.tip.QuickTip', cfg);
-            copy = Ext.apply({}, tip.tagConfig);
-            copy.attribute = 'errorqtip';
-            tip.setTagConfig(copy);
-        },
-
-        /**
-         * Destroy the error tip instance.
-         * @static
-         */
-        destroyTip: function() {
-            this.tip = Ext.destroy(this.tip);
+        if (tip) {
+          return;
         }
+
+        cfg = {
+          id: "ext-form-error-tip",
+          //<debug>
+          // tell the spec runner to ignore this element when checking if the dom is clean
+          sticky: true,
+          //</debug>
+          ui: "form-invalid",
+        };
+
+        // On Touch devices, tapping the target shows the qtip
+        if (Ext.supports.Touch) {
+          cfg.dismissDelay = 0;
+          cfg.anchor = "top";
+          cfg.showDelay = 0;
+          cfg.listeners = {
+            beforeshow: function () {
+              this.minWidth = Ext.fly(this.anchorTarget).getWidth();
+            },
+          };
+        }
+        tip = this.tip = Ext.create("Ext.tip.QuickTip", cfg);
+        copy = Ext.apply({}, tip.tagConfig);
+        copy.attribute = "errorqtip";
+        tip.setTagConfig(copy);
+      },
+
+      /**
+       * Destroy the error tip instance.
+       * @static
+       */
+      destroyTip: function () {
+        this.tip = Ext.destroy(this.tip);
+      },
     },
 
     /**
@@ -466,54 +466,58 @@ Ext.define("Ext.form.Labelable", {
      * Performs initialization of this mixin. Component classes using this mixin should call this method during their
      * own initialization.
      */
-    initLabelable: function() {
-        var me = this,
-            padding = me.padding;
+    initLabelable: function () {
+      var me = this,
+        padding = me.padding;
 
-        // This Component is rendered as a table. Padding doesn't work on tables
-        // Before padding can be applied to the encapsulating table element, copy the padding into
-        // an extraMargins property which is to be added to all computed margins post render :(
-        if (padding) {
-            me.padding = undefined;
-            me.extraMargins = Ext.Element.parseBox(padding);
+      // This Component is rendered as a table. Padding doesn't work on tables
+      // Before padding can be applied to the encapsulating table element, copy the padding into
+      // an extraMargins property which is to be added to all computed margins post render :(
+      if (padding) {
+        me.padding = undefined;
+        me.extraMargins = Ext.Element.parseBox(padding);
+      }
+
+      // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
+      // Need to force a relayout of the display:table form item.
+      // TODO: Remove when IE8 retires.
+      if (Ext.isIE8) {
+        me.restoreDisplay = Ext.Function.createDelayed(
+          me.doRestoreDisplay,
+          0,
+          me,
+        );
+      }
+
+      if (!me.activeErrorsTpl) {
+        if (me.msgTarget === "title") {
+          me.activeErrorsTpl = me.plaintextActiveErrorsTpl;
+        } else {
+          me.activeErrorsTpl = me.htmlActiveErrorsTpl;
         }
+      }
 
-        // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
-        // Need to force a relayout of the display:table form item.
-        // TODO: Remove when IE8 retires.
-        if (Ext.isIE8) {
-            me.restoreDisplay = Ext.Function.createDelayed(me.doRestoreDisplay, 0, me);
-        }
+      me.addCls([me.formItemCls, me.formItemCls + "-" + me.ui]);
 
-        if (!me.activeErrorsTpl) {
-            if (me.msgTarget === 'title') {
-                me.activeErrorsTpl = me.plaintextActiveErrorsTpl;
-            } else {
-                me.activeErrorsTpl = me.htmlActiveErrorsTpl;
-            }
-        }
+      // Prevent first render of active error, at Field render time from signalling a change from undefined to "
+      me.lastActiveError = "";
 
-        me.addCls([me.formItemCls, me.formItemCls + '-' + me.ui]);
-
-        // Prevent first render of active error, at Field render time from signalling a change from undefined to "
-        me.lastActiveError = '';
-
-        // bubbleEvents on the prototype of a mixin won't work, so call enableBubble
-        me.enableBubble('errorchange');
+      // bubbleEvents on the prototype of a mixin won't work, so call enableBubble
+      me.enableBubble("errorchange");
     },
 
     /**
      * Returns the trimmed label by slicing off the label separator character. Can be overridden.
      * @return {String} The trimmed field label, or empty string if not defined
      */
-    trimLabelSeparator: function() {
-        var me = this,
-            separator = me.labelSeparator,
-            label = me.fieldLabel || '',
-            lastChar = label.substr(label.length - 1);
+    trimLabelSeparator: function () {
+      var me = this,
+        separator = me.labelSeparator,
+        label = me.fieldLabel || "",
+        lastChar = label.substr(label.length - 1);
 
-        // if the last char is the same as the label separator then slice it off otherwise just return label value
-        return lastChar === separator ? label.slice(0, -1) : label;
+      // if the last char is the same as the label separator then slice it off otherwise just return label value
+      return lastChar === separator ? label.slice(0, -1) : label;
     },
 
     /**
@@ -522,8 +526,8 @@ Ext.define("Ext.form.Labelable", {
      * @template
      * @return {String} The configured field label, or empty string if not defined
      */
-    getFieldLabel: function() {
-        return this.trimLabelSeparator();
+    getFieldLabel: function () {
+      return this.trimLabelSeparator();
     },
 
     /**
@@ -531,85 +535,86 @@ Ext.define("Ext.form.Labelable", {
      * @param {String} label The new label. The {@link #labelSeparator} will be automatically appended to the label
      * string.
      */
-    setFieldLabel: function(label){
-        label = label || '';
+    setFieldLabel: function (label) {
+      label = label || "";
 
-        var me = this,
-            separator = me.labelSeparator,
-            labelEl = me.labelEl,
-            errorWrapEl = me.errorWrapEl,
-            sideLabel = (me.labelAlign !== 'top'),
-            noLabelCls = me.noLabelCls,
-            errorWrapUnderSideLabelCls = me.errorWrapUnderSideLabelCls;
+      var me = this,
+        separator = me.labelSeparator,
+        labelEl = me.labelEl,
+        errorWrapEl = me.errorWrapEl,
+        sideLabel = me.labelAlign !== "top",
+        noLabelCls = me.noLabelCls,
+        errorWrapUnderSideLabelCls = me.errorWrapUnderSideLabelCls;
 
-        me.fieldLabel = label;
+      me.fieldLabel = label;
+      if (me.rendered) {
+        if (Ext.isEmpty(label) && me.hideEmptyLabel) {
+          me.addCls(noLabelCls);
+          if (sideLabel && errorWrapEl) {
+            errorWrapEl.removeCls(errorWrapUnderSideLabelCls);
+          }
+        } else {
+          if (separator) {
+            label = me.trimLabelSeparator() + separator;
+          }
+          labelEl.dom.firstChild.innerHTML = label;
+          me.removeCls(noLabelCls);
+          if (sideLabel && errorWrapEl) {
+            errorWrapEl.addCls(errorWrapUnderSideLabelCls);
+          }
+        }
+        me.updateLayout();
+      }
+    },
+
+    setHideLabel: function (hideLabel) {
+      var me = this;
+
+      if (hideLabel !== me.hideLabel) {
+        me.hideLabel = hideLabel;
         if (me.rendered) {
-            if (Ext.isEmpty(label) && me.hideEmptyLabel) {
-                me.addCls(noLabelCls);
-                if (sideLabel && errorWrapEl) {
-                    errorWrapEl.removeCls(errorWrapUnderSideLabelCls);
-                }
-            } else {
-                if (separator) {
-                    label = me.trimLabelSeparator() + separator;
-                }
-                labelEl.dom.firstChild.innerHTML = label;
-                me.removeCls(noLabelCls);
-                if (sideLabel && errorWrapEl) {
-                    errorWrapEl.addCls(errorWrapUnderSideLabelCls);
-                }
-            }
-            me.updateLayout();
+          me[hideLabel ? "addCls" : "removeCls"](me.noLabelCls);
+          me.updateLayout();
         }
+      }
     },
 
-    setHideLabel: function(hideLabel) {
-        var me = this;
+    setHideEmptyLabel: function (hideEmptyLabel) {
+      var me = this,
+        hide;
 
-        if (hideLabel !== me.hideLabel) {
-            me.hideLabel = hideLabel;
-            if (me.rendered) {
-                me[hideLabel ? 'addCls' : 'removeCls'](me.noLabelCls);
-                me.updateLayout();
-            }
+      if (hideEmptyLabel !== me.hideEmptyLabel) {
+        me.hideEmptyLabel = hideEmptyLabel;
+        if (me.rendered && !me.hideLabel) {
+          hide = hideEmptyLabel && !me.getFieldLabel();
+          me[hide ? "addCls" : "removeCls"](me.noLabelCls);
+          me.updateLayout();
         }
-    },
-
-    setHideEmptyLabel: function(hideEmptyLabel) {
-        var me = this,
-            hide;
-
-        if (hideEmptyLabel !== me.hideEmptyLabel) {
-            me.hideEmptyLabel = hideEmptyLabel;
-            if (me.rendered && !me.hideLabel) {
-                hide = hideEmptyLabel && !me.getFieldLabel();
-                me[hide ? 'addCls' : 'removeCls'](me.noLabelCls);
-                me.updateLayout();
-            }
-        }
+      }
     },
 
     getInsertionRenderData: function (data, names) {
-        var i = names.length,
-            name, value;
+      var i = names.length,
+        name,
+        value;
 
-        while (i--) {
-            name = names[i];
-            value = this[name];
+      while (i--) {
+        name = names[i];
+        value = this[name];
 
-            if (value) {
-                if (typeof value !== 'string') {
-                    if (!value.isTemplate) {
-                        value = Ext.XTemplate.getTpl(this, name);
-                    }
-                    value = value.apply(data);
-                }
+        if (value) {
+          if (typeof value !== "string") {
+            if (!value.isTemplate) {
+              value = Ext.XTemplate.getTpl(this, name);
             }
-
-            data[name] = value || '';
+            value = value.apply(data);
+          }
         }
 
-        return data;
+        data[name] = value || "";
+      }
+
+      return data;
     },
 
     /**
@@ -620,138 +625,155 @@ Ext.define("Ext.form.Labelable", {
      * @return {Object} The template arguments
      * @protected
      */
-    getLabelableRenderData: function() {
-        var me = this,
-            labelAlign = me.labelAlign,
-            topLabel = (labelAlign === 'top'),
-            rightLabel = (labelAlign === 'right'),
-            sideError = (me.msgTarget === 'side'),
-            underError = (me.msgTarget === 'under'),
-            errorMsgCls = me.errorMsgCls,
-            labelPad = me.labelPad,
-            labelWidth = me.labelWidth,
-            labelClsExtra = me.labelClsExtra || '',
-            errorWrapExtraCls = sideError ? me.errorWrapSideCls : me.errorWrapUnderCls,
-            labelStyle = '',
-            labelInnerStyle = '',
-            labelVisible = me.hasVisibleLabel(),
-            autoFitErrors = me.autoFitErrors,
-            defaultBodyWidth = me.defaultBodyWidth,
-            bodyStyle, data;
+    getLabelableRenderData: function () {
+      var me = this,
+        labelAlign = me.labelAlign,
+        topLabel = labelAlign === "top",
+        rightLabel = labelAlign === "right",
+        sideError = me.msgTarget === "side",
+        underError = me.msgTarget === "under",
+        errorMsgCls = me.errorMsgCls,
+        labelPad = me.labelPad,
+        labelWidth = me.labelWidth,
+        labelClsExtra = me.labelClsExtra || "",
+        errorWrapExtraCls = sideError
+          ? me.errorWrapSideCls
+          : me.errorWrapUnderCls,
+        labelStyle = "",
+        labelInnerStyle = "",
+        labelVisible = me.hasVisibleLabel(),
+        autoFitErrors = me.autoFitErrors,
+        defaultBodyWidth = me.defaultBodyWidth,
+        bodyStyle,
+        data;
 
-        if (topLabel) {
-            labelClsExtra += ' ' + me.topLabelCls;
-            if (labelPad) {
-                labelInnerStyle = 'padding-bottom:' + labelPad + 'px;';
-            }
-            if (sideError && !autoFitErrors) {
-                labelClsExtra += ' ' + me.topLabelSideErrorCls;
-            }
-        } else {
-            if (rightLabel) {
-                labelClsExtra += ' ' + me.rightLabelCls;
-            }
-            if (labelPad) {
-                labelStyle += me.getHorizontalPaddingStyle() + labelPad + 'px;';
-            }
-            labelStyle += 'width:' + (labelWidth + (labelPad ? labelPad : 0)) + 'px;';
-            // inner label needs width as well so that setting width on the outside
-            // that is smaller than the natural width, will be ensured to take width
-            // away from the body, and not the label.
-            labelInnerStyle = 'width:' + labelWidth + 'px';
+      if (topLabel) {
+        labelClsExtra += " " + me.topLabelCls;
+        if (labelPad) {
+          labelInnerStyle = "padding-bottom:" + labelPad + "px;";
         }
-
-        if (labelVisible) {
-            if (!topLabel && underError) {
-                errorWrapExtraCls += ' ' + me.errorWrapUnderSideLabelCls;
-            }
+        if (sideError && !autoFitErrors) {
+          labelClsExtra += " " + me.topLabelSideErrorCls;
         }
-
-        if (defaultBodyWidth) {
-            // This is here to support textfield's deprecated "size" config
-            bodyStyle = 'min-width:' + defaultBodyWidth + 'px;max-width:' +
-                defaultBodyWidth + 'px;';
+      } else {
+        if (rightLabel) {
+          labelClsExtra += " " + me.rightLabelCls;
         }
+        if (labelPad) {
+          labelStyle += me.getHorizontalPaddingStyle() + labelPad + "px;";
+        }
+        labelStyle +=
+          "width:" + (labelWidth + (labelPad ? labelPad : 0)) + "px;";
+        // inner label needs width as well so that setting width on the outside
+        // that is smaller than the natural width, will be ensured to take width
+        // away from the body, and not the label.
+        labelInnerStyle = "width:" + labelWidth + "px";
+      }
 
-        data = {
-            id: me.id,
-            inputId: me.getInputId(),
-            labelCls: me.labelCls,
-            labelClsExtra: labelClsExtra,
-            labelStyle: labelStyle + (me.labelStyle || ''),
-            labelInnerStyle: labelInnerStyle,
-            labelInnerCls: me.labelInnerCls,
-            unselectableCls: Ext.Element.unselectableCls,
-            bodyStyle: bodyStyle,
-            baseBodyCls: me.baseBodyCls,
-            fieldBodyCls: me.fieldBodyCls,
-            extraFieldBodyCls: me.extraFieldBodyCls,
-            errorWrapCls: me.errorWrapCls,
-            errorWrapExtraCls: errorWrapExtraCls,
-            renderError: sideError || underError,
-            invalidMsgCls: sideError ? me.invalidIconCls : underError ? me.invalidUnderCls : '',
-            errorMsgCls: errorMsgCls,
-            growCls: me.grow ? me.growCls : '',
-            tipAnchorTarget: me.id + '-inputEl',
-            errorWrapStyle: (sideError && !autoFitErrors) ?
-                    'visibility:hidden' : 'display:none',
-            fieldLabel: me.getFieldLabel(),
-            labelSeparator: me.labelSeparator
-        };
+      if (labelVisible) {
+        if (!topLabel && underError) {
+          errorWrapExtraCls += " " + me.errorWrapUnderSideLabelCls;
+        }
+      }
 
-        me.getInsertionRenderData(data, me.labelableInsertions);
+      if (defaultBodyWidth) {
+        // This is here to support textfield's deprecated "size" config
+        bodyStyle =
+          "min-width:" +
+          defaultBodyWidth +
+          "px;max-width:" +
+          defaultBodyWidth +
+          "px;";
+      }
 
-        return data;
+      data = {
+        id: me.id,
+        inputId: me.getInputId(),
+        labelCls: me.labelCls,
+        labelClsExtra: labelClsExtra,
+        labelStyle: labelStyle + (me.labelStyle || ""),
+        labelInnerStyle: labelInnerStyle,
+        labelInnerCls: me.labelInnerCls,
+        unselectableCls: Ext.Element.unselectableCls,
+        bodyStyle: bodyStyle,
+        baseBodyCls: me.baseBodyCls,
+        fieldBodyCls: me.fieldBodyCls,
+        extraFieldBodyCls: me.extraFieldBodyCls,
+        errorWrapCls: me.errorWrapCls,
+        errorWrapExtraCls: errorWrapExtraCls,
+        renderError: sideError || underError,
+        invalidMsgCls: sideError
+          ? me.invalidIconCls
+          : underError
+            ? me.invalidUnderCls
+            : "",
+        errorMsgCls: errorMsgCls,
+        growCls: me.grow ? me.growCls : "",
+        tipAnchorTarget: me.id + "-inputEl",
+        errorWrapStyle:
+          sideError && !autoFitErrors ? "visibility:hidden" : "display:none",
+        fieldLabel: me.getFieldLabel(),
+        labelSeparator: me.labelSeparator,
+      };
+
+      me.getInsertionRenderData(data, me.labelableInsertions);
+
+      return data;
     },
 
     // hook for rtl
-    getHorizontalPaddingStyle: function() {
-        return 'padding-right:';
+    getHorizontalPaddingStyle: function () {
+      return "padding-right:";
     },
 
-    beforeLabelRender: function() {
-        var me = this;
-        me.setFieldDefaults(me.getInherited().fieldDefaults);
-        if (me.ownerLayout) {
-            me.addCls(Ext.baseCSSPrefix + me.ownerLayout.type + '-form-item');
-        }
-        if (!me.hasVisibleLabel()) {
-            me.addCls(me.noLabelCls);
-        }
+    beforeLabelRender: function () {
+      var me = this;
+      me.setFieldDefaults(me.getInherited().fieldDefaults);
+      if (me.ownerLayout) {
+        me.addCls(Ext.baseCSSPrefix + me.ownerLayout.type + "-form-item");
+      }
+      if (!me.hasVisibleLabel()) {
+        me.addCls(me.noLabelCls);
+      }
     },
 
-    onLabelRender: function() {
-        var me = this,
-            style = {},
-            ExtElement = Ext.Element,
-            errorWrapEl = me.errorWrapEl,
-            margins, side;
+    onLabelRender: function () {
+      var me = this,
+        style = {},
+        ExtElement = Ext.Element,
+        errorWrapEl = me.errorWrapEl,
+        margins,
+        side;
 
-        if (errorWrapEl) {
-            errorWrapEl.setVisibilityMode((me.msgTarget === 'side' && !me.autoFitErrors) ?
-                ExtElement.VISIBILITY : ExtElement.DISPLAY);
-        }
+      if (errorWrapEl) {
+        errorWrapEl.setVisibilityMode(
+          me.msgTarget === "side" && !me.autoFitErrors
+            ? ExtElement.VISIBILITY
+            : ExtElement.DISPLAY,
+        );
+      }
 
-        if (me.extraMargins) {
-            margins = me.el.getMargin();
-            for (side in margins) {
-                if (margins.hasOwnProperty(side)) {
-                    style['margin-' + side] = (margins[side] + me.extraMargins[side]) + 'px';
-                }
-            }
-            me.el.setStyle(style);
+      if (me.extraMargins) {
+        margins = me.el.getMargin();
+        for (side in margins) {
+          if (margins.hasOwnProperty(side)) {
+            style["margin-" + side] =
+              margins[side] + me.extraMargins[side] + "px";
+          }
         }
+        me.el.setStyle(style);
+      }
     },
 
     /**
      * Checks if the field has a visible label
      * @return {Boolean} True if the field has a visible label
      */
-    hasVisibleLabel: function(){
-        if (this.hideLabel) {
-            return false;
-        }
-        return !(this.hideEmptyLabel && !this.getFieldLabel());
+    hasVisibleLabel: function () {
+      if (this.hideLabel) {
+        return false;
+      }
+      return !(this.hideEmptyLabel && !this.getFieldLabel());
     },
 
     /**
@@ -760,8 +782,8 @@ Ext.define("Ext.form.Labelable", {
      * @return {String} The markup to be inserted
      * @protected
      */
-    getSubTplMarkup: function() {
-        return '';
+    getSubTplMarkup: function () {
+      return "";
     },
 
     /**
@@ -769,8 +791,8 @@ Ext.define("Ext.form.Labelable", {
      * Implementing subclasses may also use this as e.g. the id for their own input element.
      * @return {String} The input id
      */
-    getInputId: function() {
-        return '';
+    getInputId: function () {
+      return "";
     },
 
     /**
@@ -778,8 +800,8 @@ Ext.define("Ext.form.Labelable", {
      * returns any message that the component may already hold.
      * @return {String} The active error message on the component; if there is no error, an empty string is returned.
      */
-    getActiveError : function() {
-        return this.activeError || '';
+    getActiveError: function () {
+      return this.activeError || "";
     },
 
     /**
@@ -787,8 +809,8 @@ Ext.define("Ext.form.Labelable", {
      * merely looks for any message that the component may already hold.
      * @return {Boolean}
      */
-    hasActiveError: function() {
-        return !!this.getActiveError();
+    hasActiveError: function () {
+      return !!this.getActiveError();
     },
 
     /**
@@ -799,8 +821,8 @@ Ext.define("Ext.form.Labelable", {
      * Ext.form.field.Base} you should call {@link Ext.form.field.Base#markInvalid markInvalid} instead.
      * @param {String} msg The error message
      */
-    setActiveError: function(msg) {
-        this.setActiveErrors(msg);
+    setActiveError: function (msg) {
+      this.setActiveErrors(msg);
     },
 
     /**
@@ -809,8 +831,8 @@ Ext.define("Ext.form.Labelable", {
      * @return {String[]} The active error messages on the component; if there are no errors, an empty Array is
      * returned.
      */
-    getActiveErrors: function() {
-        return this.activeErrors || [];
+    getActiveErrors: function () {
+      return this.activeErrors || [];
     },
 
     /**
@@ -821,65 +843,66 @@ Ext.define("Ext.form.Labelable", {
      * {@link Ext.form.field.Base} you should call {@link Ext.form.field.Base#markInvalid markInvalid} instead.
      * @param {String[]} errors The error messages
      */
-    setActiveErrors: function(errors) {
-        var me = this,
-            errorWrapEl = me.errorWrapEl,
-            msgTarget = me.msgTarget,
-            isSide = msgTarget === 'side',
-            isQtip = msgTarget === 'qtip',
-            actionEl, activeError, tpl, targetEl;
+    setActiveErrors: function (errors) {
+      var me = this,
+        errorWrapEl = me.errorWrapEl,
+        msgTarget = me.msgTarget,
+        isSide = msgTarget === "side",
+        isQtip = msgTarget === "qtip",
+        actionEl,
+        activeError,
+        tpl,
+        targetEl;
 
-        errors = Ext.Array.from(errors);
-        tpl = me.getTpl('activeErrorsTpl');
+      errors = Ext.Array.from(errors);
+      tpl = me.getTpl("activeErrorsTpl");
 
-        me.activeErrors = errors;
-        activeError = me.activeError = tpl.apply({
-            fieldLabel: me.fieldLabel,
-            errors: errors,
-            listCls: Ext.baseCSSPrefix + 'list-plain'
-        });
+      me.activeErrors = errors;
+      activeError = me.activeError = tpl.apply({
+        fieldLabel: me.fieldLabel,
+        errors: errors,
+        listCls: Ext.baseCSSPrefix + "list-plain",
+      });
 
-        me.renderActiveError();
+      me.renderActiveError();
 
-        if (me.rendered) {
-            actionEl = me.getActionEl();
-            
-            if (isSide) {
-                me.errorEl.dom.setAttribute('data-errorqtip', activeError);
-            }
-            else if (isQtip) {
-                actionEl.dom.setAttribute('data-errorqtip', activeError);
-            }
-            else if (msgTarget === 'title') {
-                actionEl.dom.setAttribute('title', activeError);
-            }
+      if (me.rendered) {
+        actionEl = me.getActionEl();
 
-            // If msgTarget is title, setting an alert is redundant for ARIA purposes
-            if (msgTarget !== 'title') {
-                me.ariaErrorEl.dom.innerHTML = errors.join('. ');
-                actionEl.dom.setAttribute('aria-describedby', me.ariaErrorEl.id);
-            }
-            
-            if (isSide || isQtip) {
-                Ext.form.Labelable.initTip();
-            }
-
-            if (!me.msgTargets[msgTarget]) {
-                targetEl = Ext.get(msgTarget);
-
-                if (targetEl) {
-                    targetEl.dom.innerHTML = activeError;
-                }
-            }
+        if (isSide) {
+          me.errorEl.dom.setAttribute("data-errorqtip", activeError);
+        } else if (isQtip) {
+          actionEl.dom.setAttribute("data-errorqtip", activeError);
+        } else if (msgTarget === "title") {
+          actionEl.dom.setAttribute("title", activeError);
         }
 
-        if (errorWrapEl) {
-            errorWrapEl.setVisible(errors.length > 0);
-            if (isSide && me.autoFitErrors) {
-                me.labelEl.addCls(me.topLabelSideErrorCls);
-            }
-            me.updateLayout();
+        // If msgTarget is title, setting an alert is redundant for ARIA purposes
+        if (msgTarget !== "title") {
+          me.ariaErrorEl.dom.innerHTML = errors.join(". ");
+          actionEl.dom.setAttribute("aria-describedby", me.ariaErrorEl.id);
         }
+
+        if (isSide || isQtip) {
+          Ext.form.Labelable.initTip();
+        }
+
+        if (!me.msgTargets[msgTarget]) {
+          targetEl = Ext.get(msgTarget);
+
+          if (targetEl) {
+            targetEl.dom.innerHTML = activeError;
+          }
+        }
+      }
+
+      if (errorWrapEl) {
+        errorWrapEl.setVisible(errors.length > 0);
+        if (isSide && me.autoFitErrors) {
+          me.labelEl.addCls(me.topLabelSideErrorCls);
+        }
+        me.updateLayout();
+      }
     },
 
     /**
@@ -887,68 +910,68 @@ Ext.define("Ext.form.Labelable", {
      * you'll have to call doComponentLayout to actually update the field's layout to match. If the field extends {@link
      * Ext.form.field.Base} you should call {@link Ext.form.field.Base#clearInvalid clearInvalid} instead.
      */
-    unsetActiveError: function() {
-        var me = this,
-            errorWrapEl = me.errorWrapEl,
-            msgTarget = me.msgTarget,
-            restoreDisplay = me.restoreDisplay,
-            actionEl, targetEl;
+    unsetActiveError: function () {
+      var me = this,
+        errorWrapEl = me.errorWrapEl,
+        msgTarget = me.msgTarget,
+        restoreDisplay = me.restoreDisplay,
+        actionEl,
+        targetEl;
 
-        if (me.hasActiveError()) {
-            delete me.activeError;
-            delete me.activeErrors;
-            me.renderActiveError();
+      if (me.hasActiveError()) {
+        delete me.activeError;
+        delete me.activeErrors;
+        me.renderActiveError();
 
-            if (me.rendered) {
-                actionEl = me.getActionEl();
-                
-                if (msgTarget === 'qtip') {
-                    actionEl.dom.removeAttribute('data-errorqtip');
-                }
-                else if (msgTarget === 'title') {
-                    actionEl.dom.removeAttribute('title');
-                }
-                
-                if (msgTarget !== 'title') {
-                    me.ariaErrorEl.dom.innerHTML = '';
-                    actionEl.dom.removeAttribute('aria-describedby');
-                }
+        if (me.rendered) {
+          actionEl = me.getActionEl();
 
-                if (!me.msgTargets[msgTarget]) {
-                    targetEl = Ext.get(msgTarget);
+          if (msgTarget === "qtip") {
+            actionEl.dom.removeAttribute("data-errorqtip");
+          } else if (msgTarget === "title") {
+            actionEl.dom.removeAttribute("title");
+          }
 
-                    if (targetEl) {
-                        targetEl.dom.innerHTML = '';
-                    }
-                }
+          if (msgTarget !== "title") {
+            me.ariaErrorEl.dom.innerHTML = "";
+            actionEl.dom.removeAttribute("aria-describedby");
+          }
 
-                if (errorWrapEl) {
-                    errorWrapEl.hide();
-                    if (msgTarget === 'side' && me.autoFitErrors) {
-                        me.labelEl.removeCls(me.topLabelSideErrorCls);
-                    }
-                    me.updateLayout();
+          if (!me.msgTargets[msgTarget]) {
+            targetEl = Ext.get(msgTarget);
 
-                    // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
-                    // Need to force a relayout of the display:table form item.
-                    // TODO: Remove when IE8 retires.
-                    if (restoreDisplay) {
-                        me.el.dom.style.display = 'block';
-                        me.restoreDisplay();
-                    }
-                }
+            if (targetEl) {
+              targetEl.dom.innerHTML = "";
             }
+          }
+
+          if (errorWrapEl) {
+            errorWrapEl.hide();
+            if (msgTarget === "side" && me.autoFitErrors) {
+              me.labelEl.removeCls(me.topLabelSideErrorCls);
+            }
+            me.updateLayout();
+
+            // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
+            // Need to force a relayout of the display:table form item.
+            // TODO: Remove when IE8 retires.
+            if (restoreDisplay) {
+              me.el.dom.style.display = "block";
+              me.restoreDisplay();
+            }
+          }
         }
+      }
     },
 
-    doRestoreDisplay: function() {
-        // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
-        // Need to force a relayout of the display:table form item.
-        // TODO: Remove this method when IE8 retires.
-        var el = this.el;
-        if (el && el.dom) {
-            el.dom.style.display = '';
-        }
+    doRestoreDisplay: function () {
+      // IE8 hack for https://sencha.jira.com/browse/EXTJS-17536.
+      // Need to force a relayout of the display:table form item.
+      // TODO: Remove this method when IE8 retires.
+      var el = this.el;
+      if (el && el.dom) {
+        el.dom.style.display = "";
+      }
     },
 
     /**
@@ -956,23 +979,23 @@ Ext.define("Ext.form.Labelable", {
      * Updates the rendered DOM to match the current activeError. This only updates the content and
      * attributes, you'll have to call doComponentLayout to actually update the display.
      */
-    renderActiveError: function() {
-        var me = this,
-            activeError = me.getActiveError(),
-            hasError = !!activeError;
+    renderActiveError: function () {
+      var me = this,
+        activeError = me.getActiveError(),
+        hasError = !!activeError;
 
-        if (activeError !== me.lastActiveError) {
-            me.lastActiveError = activeError;
-            me.fireEvent('errorchange', me, activeError);
-        }
+      if (activeError !== me.lastActiveError) {
+        me.lastActiveError = activeError;
+        me.fireEvent("errorchange", me, activeError);
+      }
 
-        if (me.rendered && !me.destroyed && !me.preventMark) {
-            me.toggleInvalidCls(hasError);
-            // Update the errorEl (There will only be one if msgTarget is 'side' or 'under') with the error message text
-            if (me.errorEl) {
-                me.errorEl.dom.innerHTML = activeError;
-            }
+      if (me.rendered && !me.destroyed && !me.preventMark) {
+        me.toggleInvalidCls(hasError);
+        // Update the errorEl (There will only be one if msgTarget is 'side' or 'under') with the error message text
+        if (me.errorEl) {
+          me.errorEl.dom.innerHTML = activeError;
         }
+      }
     },
 
     /**
@@ -980,8 +1003,8 @@ Ext.define("Ext.form.Labelable", {
      * Add/remove invalid class(es)
      * @param {Boolean} hasError
      */
-    toggleInvalidCls: function(hasError) {
-        this.el[hasError ? 'addCls' : 'removeCls'](this.invalidCls);
+    toggleInvalidCls: function (hasError) {
+      this.el[hasError ? "addCls" : "removeCls"](this.invalidCls);
     },
 
     /**
@@ -990,17 +1013,19 @@ Ext.define("Ext.form.Labelable", {
      * prototype and we should apply the default value.
      * @param {Object} defaults The defaults to apply to the object.
      */
-    setFieldDefaults: function(defaults) {
-        var key;
+    setFieldDefaults: function (defaults) {
+      var key;
 
-        for (key in defaults) {
-            if (!this.hasOwnProperty(key)) {
-                this[key] = defaults[key];
-            }
+      for (key in defaults) {
+        if (!this.hasOwnProperty(key)) {
+          this[key] = defaults[key];
         }
-    }
-}, function() {
+      }
+    },
+  },
+  function () {
     if (Ext.supports.Touch) {
-        this.prototype.msgTarget = 'side';
+      this.prototype.msgTarget = "side";
     }
-});
+  },
+);

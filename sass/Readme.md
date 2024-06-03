@@ -14,7 +14,7 @@ This folder contains misc. support code for Sass builds (global functions, etc.)
 ### ./sass/src
 
 This folder contains Sass files defining CSS rules corresponding to classes
-included in the application's JavaScript code build. By default, files in this 
+included in the application's JavaScript code build. By default, files in this
 folder are mapped to the application's root namespace, 'AitiGuruTest'. This is set in
 `"app.json"`:
 
@@ -25,7 +25,7 @@ folder are mapped to the application's root namespace, 'AitiGuruTest'. This is s
 ### ./sass/var
 
 This folder contains Sass files defining Sass variables corresponding to classes
-included in the application's JavaScript code build. By default, files in this 
+included in the application's JavaScript code build. By default, files in this
 folder are mapped to the application's root namespace, 'AitiGuruTest' in the same way
 as `"AitiGuruTest/sass/src"`.
 

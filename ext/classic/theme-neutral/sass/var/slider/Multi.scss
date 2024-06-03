@@ -18,13 +18,17 @@ $horizontal-slider-thumb-height: dynamic(15px);
  * @var {number}
  * The width of the horizontal slider start cap
  */
-$horizontal-slider-start-cap-width: dynamic(floor($horizontal-slider-thumb-width / 2));
+$horizontal-slider-start-cap-width: dynamic(
+  floor($horizontal-slider-thumb-width / 2)
+);
 
 /**
  * @var {number}
  * The width of the horizontal slider end cap
  */
-$horizontal-slider-end-cap-width: dynamic(ceil($horizontal-slider-thumb-width / 2));
+$horizontal-slider-end-cap-width: dynamic(
+  ceil($horizontal-slider-thumb-width / 2)
+);
 
 /**
  * @var {number}
@@ -42,13 +46,17 @@ $vertical-slider-thumb-height: dynamic(15px);
  * @var {number}
  * The height of the vertical slider start cap
  */
-$vertical-slider-start-cap-height: dynamic(floor($vertical-slider-thumb-height / 2));
+$vertical-slider-start-cap-height: dynamic(
+  floor($vertical-slider-thumb-height / 2)
+);
 
 /**
  * @var {number}
  * The height of the vertical slider end cap
  */
-$vertical-slider-end-cap-height: dynamic(ceil($vertical-slider-thumb-height / 2));
+$vertical-slider-end-cap-height: dynamic(
+  ceil($vertical-slider-thumb-height / 2)
+);
 
 /**
  * @var {boolean}
@@ -192,10 +200,14 @@ $slider-thumb-glyph-font-size: dynamic(12px);
  * @var {string/list}
  * Glyph to display inside of the slider thumb when {@link Global_CSS#$enable-font-icons} is `true`
  */
-$horizontal-slider-thumb-glyph: dynamic($ext-icon-equals-vertical $slider-thumb-glyph-font-size ExtJS);
+$horizontal-slider-thumb-glyph: dynamic(
+  $ext-icon-equals-vertical $slider-thumb-glyph-font-size ExtJS
+);
 
 /**
  * @var {string/list}
  * Glyph to display inside of the slider thumb when {@link Global_CSS#$enable-font-icons} is `true`
  */
-$vertical-slider-thumb-glyph: dynamic($ext-icon-equals $slider-thumb-glyph-font-size ExtJS);
+$vertical-slider-thumb-glyph: dynamic(
+  $ext-icon-equals $slider-thumb-glyph-font-size ExtJS
+);

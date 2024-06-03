@@ -39,144 +39,154 @@
  *     });
  *
  */
-Ext.define('Ext.ProgressBarWidget', {
-    extend: 'Ext.Widget',
-    alias: 'widget.progressbarwidget',
+Ext.define("Ext.ProgressBarWidget", {
+  extend: "Ext.Widget",
+  alias: "widget.progressbarwidget",
 
-    // Required to pull in the styles
-    requires: [
-        'Ext.ProgressBar'
-    ],
+  // Required to pull in the styles
+  requires: ["Ext.ProgressBar"],
 
-    config: {
-        /**
-         * @cfg {String} [text]
-         * The background text
-         */
-        text: null,
+  config: {
+    /**
+     * @cfg {String} [text]
+     * The background text
+     */
+    text: null,
 
-        /**
-         * @cfg {Number} [value=0]
-         * A floating point value between 0 and 1 (e.g., .5)
-         */
-        value: 0,
+    /**
+     * @cfg {Number} [value=0]
+     * A floating point value between 0 and 1 (e.g., .5)
+     */
+    value: 0,
 
-        /**
-         * @cfg {Boolean} [animate=false]
-         * Specify as `true` to have this progress bar animate to new extent when updated.
-         */
-        animate: false,
+    /**
+     * @cfg {Boolean} [animate=false]
+     * Specify as `true` to have this progress bar animate to new extent when updated.
+     */
+    animate: false,
 
-        /**
-         * @cfg {String/Ext.XTemplate} [textTpl]
-         * A template used to create this ProgressBar's background text given two values:
-         *
-         *    `value  ' - The raw progress value between 0 and 1
-         *    'percent' - The value as a percentage between 0 and 100
-         */
-        textTpl: null
+    /**
+     * @cfg {String/Ext.XTemplate} [textTpl]
+     * A template used to create this ProgressBar's background text given two values:
+     *
+     *    `value  ' - The raw progress value between 0 and 1
+     *    'percent' - The value as a percentage between 0 and 100
+     */
+    textTpl: null,
+  },
+
+  cachedConfig: {
+    /**
+     * @cfg {String} [baseCls='x-progress']
+     * The base CSS class to apply to the progress bar's wrapper element.
+     */
+    baseCls: Ext.baseCSSPrefix + "progress",
+
+    textCls: Ext.baseCSSPrefix + "progress-text",
+
+    ui: "default",
+  },
+
+  template: [
+    {
+      reference: "backgroundEl",
     },
-
-    cachedConfig: {
-        /**
-         * @cfg {String} [baseCls='x-progress']
-         * The base CSS class to apply to the progress bar's wrapper element.
-         */
-        baseCls: Ext.baseCSSPrefix + 'progress',
-
-        textCls: Ext.baseCSSPrefix + 'progress-text',
-
-        ui: 'default'
+    {
+      reference: "barEl",
+      children: [
+        {
+          reference: "textEl",
+        },
+      ],
     },
+  ],
 
-    template: [{
-        reference: 'backgroundEl'
-    }, {
-        reference: 'barEl',
-        children: [{
-            reference: 'textEl'
-        }]
-    }],
+  defaultBindProperty: "value",
 
-    defaultBindProperty: 'value',
+  updateWidth: function (width, oldWidth) {
+    var me = this;
 
-    updateWidth: function(width, oldWidth) {
-        var me = this;
+    me.callParent([width, oldWidth]);
+    width -= me.element.getBorderWidth("lr");
+    me.backgroundEl.setWidth(width);
+    me.textEl.setWidth(width);
+  },
 
-        me.callParent([width, oldWidth]);
-        width -= me.element.getBorderWidth('lr');
-        me.backgroundEl.setWidth(width);
-        me.textEl.setWidth(width);
-    },
-            
-    updateUi: function(ui, oldUi) {
-        var element = this.element,
-            barEl = this.barEl,
-            baseCls = this.getBaseCls() + '-';
+  updateUi: function (ui, oldUi) {
+    var element = this.element,
+      barEl = this.barEl,
+      baseCls = this.getBaseCls() + "-";
 
-        if (oldUi) {
-            element.removeCls(baseCls + oldUi);
-            barEl.removeCls(baseCls + 'bar-' + oldUi);
-        }
-
-        element.addCls(baseCls + ui);
-        barEl.addCls(baseCls + 'bar-' + ui);
-    },
-
-    updateBaseCls: function(baseCls, oldBaseCls) {
-        //<debug>
-        if (oldBaseCls) {
-            Ext.raise('You cannot configure baseCls - use a subclass');
-        }
-        //</debug>
-        this.element.addCls(baseCls);
-        this.barEl.addCls(baseCls + '-bar');
-    },
-
-    updateTextCls: function(textCls) {
-        this.backgroundEl.addCls(textCls + ' ' + textCls + '-back');
-        this.textEl.addCls(textCls);
-    },
-
-    applyValue: function(value) {
-        return value || 0;
-    },
-
-    updateValue: function(value, oldValue) {
-        var me = this,
-            barEl = me.barEl,
-            textTpl = me.getTextTpl();
-
-        if (textTpl) {
-            me.setText(textTpl.apply({
-                value: value,
-                percent: Math.round(value * 100)
-            }));
-        }
-        if (me.getAnimate()) {
-            barEl.stopAnimation();
-            barEl.animate(Ext.apply({
-                from: {
-                    width: (oldValue * 100) + '%'
-                },
-                to: {
-                    width: (value * 100) + '%'
-                }
-            }, me.animate));
-        } else {
-            barEl.setStyle('width', (value * 100) + '%');
-        }
-    },
-
-    updateText: function(text) {
-        this.backgroundEl.setHtml(text);
-        this.textEl.setHtml(text);
-    },
-
-    applyTextTpl: function(textTpl) {
-        if (!textTpl.isTemplate) {
-            textTpl = new Ext.XTemplate(textTpl);
-        }
-        return textTpl;
+    if (oldUi) {
+      element.removeCls(baseCls + oldUi);
+      barEl.removeCls(baseCls + "bar-" + oldUi);
     }
+
+    element.addCls(baseCls + ui);
+    barEl.addCls(baseCls + "bar-" + ui);
+  },
+
+  updateBaseCls: function (baseCls, oldBaseCls) {
+    //<debug>
+    if (oldBaseCls) {
+      Ext.raise("You cannot configure baseCls - use a subclass");
+    }
+    //</debug>
+    this.element.addCls(baseCls);
+    this.barEl.addCls(baseCls + "-bar");
+  },
+
+  updateTextCls: function (textCls) {
+    this.backgroundEl.addCls(textCls + " " + textCls + "-back");
+    this.textEl.addCls(textCls);
+  },
+
+  applyValue: function (value) {
+    return value || 0;
+  },
+
+  updateValue: function (value, oldValue) {
+    var me = this,
+      barEl = me.barEl,
+      textTpl = me.getTextTpl();
+
+    if (textTpl) {
+      me.setText(
+        textTpl.apply({
+          value: value,
+          percent: Math.round(value * 100),
+        }),
+      );
+    }
+    if (me.getAnimate()) {
+      barEl.stopAnimation();
+      barEl.animate(
+        Ext.apply(
+          {
+            from: {
+              width: oldValue * 100 + "%",
+            },
+            to: {
+              width: value * 100 + "%",
+            },
+          },
+          me.animate,
+        ),
+      );
+    } else {
+      barEl.setStyle("width", value * 100 + "%");
+    }
+  },
+
+  updateText: function (text) {
+    this.backgroundEl.setHtml(text);
+    this.textEl.setHtml(text);
+  },
+
+  applyTextTpl: function (textTpl) {
+    if (!textTpl.isTemplate) {
+      textTpl = new Ext.XTemplate(textTpl);
+    }
+    return textTpl;
+  },
 });

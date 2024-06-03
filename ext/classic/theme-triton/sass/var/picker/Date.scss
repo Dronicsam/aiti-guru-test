@@ -3,11 +3,17 @@ $datepicker-month-button-color: dynamic($color);
 $datepicker-month-button-font-size: dynamic(round($font-size * 1.15));
 $datepicker-month-button-padding: dynamic(14px);
 $datepicker-header-padding: dynamic(0);
-$datepicker-month-button-over-background-color: dynamic(darken($datepicker-header-background-color, 5%));
-$datepicker-month-button-pressed-background-color: dynamic(darken($datepicker-header-background-color, 10%));
+$datepicker-month-button-over-background-color: dynamic(
+  darken($datepicker-header-background-color, 5%)
+);
+$datepicker-month-button-pressed-background-color: dynamic(
+  darken($datepicker-header-background-color, 10%)
+);
 $datepicker-month-button-arrow-width: dynamic(16px);
 $datepicker-footer-padding: dynamic(6px 0);
-$datepicker-arrow-height: dynamic(vertical($datepicker-month-button-padding) + $button-small-icon-size);
+$datepicker-arrow-height: dynamic(
+  vertical($datepicker-month-button-padding) + $button-small-icon-size
+);
 $datepicker-arrow-width: dynamic(32px);
 $datepicker-arrow-glyph-color: dynamic($neutral-dark-color);
 $datepicker-item-border-width: dynamic(0);
@@ -20,7 +26,9 @@ $datepicker-item-selected-font-weight: dynamic($font-weight);
 $datepicker-item-selected-background-color: dynamic($base-color);
 $datepicker-item-today-background-color: dynamic($base-light-color);
 $datepicker-item-hover-background-color: dynamic($neutral-highlight-color);
-$datepicker-column-header-background-color: dynamic($datepicker-header-background-color);
+$datepicker-column-header-background-color: dynamic(
+  $datepicker-header-background-color
+);
 $datepicker-item-prev-next-color: dynamic($neutral-color);
 $datepicker-item-selected-color: dynamic(#fff);
 $datepicker-monthpicker-yearnav-button-height: dynamic(16px);

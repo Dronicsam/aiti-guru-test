@@ -4,4 +4,6 @@
 $grid-column-header-font-weight: dynamic($font-weight-bold);
 $grid-column-header-color: dynamic(#666);
 
-$grid-column-header-focus-border-color: dynamic(mix($grid-header-background-color, $base-color, 20%));
+$grid-column-header-focus-border-color: dynamic(
+  mix($grid-header-background-color, $base-color, 20%)
+);

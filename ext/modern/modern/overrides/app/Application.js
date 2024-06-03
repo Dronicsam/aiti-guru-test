@@ -1,23 +1,23 @@
-Ext.define('Ext.overrides.app.Application', {
-    override: 'Ext.app.Application',
-    requires: ['Ext.viewport.Viewport'],
+Ext.define("Ext.overrides.app.Application", {
+  override: "Ext.app.Application",
+  requires: ["Ext.viewport.Viewport"],
 
-    initMainView: function() {
-        var me = this,
-            viewport,
-            mainView;
+  initMainView: function () {
+    var me = this,
+      viewport,
+      mainView;
 
-        me.viewport = viewport = Ext.Viewport;
+    me.viewport = viewport = Ext.Viewport;
 
-        me.callParent();
+    me.callParent();
 
-        mainView = me.getMainView();
+    mainView = me.getMainView();
 
-        // Ensure the viewport is ready by the time launch is called
-        viewport.onAppLaunch();
+    // Ensure the viewport is ready by the time launch is called
+    viewport.onAppLaunch();
 
-        if (mainView) {
-            viewport.add(mainView);
-        }
+    if (mainView) {
+      viewport.add(mainView);
     }
+  },
 });

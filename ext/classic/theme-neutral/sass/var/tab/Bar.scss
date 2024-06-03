@@ -26,7 +26,7 @@ $tabbar-base-color: dynamic($base-color);
  * or a list of color stops. Used as the `$type` parameter for 
  * {@link Global_CSS#background-gradient}.
  */
-$tabbar-background-gradient: dynamic('tabbar');
+$tabbar-background-gradient: dynamic("tabbar");
 
 /**
  * @var {color}
@@ -158,25 +158,33 @@ $tabbar-scroller-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the "top" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tabbar-scroller-top-glyph: dynamic($fa-var-chevron-up $tabbar-scroller-glyph-font-size $font-icon-font-family);
+$tabbar-scroller-top-glyph: dynamic(
+  $fa-var-chevron-up $tabbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "right" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tabbar-scroller-right-glyph: dynamic($fa-var-chevron-right $tabbar-scroller-glyph-font-size $font-icon-font-family);
+$tabbar-scroller-right-glyph: dynamic(
+  $fa-var-chevron-right $tabbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "bottom" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tabbar-scroller-bottom-glyph: dynamic($fa-var-chevron-down $tabbar-scroller-glyph-font-size $font-icon-font-family);
+$tabbar-scroller-bottom-glyph: dynamic(
+  $fa-var-chevron-down $tabbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "left" scroller icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tabbar-scroller-left-glyph: dynamic($fa-var-chevron-left $tabbar-scroller-glyph-font-size $font-icon-font-family);
+$tabbar-scroller-left-glyph: dynamic(
+  $fa-var-chevron-left $tabbar-scroller-glyph-font-size $font-icon-font-family
+);
 
 /**
  * @var {boolean}

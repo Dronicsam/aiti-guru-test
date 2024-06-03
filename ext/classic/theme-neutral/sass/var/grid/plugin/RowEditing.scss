@@ -21,7 +21,9 @@ $grid-row-editor-border-color: dynamic($panel-border-color);
 $grid-row-editor-border-width: dynamic(1px);
 
 // private
-$grid-row-editor-border: dynamic($grid-row-editor-border-width solid $grid-row-editor-border-color);
+$grid-row-editor-border: dynamic(
+  $grid-row-editor-border-width solid $grid-row-editor-border-color
+);
 
 /**
  * @var {number/list}
@@ -72,8 +74,17 @@ $grid-row-editor-error-tip-list-style: dynamic(disc);
 $grid-row-editor-error-tip-list-spacing: dynamic(15px);
 
 // private
-$grid-row-editor-field-padding:
-    top($grid-cell-field-padding)
-    max((right($grid-cell-field-padding) - ceil($grid-row-editor-field-spacing / 2)), 0)
-    bottom($grid-cell-field-padding)
-    max((left($grid-cell-field-padding) - floor($grid-row-editor-field-spacing / 2)), 0);
+$grid-row-editor-field-padding: top($grid-cell-field-padding)
+  max(
+    (
+      right($grid-cell-field-padding) - ceil($grid-row-editor-field-spacing / 2)
+    ),
+    0
+  )
+  bottom($grid-cell-field-padding)
+  max(
+    (
+      left($grid-cell-field-padding) - floor($grid-row-editor-field-spacing / 2)
+    ),
+    0
+  );

@@ -18,13 +18,13 @@ $splitter-active-background-color: dynamic(#b4b4b4);
  * @var {number}
  * The opacity of the active Splitter (the Splitter currently being dragged)
  */
-$splitter-active-opacity: dynamic(.8);
+$splitter-active-opacity: dynamic(0.8);
 
 /**
  * @var {number}
  * The opacity of the collapse tool on the active Splitter (the Splitter currently being dragged)
  */
-$splitter-active-collapse-tool-opacity: dynamic(.3);
+$splitter-active-collapse-tool-opacity: dynamic(0.3);
 
 /**
  * @var {color}
@@ -109,25 +109,37 @@ $splitter-collapse-tool-glyph-font-size: dynamic(16px);
  * @var {string/list}
  * Glyph for the "top" collapse tool when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$splitter-collapse-tool-top-glyph: dynamic($fa-var-caret-up $splitter-collapse-tool-glyph-font-size $font-icon-font-family);
+$splitter-collapse-tool-top-glyph: dynamic(
+  $fa-var-caret-up $splitter-collapse-tool-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "right" collapse tool when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$splitter-collapse-tool-right-glyph: dynamic($fa-var-caret-right $splitter-collapse-tool-glyph-font-size $font-icon-font-family);
+$splitter-collapse-tool-right-glyph: dynamic(
+  $fa-var-caret-right $splitter-collapse-tool-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "bottom" collapse tool when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$splitter-collapse-tool-bottom-glyph: dynamic($fa-var-caret-down $splitter-collapse-tool-glyph-font-size $font-icon-font-family);
+$splitter-collapse-tool-bottom-glyph: dynamic(
+  $fa-var-caret-down $splitter-collapse-tool-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {string/list}
  * Glyph for the "left" collapse tool when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$splitter-collapse-tool-left-glyph: dynamic($fa-var-caret-left $splitter-collapse-tool-glyph-font-size $font-icon-font-family);
+$splitter-collapse-tool-left-glyph: dynamic(
+  $fa-var-caret-left $splitter-collapse-tool-glyph-font-size
+    $font-icon-font-family
+);
 
 /**
  * @var {number/list}

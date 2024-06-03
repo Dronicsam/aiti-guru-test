@@ -1,21 +1,23 @@
 /**
  * A event recognizer which knows when you tap and hold for more than 1 second.
  */
-Ext.define('Ext.event.gesture.LongPress', {
-    extend: 'Ext.event.gesture.SingleTouch',
+Ext.define(
+  "Ext.event.gesture.LongPress",
+  {
+    extend: "Ext.event.gesture.SingleTouch",
 
     priority: 400,
 
     inheritableStatics: {
-        DURATION_NOT_ENOUGH: 'Duration Not Enough'
+      DURATION_NOT_ENOUGH: "Duration Not Enough",
     },
 
     config: {
-        moveDistance: 8,
-        minDuration: 1000
+      moveDistance: 8,
+      minDuration: 1000,
     },
 
-    handledEvents: ['longpress', 'taphold'],
+    handledEvents: ["longpress", "taphold"],
 
     /**
      * @member Ext.dom.Element
@@ -32,68 +34,72 @@ Ext.define('Ext.event.gesture.LongPress', {
      * @inheritdoc Ext.dom.Element#longpress
      */
 
-    fireLongPress: function(e) {
-        this.fire('longpress', e, {
-            touch: e.changedTouches[0],
-            duration: this.getMinDuration()
-        });
+    fireLongPress: function (e) {
+      this.fire("longpress", e, {
+        touch: e.changedTouches[0],
+        duration: this.getMinDuration(),
+      });
 
-        this.isLongPress = true;
+      this.isLongPress = true;
     },
 
-    onTouchStart: function(e) {
-        if (this.callParent(arguments) === false) {
-            return false;
-        }
-        this.startPoint = e.changedTouches[0].point;
+    onTouchStart: function (e) {
+      if (this.callParent(arguments) === false) {
+        return false;
+      }
+      this.startPoint = e.changedTouches[0].point;
 
-        this.isLongPress = false;
+      this.isLongPress = false;
 
-        this.setLongPressTimer(e);
+      this.setLongPressTimer(e);
     },
 
-    setLongPressTimer: function(e) {
-        var me = this;
+    setLongPressTimer: function (e) {
+      var me = this;
 
-        me.timer = Ext.defer(function() {
-            me.fireLongPress(e);
-        }, me.getMinDuration());
+      me.timer = Ext.defer(function () {
+        me.fireLongPress(e);
+      }, me.getMinDuration());
     },
 
-    onTouchMove: function(e) {
-        var point = e.changedTouches[0].point;
-        if (Math.abs(point.getDistanceTo(this.startPoint)) >= this.getMoveDistance()) {
-            return this.fail(this.self.TOUCH_MOVED);
-        }
+    onTouchMove: function (e) {
+      var point = e.changedTouches[0].point;
+      if (
+        Math.abs(point.getDistanceTo(this.startPoint)) >= this.getMoveDistance()
+      ) {
+        return this.fail(this.self.TOUCH_MOVED);
+      }
     },
 
-    onTouchEnd: function() {
-        if (!this.isLongPress) {
-            return this.fail(this.self.DURATION_NOT_ENOUGH);
-        }
+    onTouchEnd: function () {
+      if (!this.isLongPress) {
+        return this.fail(this.self.DURATION_NOT_ENOUGH);
+      }
     },
 
-    fail: function() {
-        clearTimeout(this.timer);
+    fail: function () {
+      clearTimeout(this.timer);
 
-        return this.callParent(arguments);
+      return this.callParent(arguments);
     },
 
-    reset: function() {
-        this.isLongPress = this.startPoint = null;
+    reset: function () {
+      this.isLongPress = this.startPoint = null;
     },
 
-    fire: function(eventName) {
-        if (eventName === 'longpress') {
-            var args = Array.prototype.slice.call(arguments);
-            args[0] = 'taphold';
+    fire: function (eventName) {
+      if (eventName === "longpress") {
+        var args = Array.prototype.slice.call(arguments);
+        args[0] = "taphold";
 
-            this.fire.apply(this, args);
-        }
+        this.fire.apply(this, args);
+      }
 
-        return this.callParent(arguments);
-    }
-}, function(LongPress) {
+      return this.callParent(arguments);
+    },
+  },
+  function (LongPress) {
     var gestures = Ext.manifest.gestures;
     LongPress.instance = new LongPress(gestures && gestures.longPress);
-});
+  },
+);

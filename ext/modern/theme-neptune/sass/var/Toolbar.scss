@@ -37,39 +37,39 @@ $toolbar-border-style: dynamic(solid);
  * @var {number/list}
  * Toolbar padding
  */
-$toolbar-padding: dynamic(.46rem .5rem);
+$toolbar-padding: dynamic(0.46rem 0.5rem);
 
 /**
  * @var {number/list}
  * Toolbar padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
-$toolbar-padding-big: dynamic(.4rem .67rem);
+$toolbar-padding-big: dynamic(0.4rem 0.67rem);
 
 /**
  * @var {number}
  * The space in between horizontally aligned Toolbar items
  */
-$toolbar-horizontal-spacing: dynamic(.2rem);
+$toolbar-horizontal-spacing: dynamic(0.2rem);
 
 /**
  * @var {number}
  * The space in between horizontally aligned Toolbar items in the
  * {@link Ext.Component#$enable-big big} sizing scheme
  */
-$toolbar-horizontal-spacing-big: dynamic(.3rem);
+$toolbar-horizontal-spacing-big: dynamic(0.3rem);
 
 /**
  * @var {number}
  * The space in between vertically aligned Toolbar items
  */
-$toolbar-vertical-spacing: dynamic(.2rem);
+$toolbar-vertical-spacing: dynamic(0.2rem);
 
 /**
  * @var {number}
  * The space in between vertically aligned Toolbar items in the
  * {@link Ext.Component#$enable-big big} sizing scheme
  */
-$toolbar-vertical-spacing-big: dynamic(.3rem);
+$toolbar-vertical-spacing-big: dynamic(0.3rem);
 
 /**
  * @var {color}

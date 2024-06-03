@@ -14,6 +14,8 @@ $datepicker-month-button-color: dynamic(#fff);
 $datepicker-monthpicker-height: dynamic(172px);
 $datepicker-monthpicker-item-color: dynamic(#fff);
 $datepicker-monthpicker-item-border: dynamic(0 none);
-$datepicker-monthpicker-item-selected-background-color: dynamic($datepicker-item-selected-background-color);
+$datepicker-monthpicker-item-selected-background-color: dynamic(
+  $datepicker-item-selected-background-color
+);
 $datepicker-arrow-opacity: dynamic(1);
-$datepicker-arrow-opacity-over: dynamic(.7);
+$datepicker-arrow-opacity-over: dynamic(0.7);

@@ -47,148 +47,160 @@
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.layout.container.Absolute', {
+Ext.define("Ext.layout.container.Absolute", {
+  /* Begin Definitions */
 
-    /* Begin Definitions */
+  alias: "layout.absolute",
+  extend: "Ext.layout.container.Anchor",
+  alternateClassName: "Ext.layout.AbsoluteLayout",
 
-    alias: 'layout.absolute',
-    extend: 'Ext.layout.container.Anchor',
-    alternateClassName: 'Ext.layout.AbsoluteLayout',
+  /* End Definitions */
 
-    /* End Definitions */
+  targetCls: Ext.baseCSSPrefix + "abs-layout-ct",
+  itemCls: Ext.baseCSSPrefix + "abs-layout-item",
 
-    targetCls: Ext.baseCSSPrefix + 'abs-layout-ct',
-    itemCls: Ext.baseCSSPrefix + 'abs-layout-item',
+  /**
+   * @cfg {Boolean} ignoreOnContentChange
+   * True indicates that changes to one item in this layout do not effect the layout in
+   * general. This may need to be set to false if the component is
+   * {@link Ext.Component#scrollable scrollable}.
+   */
+  ignoreOnContentChange: true,
 
-    /**
-     * @cfg {Boolean} ignoreOnContentChange
-     * True indicates that changes to one item in this layout do not effect the layout in
-     * general. This may need to be set to false if the component is
-     * {@link Ext.Component#scrollable scrollable}.
-     */
-    ignoreOnContentChange: true,
+  type: "absolute",
 
-    type: 'absolute',
+  /**
+   * @private
+   */
+  adjustWidthAnchor: function (value, childContext) {
+    var padding = this.targetPadding,
+      x = childContext.getStyle("left");
 
-    /**
-     * @private
-     */
-    adjustWidthAnchor: function(value, childContext) {
-        var padding = this.targetPadding,
-            x = childContext.getStyle('left');
+    return value - x + padding.left;
+  },
 
-        return value - x + padding.left;
-    },
+  /**
+   * @private
+   */
+  adjustHeightAnchor: function (value, childContext) {
+    var padding = this.targetPadding,
+      y = childContext.getStyle("top");
 
-    /**
-     * @private
-     */
-    adjustHeightAnchor: function(value, childContext) {
-        var padding = this.targetPadding,
-            y = childContext.getStyle('top');
+    return value - y + padding.top;
+  },
 
-        return value - y + padding.top;
-    },
+  isItemLayoutRoot: function (item) {
+    return this.ignoreOnContentChange || this.callParent(arguments);
+  },
 
-    isItemLayoutRoot: function (item) {
-        return this.ignoreOnContentChange || this.callParent(arguments);
-    },
+  isItemShrinkWrap: function (item) {
+    return true;
+  },
 
-    isItemShrinkWrap: function (item) {
-        return true;
-    },
+  beginLayout: function (ownerContext) {
+    var me = this,
+      target = me.getTarget();
 
-    beginLayout: function (ownerContext) {
-        var me = this,
-            target = me.getTarget();
+    me.callParent(arguments);
 
-        me.callParent(arguments);
+    // Do not set position: relative; when the absolute layout target is the body
+    if (target.dom !== document.body) {
+      target.position();
+    }
 
-        // Do not set position: relative; when the absolute layout target is the body
-        if (target.dom !== document.body) {
-            target.position();
+    me.targetPadding = ownerContext.targetContext.getPaddingInfo();
+  },
+
+  isItemBoxParent: function (itemContext) {
+    return true;
+  },
+
+  onContentChange: function () {
+    if (this.ignoreOnContentChange) {
+      return false;
+    }
+    return this.callParent(arguments);
+  },
+
+  calculateContentSize: function (ownerContext, dimensions) {
+    var me = this,
+      containerDimensions =
+        (dimensions || 0) | // jshint ignore:line
+        ((ownerContext.widthModel.shrinkWrap ? 1 : 0) | // jshint ignore:line
+          (ownerContext.heightModel.shrinkWrap ? 2 : 0)),
+      calcWidth = containerDimensions & 1 || undefined, // jshint ignore:line
+      calcHeight = containerDimensions & 2 || undefined, // jshint ignore:line
+      childItems = ownerContext.childItems,
+      length = childItems.length,
+      contentHeight = 0,
+      contentWidth = 0,
+      needed = 0,
+      props = ownerContext.props,
+      targetPadding,
+      child,
+      childContext,
+      height,
+      i,
+      margins,
+      width;
+
+    if (calcWidth) {
+      if (isNaN(props.contentWidth)) {
+        ++needed;
+      } else {
+        calcWidth = undefined;
+      }
+    }
+    if (calcHeight) {
+      if (isNaN(props.contentHeight)) {
+        ++needed;
+      } else {
+        calcHeight = undefined;
+      }
+    }
+
+    if (needed) {
+      for (i = 0; i < length; ++i) {
+        childContext = childItems[i];
+        child = childContext.target;
+        height = calcHeight && childContext.getProp("height");
+        width = calcWidth && childContext.getProp("width");
+        margins = childContext.getMarginInfo();
+
+        height += margins.bottom;
+        width += margins.right;
+
+        contentHeight = Math.max(contentHeight, (child.y || 0) + height);
+        contentWidth = Math.max(contentWidth, (child.x || 0) + width);
+
+        if (isNaN(contentHeight) && isNaN(contentWidth)) {
+          me.done = false;
+          return;
         }
+      }
 
-        me.targetPadding = ownerContext.targetContext.getPaddingInfo();
-    },
+      if (calcWidth || calcHeight) {
+        targetPadding = ownerContext.targetContext.getPaddingInfo();
+      }
+      if (
+        calcWidth &&
+        !ownerContext.setContentWidth(contentWidth + targetPadding.width)
+      ) {
+        me.done = false;
+      }
+      if (
+        calcHeight &&
+        !ownerContext.setContentHeight(contentHeight + targetPadding.height)
+      ) {
+        me.done = false;
+      }
 
-    isItemBoxParent: function (itemContext) {
-        return true;
-    },
-
-    onContentChange: function () {
-        if (this.ignoreOnContentChange) {
-            return false;
-        }
-        return this.callParent(arguments);
-    },
-
-    calculateContentSize: function (ownerContext, dimensions) {
-        var me = this,
-            containerDimensions = (dimensions || 0) | // jshint ignore:line
-                   ((ownerContext.widthModel.shrinkWrap ? 1 : 0) | // jshint ignore:line
-                    (ownerContext.heightModel.shrinkWrap ? 2 : 0)),
-            calcWidth = (containerDimensions & 1) || undefined,// jshint ignore:line
-            calcHeight = (containerDimensions & 2) || undefined,// jshint ignore:line
-            childItems = ownerContext.childItems,
-            length = childItems.length,
-            contentHeight = 0,
-            contentWidth = 0,
-            needed = 0,
-            props = ownerContext.props,
-            targetPadding, child, childContext, height, i, margins, width;
-
-        if (calcWidth) {
-            if (isNaN(props.contentWidth)) {
-                ++needed;
-            } else {
-                calcWidth = undefined;
-            }
-        }
-        if (calcHeight) {
-            if (isNaN(props.contentHeight)) {
-                ++needed;
-            } else {
-                calcHeight = undefined;
-            }
-        }
-
-        if (needed) {
-            for (i = 0; i < length; ++i) {
-                childContext = childItems[i];
-                child = childContext.target;
-                height = calcHeight && childContext.getProp('height');
-                width = calcWidth && childContext.getProp('width');
-                margins = childContext.getMarginInfo();
-
-                height += margins.bottom;
-                width  += margins.right;
-
-                contentHeight = Math.max(contentHeight, (child.y || 0) + height);
-                contentWidth = Math.max(contentWidth, (child.x || 0) + width);
-
-                if (isNaN(contentHeight) && isNaN(contentWidth)) {
-                    me.done = false;
-                    return;
-                }
-            }
-
-            if (calcWidth || calcHeight) {
-                targetPadding = ownerContext.targetContext.getPaddingInfo();
-            }
-            if (calcWidth && !ownerContext.setContentWidth(contentWidth + targetPadding.width)) {
-                me.done = false;
-            }
-            if (calcHeight && !ownerContext.setContentHeight(contentHeight + targetPadding.height)) {
-                me.done = false;
-            }
-
-            /* add a '/' to turn on this log ('//* enables, '/*' disables)
+      /* add a '/' to turn on this log ('//* enables, '/*' disables)
             if (me.done) {
                 var el = ownerContext.targetContext.el.dom;
                 Ext.log(this.owner.id, '.contentSize: ', contentWidth, 'x', contentHeight,
                     ' => scrollSize: ', el.scrollWidth, 'x', el.scrollHeight);
             }/**/
-        }
     }
+  },
 });

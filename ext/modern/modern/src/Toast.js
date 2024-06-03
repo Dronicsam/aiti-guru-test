@@ -26,122 +26,122 @@
  *      Ext.toast('Hello Sencha Again!');
  *      Ext.toast('Hello Sencha One More Time!');
  */
-Ext.define('Ext.Toast', {
-    extend: 'Ext.Sheet',
-    requires: [
-        'Ext.util.InputBlocker'
-    ],
+Ext.define(
+  "Ext.Toast",
+  {
+    extend: "Ext.Sheet",
+    requires: ["Ext.util.InputBlocker"],
 
     config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        ui: 'dark',
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      ui: "dark",
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        baseCls: Ext.baseCSSPrefix + 'toast',
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      baseCls: Ext.baseCSSPrefix + "toast",
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        showAnimation: {
-            type: 'popIn',
-            duration: 250,
-            easing: 'ease-out'
-        },
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      showAnimation: {
+        type: "popIn",
+        duration: 250,
+        easing: "ease-out",
+      },
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        hideAnimation: {
-            type: 'popOut',
-            duration: 250,
-            easing: 'ease-out'
-        },
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      hideAnimation: {
+        type: "popOut",
+        duration: 250,
+        easing: "ease-out",
+      },
 
-        /**
-         * Override the default `zIndex` so it is normally always above floating components.
-         */
-        zIndex: 999,
+      /**
+       * Override the default `zIndex` so it is normally always above floating components.
+       */
+      zIndex: 999,
 
-        /**
-         * @cfg {String} message
-         * The message to be displayed in the {@link Ext.Toast}.
-         * @accessor
-         */
-        message: null,
+      /**
+       * @cfg {String} message
+       * The message to be displayed in the {@link Ext.Toast}.
+       * @accessor
+       */
+      message: null,
 
-        /**
-         * @cfg {Number} timeout
-         * The amount of time in milliseconds to wait before destroying the toast automatically
-         */
-        timeout: 1000,
+      /**
+       * @cfg {Number} timeout
+       * The amount of time in milliseconds to wait before destroying the toast automatically
+       */
+      timeout: 1000,
 
-        /**
-         * @cfg{Boolean/Object} animation
-         * The animation that should be used between toast messages when they are queued up
-         */
-        messageAnimation: true,
+      /**
+       * @cfg{Boolean/Object} animation
+       * The animation that should be used between toast messages when they are queued up
+       */
+      messageAnimation: true,
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        hideOnMaskTap: true,
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      hideOnMaskTap: true,
 
-        /**
-         * @private
-         */
-        modal: true,
+      /**
+       * @private
+       */
+      modal: true,
 
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        layout: {
-            type: 'vbox',
-            pack: 'center'
-        }
+      /**
+       * @cfg
+       * @inheritdoc
+       */
+      layout: {
+        type: "vbox",
+        pack: "center",
+      },
     },
 
     /**
      * @private
      */
-    applyMessage: function(config) {
-        config = {
-            html: config,
-            cls: this.getBaseCls() + '-text'
-        };
+    applyMessage: function (config) {
+      config = {
+        html: config,
+        cls: this.getBaseCls() + "-text",
+      };
 
-        return Ext.factory(config, Ext.Component, this._message);
+      return Ext.factory(config, Ext.Component, this._message);
     },
 
     /**
      * @private
      */
-    updateMessage: function(newMessage) {
-        if (newMessage) {
-            this.add(newMessage);
-        }
+    updateMessage: function (newMessage) {
+      if (newMessage) {
+        this.add(newMessage);
+      }
     },
 
     /**
      * @private
      */
-    applyTimeout: function(timeout) {
-        if (this._timeoutID) {
-            clearTimeout(this._timeoutID);
-            if (!Ext.isEmpty(timeout)) {
-                this._timeoutID = setTimeout(Ext.bind(this.onTimeout, this), timeout);
-            }
+    applyTimeout: function (timeout) {
+      if (this._timeoutID) {
+        clearTimeout(this._timeoutID);
+        if (!Ext.isEmpty(timeout)) {
+          this._timeoutID = setTimeout(Ext.bind(this.onTimeout, this), timeout);
         }
-        return timeout;
+      }
+      return timeout;
     },
 
     /**
@@ -152,113 +152,114 @@ Ext.define('Ext.Toast', {
     /**
      * @private
      */
-    show: function(config) {
-        var me = this,
-            timeout = config.timeout,
-            msgAnimation = me.getMessageAnimation(),
+    show: function (config) {
+      var me = this,
+        timeout = config.timeout,
+        msgAnimation = me.getMessageAnimation(),
+        message = me.getMessage();
+
+      if (me.isRendered() && me.isHidden() === false) {
+        config.timeout = null;
+        message.onAfter({
+          hiddenchange: function () {
+            me.setMessage(config.message);
             message = me.getMessage();
-
-        if (me.isRendered() && me.isHidden() === false) {
-            config.timeout = null;
             message.onAfter({
-                hiddenchange: function() {
-                    me.setMessage(config.message);
-                    message = me.getMessage();
-                    message.onAfter({
-                        hiddenchange: function() {
-
-                            // Forces applyTimeout to create a timer
-                            this._timeoutID = true;
-                            me.setTimeout(timeout);
-                        },
-                        scope: me,
-                        single: true
-                    });
-                    message.show(msgAnimation);
-                },
-                scope: me,
-                single: true
+              hiddenchange: function () {
+                // Forces applyTimeout to create a timer
+                this._timeoutID = true;
+                me.setTimeout(timeout);
+              },
+              scope: me,
+              single: true,
             });
+            message.show(msgAnimation);
+          },
+          scope: me,
+          single: true,
+        });
 
-            message.hide(msgAnimation);
-        } else {
-            Ext.util.InputBlocker.blockInputs();
-            me.setConfig(config);
+        message.hide(msgAnimation);
+      } else {
+        Ext.util.InputBlocker.blockInputs();
+        me.setConfig(config);
 
-            //if it has not been added to a container, add it to the Viewport.
-            if (!me.getParent() && Ext.Viewport) {
-                Ext.Viewport.add(me);
-            }
-
-            if (!Ext.isEmpty(timeout)) {
-                me._timeoutID = setTimeout(Ext.bind(me.onTimeout, me), timeout);
-            }
-
-            me.callParent(arguments);
+        //if it has not been added to a container, add it to the Viewport.
+        if (!me.getParent() && Ext.Viewport) {
+          Ext.Viewport.add(me);
         }
+
+        if (!Ext.isEmpty(timeout)) {
+          me._timeoutID = setTimeout(Ext.bind(me.onTimeout, me), timeout);
+        }
+
+        me.callParent(arguments);
+      }
     },
 
     /**
      * @private
      */
-    hide: function(animation) {
-        clearTimeout(this._timeoutID);
-        if (!this.next()) {
-            this.callParent(arguments);
-        }
+    hide: function (animation) {
+      clearTimeout(this._timeoutID);
+      if (!this.next()) {
+        this.callParent(arguments);
+      }
     },
 
     /**
      * @private
      */
-    onTimeout: function() {
-        this.hide();
-    }
-}, function(Toast) {
-    var _queue = [], _isToasting = false;
+    onTimeout: function () {
+      this.hide();
+    },
+  },
+  function (Toast) {
+    var _queue = [],
+      _isToasting = false;
 
     function next() {
-        var config = _queue.shift();
+      var config = _queue.shift();
 
-        if (config) {
-            _isToasting = true;
-            this.show(config);
-        } else {
-            _isToasting = false;
-        }
+      if (config) {
+        _isToasting = true;
+        this.show(config);
+      } else {
+        _isToasting = false;
+      }
 
-        return _isToasting;
+      return _isToasting;
     }
 
     function getInstance() {
-        if (!Ext.Toast._instance) {
-            Ext.Toast._instance = Ext.create('Ext.Toast');
-            Ext.Toast._instance.next = next;
-        }
-        return Ext.Toast._instance;
+      if (!Ext.Toast._instance) {
+        Ext.Toast._instance = Ext.create("Ext.Toast");
+        Ext.Toast._instance.next = next;
+      }
+      return Ext.Toast._instance;
     }
 
-    Ext.toast = function(message, timeout) {
-        var toast = getInstance(),
-            config = message;
+    Ext.toast = function (message, timeout) {
+      var toast = getInstance(),
+        config = message;
 
-        if (Ext.isString(message)) {
-            config = {
-                message: message,
-                timeout: timeout
-            };
-        }
+      if (Ext.isString(message)) {
+        config = {
+          message: message,
+          timeout: timeout,
+        };
+      }
 
-        if (config.timeout === undefined) {
-            config.timeout = Ext.Toast.prototype.config.timeout;
-        }
+      if (config.timeout === undefined) {
+        config.timeout = Ext.Toast.prototype.config.timeout;
+      }
 
-        _queue.push(config);
-        if (!_isToasting) {
-            toast.next();
-        }
+      _queue.push(config);
+      if (!_isToasting) {
+        toast.next();
+      }
 
-        return toast;
-    }
-});
-
+      return toast;
+    };
+  },
+);

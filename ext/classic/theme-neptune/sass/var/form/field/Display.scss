@@ -2,4 +2,6 @@
 //
 
 $form-display-field-line-height: dynamic(17px);
-$form-toolbar-display-field-line-height: dynamic($form-display-field-line-height);
+$form-toolbar-display-field-line-height: dynamic(
+  $form-display-field-line-height
+);

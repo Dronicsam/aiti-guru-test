@@ -33,14 +33,14 @@
  *         }]
  *     });
  */
-Ext.define('Ext.layout.container.VBox', {
-    extend: 'Ext.layout.container.Box',
+Ext.define("Ext.layout.container.VBox", {
+  extend: "Ext.layout.container.Box",
 
-    alias: 'layout.vbox',
+  alias: "layout.vbox",
 
-    alternateClassName: 'Ext.layout.VBoxLayout',
+  alternateClassName: "Ext.layout.VBoxLayout",
 
-    type: 'vbox',
+  type: "vbox",
 
-    vertical: true
+  vertical: true,
 });

@@ -72,13 +72,17 @@ $tab-plain-background-color-active: dynamic($tab-plain-background-color);
  * @var {color}
  * The background-color of focused hovered {@link Ext.tab.Bar#plain} Tabs
  */
-$tab-plain-background-color-focus-over: dynamic($tab-plain-background-color-over);
+$tab-plain-background-color-focus-over: dynamic(
+  $tab-plain-background-color-over
+);
 
 /**
  * @var {color}
  * The background-color of the active {@link Ext.tab.Bar#plain} Tab when focused
  */
-$tab-plain-background-color-focus-active: dynamic($tab-plain-background-color-active);
+$tab-plain-background-color-focus-active: dynamic(
+  $tab-plain-background-color-active
+);
 
 /**
  * @var {color}
@@ -314,7 +318,7 @@ $tab-cursor-disabled: dynamic(default);
  * or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$tab-background-gradient: dynamic('tab');
+$tab-background-gradient: dynamic("tab");
 
 /**
  * @var {string/list}
@@ -322,7 +326,7 @@ $tab-background-gradient: dynamic('tab');
  * or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$tab-background-gradient-focus: dynamic('tab');
+$tab-background-gradient-focus: dynamic("tab");
 
 /**
  * @var {string/list}
@@ -330,7 +334,7 @@ $tab-background-gradient-focus: dynamic('tab');
  * or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$tab-background-gradient-over: dynamic('tab-over');
+$tab-background-gradient-over: dynamic("tab-over");
 
 /**
  * @var {string/list}
@@ -338,7 +342,7 @@ $tab-background-gradient-over: dynamic('tab-over');
  * or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$tab-background-gradient-active: dynamic('tab-active');
+$tab-background-gradient-active: dynamic("tab-active");
 
 /**
  * @var {string/list}
@@ -362,7 +366,7 @@ $tab-background-gradient-focus-active: dynamic($tab-background-gradient-active);
  * or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$tab-background-gradient-disabled: dynamic('tab-disabled');
+$tab-background-gradient-disabled: dynamic("tab-disabled");
 
 /**
  * @var {list}
@@ -416,7 +420,7 @@ $tab-border-width-disabled: dynamic($tab-border-width);
  * @var {number/list}
  * The inner border-width of Tabs
  */
-$tab-inner-border-width: dynamic('none');
+$tab-inner-border-width: dynamic("none");
 
 /**
  * @var {number/list}
@@ -458,7 +462,7 @@ $tab-inner-border-width-disabled: dynamic($tab-inner-border-width);
  * @var {color}
  * The inner border-color of Tabs
  */
-$tab-inner-border-color: dynamic('none');
+$tab-inner-border-color: dynamic("none");
 
 /**
  * @var {color}
@@ -535,7 +539,9 @@ $tab-inner-border-collapse-focus-over: dynamic($tab-inner-border-collapse-over);
  * `true` to suppress the inner border of the tab on the side adjacent to the tab strip
  * when the tab is focused and active
  */
-$tab-inner-border-collapse-focus-active: dynamic($tab-inner-border-collapse-active);
+$tab-inner-border-collapse-focus-active: dynamic(
+  $tab-inner-border-collapse-active
+);
 
 /**
  * @var {boolean}
@@ -763,19 +769,25 @@ $tab-closable-icon-glyph-color-active: dynamic($tab-closable-icon-glyph-color);
  * @var {color}
  * The color of a focused and hovered Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-closable-icon-glyph-color-focus-over: dynamic($tab-closable-icon-glyph-color-over);
+$tab-closable-icon-glyph-color-focus-over: dynamic(
+  $tab-closable-icon-glyph-color-over
+);
 
 /**
  * @var {color}
  * The color of a focused and active Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-closable-icon-glyph-color-focus-active: dynamic($tab-closable-icon-glyph-color-active);
+$tab-closable-icon-glyph-color-focus-active: dynamic(
+  $tab-closable-icon-glyph-color-active
+);
 
 /**
  * @var {color}
  * The color of a disabled Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-closable-icon-glyph-color-disabled: dynamic($tab-closable-icon-glyph-color);
+$tab-closable-icon-glyph-color-disabled: dynamic(
+  $tab-closable-icon-glyph-color
+);
 
 /**
  * @var {color}
@@ -787,37 +799,49 @@ $tab-plain-closable-icon-glyph-color: dynamic($tab-closable-icon-glyph-color);
  * @var {color}
  * The color of the focused {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-focus: dynamic($tab-plain-closable-icon-glyph-color);
+$tab-plain-closable-icon-glyph-color-focus: dynamic(
+  $tab-plain-closable-icon-glyph-color
+);
 
 /**
  * @var {color}
  * The color of the hovered {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-over: dynamic($tab-plain-closable-icon-glyph-color);
+$tab-plain-closable-icon-glyph-color-over: dynamic(
+  $tab-plain-closable-icon-glyph-color
+);
 
 /**
  * @var {color}
  * The color of the active {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-active: dynamic($tab-plain-closable-icon-glyph-color);
+$tab-plain-closable-icon-glyph-color-active: dynamic(
+  $tab-plain-closable-icon-glyph-color
+);
 
 /**
  * @var {color}
  * The color of a focused and hovered {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-focus-over: dynamic($tab-plain-closable-icon-glyph-color-over);
+$tab-plain-closable-icon-glyph-color-focus-over: dynamic(
+  $tab-plain-closable-icon-glyph-color-over
+);
 
 /**
  * @var {color}
  * The color of a focused and active {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-focus-active: dynamic($tab-plain-closable-icon-glyph-color-active);
+$tab-plain-closable-icon-glyph-color-focus-active: dynamic(
+  $tab-plain-closable-icon-glyph-color-active
+);
 
 /**
  * @var {color}
  * The color of a disabled {@link Ext.tab.Bar#plain} Tab's close icon when {@link Global_CSS#$enable-font-icons} is `true`.
  */
-$tab-plain-closable-icon-glyph-color-disabled: dynamic($tab-plain-closable-icon-glyph-color);
+$tab-plain-closable-icon-glyph-color-disabled: dynamic(
+  $tab-plain-closable-icon-glyph-color
+);
 
 /**
  * @var {string/list}
@@ -957,13 +981,13 @@ $tab-plain-glyph-color-disabled: dynamic($tab-plain-color-disabled);
  * @var {number}
  * The opacity of a Tab glyph icon
  */
-$tab-glyph-opacity: dynamic(.5);
+$tab-glyph-opacity: dynamic(0.5);
 
 /**
  * @var {number}
  * The opacity of a Tab glyph icon when the Tab is disabled
  */
-$tab-glyph-opacity-disabled: dynamic(.3);
+$tab-glyph-opacity-disabled: dynamic(0.3);
 
 /**
  * @var {number}
@@ -1053,13 +1077,13 @@ $tab-background-opacity-disabled: dynamic($tab-background-opacity);
  * @var {number}
  * opacity to apply to the tab's text element when the tab is disabled
  */
-$tab-text-opacity-disabled: dynamic(.3);
+$tab-text-opacity-disabled: dynamic(0.3);
 
 /**
  * @var {number}
  * opacity to apply to the tab's icon element when the tab is disabled
  */
-$tab-icon-opacity-disabled: dynamic(.5);
+$tab-icon-opacity-disabled: dynamic(0.5);
 
 /**
  * @var {boolean}

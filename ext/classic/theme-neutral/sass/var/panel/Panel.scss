@@ -99,7 +99,7 @@ $panel-tool-spacing: dynamic(4px);
  * @var {string}
  * The background sprite to use for Panel {@link Ext.panel.Tool Tools}
  */
-$panel-tool-background-image: dynamic('tools/tool-sprites');
+$panel-tool-background-image: dynamic("tools/tool-sprites");
 
 /**
  * @var {color}
@@ -191,7 +191,7 @@ $panel-header-text-margin: dynamic(0);
  * gradient or a list of color stops. Used as the `$type` parameter for
  * {@link Global_CSS#background-gradient}.
  */
-$panel-header-background-gradient: dynamic('none');
+$panel-header-background-gradient: dynamic("none");
 
 /**
  * @var {color}
@@ -257,7 +257,7 @@ $panel-header-glyph-color: dynamic($panel-header-color);
  * @var {number}
  * The opacity of the Panel Header glyph icon
  */
-$panel-header-glyph-opacity: dynamic(.5);
+$panel-header-glyph-opacity: dynamic(0.5);
 
 /**
  * @var {boolean}
@@ -343,7 +343,7 @@ $panel-frame-header-padding: dynamic($panel-header-padding);
  * @var {number}
  * The opacity of ghost Panels while dragging
  */
-$panel-ghost-opacity: dynamic(0.50);
+$panel-ghost-opacity: dynamic(0.5);
 
 /**
  * @var {string}
