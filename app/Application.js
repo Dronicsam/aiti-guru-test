@@ -1,34 +1,35 @@
-Ext.define('AitiGuruTest.Application', {
-    extend: 'Ext.app.Application',
+Ext.define("AitiGuruTest.Application", {
+  extend: "Ext.app.Application",
 
-    name: 'AitiGuruTest',
+  name: "AitiGuruTest",
 
-    stores: [
-        // TODO: add global / shared stores here
-    ],
+  stores: [
+    // TODO: add global / shared stores here
+  ],
 
-    launch: function () {
-        var loggedIn;
-        loggedIn = localStorage.getItem("TutorialLoggedIn");
-        if(loggedIn === "true"){
-            Ext.create({
-                xtype: "app-main"
-            })
-        }else{
-            Ext.create({
-                xtype: "login"
-            })
-        }
-
-    },
-
-    onAppUpdate: function () {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
-                if (choice === 'yes') {
-                    window.location.reload();
-                }
-            }
-        );
+  launch: function () {
+    var loggedIn;
+    loggedIn = localStorage.getItem("TutorialLoggedIn");
+    if (loggedIn === "true") {
+      Ext.create({
+        xtype: "app-main",
+      });
+    } else {
+      Ext.create({
+        xtype: "login",
+      });
     }
+  },
+
+  onAppUpdate: function () {
+    Ext.Msg.confirm(
+      "Application Update",
+      "This application has an update, reload?",
+      function (choice) {
+        if (choice === "yes") {
+          window.location.reload();
+        }
+      },
+    );
+  },
 });

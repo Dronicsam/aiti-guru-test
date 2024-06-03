@@ -4,11 +4,9 @@
  * Sencha Cmd when upgrading.
  */
 Ext.application({
-    name: 'AitiGuruTest',
+  name: "AitiGuruTest",
 
-    extend: 'AitiGuruTest.Application',
+  extend: "AitiGuruTest.Application",
 
-    requires: [
-        'AitiGuruTest.view.main.Main'
-    ],
+  requires: ["AitiGuruTest.view.main.Main"],
 });
