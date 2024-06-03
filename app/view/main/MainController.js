@@ -9,9 +9,6 @@ Ext.define('AitiGuruTest.view.main.MainController', {
 
     alias: 'controller.main',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-    },
 
     onConfirm: function (choice) {
         if (choice === 'yes') {
@@ -32,6 +29,7 @@ Ext.define('AitiGuruTest.view.main.MainController', {
             xtype: 'login'
         });
     },
+
     onAddItem: function(){
         function makeid(length) {
             let result = '';
@@ -49,7 +47,7 @@ Ext.define('AitiGuruTest.view.main.MainController', {
         var idPage = makeid(10)
         var tabPanel = Ext.getCmp('mainpanel');
         tabPanel.add({
-            title: "Товар",
+            title: "Товары",
             xtype: "panel",
             items: [{xtype: "wpage", id: idPage},{xtype: "mainlist", id: idList}],
             ui: "navigation",

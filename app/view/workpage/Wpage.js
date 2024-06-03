@@ -5,6 +5,7 @@ Ext.define('AitiGuruTest.view.workpage.Wpage', {
     requires: [
         'AitiGuruTest.view.workpage.WpageController'
     ],
+    controller: 'workpage',
     header: {
         title: {
             bind: {
@@ -16,14 +17,23 @@ Ext.define('AitiGuruTest.view.workpage.Wpage', {
     // bodyPadding: 30,
     items: [{
         xtype: 'textfield',
-        name: 'name',
-        fieldLabel: 'Name',
-        allowBlank: false  // requires a non-empty value
-    }, {
+        name: 'id',
+        fieldLabel: 'ID:',
+        emptyText: "Введите фильтр...",
+        maskRe: /[0-9.-]/,
+        listeners: {
+            change: {
+                fn: 'onIdChange'
+        },
+    }}, {
         xtype: 'textfield',
-        name: 'email',
-        fieldLabel: 'Email Address',
-        vtype: 'email'  // requires value to be a valid email address format
+        name: 'description',
+        fieldLabel: 'Описание:',
+        emptyText: "Введите фильтр...",
+        listeners: {
+            change: {
+                fn: 'onDescChange'
+        }}
     },    
 ]
 });

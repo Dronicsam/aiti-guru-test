@@ -4,6 +4,7 @@
 Ext.define('AitiGuruTest.view.main.List', {
     extend: 'Ext.grid.Panel',
     xtype: 'mainlist',
+    reference: "mainlist",
     id: "mainlist",
     requires: [
         'AitiGuruTest.store.Products'
