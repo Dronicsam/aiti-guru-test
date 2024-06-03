@@ -13,25 +13,31 @@ Ext.define("AitiGuruTest.store.Products", {
   storeId: "products-store",
   data: {
     items: [
-      { id: 1, name: "Мышь", description: "Игоры", price: 13.0, amount: 12 },
+      {
+        id: 1,
+        name: "Notebook Lenovo",
+        description: "ThinkPad",
+        price: 13.2,
+        amount: 12,
+      },
       {
         id: 2,
-        name: "Клава",
-        description: "Работова",
+        name: "Logitech Keyboard",
+        description: "Great for work and perfect for gaming",
         price: 12311,
         amount: 1,
       },
       {
         id: 3,
-        name: "Клава",
-        description: "Работова",
+        name: "Mousepad",
+        description: "Black mousepad",
         price: 12311,
         amount: 1,
       },
       {
         id: 4,
-        name: "Микрофон",
-        description: "Говорение",
+        name: "Network adapter",
+        description: "Great internet speed",
         price: 12311,
         amount: 0,
       },

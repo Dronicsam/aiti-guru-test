@@ -55,5 +55,5 @@ Ext.define("AitiGuruTest.view.main.Main", {
     ],
   },
 
-  items: [{ xtype: "wpage" }, { xtype: "mainlist" }],
+  items: [{ xtype: "mainpanel" }],
 });

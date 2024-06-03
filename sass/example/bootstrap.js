@@ -1483,7 +1483,8 @@ Ext.Boot =
               "'. It's likely that the file is either being loaded from a " +
               "different domain or from the local file system where cross " +
               "origin requests are not allowed for security reasons. Try " +
-              "asynchronous loading instead." || true;
+              "asynchronous loading instead." ||
+            true;
           me.evaluated = true;
         } else if (
           (status >= 200 && status < 300) ||
@@ -1497,7 +1498,8 @@ Ext.Boot =
             "Failed loading synchronously via XHR: '" +
               url +
               "'. Please verify that the file exists. XHR status code: " +
-              status || true;
+              status ||
+            true;
           me.evaluated = true;
         }
       },
@@ -1820,6 +1822,7 @@ Ext.Boot =
       date = date.toGMTString();
       doc.cookie = "ext-cache=1; expires=" + date + "; path=" + (path || "/");
     };
+
 
     Boot.init();
     return Boot;
@@ -2194,7 +2197,8 @@ Ext.Microloader =
             this.key,
             JSON.stringify(content || this.content),
           );
-        } else {
+        }
+        else {
           _debug("Manifest caching is disabled.");
         }
       },
@@ -2966,7 +2970,8 @@ Ext.Microloader =
               };
 
               Microloader.fireAppUpdate();
-            } else {
+            }
+            else {
               _debug(
                 "AppCache and LocalStorage Cache are current, no updating needed",
               );
