@@ -1,7 +1,7 @@
 /**
  * Generates a set of style rules for the "navigation" tab UI.
  */
-@include extjs-tab-panel-ui(
+ @include extjs-tab-panel-ui(
     $ui: 'navigation',
     $ui-tab-background-color: transparent,
     $ui-tab-background-color-over: #505050,
@@ -80,13 +80,4 @@
 .x-panel-header-title-navigation > .x-title-text-navigation:after {
     top: 30px;
     right: -24px;
-}
-
-.price-fall .x-change-cell {
-    background-color: #FFB0C4;
-    color:red;
-}
-.price-rise .x-change-cell {
-    background-color: #B0FFC5;
-    color:green;
 }

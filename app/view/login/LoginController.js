@@ -26,7 +26,8 @@ Ext.define('AitiGuruTest.view.login.LoginController', {
             localStorage.setItem("TutorialLoggedIn", true)
             // Remove Login Window
             this.getView().destroy();
-
+            localStorage.removeItem("login")
+            localStorage.removeItem("password")
             // Add the main view to the viewport
             Ext.create({
                 xtype: 'app-main'

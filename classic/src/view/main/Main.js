@@ -28,9 +28,6 @@ Ext.define('AitiGuruTest.view.main.Main', {
     titleRotation: 0,
     tabRotation: 0,
     header: {
-        // layout: {
-        //     align: 'stretchmax'
-        // },
         title: {
             bind: {
                 text: '{name}'
@@ -39,26 +36,11 @@ Ext.define('AitiGuruTest.view.main.Main', {
         
         items: [{
             xtype: 'button',
-            handler: function (button, e) {
-                function makeid(length) {
-                    let result = '';
-                    const characters = 'ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijhlmnopqrstuvwxyz';
-                    const charactersLength = characters.length;
-                    let counter = 0;
-                    while (counter < length) {
-                      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                      counter += 1;
-                    }
-                    return result;
-                }
-                
-                var idProp = makeid(5)
-                var even = (Math.floor(Math.random() * 90 + 10)) % 2 === 0
-                var tabPanel = Ext.getCmp('mainpanel');
-                tabPanel.add({title: "Товар", xtype: "mainlist", id: idProp, closable: true})
-                console.log(idProp)
-            },
-            text: 'Товар'
+            text: 'Товар',
+            listeners: [
+                {
+                    click: 'onAddItem'
+                }]
         }, {
             xtype: 'button',
             text: "Выход",
