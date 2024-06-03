@@ -10,7 +10,7 @@ Ext.define("AitiGuruTest.store.Products", {
     { name: "price", type: "float" },
     { name: "amount", type: "int" },
   ],
-
+  storeId: "products-store",
   data: {
     items: [
       { id: 1, name: "Мышь", description: "Игоры", price: 13.0, amount: 12 },

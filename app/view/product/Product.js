@@ -59,15 +59,17 @@ Ext.define("AitiGuruTest.view.product.Product", {
     buttons: [
       {
         text: "Сохранить",
+        id: "save",
         formBind: true,
         listeners: [
           {
-            click: { fn: "onCancelClick", extraArg: "yes" },
+            click: { fn: "onSaveClick" },
           },
         ],
       },
       {
         text: "Отмена",
+        id: "cancel",
         formBind: true,
         listeners: [
           {

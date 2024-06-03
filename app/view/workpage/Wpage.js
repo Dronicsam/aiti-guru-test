@@ -7,12 +7,11 @@ Ext.define("AitiGuruTest.view.workpage.Wpage", {
   header: {
     title: {
       bind: {
-        text: "{name}",
+        text: "Список товаров",
       },
     },
   },
   bodyStyle: "padding: 20px;",
-  // bodyPadding: 30,
   items: [
     {
       xtype: "textfield",

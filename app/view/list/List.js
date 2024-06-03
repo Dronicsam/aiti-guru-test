@@ -36,11 +36,11 @@ Ext.define("AitiGuruTest.view.list.List", {
   listeners: {
     select: {
       fn: function () {
-        // Ext.getCmp("productcard").destroy()
         Ext.create({
           xtype: "productcard",
         });
         var data = this.getSelection()[0].data;
+        this.getSelectionModel().deselectAll();
         Ext.getCmp("itemId").setValue(data.id);
         Ext.getCmp("amountId").setValue(data.amount);
         Ext.getCmp("descId").setValue(data.description);

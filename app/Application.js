@@ -3,9 +3,7 @@ Ext.define("AitiGuruTest.Application", {
 
   name: "AitiGuruTest",
 
-  stores: [
-    // TODO: add global / shared stores here
-  ],
+  stores: [],
 
   launch: function () {
     var loggedIn;
